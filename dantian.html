@@ -502,7 +502,6 @@
     </div>
 
     <div class="caption">
-      <div class="cap-part" id="p-caphead">입정 · 마음 고르기</div>
       <div class="cap-text" id="p-caption">편안히 앉아 호흡을 고릅니다.</div>
     </div>
 
@@ -683,7 +682,7 @@
         "들숨은 길고 깊게, 날숨은 짧고 부드럽게. 마음을 아랫배에 내려놓습니다."
       ],
       lymphTitle: "림프경선 비우기",
-      lymphKind: "LYMPHATIC CLEARING",
+      lymphKind: "림프경선 비우기",
       lymphIntro: "지금부터 몸의 림프절을 부드럽게 열어 막힌 기운을 비웁니다. 앉아서도, 누워서도, 서서도, 걸으면서도 할 수 있습니다. 절대 세게 누르지 말고, 아기 피부를 만지듯 가볍게 쓸어 주세요. 시작합니다.",
       lymphIntroCap: "세게 누르지 말고, 아기 피부를 만지듯 가볍게.",
       lymphMid: "힘을 빼고, 피부 위를 바람이 지나가듯 가볍게 쓸어 주세요.",
@@ -700,7 +699,7 @@
         {name:"무릎 뒤 오금·종아리", guide:"무릎 뒤 오금과 종아리를 아래에서 위로 부드럽게 쓸어 올립니다."}
       ],
       danTitle: "하단전 채우기",
-      danKind: "DANTIAN BREATHING",
+      danKind: "하단전 채우기",
       danIntro: "이제 마음을 아랫배 하단전으로 편안히 내려놓고, 맑은 기운을 채우는 단전주선을 시작합니다. 앉아서도, 누워서도, 서서도, 걸으면서도 좋습니다. 들숨은 길고 깊게, 날숨은 짧고 부드럽게. 머리가 아니라 아랫배의 따뜻한 느낌에 마음을 머뭅니다. 시작합니다.",
       danIntroCap: "들숨은 길고 깊게, 날숨은 짧고 부드럽게.",
       danCues: [
@@ -715,6 +714,7 @@
       ],
       danEnd: "숨을 그대로 두고, 아랫배의 온기를 잠시 느껴 봅니다. 수고하셨습니다.",
       fullLabel: "전체 수행",
+      fullKind: "비우고 채우는 단전주선",
       complete: "오늘의 비우고 채우는 단전주선을 마쳤습니다. 아랫배의 따뜻한 온기를 느끼며 편안히 숨을 고르세요. 수고하셨습니다.",
       scripts: {
         empty: "림프절 비우기는 몸의 림프 순환을 도와 노폐물과 긴장을 비우는 운동입니다. 세게 누르지 말고 아기 피부를 만지듯 가볍게 쓸어 주세요.",
@@ -803,6 +803,7 @@
       ],
       danEnd: "Leave the breath as it is, and rest for a moment in the warmth of your lower belly. Well done.",
       fullLabel: "Full sequence",
+      fullKind: "Empty & Fill",
       complete: "You have finished today's practice of emptying and filling. Rest in the warmth of your lower belly, and breathe at ease. Well done.",
       scripts: {
         empty: "Lymphatic clearing gently opens the lymph nodes to let go of what the body has been holding. Never press hard — stroke as lightly as a baby's skin.",
@@ -1354,17 +1355,17 @@
 
     if(mode === "jeong"){
       c.jeong.forEach((line, i)=>{
-        push(15, c.jeongTitle, line, line, line);
+        push(15, (i + 1) + " / " + c.jeong.length, line, line, line);
       });
     }
 
     if(mode === "lymph"){
-      push(32, c.lymphTitle, c.lymphIntroCap, c.lymphIntro, "");
+      push(32, c.lymphKind, c.lymphIntroCap, c.lymphIntro, "");
       c.areas.forEach((a, i)=>{
         const say = c.ord[i] + " " + a.name + ". " + a.guide;
-        push(opt.perArea, (i+1) + "/8 · " + a.name, a.guide, say, a.name + ". " + c.lymphMid);
+        push(opt.perArea, (i + 1) + " / 8", a.guide, say, a.name + ". " + c.lymphMid);
       });
-      push(24, c.lymphTitle, c.lymphEnd, c.lymphEnd, c.lymphEnd);
+      push(24, c.lymphKind, c.lymphEnd, c.lymphEnd, c.lymphEnd);
     }
 
     if(mode === "lymphOne"){
@@ -1377,7 +1378,8 @@
 
     if(mode === "dantian"){
       const target = opt.min * 60;
-      push(38, c.danTitle, c.danIntroCap, c.danIntro, "");
+      const mark = opt.min + c.minLabel;
+      push(38, mark, c.danIntroCap, c.danIntro, "");
       let used = 38;
       const closing = 22;
       let i = 0;
@@ -1385,23 +1387,24 @@
         const left = target - closing - used;
         const d = Math.min(45, left);
         const cue = c.danCues[i % c.danCues.length];
-        push(d, c.danTitle, cue, cue, cue);
+        push(d, mark, cue, cue, cue);
         used += d;
         i++;
       }
-      push(closing, c.danTitle, c.danEnd, c.danEnd, c.danEnd);
+      push(closing, mark, c.danEnd, c.danEnd, c.danEnd);
     }
 
     if(mode === "full"){
-      c.jeong.forEach(line => push(15, c.jeongTitle, line, line, line));
-      push(32, c.lymphTitle, c.lymphIntroCap, c.lymphIntro, "");
+      c.jeong.forEach((line, i) => push(15, (i + 1) + " / " + c.jeong.length, line, line, line));
+      push(30, c.lymphKind, c.lymphIntroCap, c.lymphIntro, "");
       c.areas.forEach((a, i)=>{
         const say = c.ord[i] + " " + a.name + ". " + a.guide;
-        push(opt.perArea, (i+1) + "/8 · " + a.name, a.guide, say, a.name + ". " + c.lymphMid);
+        push(opt.perArea, (i + 1) + " / 8", a.guide, say, a.name + ". " + c.lymphMid);
       });
-      push(22, c.lymphTitle, c.lymphEnd, c.lymphEnd, c.lymphEnd);
+      push(22, c.lymphKind, c.lymphEnd, c.lymphEnd, c.lymphEnd);
       const target = opt.min * 60;
-      push(34, c.danTitle, c.danIntroCap, c.danIntro, "");
+      const mark = opt.min + c.minLabel;
+      push(34, mark, c.danIntroCap, c.danIntro, "");
       let used = 34;
       const closing = 20;
       let i = 0;
@@ -1409,10 +1412,10 @@
         const left = target - closing - used;
         const d = Math.min(45, left);
         const cue = c.danCues[i % c.danCues.length];
-        push(d, c.danTitle, cue, cue, cue);
+        push(d, mark, cue, cue, cue);
         used += d; i++;
       }
-      push(closing, c.danTitle, c.danEnd, c.danEnd, c.danEnd);
+      push(closing, mark, c.danEnd, c.danEnd, c.danEnd);
     }
 
     return segs;
@@ -1437,7 +1440,8 @@
     session.min = (opt && opt.min) || state.dantianMin;
     if(mode === "jeong") session.kind = c.jeongTitle;
     if(mode === "lymph" || mode === "lymphOne") session.kind = c.lymphKind;
-    if(mode === "dantian" || mode === "full") session.kind = c.danKind;
+    if(mode === "dantian") session.kind = c.danKind;
+    if(mode === "full") session.kind = c.fullKind;
 
     $("p-kind").textContent = session.kind;
     refreshPlayLabel();
@@ -1475,7 +1479,6 @@
 
     session.segLeft = s.dur;
     $("p-part").textContent = s.part;
-    $("p-caphead").textContent = s.part;
     $("p-caption").textContent = s.caption;
     updateRing();
 
