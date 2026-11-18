@@ -10,16 +10,17 @@
   <style>
     :root {
       --bg: #F6F1E7;
-      --card: #FDFBF7;
-      --ink: #222521;
-      --muted: #5F635B;
+      --card: #FFFDF7;
+      --ink: #2B2A24;
+      --muted: #726A56;
       --gold: #B8922E;
       --gold-soft: #F3EAD3;
       --pine: #33523F;
       --pine-deep: #1C2A22;
-      --border: #DDD4C3;
-      --danger: #A63A3A;
+      --border: #D9CFB8;
       --radius: 18px;
+      --serif: 'Gowun Batang', 'Nanum Myeongjo', serif;
+      --sans: 'Gowun Dodum', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -39,25 +40,26 @@
       margin: 0; padding: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: 'Gowun Dodum', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      font-family: var(--sans);
       font-size: 18px;
       line-height: 1.65;
+      transition: background 0.6s ease;
     }
     body.practicing {
       background: var(--pine-deep);
-      color: #F4EFE4;
+      color: #EDE7D6;
     }
     .app {
-      max-width: 430px;
+      max-width: 440px;
       margin: 0 auto;
       min-height: 100dvh;
-      padding: 16px 16px 36px;
+      padding: 18px 16px 40px;
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
     h1, h2, h3, .serif {
-      font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
+      font-family: var(--serif);
       margin: 0;
       letter-spacing: -0.02em;
     }
@@ -69,23 +71,36 @@
       border-radius: 14px;
       padding: 12px 14px;
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.55;
     }
     .inapp-banner.show { display: block; }
 
     header.topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      padding-bottom: 6px;
+      text-align: center;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border);
     }
-    .brand-sub { font-size: 13px; color: var(--gold); font-weight: 700; }
-    .brand-title { font-size: 24px; color: var(--pine); }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .brand-title {
+      font-size: 26px;
+      color: var(--pine);
+      line-height: 1.35;
+    }
+    .brand-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
     @media (prefers-color-scheme: dark) {
       .brand-title { color: #D7E6DB; }
     }
+
     .nav-tabs {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -116,7 +131,9 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     }
     .sec-title {
+      font-family: var(--serif);
       font-size: 19px;
+      font-weight: 700;
       margin-bottom: 12px;
       color: var(--pine);
       display: flex;
@@ -130,7 +147,7 @@
     .level-list { display: flex; flex-direction: column; gap: 10px; }
     .level-btn {
       text-align: left;
-      padding: 14px 16px;
+      padding: 14px 15px;
       border-radius: 14px;
       border: 2px solid var(--border);
       background: var(--bg);
@@ -146,13 +163,13 @@
       border-color: var(--gold);
       background: var(--gold-soft);
     }
-    .level-name { font-family: 'Gowun Batang', serif; font-size: 19px; font-weight: 700; }
-    .level-desc { font-size: 14px; color: var(--muted); margin-top: 2px; }
+    .level-name { font-family: var(--serif); font-size: 18.5px; font-weight: 700; }
+    .level-desc { font-size: 13.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
     .level-badge {
       flex-shrink: 0;
       background: var(--pine);
       color: #FFF;
-      padding: 4px 10px;
+      padding: 4px 11px;
       border-radius: 999px;
       font-size: 13px;
       font-weight: 700;
@@ -163,7 +180,8 @@
       padding: 18px 16px;
       font-size: 21px;
       font-weight: 700;
-      font-family: 'Gowun Batang', serif;
+      font-family: var(--serif);
+      letter-spacing: 0.06em;
       border-radius: 16px;
       border: none;
       background: var(--pine);
@@ -204,17 +222,18 @@
       align-items: center;
       padding: 10px 0;
       border-bottom: 1px dashed var(--border);
+      font-size: 16.5px;
     }
     .toggle-row:last-child { border-bottom: none; }
     .switch-btn {
-      min-width: 74px;
-      padding: 8px 12px;
+      min-width: 72px;
+      padding: 7px 12px;
       border-radius: 999px;
       border: 1.5px solid var(--border);
       background: var(--bg);
       color: var(--muted);
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14.5px;
       cursor: pointer;
       font-family: inherit;
     }
@@ -223,6 +242,37 @@
       border-color: var(--pine);
       color: #FFF;
     }
+
+    /* Guide Accordion */
+    .guide-toggle {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 15.5px;
+      font-weight: 700;
+      font-family: var(--serif);
+      color: var(--pine);
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      border-radius: 999px;
+      cursor: pointer;
+      text-align: center;
+    }
+    @media (prefers-color-scheme: dark) { .guide-toggle { color: #D7E6DB; } }
+    .guide-box {
+      display: none;
+      margin-top: 12px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .guide-box.open { display: block; }
+    .g-item { padding: 10px 0; border-bottom: 1px dashed var(--border); }
+    .g-item:last-child { border-bottom: none; }
+    .g-name { font-family: var(--serif); font-size: 16px; font-weight: 700; color: var(--pine); }
+    @media (prefers-color-scheme: dark) { .g-name { color: #D7E6DB; } }
+    .g-how { font-size: 14.5px; color: var(--muted); margin-top: 3px; line-height: 1.6; }
 
     .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .preview-btn {
@@ -257,22 +307,73 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 16px;
-      padding: 10px 4px;
+      gap: 14px;
+      padding: 8px 4px;
     }
-    .phase-pill {
-      display: inline-block;
-      padding: 6px 16px;
-      border-radius: 999px;
-      border: 1.5px solid #B8922E;
-      color: #E9CD78;
-      font-size: 15px;
-      font-weight: 700;
+    .progress-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 2px;
     }
+    .pdot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: #3E5347;
+      transition: all 0.3s;
+    }
+    .pdot.done { background: #E3D3A6; }
+    .pdot.now { background: #B8922E; box-shadow: 0 0 10px rgba(184, 146, 46, 0.85); transform: scale(1.25); }
+
+    .phase-kind {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      color: #E3D3A6;
+      opacity: 0.9;
+    }
+    .phase-name {
+      font-family: var(--serif);
+      font-size: 25px;
+      color: #F3EEDF;
+      line-height: 1.35;
+    }
+
+    .figure-wrap {
+      position: relative;
+      width: 140px;
+      height: 165px;
+      margin: 2px auto 0;
+    }
+    .fig-svg .body {
+      fill: rgba(227, 211, 166, 0.08);
+      stroke: rgba(227, 211, 166, 0.42);
+      stroke-width: 1.2;
+    }
+    .fig-svg .axis {
+      stroke: rgba(227, 211, 166, 0.22);
+      stroke-width: 1;
+      stroke-dasharray: 2 4;
+    }
+    .dan-dot {
+      position: absolute;
+      left: 50%;
+      top: 74%;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background: #B8922E;
+      animation: danbreath 6s ease-in-out infinite;
+    }
+    @keyframes danbreath {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.85); box-shadow: 0 0 8px 2px rgba(184, 146, 46, 0.45); }
+      50% { transform: translate(-50%, -50%) scale(1.3); box-shadow: 0 0 26px 10px rgba(184, 146, 46, 0.8); }
+    }
+
     .timer-ring-box {
       position: relative;
-      width: 240px;
-      height: 240px;
+      width: 224px;
+      height: 224px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -282,48 +383,40 @@
       inset: 0;
       transform: rotate(-90deg);
     }
-    .meditation-core {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-    }
-    .dantian-glow {
+    .ring-breath {
       position: absolute;
-      bottom: 42px;
-      width: 34px;
-      height: 34px;
+      inset: 22px;
       border-radius: 50%;
-      background: radial-gradient(circle, #FFE58F 0%, rgba(184, 146, 46, 0.7) 45%, rgba(184, 146, 46, 0) 75%);
-      animation: breatheGlow 6s ease-in-out infinite;
+      border: 1px solid rgba(227, 211, 166, 0.22);
+      animation: ringbreath 6s ease-in-out infinite;
     }
-    @keyframes breatheGlow {
-      0%, 100% { transform: scale(0.8); opacity: 0.55; }
-      50% { transform: scale(1.55); opacity: 1; }
+    @keyframes ringbreath {
+      0%, 100% { transform: scale(0.94); opacity: 0.45; }
+      50% { transform: scale(1.03); opacity: 1; }
     }
     .timer-text {
-      font-family: 'Gowun Batang', serif;
-      font-size: 38px;
+      font-family: var(--serif);
+      font-size: 46px;
       font-weight: 700;
-      color: #FFF;
-      margin-top: 6px;
+      color: #F3EEDF;
+      font-variant-numeric: tabular-nums;
+      z-index: 2;
     }
-    .guide-box {
+    .guide-panel {
       width: 100%;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(227, 211, 166, 0.22);
       border-radius: 16px;
       padding: 16px;
-      min-height: 112px;
+      min-height: 116px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 6px;
     }
-    .guide-part { font-family: 'Gowun Batang', serif; font-size: 21px; color: #F0D483; font-weight: 700; }
-    .guide-text { font-size: 17px; color: #F2EDE2; line-height: 1.6; }
+    .guide-part { font-family: var(--serif); font-size: 20px; color: #F0D483; font-weight: 700; }
+    .guide-text { font-size: 16.5px; color: #EDE7D6; line-height: 1.65; }
+
     .practice-controls {
       width: 100%;
       display: grid;
@@ -335,13 +428,14 @@
       font-size: 17px;
       font-weight: 700;
       font-family: inherit;
-      border-radius: 14px;
-      border: 1.5px solid rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.1);
-      color: #FFF;
+      border-radius: 999px;
+      border: 1.5px solid rgba(227, 211, 166, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      color: #EDE7D6;
       cursor: pointer;
     }
-    .dark-btn.stop { border-color: rgba(230, 100, 100, 0.55); color: #FFB3B3; }
+    .dark-btn.gold { background: #B8922E; border-color: #B8922E; color: #1C2A22; }
+    .dark-btn.stop { border-color: rgba(230, 120, 120, 0.5); color: #FFBABA; }
 
     /* Breath Check */
     .breath-circle {
@@ -359,10 +453,9 @@
       box-shadow: 0 8px 20px rgba(184, 146, 46, 0.18);
     }
     .breath-circle:active { transform: scale(0.96); }
-    .breath-count { font-family: 'Gowun Batang', serif; font-size: 46px; font-weight: 700; color: var(--pine); line-height: 1.1; }
+    .breath-count { font-family: var(--serif); font-size: 46px; font-weight: 700; color: var(--pine); line-height: 1.1; }
     @media (prefers-color-scheme: dark) { .breath-count { color: #F2EDE2; } }
 
-    /* Chips & Slider */
     .chip-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
       padding: 9px 14px;
@@ -380,11 +473,7 @@
       color: #FFF;
       font-weight: 700;
     }
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--pine);
-      height: 28px;
-    }
+    input[type="range"] { width: 100%; accent-color: var(--pine); height: 28px; }
     textarea {
       width: 100%;
       padding: 12px;
@@ -398,7 +487,6 @@
       min-height: 76px;
     }
 
-    /* Chart */
     .chart-bars {
       display: flex;
       align-items: flex-end;
@@ -428,11 +516,7 @@
     .bar-val { font-size: 12px; font-weight: 700; color: var(--gold); }
     .bar-date { font-size: 11px; color: var(--muted); }
 
-    .diary-item {
-      padding: 12px 0;
-      border-bottom: 1px dashed var(--border);
-      font-size: 15px;
-    }
+    .diary-item { padding: 12px 0; border-bottom: 1px dashed var(--border); font-size: 15px; }
     .diary-item:last-child { border-bottom: none; }
     .hidden { display: none !important; }
   </style>
@@ -440,14 +524,13 @@
 <body>
   <div class="app">
     <div id="inapp-banner" class="inapp-banner">
-      📱 <strong>안내:</strong> 카카오톡 등 앱 안의 브라우저에서는 안내 음성이 안 들릴 수 있어요. 오른쪽 위/아래 <strong>⋮ → 다른 브라우저(크롬·삼성 인터넷)로 열기</strong>를 누르시면 소리가 잘 나옵니다!
+      📱 <strong>안내:</strong> 카카오톡 등 앱 안의 브라우저에서는 안내 음성이 안 들릴 수 있어요. 오른쪽 위/아래 <strong>⋮ → 다른 브라우저(크롬·삼성 인터넷)로 열기</strong>를 누르시면 차분한 음성이 잘 나옵니다!
     </div>
 
     <header class="topbar" id="topbar">
-      <div>
-        <div class="brand-sub">일상회복연구소 · 마음공부 평온감 루틴</div>
-        <h1 class="brand-title">비우고 채우는 단전주선</h1>
-      </div>
+      <div class="eyebrow">日常回復研究所</div>
+      <h1 class="brand-title">비우고 채우는 단전주선</h1>
+      <div class="brand-sub">림프경선 비우기로 열고 하단전에 고요히 채우는 수행</div>
     </header>
 
     <nav class="nav-tabs" id="nav-tabs">
@@ -460,52 +543,80 @@
     <section id="tab-home" class="view-section">
       <div class="card">
         <div class="sec-title">
-          <span>1. 단계 고르기</span>
+          <span>1. 수행 단계 고르기</span>
           <span style="font-size:13px; color:var(--muted); font-weight:400;">비우기 → 채우기</span>
         </div>
         <div class="level-list">
           <button class="level-btn active" id="lvl-beginner" onclick="selectLevel('beginner')">
             <div>
               <div class="level-name">초급 · 가볍게 열기</div>
-              <div class="level-desc">림프절 비우기 3분(5부위) + 단전주선 5분</div>
+              <div class="level-desc">림프절 비우기 3분(5부위) + 하단전 채우기 5분</div>
             </div>
             <span class="level-badge">8분</span>
           </button>
           <button class="level-btn" id="lvl-intermediate" onclick="selectLevel('intermediate')">
             <div>
               <div class="level-name">중급 · 고르게 돌리기</div>
-              <div class="level-desc">림프절 비우기 5분(8부위) + 단전주선 10분</div>
+              <div class="level-desc">림프경선 비우기 5분(8부위) + 하단전 채우기 10분</div>
             </div>
             <span class="level-badge">15분</span>
           </button>
           <button class="level-btn" id="lvl-advanced" onclick="selectLevel('advanced')">
             <div>
               <div class="level-name">고급 · 깊이 머물기</div>
-              <div class="level-desc">림프절 비우기 10분(8부위) + 단전주선 20분</div>
+              <div class="level-desc">림프경선 비우기 10분(8부위) + 하단전 채우기 20분</div>
             </div>
             <span class="level-badge">30분</span>
           </button>
+          <button class="level-btn" id="lvl-cycle" onclick="selectLevel('cycle')">
+            <div>
+              <div class="level-name">심화 · 3회 순환 루틴</div>
+              <div class="level-desc">하단전 좌선과 림프경선 비우기를 번갈아 3회 순환</div>
+            </div>
+            <span class="level-badge">40분</span>
+          </button>
         </div>
 
-        <div style="margin-top:16px;">
-          <button class="primary-btn" onclick="startRoutine(false)">▶ 수행 시작하기</button>
+        <div class="toggle-row" style="margin-top:12px; border-top:1px dashed var(--border); padding-top:12px;">
+          <span>🕊️ 시작 전 마음 고르기(입정) 1분</span>
+          <button class="switch-btn on" id="tog-jeong" onclick="toggleSetting('jeong')">켜짐</button>
+        </div>
+
+        <div style="margin-top:14px;">
+          <button class="primary-btn" onclick="startRoutine(false)">수행 시작하기</button>
         </div>
         <div id="before-breath-badge" style="margin-top:10px; text-align:center; font-size:14px; color:var(--muted);">
-          수행 전 1분 호흡을 재고 시작하시면 변화를 비교해 볼 수 있어요.
+          수행 전 1분 호흡을 재고 시작하시면 전·후 변화를 비교해 볼 수 있어요.
+        </div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <button class="guide-toggle" onclick="document.getElementById('dantian-guide').classList.toggle('open')">
+          💡 하단전 위치와 림프절 비우기 요령 보기
+        </button>
+        <div class="guide-box" id="dantian-guide">
+          <div class="g-item">
+            <div class="g-name">하단전 (아랫배 · 기해)</div>
+            <div class="g-how">배꼽에서 손가락 세 개 폭 아래, 피부가 아닌 몸속 중심에 마음을 툭 내려놓습니다. 머리가 더워지면 즉시 날숨을 길게 내쉬고 아랫배로 돌아옵니다.</div>
+          </div>
+          <div class="g-item">
+            <div class="g-name">림프경선 비우기 8부위</div>
+            <div class="g-how">쇄골 → 귀밑 → 목 옆선 → 겨드랑이 → 팔 안쪽·팔꿈치 → 복부(시계방향) → 서혜부(사타구니) → 무릎 뒤 오금·종아리 순으로 아기 피부를 만지듯 부드럽게 쓸어 줍니다.</div>
+          </div>
         </div>
       </div>
 
       <div class="card" style="margin-top:14px;">
-        <div class="sec-title"><span>2. 소리 · 음성 설정</span></div>
+        <div class="sec-title"><span>2. 차분한 음성 · 소리 설정</span></div>
         <div class="toggle-row">
-          <span>🗣️ 음성 안내 (속도 0.8배)</span>
+          <span>🗣️ 명상가 음성 안내 (차분한 0.74배)</span>
           <button class="switch-btn on" id="tog-voice" onclick="toggleSetting('voice')">켜짐</button>
         </div>
         <div class="toggle-row">
-          <span>음성 목소리 톤</span>
+          <span>목소리 톤</span>
           <div style="display:flex; gap:6px;">
-            <button class="switch-btn on" id="tone-female" onclick="setTone('female')">여성</button>
-            <button class="switch-btn" id="tone-male" onclick="setTone('male')">남성</button>
+            <button class="switch-btn on" id="tone-female" onclick="setTone('female')">부드러운 여성</button>
+            <button class="switch-btn" id="tone-male" onclick="setTone('male')">중후한 남성</button>
           </div>
         </div>
         <div class="toggle-row">
@@ -513,14 +624,14 @@
           <button class="switch-btn on" id="tog-bell" onclick="toggleSetting('bell')">켜짐</button>
         </div>
         <div class="toggle-row">
-          <span>🍃 잔잔한 배경음악</span>
+          <span>🍃 잔잔한 바람·저음 배경</span>
           <button class="switch-btn on" id="tog-bgm" onclick="toggleSetting('bgm')">켜짐</button>
         </div>
         <div style="margin-top:12px;">
           <button class="outline-btn" onclick="testVoiceAndBell()">🔊 음성·싱잉볼 테스트</button>
         </div>
         <div class="help-box">
-          <strong>소리가 안 들릴 때 점검:</strong> ① 휴대폰 미디어 음량 키우기 ② 블루투스 이어폰 연결 확인 ③ 카톡 안에서 열었다면 <strong>다른 브라우저(크롬·삼성 인터넷)</strong>로 열기
+          <strong>소리가 안 들릴 때:</strong> ① 휴대폰 미디어 음량 확인 ② 블루투스 이어폰 확인 ③ 카톡 안이라면 <strong>크롬·삼성 인터넷</strong>으로 열기
         </div>
       </div>
 
@@ -538,34 +649,39 @@
     <!-- PRACTICE VIEW -->
     <section id="view-practice" class="view-section hidden">
       <div class="practice-wrap">
-        <span class="phase-pill" id="prac-phase">1단계 · 림프절 비우기</span>
-        <div style="font-size:15px; color:#C9D6CD;" id="prac-set-info">초급 1세트</div>
+        <div class="progress-dots" id="prac-dots"></div>
+        <div class="phase-kind" id="prac-kind">入定 · 마음 고르기</div>
+        <h2 class="phase-name" id="prac-name">준비 중</h2>
 
-        <div class="timer-ring-box">
-          <svg class="timer-svg" width="240" height="240" viewBox="0 0 240 240">
-            <circle cx="120" cy="120" r="108" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="10" />
-            <circle id="timer-arc" cx="120" cy="120" r="108" fill="none" stroke="#B8922E" stroke-width="10"
-              stroke-linecap="round" stroke-dasharray="678.58" stroke-dashoffset="0" />
+        <div class="figure-wrap">
+          <svg class="fig-svg" width="140" height="165" viewBox="0 0 120 150">
+            <circle class="body" cx="60" cy="26" r="13"></circle>
+            <path class="body" d="M60,41 C44,44 36,58 33,78 C30,96 22,108 19,118
+              C15,130 28,138 60,138 C92,138 105,130 101,118 C98,108 90,96 87,78
+              C84,58 76,44 60,41 Z"></path>
+            <line class="axis" x1="60" y1="20" x2="60" y2="120"></line>
           </svg>
-          <div class="meditation-core">
-            <!-- Seated silhouette -->
-            <svg width="92" height="96" viewBox="0 0 100 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="22" r="11" fill="#E8E2D5" opacity="0.88" />
-              <path d="M50 35 C35 35, 28 52, 26 70 C20 74, 15 84, 24 89 L76 89 C85 84, 80 74, 74 70 C72 52, 65 35, 50 35 Z" fill="#E8E2D5" opacity="0.82" />
-            </svg>
-            <div class="dantian-glow" id="dantian-glow"></div>
-            <div class="timer-text" id="prac-timer">03:00</div>
-          </div>
+          <div class="dan-dot"></div>
         </div>
 
-        <div class="guide-box">
-          <div class="guide-part" id="prac-part">준비 중입니다</div>
-          <div class="guide-text" id="prac-guide">편안한 자세로 호흡을 고릅니다.</div>
+        <div class="timer-ring-box">
+          <div class="ring-breath"></div>
+          <svg class="timer-svg" width="224" height="224" viewBox="0 0 224 224">
+            <circle cx="112" cy="112" r="103" fill="none" stroke="rgba(227,211,166,0.14)" stroke-width="6" />
+            <circle id="timer-arc" cx="112" cy="112" r="103" fill="none" stroke="#B8922E" stroke-width="6"
+              stroke-linecap="round" stroke-dasharray="647.17" stroke-dashoffset="0" />
+          </svg>
+          <div class="timer-text" id="prac-timer">03:00</div>
+        </div>
+
+        <div class="guide-panel">
+          <div class="guide-part" id="prac-part">편안히 앉아 호흡을 고릅니다</div>
+          <div class="guide-text" id="prac-guide">어깨와 턱의 힘을 내려놓고 아랫배에 마음을 둡니다.</div>
         </div>
 
         <div class="practice-controls">
-          <button class="dark-btn" id="pause-btn" onclick="togglePause()">⏸ 일시정지</button>
-          <button class="dark-btn" onclick="skipPhase()">⏭ 다음 단계</button>
+          <button class="dark-btn gold" id="pause-btn" onclick="togglePause()">일시정지</button>
+          <button class="dark-btn" onclick="skipPhase()">다음 단계 →</button>
         </div>
         <button class="dark-btn stop" style="width:100%;" onclick="stopRoutineEarly()">수행 마치고 기록하기</button>
       </div>
@@ -584,9 +700,9 @@
           <button class="chip" id="bm-after" onclick="setBreathMode('after')">수행 후 측정</button>
         </div>
 
-        <div style="font-family:'Gowun Batang',serif; font-size:26px; font-weight:700; color:var(--pine);" id="breath-timer">60초</div>
+        <div style="font-family:var(--serif); font-size:26px; font-weight:700; color:var(--pine);" id="breath-timer">60초</div>
 
-        <div class="breath-circle" id="breath-circle" onclick="tapBreath()">
+        <div class="breath-circle" onclick="tapBreath()">
           <div class="breath-count" id="breath-count">0</div>
           <div style="font-size:15px; color:var(--muted);">내쉴 때 탭</div>
         </div>
@@ -603,7 +719,7 @@
     <!-- COMPLETE / JOURNAL FORM -->
     <section id="view-complete" class="view-section hidden">
       <div class="card">
-        <div class="sec-title"><span>🌿 수행을 마쳤습니다</span></div>
+        <div class="sec-title"><span>🌿 오늘의 수행을 마쳤습니다</span></div>
         <p id="complete-summary" style="font-size:16px; color:var(--muted); margin:0 0 14px;"></p>
 
         <div style="margin-bottom:16px;">
@@ -663,47 +779,62 @@
   </div>
 
   <script>
+    const PARTS_5 = [
+      { name: '쇄골 림프절', guide: '쇄골 위아래를 안쪽에서 바깥쪽으로, 아기 피부를 만지듯 부드럽게 쓸어 줍니다.' },
+      { name: '귀밑 림프절', guide: '귀 아래 턱선 뒤쪽을 손가락 끝으로 둥글게 쓸어 내리며 목 옆으로 보냅니다.' },
+      { name: '목 옆선 림프절', guide: '목 옆선을 귀 뒤에서 쇄골 방향으로 힘을 빼고 천천히 쓸어 내립니다.' },
+      { name: '겨드랑이 림프절', guide: '겨드랑이 안쪽을 가볍게 감싸 쥐듯 두드리거나 부드럽게 문질러 줍니다.' },
+      { name: '서혜부(사타구니) 림프절', guide: '아랫배와 허벅지가 만나는 접히는 부분을 손바닥 온기로 따뜻하게 쓸어 줍니다.' }
+    ];
+
+    const PARTS_8 = [
+      { name: '쇄골 림프절', guide: '쇄골 위아래를 안쪽에서 바깥쪽으로, 아기 피부를 만지듯 부드럽게 쓸어 줍니다.' },
+      { name: '귀밑 림프절', guide: '귀 아래 턱선 뒤쪽을 둥글게 풀어 주며 목 옆으로 흘려보냅니다.' },
+      { name: '목 옆선 림프절', guide: '귀 뒤에서 쇄골까지 목 옆선을 따라 천천히 쓸어 내립니다.' },
+      { name: '겨드랑이 림프절', guide: '겨드랑이 안쪽을 가볍게 감싸 쥐고 두드리며 막힌 기운을 엽니다.' },
+      { name: '팔 안쪽 경선 · 팔꿈치', guide: '팔꿈치 안쪽에서 겨드랑이 방향으로 손바닥으로 부드럽게 쓸어 올립니다.' },
+      { name: '복부 · 배꼽 주변', guide: '배꼽 주변과 아랫배를 시계 방향으로 큰 원을 그리며 따뜻하게 어루만집니다.' },
+      { name: '서혜부(사타구니) 림프절', guide: '사타구니 접히는 부위를 손바닥으로 지그시 쓸어 순환시킵니다.' },
+      { name: '무릎 뒤 오금 · 종아리', guide: '무릎 뒤 오금과 종아리를 아래에서 위로 부드럽게 쓸어 올려 줍니다.' }
+    ];
+
+    const JEONG_LINES = [
+      '편안히 자리를 잡고 허리를 부드럽게 곧게 세웁니다.',
+      '어깨와 턱, 얼굴의 긴장을 스르르 내려놓습니다.',
+      '눈은 지그시 감거나 반쯤 뜨고, 혀끝은 입천장에 가볍게 댑니다.',
+      '들숨은 길고 깊게, 날숨은 짧고 부드럽게 내쉬며 아랫배로 기운을 내립니다.'
+    ];
+
     const LEVELS = {
       beginner: {
         name: '초급 · 가볍게 열기',
-        emptyMin: 3,
-        fillMin: 5,
-        parts: [
-          { name: '쇄골 림프절', guide: '쇄골 위아래를 안쪽에서 바깥쪽으로, 아기 피부를 만지듯 부드럽게 쓸어 줍니다.' },
-          { name: '귀밑 림프절', guide: '귀 아래 턱선 뒤쪽을 손가락 끝으로 둥글게 쓸어 내리며 목 옆으로 보냅니다.' },
-          { name: '목 림프절', guide: '목 옆선을 귀 아래에서 쇄골 방향으로 힘을 빼고 천천히 쓸어 내립니다.' },
-          { name: '겨드랑이 림프절', guide: '겨드랑이 안쪽을 가볍게 감싸 쥐듯 두드리거나 부드럽게 문질러 줍니다.' },
-          { name: '서혜부(사타구니) 림프절', guide: '아랫배와 허벅지가 만나는 접히는 부분을 손바닥으로 따뜻하게 쓸어 줍니다.' }
+        phases: [
+          { kind: 'empty', min: 3, parts: PARTS_5 },
+          { kind: 'fill', min: 5 }
         ]
       },
       intermediate: {
         name: '중급 · 고르게 돌리기',
-        emptyMin: 5,
-        fillMin: 10,
-        parts: [
-          { name: '쇄골 림프절', guide: '쇄골 위아래를 안쪽에서 바깥쪽으로 부드럽게 쓸어 줍니다.' },
-          { name: '귀밑 림프절', guide: '귀 아래 턱선 뒤쪽을 부드럽게 둥글리며 목 옆으로 흘려보냅니다.' },
-          { name: '목 림프절', guide: '목 옆선을 위에서 아래 쇄골 쪽으로 천천히 쓸어 내립니다.' },
-          { name: '겨드랑이 림프절', guide: '겨드랑이 안쪽을 가볍게 감싸 풀어 줍니다.' },
-          { name: '팔꿈치 안쪽', guide: '팔꿈치 접히는 안쪽을 반대편 손바닥으로 부드럽게 쓸어 올립니다.' },
-          { name: '복부(배꼽 주변)', guide: '배꼽 주변을 시계 방향으로 크게 그리며 따뜻하게 어루만집니다.' },
-          { name: '서혜부(사타구니)', guide: '사타구니 접히는 부위를 손바닥으로 가볍게 쓸어 내립니다.' },
-          { name: '오금(무릎 뒤)', guide: '무릎 뒤 오금 부위를 양손으로 감싸 부드럽게 쓸어 올려 줍니다.' }
+        phases: [
+          { kind: 'empty', min: 5, parts: PARTS_8 },
+          { kind: 'fill', min: 10 }
         ]
       },
       advanced: {
         name: '고급 · 깊이 머물기',
-        emptyMin: 10,
-        fillMin: 20,
-        parts: [
-          { name: '쇄골 림프절', guide: '쇄골 위아래를 호흡과 함께 안쪽에서 바깥쪽으로 깊고 부드럽게 엽니다.' },
-          { name: '귀밑 림프절', guide: '귀 아래 림프절의 긴장을 풀며 천천히 목 옆으로 흘려보냅니다.' },
-          { name: '목 림프절', guide: '목 옆선을 따라 쇄골까지 막힌 기운을 비워 내듯 쓸어 내립니다.' },
-          { name: '겨드랑이 림프절', guide: '겨드랑이 안쪽을 편안히 감싸 쥐고 부드럽게 순환시킵니다.' },
-          { name: '팔꿈치 안쪽', guide: '팔꿈치 안쪽에서 겨드랑이 방향으로 가볍게 쓸어 올립니다.' },
-          { name: '복부(배꼽 주변)', guide: '배꼽과 아랫배를 시계 방향으로 느리고 따뜻하게 어루만집니다.' },
-          { name: '서혜부(사타구니)', guide: '하체로 이어지는 서혜부 통로를 손바닥 온기로 부드럽게 엽니다.' },
-          { name: '오금(무릎 뒤)', guide: '무릎 뒤 오금을 양손으로 가볍게 감싸 위쪽으로 쓸어 올립니다.' }
+        phases: [
+          { kind: 'empty', min: 10, parts: PARTS_8 },
+          { kind: 'fill', min: 20 }
+        ]
+      },
+      cycle: {
+        name: '심화 · 3회 순환 루틴',
+        phases: [
+          { kind: 'empty', min: 5, parts: PARTS_8 },
+          { kind: 'fill', min: 10 },
+          { kind: 'empty', min: 5, parts: PARTS_8 },
+          { kind: 'fill', min: 10 },
+          { kind: 'fill', min: 10 }
         ]
       }
     };
@@ -720,6 +851,7 @@
 
     let state = {
       level: 'beginner',
+      jeong: true,
       voice: true,
       tone: 'female',
       bell: true,
@@ -730,32 +862,22 @@
     };
 
     try {
-      const saved = JSON.parse(localStorage.getItem('dantian_settings_v1') || '{}');
+      const saved = JSON.parse(localStorage.getItem('dantian_settings_v2') || '{}');
       Object.assign(state, saved);
     } catch (e) {}
 
     function saveSettings() {
-      localStorage.setItem('dantian_settings_v1', JSON.stringify({
-        level: state.level,
-        voice: state.voice,
-        tone: state.tone,
-        bell: state.bell,
-        bgm: state.bgm
+      localStorage.setItem('dantian_settings_v2', JSON.stringify({
+        level: state.level, jeong: state.jeong, voice: state.voice,
+        tone: state.tone, bell: state.bell, bgm: state.bgm
       }));
     }
 
-    // Detect in-app browsers (KakaoTalk, Naver, Instagram, etc.)
-    const ua = navigator.userAgent || '';
-    if (/KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line/i.test(ua)) {
+    if (/KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line/i.test(navigator.userAgent || '')) {
       document.getElementById('inapp-banner').classList.add('show');
     }
 
-    // Audio Engine
-    let audioCtx = null;
-    let bgmNodes = null;
-    let wakeLock = null;
-    let ttsKeepAlive = null;
-    let ttsUnlocked = false;
+    let audioCtx = null, bgmNodes = null, wakeLock = null, ttsUnlocked = false, speechSeqId = 0;
 
     function ensureAudio() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -776,21 +898,21 @@
       if (!state.bell) return;
       ensureAudio();
       const freqs = [196, 392.5, 590, 988];
-      const amps = [0.32, 0.14, 0.08, 0.04];
+      const amps = [0.30, 0.15, 0.07, 0.03];
       for (let c = 0; c < count; c++) {
-        const startAt = audioCtx.currentTime + c * 2.1;
+        const startAt = audioCtx.currentTime + c * 2.2;
         freqs.forEach((f, idx) => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
           osc.type = 'sine';
           osc.frequency.setValueAtTime(f, startAt);
           gain.gain.setValueAtTime(0.0001, startAt);
-          gain.gain.linearRampToValueAtTime(amps[idx], startAt + 0.03);
-          gain.gain.exponentialRampToValueAtTime(0.0001, startAt + 4.2);
+          gain.gain.linearRampToValueAtTime(amps[idx], startAt + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, startAt + 4.8 - idx * 0.5);
           osc.connect(gain);
           gain.connect(audioCtx.destination);
           osc.start(startAt);
-          osc.stop(startAt + 4.3);
+          osc.stop(startAt + 5.0);
         });
       }
     }
@@ -799,47 +921,25 @@
       if (!state.bgm || bgmNodes) return;
       ensureAudio();
       const master = audioCtx.createGain();
-      master.gain.value = 0.045;
+      master.gain.value = 0.04;
       master.connect(audioCtx.destination);
 
-      const osc1 = audioCtx.createOscillator();
-      osc1.type = 'sine';
-      osc1.frequency.value = 110;
-      const osc2 = audioCtx.createOscillator();
-      osc2.type = 'sine';
-      osc2.frequency.value = 164.8;
+      const osc1 = audioCtx.createOscillator(); osc1.type = 'sine'; osc1.frequency.value = 110;
+      const osc2 = audioCtx.createOscillator(); osc2.type = 'sine'; osc2.frequency.value = 164.8;
+      const padGain = audioCtx.createGain(); padGain.gain.value = 0.45;
+      const lfo = audioCtx.createOscillator(); lfo.frequency.value = 0.11;
+      const lfoGain = audioCtx.createGain(); lfoGain.gain.value = 0.16;
+      lfo.connect(lfoGain); lfoGain.connect(padGain.gain);
+      osc1.connect(padGain); osc2.connect(padGain); padGain.connect(master);
 
-      const padGain = audioCtx.createGain();
-      padGain.gain.value = 0.45;
-      const lfo = audioCtx.createOscillator();
-      lfo.frequency.value = 0.12;
-      const lfoGain = audioCtx.createGain();
-      lfoGain.gain.value = 0.18;
-      lfo.connect(lfoGain);
-      lfoGain.connect(padGain.gain);
-
-      osc1.connect(padGain);
-      osc2.connect(padGain);
-      padGain.connect(master);
-
-      // Gentle wind noise
       const bufSize = audioCtx.sampleRate * 2;
       const buf = audioCtx.createBuffer(1, bufSize, audioCtx.sampleRate);
       const data = buf.getChannelData(0);
       for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
-      const noise = audioCtx.createBufferSource();
-      noise.buffer = buf;
-      noise.loop = true;
-
-      const filter = audioCtx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = 340;
-      const noiseGain = audioCtx.createGain();
-      noiseGain.gain.value = 0.18;
-
-      noise.connect(filter);
-      filter.connect(noiseGain);
-      noiseGain.connect(master);
+      const noise = audioCtx.createBufferSource(); noise.buffer = buf; noise.loop = true;
+      const filter = audioCtx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 320;
+      const noiseGain = audioCtx.createGain(); noiseGain.gain.value = 0.16;
+      noise.connect(filter); filter.connect(noiseGain); noiseGain.connect(master);
 
       osc1.start(); osc2.start(); lfo.start(); noise.start();
       bgmNodes = { osc1, osc2, lfo, noise, master };
@@ -848,16 +948,11 @@
     function stopBGM() {
       if (!bgmNodes) return;
       try {
-        bgmNodes.osc1.stop();
-        bgmNodes.osc2.stop();
-        bgmNodes.lfo.stop();
-        bgmNodes.noise.stop();
+        bgmNodes.osc1.stop(); bgmNodes.osc2.stop(); bgmNodes.lfo.stop(); bgmNodes.noise.stop();
         bgmNodes.master.disconnect();
       } catch (e) {}
       bgmNodes = null;
     }
-
-    let speechSeqId = 0;
 
     function speakText(text, onDone) {
       if (!state.voice || !('speechSynthesis' in window)) {
@@ -867,17 +962,9 @@
       speechSeqId++;
       const mySeq = speechSeqId;
       window.speechSynthesis.cancel();
-      clearInterval(ttsKeepAlive);
 
-      // Split into natural short sentences so Android/iOS TTS never cuts off mid-speech
-      const chunks = text
-        .split(/(?<=[.!?])\s+/)
-        .map(s => s.trim())
-        .filter(Boolean);
-      if (chunks.length === 0) {
-        if (onDone) onDone();
-        return;
-      }
+      const chunks = text.split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
+      if (!chunks.length) { if (onDone) onDone(); return; }
 
       const voices = window.speechSynthesis.getVoices().filter(v => v.lang && v.lang.startsWith('ko'));
       const preferredVoice = voices.length > 0
@@ -887,37 +974,29 @@
       let idx = 0;
       function speakNext() {
         if (mySeq !== speechSeqId) return;
-        if (idx >= chunks.length) {
-          if (onDone) onDone();
-          return;
-        }
+        if (idx >= chunks.length) { if (onDone) onDone(); return; }
         const chunk = chunks[idx++];
         const u = new SpeechSynthesisUtterance(chunk);
         u.lang = 'ko-KR';
-        u.rate = 0.78;
-        u.pitch = state.tone === 'female' ? 0.94 : 0.74;
+        u.rate = 0.74;
+        u.pitch = state.tone === 'female' ? 0.90 : 0.68;
         if (preferredVoice) u.voice = preferredVoice;
 
         let doneChunk = false;
-        const nextAfterDelay = () => {
+        const finishChunk = () => {
           if (doneChunk || mySeq !== speechSeqId) return;
           doneChunk = true;
           clearTimeout(fallbackTimer);
-          setTimeout(speakNext, 350);
+          setTimeout(speakNext, 550);
         };
-
-        u.onend = nextAfterDelay;
-        u.onerror = nextAfterDelay;
-        const estMs = Math.max(4500, chunk.length * 260 + 3500);
-        const fallbackTimer = setTimeout(nextAfterDelay, estMs);
-
+        u.onend = finishChunk;
+        u.onerror = finishChunk;
+        const fallbackTimer = setTimeout(finishChunk, Math.max(5000, chunk.length * 290 + 3500));
         window.speechSynthesis.speak(u);
       }
-
       speakNext();
     }
 
-    // UI Helpers
     function showTab(tab) {
       document.body.classList.remove('practicing');
       document.getElementById('nav-tabs').classList.remove('hidden');
@@ -932,7 +1011,7 @@
 
     function selectLevel(lvl) {
       state.level = lvl;
-      ['beginner', 'intermediate', 'advanced'].forEach(k => {
+      ['beginner', 'intermediate', 'advanced', 'cycle'].forEach(k => {
         document.getElementById('lvl-' + k).classList.toggle('active', k === lvl);
       });
       saveSettings();
@@ -957,18 +1036,15 @@
     }
 
     function testVoiceAndBell() {
-      ensureAudio();
-      unlockTTS();
-      playBell(1);
+      ensureAudio(); unlockTTS(); playBell(1);
       setTimeout(() => {
-        speakText('안녕하세요. 비우고 채우는 단전주선 음성 안내 테스트입니다. 편안히 호흡해 보세요.');
-      }, 500);
+        speakText('안녕하세요. 비우고 채우는 단전주선입니다. 어깨 힘을 빼고, 아랫배로 편안히 숨을 내쉬어 보세요.');
+      }, 600);
     }
 
     let currentPreview = null;
     function playPreview(key) {
-      ensureAudio();
-      unlockTTS();
+      ensureAudio(); unlockTTS();
       document.querySelectorAll('.preview-btn').forEach(b => b.classList.remove('playing'));
       if (currentPreview === key) {
         speechSeqId++;
@@ -984,32 +1060,30 @@
       });
     }
 
-    // Routine Runner
-    const ARC_LEN = 2 * Math.PI * 108;
+    const ARC_LEN = 2 * Math.PI * 103;
     let routine = {
-      active: false,
-      paused: false,
-      phase: 'empty', // empty | fill
-      totalSec: 0,
-      remSec: 0,
-      partIdx: -1,
+      active: false, paused: false,
+      queue: [], idx: 0,
+      totalSec: 0, remSec: 0, partIdx: -1, jeongIdx: -1,
       interval: null
     };
 
     async function requestWakeLock() {
-      try {
-        if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen');
-      } catch (e) {}
+      try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {}
     }
     function releaseWakeLock() {
       try { if (wakeLock) { wakeLock.release(); wakeLock = null; } } catch (e) {}
     }
 
     function startRoutine(isExtraSet) {
-      ensureAudio();
-      unlockTTS();
-      requestWakeLock();
+      ensureAudio(); unlockTTS(); requestWakeLock();
       if (!isExtraSet) state.setsDone = 0;
+
+      const cfg = LEVELS[state.level];
+      routine.queue = [];
+      if (state.jeong) routine.queue.push({ kind: 'jeong', min: 1 });
+      cfg.phases.forEach(p => routine.queue.push(p));
+      routine.idx = 0;
 
       document.body.classList.add('practicing');
       document.getElementById('nav-tabs').classList.add('hidden');
@@ -1019,71 +1093,91 @@
 
       routine.active = true;
       routine.paused = false;
-      document.getElementById('pause-btn').textContent = '⏸ 일시정지';
+      document.getElementById('pause-btn').textContent = '일시정지';
       startBGM();
-      beginEmptyPhase();
+      enterPhase();
     }
 
-    function beginEmptyPhase() {
-      const cfg = LEVELS[state.level];
-      routine.phase = 'empty';
-      routine.totalSec = cfg.emptyMin * 60;
-      routine.remSec = routine.totalSec;
-      routine.partIdx = -1;
-      document.getElementById('prac-phase').textContent = '1단계 · 림프절 비우기';
-      document.getElementById('prac-set-info').textContent = `${cfg.name} (${state.setsDone + 1}세트)`;
-      document.getElementById('prac-part').textContent = '비우기 준비';
-      document.getElementById('prac-guide').textContent = '앉아서도, 누워서도, 서서도, 걸으면서도 할 수 있습니다. 부드럽게 몸을 열어 줍니다.';
-      updateTimerUI();
-
-      clearInterval(routine.interval);
-      speakText(SCRIPTS.empty, () => {
-        if (!routine.active) return;
-        playBell(1);
-        runPhaseTick();
-      });
+    function renderDots() {
+      document.getElementById('prac-dots').innerHTML = routine.queue.map((_, i) => {
+        const cls = i < routine.idx ? 'pdot done' : (i === routine.idx ? 'pdot now' : 'pdot');
+        return `<div class="${cls}"></div>`;
+      }).join('');
     }
 
-    function beginFillPhase() {
-      const cfg = LEVELS[state.level];
-      routine.phase = 'fill';
-      routine.totalSec = cfg.fillMin * 60;
+    function enterPhase() {
+      clearInterval(routine.interval);
+      if (routine.idx >= routine.queue.length) { finishSet(); return; }
+      renderDots();
+      const ph = routine.queue[routine.idx];
+      routine.totalSec = ph.min * 60;
       routine.remSec = routine.totalSec;
       routine.partIdx = -1;
-      document.getElementById('prac-phase').textContent = '2단계 · 단전주선 채우기';
-      document.getElementById('prac-part').textContent = '하단전 집중';
-      document.getElementById('prac-guide').textContent = '들숨은 길고 깊게, 날숨은 짧고 부드럽게. 마음을 아랫배에 내려놓습니다.';
+      routine.jeongIdx = -1;
       updateTimerUI();
 
-      clearInterval(routine.interval);
-      speakText(SCRIPTS.fill, () => {
-        if (!routine.active) return;
+      if (ph.kind === 'jeong') {
+        document.getElementById('prac-kind').textContent = '入定 · 마음 고르기';
+        document.getElementById('prac-name').textContent = '조용히 숨 고르기';
+        document.getElementById('prac-part').textContent = '입정 안내';
+        document.getElementById('prac-guide').textContent = JEONG_LINES[0];
         playBell(1);
         runPhaseTick();
-      });
+      } else if (ph.kind === 'empty') {
+        document.getElementById('prac-kind').textContent = '循環 · 림프경선 비우기';
+        document.getElementById('prac-name').textContent = '부드럽게 열어 비우기';
+        document.getElementById('prac-part').textContent = '비우기 준비';
+        document.getElementById('prac-guide').textContent = '앉아서도, 누워서도, 서서도, 걸으면서도 할 수 있습니다.';
+        speakText(SCRIPTS.empty, () => {
+          if (!routine.active) return;
+          playBell(1);
+          runPhaseTick();
+        });
+      } else {
+        document.getElementById('prac-kind').textContent = '坐禪 · 하단전 채우기';
+        document.getElementById('prac-name').textContent = '하단전 단전주선';
+        document.getElementById('prac-part').textContent = '아랫배 하단전 집중';
+        document.getElementById('prac-guide').textContent = '들숨은 길고 깊게, 날숨은 짧고 부드럽게. 마음을 아랫배에 내려놓습니다.';
+        speakText(SCRIPTS.fill, () => {
+          if (!routine.active) return;
+          playBell(1);
+          runPhaseTick();
+        });
+      }
     }
 
     function runPhaseTick() {
       clearInterval(routine.interval);
-      if (routine.phase === 'empty') checkEmptyPart();
+      const ph = routine.queue[routine.idx];
+      if (ph.kind === 'empty') checkEmptyPart(ph);
+      if (ph.kind === 'jeong') checkJeongLine();
+
       routine.interval = setInterval(() => {
         if (!routine.active || routine.paused) return;
         routine.remSec--;
         updateTimerUI();
-        if (routine.phase === 'empty') checkEmptyPart();
+        if (ph.kind === 'empty') checkEmptyPart(ph);
+        if (ph.kind === 'jeong') checkJeongLine();
         if (routine.remSec <= 0) {
           clearInterval(routine.interval);
-          if (routine.phase === 'empty') {
-            beginFillPhase();
-          } else {
-            finishSet();
-          }
+          routine.idx++;
+          enterPhase();
         }
       }, 1000);
     }
 
-    function checkEmptyPart() {
-      const parts = LEVELS[state.level].parts;
+    function checkJeongLine() {
+      const elapsed = routine.totalSec - routine.remSec;
+      const idx = Math.min(JEONG_LINES.length - 1, Math.floor(elapsed / 15));
+      if (idx !== routine.jeongIdx) {
+        routine.jeongIdx = idx;
+        document.getElementById('prac-guide').textContent = JEONG_LINES[idx];
+        speakText(JEONG_LINES[idx]);
+      }
+    }
+
+    function checkEmptyPart(ph) {
+      const parts = ph.parts || PARTS_5;
       const elapsed = routine.totalSec - routine.remSec;
       const perPart = routine.totalSec / parts.length;
       const idx = Math.min(parts.length - 1, Math.floor(elapsed / perPart));
@@ -1106,7 +1200,7 @@
 
     function togglePause() {
       routine.paused = !routine.paused;
-      document.getElementById('pause-btn').textContent = routine.paused ? '▶ 계속하기' : '⏸ 일시정지';
+      document.getElementById('pause-btn').textContent = routine.paused ? '이어서 하기' : '일시정지';
       if (routine.paused) window.speechSynthesis && window.speechSynthesis.pause();
       else window.speechSynthesis && window.speechSynthesis.resume();
     }
@@ -1115,8 +1209,8 @@
       clearInterval(routine.interval);
       speechSeqId++;
       window.speechSynthesis && window.speechSynthesis.cancel();
-      if (routine.phase === 'empty') beginFillPhase();
-      else finishSet();
+      routine.idx++;
+      enterPhase();
     }
 
     function stopRoutineEarly() {
@@ -1133,12 +1227,19 @@
       clearInterval(routine.interval);
       state.setsDone += 1;
       playBell(3);
-      speakText('한 세트의 비우고 채우는 단전주선을 마쳤습니다. 아랫배의 온기를 느끼며 편안히 숨을 고르세요. 수고하셨습니다.', () => {
+      speakText('오늘의 비우고 채우는 단전주선을 마쳤습니다. 아랫배의 따뜻한 온기를 느끼며 편안히 숨을 고르세요. 수고하셨습니다.', () => {
         routine.active = false;
         stopBGM();
         releaseWakeLock();
         openCompleteScreen();
       });
+    }
+
+    function getLevelMinutes() {
+      const phs = LEVELS[state.level].phases;
+      const emptyMin = phs.filter(p => p.kind === 'empty').reduce((a, b) => a + b.min, 0);
+      const fillMin = phs.filter(p => p.kind === 'fill').reduce((a, b) => a + b.min, 0);
+      return { emptyMin, fillMin };
     }
 
     function openCompleteScreen() {
@@ -1150,8 +1251,9 @@
 
       const cfg = LEVELS[state.level];
       const sets = Math.max(1, state.setsDone);
+      const { emptyMin, fillMin } = getLevelMinutes();
       document.getElementById('complete-summary').textContent =
-        `${cfg.name} · ${sets}세트 완료 (비우기 ${cfg.emptyMin * sets}분 + 채우기 ${cfg.fillMin * sets}분)`;
+        `${cfg.name} · ${sets}세트 완료 (비우기 ${emptyMin * sets}분 + 채우기 ${fillMin * sets}분)`;
 
       const cmpBox = document.getElementById('breath-compare-box');
       if (state.breathBefore !== null && state.breathAfter !== null) {
@@ -1167,12 +1269,7 @@
       }
     }
 
-    // 1-Min Breath Check
-    let breathMode = 'before';
-    let breathSec = 60;
-    let breathCount = 0;
-    let breathRunning = false;
-    let breathTimer = null;
+    let breathMode = 'before', breathSec = 60, breathCount = 0, breathRunning = false, breathTimer = null;
 
     function setBreathMode(m) {
       breathMode = m;
@@ -1191,25 +1288,20 @@
 
     function startBreathCheck() {
       if (breathRunning) return;
-      breathSec = 60;
-      breathCount = 0;
-      breathRunning = true;
+      breathSec = 60; breathCount = 0; breathRunning = true;
       document.getElementById('breath-count').textContent = '0';
       document.getElementById('breath-timer').textContent = '60초';
       document.getElementById('breath-result-box').classList.add('hidden');
       document.getElementById('breath-start-btn').textContent = '측정 중...';
-
       clearInterval(breathTimer);
       breathTimer = setInterval(() => {
         breathSec--;
         document.getElementById('breath-timer').textContent = breathSec + '초';
         if (breathSec <= 0) {
-          clearInterval(breathTimer);
-          breathRunning = false;
+          clearInterval(breathTimer); breathRunning = false;
           document.getElementById('breath-start-btn').textContent = '다시 측정';
           if (breathMode === 'before') state.breathBefore = breathCount;
           else state.breathAfter = breathCount;
-
           const box = document.getElementById('breath-result-box');
           let html = `<strong>${breathMode === 'before' ? '수행 전' : '수행 후'} 결과: 1분 ${breathCount}회</strong><br/>${evaluateBreath(breathCount)}`;
           if (state.breathBefore !== null && state.breathAfter !== null) {
@@ -1231,33 +1323,23 @@
     }
 
     function resetBreathCheck() {
-      clearInterval(breathTimer);
-      breathRunning = false;
-      breathSec = 60;
-      breathCount = 0;
+      clearInterval(breathTimer); breathRunning = false; breathSec = 60; breathCount = 0;
       document.getElementById('breath-timer').textContent = '60초';
       document.getElementById('breath-count').textContent = '0';
       document.getElementById('breath-start-btn').textContent = '측정 시작';
       document.getElementById('breath-result-box').classList.add('hidden');
     }
 
-    // Diary Chips & Save
     function initChips() {
       const bWrap = document.getElementById('body-chips');
       BODY_CHIPS.forEach(t => {
-        const b = document.createElement('button');
-        b.className = 'chip';
-        b.textContent = t;
-        b.onclick = () => b.classList.toggle('selected');
-        bWrap.appendChild(b);
+        const b = document.createElement('button'); b.className = 'chip'; b.textContent = t;
+        b.onclick = () => b.classList.toggle('selected'); bWrap.appendChild(b);
       });
       const mWrap = document.getElementById('mind-chips');
       MIND_CHIPS.forEach(t => {
-        const b = document.createElement('button');
-        b.className = 'chip';
-        b.textContent = t;
-        b.onclick = () => b.classList.toggle('selected');
-        mWrap.appendChild(b);
+        const b = document.createElement('button'); b.className = 'chip'; b.textContent = t;
+        b.onclick = () => b.classList.toggle('selected'); mWrap.appendChild(b);
       });
     }
 
@@ -1269,29 +1351,21 @@
     function saveDiary() {
       const cfg = LEVELS[state.level];
       const sets = Math.max(1, state.setsDone);
+      const { emptyMin, fillMin } = getLevelMinutes();
       const bodySel = [...document.querySelectorAll('#body-chips .chip.selected')].map(el => el.textContent);
       const mindSel = [...document.querySelectorAll('#mind-chips .chip.selected')].map(el => el.textContent);
       const now = new Date();
       const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
-      const entry = {
-        date: dateStr,
-        level: cfg.name,
-        sets,
-        emptyMin: cfg.emptyMin * sets,
-        fillMin: cfg.fillMin * sets,
-        breathBefore: state.breathBefore,
-        breathAfter: state.breathAfter,
-        score: Number(document.getElementById('score-slider').value),
-        body: bodySel,
-        mind: mindSel,
-        memo: document.getElementById('diary-memo').value.trim()
-      };
       const list = getDiaries();
-      list.unshift(entry);
+      list.unshift({
+        date: dateStr, level: cfg.name, sets,
+        emptyMin: emptyMin * sets, fillMin: fillMin * sets,
+        breathBefore: state.breathBefore, breathAfter: state.breathAfter,
+        score: Number(document.getElementById('score-slider').value),
+        body: bodySel, mind: mindSel,
+        memo: document.getElementById('diary-memo').value.trim()
+      });
       localStorage.setItem('dantian_diary_v1', JSON.stringify(list));
-
-      // Reset form
       document.querySelectorAll('#body-chips .chip, #mind-chips .chip').forEach(c => c.classList.remove('selected'));
       document.getElementById('diary-memo').value = '';
       showTab('diary');
@@ -1302,21 +1376,18 @@
       const chart = document.getElementById('chart-bars');
       chart.innerHTML = '';
       const recent7 = list.slice(0, 7).reverse();
-      if (recent7.length === 0) {
+      if (!recent7.length) {
         chart.innerHTML = '<div style="width:100%;text-align:center;color:var(--muted);align-self:center;">수행 후 일기를 저장하면 그래프가 나타납니다.</div>';
       } else {
         recent7.forEach(item => {
-          const col = document.createElement('div');
-          col.className = 'bar-col';
+          const col = document.createElement('div'); col.className = 'bar-col';
           const hPct = Math.max(10, item.score * 10);
-          const shortDate = item.date.slice(5, 10);
-          col.innerHTML = `<div class="bar-val">${item.score}</div><div class="bar-fill" style="height:${hPct}%"></div><div class="bar-date">${shortDate}</div>`;
+          col.innerHTML = `<div class="bar-val">${item.score}</div><div class="bar-fill" style="height:${hPct}%"></div><div class="bar-date">${item.date.slice(5, 10)}</div>`;
           chart.appendChild(col);
         });
       }
-
       const dList = document.getElementById('diary-list');
-      if (list.length === 0) {
+      if (!list.length) {
         dList.innerHTML = '<p style="color:var(--muted); text-align:center;">아직 저장된 일기가 없습니다.</p>';
       } else {
         dList.innerHTML = list.map(item => `
@@ -1347,11 +1418,10 @@
       navigator.clipboard.writeText(txt).then(() => alert('전체 일기를 복사했습니다! 카톡 등에 붙여넣어 보관해 보세요.'));
     }
 
-    // Init
     initChips();
     selectLevel(state.level);
     setTone(state.tone);
-    ['voice', 'bell', 'bgm'].forEach(k => {
+    ['jeong', 'voice', 'bell', 'bgm'].forEach(k => {
       const btn = document.getElementById('tog-' + k);
       btn.classList.toggle('on', state[k]);
       btn.textContent = state[k] ? '켜짐' : '꺼짐';
