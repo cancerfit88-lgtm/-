@@ -857,48 +857,64 @@
       bgmNodes = null;
     }
 
+    let speechSeqId = 0;
+
     function speakText(text, onDone) {
       if (!state.voice || !('speechSynthesis' in window)) {
         if (onDone) setTimeout(onDone, 300);
         return;
       }
+      speechSeqId++;
+      const mySeq = speechSeqId;
       window.speechSynthesis.cancel();
       clearInterval(ttsKeepAlive);
 
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'ko-KR';
-      u.rate = 0.8;
-      u.pitch = state.tone === 'female' ? 1.05 : 0.82;
-
-      const voices = window.speechSynthesis.getVoices().filter(v => v.lang && v.lang.startsWith('ko'));
-      if (voices.length > 0) {
-        const prefer = voices.find(v => state.tone === 'female' ? /female|woman|유나|yuna|sunhi|지혜/i.test(v.name) : /male|man|민수|inho|hyun/i.test(v.name));
-        u.voice = prefer || voices[0];
+      // Split into natural short sentences so Android/iOS TTS never cuts off mid-speech
+      const chunks = text
+        .split(/(?<=[.!?])\s+/)
+        .map(s => s.trim())
+        .filter(Boolean);
+      if (chunks.length === 0) {
+        if (onDone) onDone();
+        return;
       }
 
-      let finished = false;
-      const finish = () => {
-        if (finished) return;
-        finished = true;
-        clearInterval(ttsKeepAlive);
-        clearTimeout(fallbackTimer);
-        if (onDone) onDone();
-      };
+      const voices = window.speechSynthesis.getVoices().filter(v => v.lang && v.lang.startsWith('ko'));
+      const preferredVoice = voices.length > 0
+        ? (voices.find(v => state.tone === 'female' ? /female|woman|유나|yuna|sunhi|지혜/i.test(v.name) : /male|man|민수|inho|hyun/i.test(v.name)) || voices[0])
+        : null;
 
-      u.onend = finish;
-      u.onerror = finish;
-      // Fallback timeout in case onend never fires
-      const estMs = Math.max(4000, text.length * 165 + 2500);
-      const fallbackTimer = setTimeout(finish, estMs);
-
-      ttsKeepAlive = setInterval(() => {
-        if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
-          window.speechSynthesis.pause();
-          window.speechSynthesis.resume();
+      let idx = 0;
+      function speakNext() {
+        if (mySeq !== speechSeqId) return;
+        if (idx >= chunks.length) {
+          if (onDone) onDone();
+          return;
         }
-      }, 12000);
+        const chunk = chunks[idx++];
+        const u = new SpeechSynthesisUtterance(chunk);
+        u.lang = 'ko-KR';
+        u.rate = 0.78;
+        u.pitch = state.tone === 'female' ? 0.94 : 0.74;
+        if (preferredVoice) u.voice = preferredVoice;
 
-      window.speechSynthesis.speak(u);
+        let doneChunk = false;
+        const nextAfterDelay = () => {
+          if (doneChunk || mySeq !== speechSeqId) return;
+          doneChunk = true;
+          clearTimeout(fallbackTimer);
+          setTimeout(speakNext, 350);
+        };
+
+        u.onend = nextAfterDelay;
+        u.onerror = nextAfterDelay;
+        const estMs = Math.max(4500, chunk.length * 260 + 3500);
+        const fallbackTimer = setTimeout(nextAfterDelay, estMs);
+
+        window.speechSynthesis.speak(u);
+      }
+
+      speakNext();
     }
 
     // UI Helpers
@@ -955,6 +971,7 @@
       unlockTTS();
       document.querySelectorAll('.preview-btn').forEach(b => b.classList.remove('playing'));
       if (currentPreview === key) {
+        speechSeqId++;
         window.speechSynthesis && window.speechSynthesis.cancel();
         currentPreview = null;
         return;
@@ -1096,6 +1113,7 @@
 
     function skipPhase() {
       clearInterval(routine.interval);
+      speechSeqId++;
       window.speechSynthesis && window.speechSynthesis.cancel();
       if (routine.phase === 'empty') beginFillPhase();
       else finishSet();
@@ -1103,6 +1121,7 @@
 
     function stopRoutineEarly() {
       clearInterval(routine.interval);
+      speechSeqId++;
       window.speechSynthesis && window.speechSynthesis.cancel();
       routine.active = false;
       stopBGM();
