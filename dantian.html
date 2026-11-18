@@ -262,6 +262,8 @@
   .pr-stop.quiet{color:var(--muted);border-color:#F0E8DA}
   .hide-nav{padding-bottom:44px}
   .hide-nav .bnav{display:none}
+  .hide-nav .top{display:none}
+  .hide-nav .inapp{margin-top:10px}
 
   /* ---------- breath ---------- */
   .breath-circle{
@@ -821,9 +823,9 @@
         listen: "Listen"
       },
       rates: [{v:0.78,l:"Slow"},{v:0.88,l:"Normal"},{v:0.98,l:"A little faster"}],
-      minLabel: "min",
+      minLabel: " min",
       perArea: [30,45,60],
-      perAreaUnit: "sec",
+      perAreaUnit: " sec",
       defaultVoiceOpt: "Device default (automatic)",
       voiceNote: "This device offers only one voice, so it will read to you calmly in that voice.",
       voiceListed: " voices found on this device.",
@@ -935,6 +937,12 @@
     });
 
     document.title = l === "ko" ? "비우고 채우는 단전주선" : "Empty & Fill · Dantian Seon";
+
+    ["voice","bell","bgm"].forEach(k=>{
+      const b = $("sw-" + k);
+      if(!b) return;
+      b.textContent = state[k] ? (l === "ko" ? "켜짐" : "On") : (l === "ko" ? "꺼짐" : "Off");
+    });
 
     const banner = $("inapp");
     if(banner && banner.classList.contains("show")){
