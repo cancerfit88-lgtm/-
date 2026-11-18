@@ -1471,7 +1471,7 @@
       const a = c.areas[s.areaIndex] || c.areas[0];
       return a.name;
     }
-    if(s.mode === "dantian") return (state.lang === "ko" ? "하단전 채우기 " : "Dantian breathing ") + (s.min || 5) + c.minLabel;
+    if(s.mode === "dantian") return c.danTitle;
     if(s.mode === "full") return c.fullLabel;
     return "";
   }
@@ -1864,7 +1864,7 @@
     el.textContent = msg;
     el.classList.add("show");
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(()=> el.classList.remove("show"), 3600);
+    toastTimer = setTimeout(function(){ el.classList.remove("show"); el.textContent = ""; }, 3600);
   }
 
   /* =========================================================
