@@ -1257,7 +1257,7 @@
       const el = $("screen-" + s);
       if(el) el.classList.toggle("hidden", s !== name);
     });
-    document.body.classList.toggle("hide-nav", name === "practice");
+    document.body.classList.toggle("hide-nav", name === "practice" || name === "lymph");
     window.scrollTo(0, 0);
   }
   function showTab(name){
