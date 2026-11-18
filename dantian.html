@@ -128,11 +128,13 @@
   .chip.on{background:var(--cream);border-color:var(--gold-l);color:var(--gold-d);font-weight:700}
 
   .linkbtn{
-    display:block;width:100%;margin-top:14px;padding:14px;
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    width:100%;margin-top:14px;padding:15px 14px;
     border-radius:14px;border:1.5px dashed var(--sand);
-    color:var(--gold-d);font-size:15.5px;font-weight:700;line-height:1.5;
-    background:var(--cream-l);
+    color:var(--gold-d);background:var(--cream-l);text-align:center;
   }
+  .linkbtn .lb1{font-size:16.5px;font-weight:700;line-height:1.4}
+  .linkbtn .lb2{font-size:13.5px;font-weight:500;color:#8A7A5C;line-height:1.4}
 
   /* ---------- cards ---------- */
   .card{
@@ -424,7 +426,10 @@
       </div>
     </div>
 
-    <button class="linkbtn" onclick="startFull()" id="t-c4">이어서 전체 하기 — 마음 고르기 → 비우기 → 채우기</button>
+    <button class="linkbtn" onclick="startFull()">
+      <span class="lb1" id="t-c4">이어서 전체 하기</span>
+      <span class="lb2" id="t-c4s">마음 고르기 → 림프절 비우기 → 하단전 채우기</span>
+    </button>
 
     <div class="card">
       <div class="sec-title"><span id="t-sound">소리와 목소리</span></div>
@@ -632,7 +637,8 @@
     "t-c2s":          {ko:"8부위 순환 · 한 부위만 골라 들을 수도 있습니다", en:"8 areas · play one area on its own, or all in order"},
     "t-c3":           {ko:"하단전 채우기", en:"Dantian Breathing"},
     "t-c3s":          {ko:"단전 호흡 · 시간을 골라 시작합니다", en:"Lower dantian breathing · choose your time"},
-    "t-c4":           {ko:"이어서 전체 하기 — 마음 고르기 → 비우기 → 채우기", en:"The full sequence — settling → clearing → filling"},
+    "t-c4":           {ko:"이어서 전체 하기", en:"The full sequence"},
+    "t-c4s":          {ko:"마음 고르기 → 림프절 비우기 → 하단전 채우기", en:"settling → clearing → filling"},
     "t-sound":        {ko:"소리와 목소리", en:"Voice &amp; Sound"},
     "t-soundnote":    {ko:"기기에 깔린 목소리 중에서 고르시면 가장 자연스럽습니다.", en:"Choosing one of your device's own voices sounds the most natural."},
     "t-voice":        {ko:"음성 안내", en:"Voice guidance"},
