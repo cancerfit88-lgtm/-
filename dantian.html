@@ -97,11 +97,13 @@
   /* ---------- practice cards ---------- */
   .pcards{margin-top:16px;display:flex;flex-direction:column;gap:12px}
   .pcard{
-    display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:14px;row-gap:12px;
+    width:100%;text-align:left;
     background:#FFFFFF;border:1px solid var(--line);border-radius:var(--r);
     padding:18px 16px;box-shadow:var(--shadow);
     transition:transform .12s ease, box-shadow .12s ease;
   }
+  .pcard > .pchips{grid-column:1 / -1;margin-top:0}
   .pcard:active{transform:scale(.985);box-shadow:0 3px 10px rgba(140,110,60,.08)}
   .pnum{
     flex:0 0 auto;width:44px;height:44px;border-radius:50%;
@@ -416,9 +418,9 @@
         <span class="pbody">
           <span class="ptitle" id="t-c3">하단전 채우기</span>
           <span class="psub" id="t-c3s">단전 호흡 · 시간을 골라 시작합니다</span>
-          <span class="chips" onclick="event.stopPropagation()" id="min-chips"></span>
         </span>
         <span class="pgo">▶</span>
+        <div class="chips pchips" onclick="event.stopPropagation()" id="min-chips"></div>
       </div>
     </div>
 
