@@ -241,7 +241,7 @@
     font-size:52px;font-weight:700;color:var(--ink);line-height:1.1;
     font-variant-numeric:tabular-nums;letter-spacing:-.02em;
   }
-  .ring-sub{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+  .ring-sub{font-size:14px;color:#5C5346;margin-top:6px;line-height:1.4}
   .ring-kind{font-size:14.5px;font-weight:700;color:var(--gold-d);margin-top:8px;line-height:1.4}
 
   .caption{
@@ -975,8 +975,8 @@
     renderChips();
     populateVoices();
     refreshBreathLabels();
-    refreshPlayLabel();
-    renderDiary();
+    refreshPlayLabel();    renderDiary();
+    renderCompleteSummary();
     saveSettings();
   }
 
@@ -1468,8 +1468,7 @@
     enterSegment(true);
   }
 
-  function sessionLabelText(s){
-    const c = C();
+  function sessionLabelText(s){    const c = C();
     if(!s) return "";
     if(s.mode === "jeong") return state.lang === "ko" ? "마음 고르기" : "Mind settling";
     if(s.mode === "lymph") return state.lang === "ko" ? "림프절 비우기 8부위" : "Lymphatic clearing · 8 areas";
@@ -1616,8 +1615,7 @@
     }
 
     showScreen("complete");
-    $("complete-summary").textContent = sessionLabelText(lastSession) + " · " +
-      (state.lang === "ko" ? lastSession.minutes + "분 수행" : lastSession.minutes + " min practiced");
+    renderCompleteSummary();
 
     const cmp = $("breath-compare");
     if(state.breathBefore !== null && state.breathAfter !== null){
@@ -1636,6 +1634,14 @@
   }
 
   let lastSession = {mode:"", minutes:0, areaIndex:0, min:5};
+
+  function renderCompleteSummary(){
+    if(!lastSession.mode) return;
+    const el = $("complete-summary");
+    if(!el) return;
+    el.textContent = sessionLabelText(lastSession) + " · " +
+      (state.lang === "ko" ? lastSession.minutes + "분 수행" : lastSession.minutes + " min practiced");
+  }
 
   function again(){
     if(!lastSession.mode){ showScreen("home"); return; }
