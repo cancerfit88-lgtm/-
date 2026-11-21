@@ -550,6 +550,7 @@
 
       <div class="field-label" id="t-turn">한 쌍에 주는 시간</div>
       <div class="chips" id="turn-chips"></div>
+      <div class="hint" id="turn-note" style="margin-top:8px"></div>
 
       <button class="btn btn-gold" style="margin-top:18px" onclick="startCircuit()" id="t-cystart">서킷 시작 — 축 → 여섯 쌍</button>
       <div class="row2" style="margin-top:10px">
@@ -1653,6 +1654,8 @@
       b.onclick = ()=>{ state.pairTurn = t.v; renderTurnChips(); saveSettings(); };
       box.appendChild(b);
     });
+    const note = $("turn-note");
+    if(note) note.textContent = C().turnNote;
   }
 
   function renderOrderChips(){
@@ -1959,7 +1962,7 @@
     if(s.mode === "dantian") return c.danTitle;
     if(s.mode === "full") return c.fullLabel;
     if(s.mode === "axis") return c.axis.title;
-    if(s.mode === "circuit") return c.circuitTitle + (s.pairs ? " " + s.pairs.length + "/6" : "");
+    if(s.mode === "circuit") return c.circuitTitle;
     if(s.mode === "circuitOne"){
       const p = c.pairs[s.pairIndex] || c.pairs[0];
       return p.no + " " + p.name;
