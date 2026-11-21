@@ -2563,6 +2563,14 @@
         '<div class="d-top"><span>' + item.date + '</span>' +
         (right ? '<span class="d-score">' + right + '</span>' : '') + '</div>' +
         '<div class="d-meta">' + meta + '</div>';
+      const hasB = (item.breathBefore !== null && item.breathBefore !== undefined) ||
+                   (item.breathAfter !== null && item.breathAfter !== undefined);
+      if(hasB){
+        const bb = (item.breathBefore === null || item.breathBefore === undefined) ? "-" : item.breathBefore;
+        const ba = (item.breathAfter === null || item.breathAfter === undefined) ? "-" : item.breathAfter;
+        html += '<div class="d-meta">🌬️ ' + (ko ? "호흡 " : "breath ") + bb + " → " + ba +
+                (ko ? "회/분" : " per min") + '</div>';
+      }
       if(item.lymphV || item.danV){
         let tags = '';
         if(item.lymphV) tags += '<span class="d-tag gold">' + (ko ? "림프절 · " : "lymph · ") +
@@ -2576,14 +2584,6 @@
         if((item.pairs || []).length) cl += " · " + item.pairs.join(" ") + " (" + item.pairs.length + "/6)";
         if(item.axisDone) cl += ko ? " · 축 포함" : " · with axis";
         html += '<div class="d-meta">' + cl + '</div>';
-      }
-      const hasB = (item.breathBefore !== null && item.breathBefore !== undefined) ||
-                   (item.breathAfter !== null && item.breathAfter !== undefined);
-      if(hasB){
-        const bb = (item.breathBefore === null || item.breathBefore === undefined) ? "-" : item.breathBefore;
-        const ba = (item.breathAfter === null || item.breathAfter === undefined) ? "-" : item.breathAfter;
-        html += '<div class="d-meta">🌬️ ' + (ko ? "호흡 " : "breath ") + bb + " → " + ba +
-                (ko ? "회/분" : " per min") + '</div>';
       }
       if(feel.length){
         html += '<div>' + feel.map(t => '<span class="d-tag">' + t + '</span>').join("") + '</div>';
