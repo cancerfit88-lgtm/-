@@ -857,7 +857,14 @@
 
   function loadSettings(){
     try{
-      const s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
+      let s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
+      if(!s || typeof s !== "object" || !Object.keys(s).length){
+        /* carry the voice and sound choices over from the earlier version */
+        const old = JSON.parse(localStorage.getItem("dantian_settings_v3") || "{}");
+        if(old && typeof old === "object"){
+          s = {voice:old.voice, bell:old.bell, bgm:old.bgm, rate:old.rate, voiceURI:old.voiceURI};
+        }
+      }
       if(s && typeof s === "object"){
         ["lang","voice","bell","bgm","rate","danMin","lymphMin"].forEach(k=>{
           if(s[k] !== undefined) state[k] = s[k];
