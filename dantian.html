@@ -266,7 +266,7 @@
       </svg>
       <div class="hero-txt">
         <div class="h1" id="t-hero1">오늘은 세 가지 중 하나</div>
-        <div class="h2" id="t-hero2">비우고 · 채우고 · 5분 통합 — 몸이 원하는 것부터.</div>
+        <div class="h2" id="t-hero2">비우고 · 채우고 · 그리고 오늘의 몸 살피기.</div>
       </div>
     </div>
 
@@ -291,14 +291,14 @@
         <div class="chips pchips" onclick="event.stopPropagation()" id="min-chips"></div>
       </div>
 
-      <button class="pcard" onclick="startCombined()">
+      <button class="pcard" onclick="openEval()">
         <span class="pnum">3</span>
         <span class="pbody">
-          <span class="ptitle" id="t-c3">림프절 순환 + 단전주선</span>
-          <span class="psub" id="t-c3s">앉아서나 서서, 5분 안에 한 번에</span>
-          <span class="pmeta" id="t-c3m">여덟 부위 빠르게 → 하단전 2분</span>
+          <span class="ptitle" id="t-c3">주관적 평가</span>
+          <span class="psub" id="t-c3s">1분 호흡 측정 · 오늘의 몸 느낌 · 일기</span>
+          <span class="pmeta" id="t-c3m">수행을 마친 뒤가 아니어도 언제든</span>
         </span>
-        <span class="pgo">▶</span>
+        <span class="pgo">✎</span>
       </button>
     </div>
 
@@ -416,6 +416,23 @@
     <button class="pr-stop quiet" onclick="stopSession()" id="t-stop">마치고 기록하기</button>
   </section>
 
+  <!-- ================= LIGHT (one lymph site) ================= -->
+  <section id="screen-light" class="screen hidden">
+    <div class="card" style="text-align:center;margin-top:28px">
+      <div style="font-size:26px;line-height:1">🌿</div>
+      <div class="sec-title" style="justify-content:center;margin-top:10px"><span id="t-light">가볍게 마쳤습니다</span></div>
+      <div class="sec-note" style="text-align:center;margin-bottom:0" id="light-summary"></div>
+    </div>
+
+    <div class="card" style="text-align:center">
+      <div class="sec-note" style="text-align:center;margin:0 0 16px" id="t-lightnote">한 부위만 하셨으니 평가는 생략합니다. 여덟 부위를 모두 마치면 오늘의 몸을 기록할 수 있습니다.</div>
+      <button class="btn btn-gold" onclick="openLymph()" id="t-lightmap">여덟 부위 지도로</button>
+      <div style="margin-top:10px">
+        <button class="btn btn-line" style="font-size:16px" onclick="showTab('home')" id="t-lighthome">홈으로</button>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= BREATH ================= -->
   <section id="screen-breath" class="screen hidden">
     <div class="card" style="text-align:center">
@@ -525,15 +542,15 @@
     "t-brand":    {ko:"내 손안의 림프·선(禪) 리셋", en:"Lymph &amp; Seon Reset in My Hand"},
     "t-brandsub": {ko:"비우고 림프절 순환 · 채우고 단전주선", en:"Emptying the lymph nodes · filling the lower dantian"},
     "t-hero1":    {ko:"오늘은 세 가지 중 하나", en:"One of three today"},
-    "t-hero2":    {ko:"비우고 · 채우고 · 5분 통합 — 몸이 원하는 것부터.", en:"Empty · fill · five minutes together — begin where your body asks."},
+    "t-hero2":    {ko:"비우고 · 채우고 · 그리고 오늘의 몸 살피기.", en:"Empty · fill · then a quiet look at today\u2019s body."},
     "t-c1":       {ko:"비우고 · 림프절 순환", en:"Empty · lymphatic clearing"},
     "t-c1s":      {ko:"말단에서 중심으로, 여덟 부위를 차례로", en:"eight sites in order, from the edges toward the centre"},
     "t-c1m":      {ko:"8부위 · 부위당 20회 · 10분 / 15분", en:"8 sites · 20 strokes each · 10 or 15 min"},
     "t-c2":       {ko:"채우고 · 단전주선", en:"Fill · dantian breathing"},
     "t-c2s":      {ko:"들숨은 길게, 날숨은 짧고 부드럽게", en:"a long in-breath, a short and soft out-breath"},
-    "t-c3":       {ko:"림프절 순환 + 단전주선", en:"Lymphatic clearing + dantian"},
-    "t-c3s":      {ko:"앉아서나 서서, 5분 안에 한 번에", en:"seated or standing, in five minutes"},
-    "t-c3m":      {ko:"여덟 부위 빠르게 → 하단전 2분", en:"eight sites quickly → two quiet minutes in the belly"},
+    "t-c3":       {ko:"주관적 평가", en:"Subjective check-in"},
+    "t-c3s":      {ko:"1분 호흡 측정 · 오늘의 몸 느낌 · 일기", en:"a breath count, today\u2019s body, a line in the journal"},
+    "t-c3m":      {ko:"수행을 마친 뒤가 아니어도 언제든", en:"open any time, not only after practice"},
     "t-bentry":   {ko:"1분 호흡 재기", en:"One-minute breath count"},
     "t-bentrys":  {ko:"수행 전·후 분당 호흡 수를 재어 일기에 남깁니다", en:"count your breaths before and after, and keep them in the journal"},
     "t-guide":    {ko:"안내와 요령 보기", en:"Practice notes"},
@@ -561,6 +578,10 @@
     "t-tap":      {ko:"내쉴 때 탭", en:"tap on each out-breath"},
     "t-breset":   {ko:"초기화", en:"Reset"},
     "t-done":     {ko:"오늘의 수행을 마쳤습니다", en:"Today's practice is complete"},
+    "t-light":    {ko:"가볍게 마쳤습니다", en:"That's a light round done"},
+    "t-lightnote":{ko:"한 부위만 하셨으니 평가는 생략합니다. 여덟 부위를 모두 마치면 오늘의 몸을 기록할 수 있습니다.", en:"One site only, so we skip the check-in. After all eight, you can record today's body."},
+    "t-lightmap": {ko:"여덟 부위 지도로", en:"Back to the eight sites"},
+    "t-lighthome":{ko:"홈으로", en:"Home"},
     "t-check":    {ko:"오늘의 몸 — 림프절과 단전", en:"Today's body — lymph and dantian"},
     "t-ckl":      {ko:"림프절 순환", en:"Lymphatic clearing"},
     "t-ckd":      {ko:"단전", en:"Dantian"},
@@ -643,22 +664,16 @@
       danSite:"하단전",
       danMinutes:[{v:3,l:"3분"},{v:5,l:"5분"},{v:10,l:"10분"},{v:20,l:"20분"}],
       cmbTitle:"림프절 순환 + 단전주선",
-      cmbKind:"림프절 + 단전주선 · 5분",
-      cmbSub:"앉아서나 서서, 편한 자세로. 여덟 부위를 빠르게 쓸고 하단전으로 내려갑니다.",
-      cmbIntro:"앉아서나 서서, 편한 자세로 하세요. 어깨의 힘을 내려놓고 두 손을 가볍게 둡니다. 여덟 부위를 빠르고 가볍게 스무 번씩 쓸어 비우고, 남은 시간은 하단전에 머뭅니다. 시작합니다.",
-      cmbIntroCap:"앉아서나 서서, 편한 자세로.",
-      cmbBridge:"여덟 부위를 마쳤습니다. 두 손을 배꼽 아래에 포개고, 어깨를 내립니다. 이제 하단전으로 내려갑니다.",
-      cmbClose:"오늘의 5분을 마쳤습니다. 아랫배의 온기를 잠시 느끼며 숨을 고르세요.",
-      cmbSite:"림프절 + 하단전",
-      cmbQuick:"빠르고 가볍게",
       complete:"오늘의 수행을 마쳤습니다. 아랫배의 따뜻한 온기를 느끼며 편안히 숨을 고르세요. 수고하셨습니다.",
+      doneTitle:"오늘의 수행을 마쳤습니다",
+      evalTitle:"주관적 평가",
       minLabel:"분",
       perAreaNote:(s,m)=> "부위당 " + s + " · 한 부위 20회 · 모두 " + m,
       guideTitle:"안내와 요령",
       guide:[
         {n:"1 · 비우기, 림프절 순환", t:"1 귀밑 → 2 목 옆선 → 3 쇄골 위·아래 → 4 겨드랑이 → 5 팔 안쪽·팔꿈치 → 6 복부 → 7 서혜부 → 8 오금·종아리. 언제나 말단에서 중심으로, 한 부위 스무 번. 손은 피부에 닿을 듯 가볍게."},
         {n:"2 · 채우기, 단전주선", t:"배꼽 아래 세 손가락 자리, 하단전에 마음을 내려놓습니다. 들숨은 길고 깊게, 날숨은 짧고 부드럽게. 생각이 떠오르면 붙잡지도 밀어내지도 말고 다시 아랫배로 돌아옵니다."},
-        {n:"3 · 5분 통합", t:"앉아서나 서서. 여덟 부위를 빠르게 스무 번씩 쓸어 비우고, 남은 2분을 하단전에 머뭅니다. 시간이 없는 날의 최소 수행입니다."},
+        {n:"3 · 주관적 평가", t:"수행을 마친 뒤, 또는 하루 중 아무 때나 1분 호흡을 재고 오늘의 몸 느낌을 골라 한 줄 메모와 함께 일기에 남깁니다. 여덟 부위를 모두 마친 뒤에 기록하면 림프절과 단전의 느낌이 가장 잘 드러납니다."},
         {n:"주의할 점", t:"림프절은 절대 세게 누르지 않습니다. 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 말고 손바닥으로 덮기만 합니다. 식사 직후나 음주 후에는 피하고, 임신 중이거나 치료 중인 질환이 있으면 의료진과 상의해 주세요."},
         {n:"기대 효과", t:"부기와 뭉침을 덜고, 호흡이 깊어지며 마음이 가라앉습니다. 매일 같은 시간에 하면 몸이 리듬을 기억합니다."}
       ],
@@ -759,22 +774,16 @@
       danSite:"Lower dantian",
       danMinutes:[{v:3,l:"3 min"},{v:5,l:"5 min"},{v:10,l:"10 min"},{v:20,l:"20 min"}],
       cmbTitle:"Lymphatic clearing + dantian",
-      cmbKind:"LYMPH + DANTIAN · 5 MIN",
-      cmbSub:"Seated or standing, in a comfortable posture. Eight sites quickly, then down into the lower belly.",
-      cmbIntro:"Seated or standing, in a comfortable posture. Let the shoulders drop and rest the hands lightly. We sweep the eight sites twenty quick, light strokes each, then spend the rest of the time in the lower belly. Let us begin.",
-      cmbIntroCap:"Seated or standing, comfortably.",
-      cmbBridge:"The eight sites are done. Fold both hands below the navel and let the shoulders drop. Now down into the lower belly.",
-      cmbClose:"Your five minutes are complete. Rest in the warmth of the lower belly, and breathe at ease.",
-      cmbSite:"Lymph + dantian",
-      cmbQuick:"quick and light",
       complete:"You have finished today's practice. Rest in the warmth of your lower belly, and breathe at ease. Well done.",
+      doneTitle:"Today's practice is complete",
+      evalTitle:"Subjective check-in",
       minLabel:" min",
       perAreaNote:(s,m)=> s + " per site · twenty strokes each · " + m + " in all",
       guideTitle:"Practice notes",
       guide:[
         {n:"1 · Emptying, the lymph nodes", t:"1 under the ear → 2 side of the neck → 3 above and below the collarbone → 4 armpit → 5 inner arm and elbow → 6 abdomen → 7 groin → 8 behind the knee and calf. Always from the edges toward the centre, twenty strokes at each site, the hand barely touching the skin."},
         {n:"2 · Filling, the lower dantian", t:"Three fingers below the navel, let the mind come to rest. In long and deep, out short and soft. When a thought appears, neither hold it nor push it away — simply return to the belly."},
-        {n:"3 · The five-minute session", t:"Seated or standing: sweep the eight sites twenty quick strokes each, then spend two quiet minutes in the lower belly. The smallest practice for a day without time."},
+        {n:"3 · Subjective check-in", t:"After practice, or at any point in the day: count a minute of breaths, choose how today's body felt, and keep it with a line in the journal. Right after all eight sites it reads the clearest."},
         {n:"Cautions", t:"Never press a lymph node hard. Do not press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after eating or drinking, and if you are pregnant or under treatment for an illness, please speak with your doctor first."},
         {n:"What it may bring", t:"Less swelling and heaviness, a deeper breath and a quieter mind. Done at the same time each day, the body learns the rhythm."}
       ],
@@ -939,13 +948,15 @@
     renderCompleteSummary();
     updateBreathCompare();
     if(session.active) renderPractice();
+    applyCompleteHeading();
+    if(!$("screen-light").classList.contains("hidden")) renderLightSummary();
     saveSettings();
   }
 
   /* =========================================================
      Screen / nav
      ========================================================= */
-  const SCREENS = ["home","lymph","practice","complete","breath","diary"];
+  const SCREENS = ["home","lymph","practice","light","complete","breath","diary"];
 
   function showScreen(name){
     SCREENS.forEach(s=>{
@@ -1079,6 +1090,9 @@
   let voices = [];
   let seq = 0;
   let ttsReady = false;
+  let chainTimer = null;    /* the short pause between spoken sentences */
+  let cueTimer = null;      /* the breath taken after cancel(), before speak() */
+  let lastCue = "", lastCueAt = 0;
 
   function langPrefix(){ return state.lang === "ko" ? "ko" : "en"; }
   function voicesFor(){
@@ -1136,6 +1150,8 @@
     try{
       const u = new SpeechSynthesisUtterance(" ");
       u.volume = 0;
+      u.lang = state.lang === "ko" ? "ko-KR" : "en-US";
+      u.rate = 1;
       window.speechSynthesis.speak(u);
       ttsReady = true;
     }catch(e){}
@@ -1168,22 +1184,40 @@
     });
     return res.length ? res : [s];
   }
+  /* One voice at a time: every new line cancels whatever was queued, waits a
+     beat (Android Chrome drops a speak() that lands in the same tick as
+     cancel()), and only then speaks. The same cue is never started twice. */
   function stopSpeaking(){
     seq++;
+    clearTimeout(chainTimer); chainTimer = null;
+    clearTimeout(cueTimer); cueTimer = null;
     if("speechSynthesis" in window){
-      try{ window.speechSynthesis.cancel(); }catch(e){}
+      try{
+        window.speechSynthesis.cancel();
+        if(window.speechSynthesis.paused) window.speechSynthesis.resume();
+      }catch(e){}
     }
+    duckBGM(false);
   }
-  function speak(text){
+  function speak(text, opts){
     if(!state.voice || !text || !("speechSynthesis" in window)) return;
-    stopSpeaking();
+    const key = String(text).replace(/\s+/g, " ").slice(0, 90);
+    const now = Date.now();
+    if(!(opts && opts.force) && key === lastCue && now - lastCueAt < 1500) return;
+    lastCue = key; lastCueAt = now;
+
     const my = ++seq;
+    clearTimeout(chainTimer); chainTimer = null;
+    clearTimeout(cueTimer); cueTimer = null;
+    duckBGM(true);
+
     const parts = splitSentences(text);
     const voice = currentVoice();
     let i = 0;
+
     function next(){
       if(my !== seq) return;
-      if(i >= parts.length) return;
+      if(i >= parts.length){ duckBGM(false); return; }
       const chunk = parts[i++];
       const u = new SpeechSynthesisUtterance(chunk);
       u.lang = state.lang === "ko" ? "ko-KR" : "en-US";
@@ -1191,20 +1225,33 @@
       u.pitch = 1.0;
       u.volume = 1;
       if(voice) u.voice = voice;
+
       let done = false;
-      const finish = () => {
+      let timer = null;
+      const advance = () => {
         if(done || my !== seq) return;
         done = true;
         clearTimeout(timer);
-        setTimeout(next, 300);
+        if(i >= parts.length){ duckBGM(false); return; }
+        chainTimer = setTimeout(next, 320);
       };
-      u.onend = finish;
-      u.onerror = finish;
-      const timer = setTimeout(finish, Math.max(4500, chunk.length * 240 + 3000));
-      try{ window.speechSynthesis.speak(u); }catch(e){ finish(); }
+      u.onend = advance;
+      u.onerror = advance;
+      timer = setTimeout(advance, Math.max(4500, Math.round(chunk.length * 300) + 2500));
+
+      /* clear the queue again, then speak after the engine has let go */
+      try{
+        window.speechSynthesis.cancel();
+        if(window.speechSynthesis.paused) window.speechSynthesis.resume();
+      }catch(e){}
+      cueTimer = setTimeout(()=>{
+        if(my !== seq){ return; }
+        try{ window.speechSynthesis.speak(u); }catch(e){ advance(); }
+      }, 60);
     }
     next();
   }
+
   function previewVoice(){
     unlockTTS(); ensureAudio();
     speak(state.lang === "ko"
@@ -1221,6 +1268,7 @@
     if(key === "bgm" && session.active){
       if(state[key]) startBGM(); else stopBGM();
     }
+    if(key === "bgm" && bgmNodes) duckBGM(window.speechSynthesis && window.speechSynthesis.speaking);
     if(key === "voice" && !state[key]) stopSpeaking();
     saveSettings();
   }
@@ -1236,15 +1284,25 @@
       if(audioCtx.state === "suspended") audioCtx.resume();
     }catch(e){}
   }
+  /* the tone steps back while the voice speaks, so the two never sit on top of each other */
+  function duckBGM(on){
+    if(!bgmNodes || !audioCtx || !bgmNodes.master) return;
+    try{
+      const g = bgmNodes.master.gain;
+      const t = audioCtx.currentTime;
+      g.cancelScheduledValues(t);
+      g.setTargetAtTime(on ? 0.004 : 0.02, t, 0.15);
+    }catch(e){}
+  }
   function playBell(times){
     if(!state.bell) return;
     ensureAudio();
     if(!audioCtx) return;
     const count = times || 1;
-    const freqs = [196, 392.5, 590, 988];
-    const amps  = [0.30, 0.15, 0.07, 0.03];
+    const freqs = [196, 352, 528, 880];
+    const amps  = [0.16, 0.08, 0.045, 0.018];
     for(let c = 0; c < count; c++){
-      const startAt = audioCtx.currentTime + c * 2.2;
+      const startAt = audioCtx.currentTime + c * 2.4;
       freqs.forEach((f, idx)=>{
         const osc = audioCtx.createOscillator();
         const g = audioCtx.createGain();
@@ -1252,9 +1310,9 @@
         osc.frequency.setValueAtTime(f, startAt);
         g.gain.setValueAtTime(0.0001, startAt);
         g.gain.linearRampToValueAtTime(amps[idx], startAt + 0.02);
-        g.gain.exponentialRampToValueAtTime(0.0001, startAt + 4.8 - idx * 0.5);
+        g.gain.exponentialRampToValueAtTime(0.0001, startAt + 3.4 - idx * 0.4);
         osc.connect(g); g.connect(audioCtx.destination);
-        osc.start(startAt); osc.stop(startAt + 5.0);
+        osc.start(startAt); osc.stop(startAt + 3.6);
       });
     }
   }
@@ -1263,33 +1321,32 @@
     ensureAudio();
     if(!audioCtx) return;
     const master = audioCtx.createGain();
-    master.gain.value = 0.035;
+    master.gain.value = 0.02;
     master.connect(audioCtx.destination);
 
+    /* a low, still pad: no LFO, no modulation, nothing to pulse against the voice */
     const o1 = audioCtx.createOscillator(); o1.type = "sine"; o1.frequency.value = 110;
     const o2 = audioCtx.createOscillator(); o2.type = "sine"; o2.frequency.value = 164.8;
-    const pad = audioCtx.createGain(); pad.gain.value = 0.45;
-    const lfo = audioCtx.createOscillator(); lfo.frequency.value = 0.11;
-    const lfoG = audioCtx.createGain(); lfoG.gain.value = 0.16;
-    lfo.connect(lfoG); lfoG.connect(pad.gain);
-    o1.connect(pad); o2.connect(pad); pad.connect(master);
+    const pad = audioCtx.createGain(); pad.gain.value = 0.22;
+    const lp = audioCtx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 420; lp.Q.value = 0.4;
+    o1.connect(pad); o2.connect(pad); pad.connect(lp); lp.connect(master);
 
     const size = audioCtx.sampleRate * 2;
     const buf = audioCtx.createBuffer(1, size, audioCtx.sampleRate);
     const data = buf.getChannelData(0);
     for(let i = 0; i < size; i++) data[i] = Math.random() * 2 - 1;
     const noise = audioCtx.createBufferSource(); noise.buffer = buf; noise.loop = true;
-    const filt = audioCtx.createBiquadFilter(); filt.type = "lowpass"; filt.frequency.value = 320;
-    const ng = audioCtx.createGain(); ng.gain.value = 0.15;
+    const filt = audioCtx.createBiquadFilter(); filt.type = "lowpass"; filt.frequency.value = 280;
+    const ng = audioCtx.createGain(); ng.gain.value = 0.06;
     noise.connect(filt); filt.connect(ng); ng.connect(master);
 
-    o1.start(); o2.start(); lfo.start(); noise.start();
-    bgmNodes = {o1, o2, lfo, noise, master};
+    o1.start(); o2.start(); noise.start();
+    bgmNodes = {o1, o2, noise, master};
   }
   function stopBGM(){
     if(!bgmNodes) return;
     try{
-      bgmNodes.o1.stop(); bgmNodes.o2.stop(); bgmNodes.lfo.stop(); bgmNodes.noise.stop();
+      bgmNodes.o1.stop(); bgmNodes.o2.stop(); bgmNodes.noise.stop();
       bgmNodes.master.disconnect();
     }catch(e){}
     bgmNodes = null;
@@ -1360,34 +1417,6 @@
     return steps;
   }
 
-  function buildCombined(){
-    const c = C();
-    const steps = [];
-    const quick = 20;      /* seconds per site in the quick sweep */
-    const total = 5 * 60;
-    const intro = 16, bridge = 10, close = 16;
-    steps.push(stepOf({dur:intro, kicker:c.kLymph, site:c.cmbSite, count:0,
-      caption:c.cmbIntroCap, speech:[{at:0, text:c.cmbIntro}], group:"intro"}));
-    c.areas.forEach((a, i)=>{
-      steps.push(stepOf({dur:quick, kicker:(i+1)+" / 8", site:(i+1)+". "+a.ring,
-        count:20, caption:a.dir + " · " + C().cmbQuick,
-        speech:[{at:0, text:(i+1)+". "+a.ring+". "+a.dir+(state.lang === "ko" ? ", 스무 번." : ".")}], group:"area"+i, area:i}));
-    });
-    steps.push(stepOf({dur:bridge, kicker:c.kBridge, site:c.cmbSite, count:0,
-      caption:c.cmbBridge, speech:[{at:0, text:c.cmbBridge}], group:"bridge"}));
-    const used = intro + quick * 8 + bridge;
-    const danSpan = total - close - used;
-    const nCue = Math.max(1, Math.round(danSpan / 45));
-    for(let i = 0; i < nCue; i++){
-      const cue = c.danCues[i % c.danCues.length];
-      steps.push(stepOf({dur:danSpan / nCue, kicker:c.kDan, site:c.cmbSite, count:0,
-        caption:cue, speech:[{at:0, text:cue}], group:"dan"}));
-    }
-    steps.push(stepOf({dur:close, kicker:c.closeSite, site:c.closeSite, count:0,
-      caption:c.cmbClose, speech:[{at:0, text:c.cmbClose}], group:"close"}));
-    return steps;
-  }
-
   function startSession(steps, mode, kick, opt){
     if(!steps.length) return;
     unlockTTS(); ensureAudio();
@@ -1422,9 +1451,12 @@
     session.stepBase = 0;
     session.stepT0 = performance.now();
     session.spoken = new Set();
-    playBell(1);
+    if(session.idx === 0) playBell(1);
     renderPractice();
-    if(speakNow !== false && s.speech.length) speak(s.speech[0].text);
+    if(s.speech.length){
+      session.spoken.add(0);          /* the first cue is spoken here, and tick must not repeat it */
+      if(speakNow !== false) speak(s.speech[0].text);
+    }
     session.timer = setInterval(tick, 250);
   }
 
@@ -1547,6 +1579,14 @@
   }
 
   let lastSession = {mode:"", minutes:0, label:"", areaIndex:0, min:0};
+  let completeKind = "session";   /* "session" after practice, "eval" when opened from section 3 */
+
+  function applyCompleteHeading(){
+    const el = $("t-done");
+    if(!el) return;
+    const c = C();
+    el.textContent = completeKind === "eval" ? c.evalTitle : c.doneTitle;
+  }
 
   function finish(reason){
     clearInterval(session.timer);
@@ -1569,8 +1609,19 @@
       label: sessionLabel()
     };
 
-    if(reason === "done") playBell(3);
+    const single = session.mode === "lymphOne";
+    if(reason === "done") playBell(single ? 1 : 3);
     refreshPlayLabel();
+
+    /* one lymph site is a light round — no full check-in for it */
+    if(single){
+      renderLightSummary();
+      showScreen("light");
+      return;
+    }
+
+    completeKind = "session";
+    applyCompleteHeading();
     showScreen("complete");
     renderCompleteSummary();
     prepareComplete();
@@ -1583,8 +1634,18 @@
     if(session.mode === "lymph") return c.lymphTitle;
     if(session.mode === "lymphOne") return c.areas[session.areaIndex].name;
     if(session.mode === "dantian") return c.danTitle;
-    if(session.mode === "combined") return c.cmbTitle;
     return c.lymphTitle;
+  }
+
+  function renderLightSummary(){
+    const el = $("light-summary");
+    if(!el) return;
+    const c = C();
+    const a = c.areas[lastSession.areaIndex || 0];
+    const ko = state.lang === "ko";
+    let txt = a ? a.name : c.lymphTitle;
+    if(lastSession.minutes) txt += " · " + lastSession.minutes + (ko ? "분" : " min");
+    el.textContent = txt;
   }
 
   function renderCompleteSummary(){
@@ -1602,14 +1663,26 @@
     if(lastSession.mode === "lymph") startLymphAll();
     else if(lastSession.mode === "lymphOne") startLymphOne(lastSession.areaIndex || 0);
     else if(lastSession.mode === "dantian") startDantian();
-    else if(lastSession.mode === "combined") startCombined();
     else showTab("home");
   }
 
   function startLymphAll(){ startSession(buildLymph(state.lymphMin), "lymph", C().lymphKind, {min:state.lymphMin}); }
   function startLymphOne(i){ startSession(buildLymph(state.lymphMin, i), "lymphOne", C().lymphKind, {areaIndex:i, min:state.lymphMin}); }
   function startDantian(){ startSession(buildDantian(state.danMin), "dantian", C().danKind, {min:state.danMin}); }
-  function startCombined(){ startSession(buildCombined(), "combined", C().cmbKind, {min:5}); }
+
+  /* ---------- the subjective evaluation, opened on its own ---------- */
+  function openEval(){
+    if(session.active) finish("stopped");
+    stopSpeaking();
+    stopBGM();
+    lastSession = {mode:"eval", kick:C().evalTitle, minutes:0, areaIndex:0, min:0};
+    completeKind = "eval";
+    applyCompleteHeading();
+    showScreen("complete");
+    renderCompleteSummary();
+    prepareComplete();
+    updateBreathCompare();
+  }
 
   /* =========================================================
      Breath
@@ -1674,6 +1747,8 @@
   }
   function breathToDiary(){
     lastSession = {mode:"breath", minutes:0, label:C().breath.label, areaIndex:0, min:0};
+    completeKind = "session";
+    applyCompleteHeading();
     showScreen("complete");
     renderCompleteSummary();
     prepareComplete();
@@ -1798,6 +1873,7 @@
     if(item.mode === "lymphOne") return c.areas[item.areaIndex || 0] ? c.areas[item.areaIndex || 0].name : c.lymphTitle;
     if(item.mode === "dantian") return c.danTitle;
     if(item.mode === "combined") return c.cmbTitle;
+    if(item.mode === "eval") return c.evalTitle;
     if(item.mode === "breath") return c.breath.label;
     return item.label || item.mode || c.breath.label;
   }
@@ -1957,7 +2033,7 @@
   window.startLymphAll = startLymphAll;
   window.startLymphOne = startLymphOne;
   window.startDantian = startDantian;
-  window.startCombined = startCombined;
+  window.openEval = openEval;
   window.togglePause = togglePause;
   window.restartSession = restartSession;
   window.nextSegment = nextSegment;
