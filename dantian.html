@@ -317,6 +317,7 @@
   .score-val{font-size:30px;font-weight:900;color:var(--gold-d);line-height:1}
   input[type=range]{width:100%;accent-color:var(--gold-d);height:34px}
   .scale{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted);line-height:1.5}
+  .d-tag.gold{background:var(--cream);border-color:var(--gold-l);color:var(--gold-d)}
   textarea{
     width:100%;padding:14px;border-radius:14px;border:1.5px solid var(--line);
     background:#FFFFFF;color:var(--ink);font-family:inherit;font-size:16.5px;
@@ -495,7 +496,7 @@
       </svg>
       <div class="hero-txt">
         <div class="h1" id="t-hero1">오늘은 네 가지 중 원하는 것만</div>
-        <div class="h2" id="t-hero2">단전주 · 림프절 · 경선 · 통합 — 몸이 원하는 곳부터 하셔도 됩니다.</div>
+        <div class="h2" id="t-hero2">단전주 · 림프절 · 경선 · 통합 — 몸이 원하는 곳부터.</div>
       </div>
     </div>
 
@@ -813,7 +814,7 @@
     "t-brand":        {ko:"내 손안의 림프·선(禪) 리셋", en:"Lymph &amp; Seon Reset in My Hand"},
     "t-brandsub":     {ko:"1·6·8 경선·림프 서킷 — 축으로 열고, 사슬로 잇고, 여덟 정거장에서 내립니다", en:"The 1·6·8 circuit — open the axis, link the six chains, release at eight stations"},
     "t-hero1":        {ko:"오늘은 네 가지 중 원하는 것만", en:"Today, any one of the four"},
-    "t-hero2":        {ko:"단전주 · 림프절 · 경선 · 통합 — 몸이 원하는 곳부터 하셔도 됩니다.", en:"Dantian · lymph · meridians · together — begin wherever your body asks."},
+    "t-hero2":        {ko:"단전주 · 림프절 · 경선 · 통합 — 몸이 원하는 곳부터.", en:"Dantian · lymph · meridians · together — begin wherever your body asks."},
     "t-c1":           {ko:"단전주 (하단전 채우기)", en:"Dantian (lower belly)"},
     "t-c1s":          {ko:"들숨 길게 · 날숨 짧게 · 시간 골라 시작", en:"long in-breath · short out-breath · pick your time"},
     "t-c2":           {ko:"림프절 순환 (8부위 비우기)", en:"Lymphatic clearing (8 areas)"},
@@ -990,7 +991,8 @@
       lymphDanKind: "통합 수행",
       closeSite: "마무리",
       danSite: "하단전",
-      kick: { jeong:"입정", axis:"경선 · 축", pair:"경선", circuit:"경선", lymph:"림프절 순환", dantian:"단전주", lymphDan:"통합 수행" },
+      jeongSite: "마음 고르기",
+      kick: { jeong:"입정 1분", axis:"경선 · 축", pair:"경선", circuit:"경선", lymph:"림프절 순환", dantian:"단전주", lymphDan:"통합 수행" },
       danTitle: "하단전 채우기",
       danKind: "하단전 채우기",
       danIntro: "이제 마음을 아랫배 하단전으로 편안히 내려놓고, 맑은 기운을 채우는 단전주선을 시작합니다. 앉아서도, 누워서도, 서서도, 걸으면서도 좋습니다. 들숨은 길고 깊게, 날숨은 짧고 부드럽게. 머리가 아니라 아랫배의 따뜻한 느낌에 마음을 머뭅니다. 시작합니다.",
@@ -1160,7 +1162,8 @@
       lymphDanKind: "TOGETHER",
       closeSite: "Closing",
       danSite: "Lower dantian",
-      kick: { jeong:"SETTLING", axis:"MERIDIANS · AXIS", pair:"MERIDIANS", circuit:"MERIDIANS", lymph:"LYMPH", dantian:"DANTIAN", lymphDan:"TOGETHER" },
+      jeongSite: "Settling in",
+      kick: { jeong:"SETTLING · 1 MIN", axis:"MERIDIANS · AXIS", pair:"MERIDIANS", circuit:"MERIDIANS", lymph:"LYMPH", dantian:"DANTIAN", lymphDan:"TOGETHER" },
       danTitle: "Filling the lower dantian",
       danKind: "DANTIAN BREATHING",
       danIntro: "Now let your mind settle into the lower dantian, and begin filling it with clear, quiet energy. You may sit, lie down, stand, or walk. Breathe in long and deep, breathe out short and soft. Rest your attention not in the head, but in the warmth of the lower belly. Let us begin.",
@@ -1984,7 +1987,7 @@
 
     if(mode === "jeong"){
       c.jeong.forEach((line, i)=>{
-        push(15, c.jeongTitle, line, line, line, "jeong");
+        push(15, c.jeongSite, line, line, line, "jeong");
       });
     }
 
@@ -2011,7 +2014,7 @@
     }
 
     if(mode === "full"){
-      c.jeong.forEach((line, i) => push(15, c.jeongTitle, line, line, line, "jeong"));
+      c.jeong.forEach((line, i) => push(15, c.jeongSite, line, line, line, "jeong"));
       pushAxisSegments(segs, c);
       pairIndexOrder(state.pairOrder).forEach(i=>{
         pushPairSegments(segs, c, c.pairs[i], state.pairTurn, m);
@@ -2544,16 +2547,21 @@
       let meta = diaryLabel(item);
       if(item.minutes) meta += " · " + item.minutes + C().minLabel;
       let right = "";
-      if(item.lymphV || item.danV){
-        right = (ko ? "림프 " : "lymph ") + (item.lymphV || "-") + " · " +
-                (ko ? "단전 " : "dantian ") + (item.danV || "-");
-      }else if(item.score){
+      if(!item.lymphV && !item.danV && item.score){
         right = (ko ? "평온 " : "calm ") + item.score + "/10";
       }
       let html = '<div class="d-item">' +
         '<div class="d-top"><span>' + item.date + '</span>' +
         (right ? '<span class="d-score">' + right + '</span>' : '') + '</div>' +
         '<div class="d-meta">' + meta + '</div>';
+      if(item.lymphV || item.danV){
+        let tags = '';
+        if(item.lymphV) tags += '<span class="d-tag gold">' + (ko ? "림프절 · " : "lymph · ") +
+          chipLabel(LYMPH_CK, "l" + item.lymphV) + '</span>';
+        if(item.danV) tags += '<span class="d-tag">' + (ko ? "단전 · " : "dantian · ") +
+          chipLabel(DAN_CK, "d" + item.danV) + '</span>';
+        html += '<div>' + tags + '</div>';
+      }
       if(item.circuitMode){
         let cl = "🔁 1·6·8 · " + modeName(item.circuitMode);
         if((item.pairs || []).length) cl += " · " + item.pairs.join(" ") + " (" + item.pairs.length + "/6)";
