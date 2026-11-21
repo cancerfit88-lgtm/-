@@ -281,7 +281,7 @@
         <span class="pgo">▶</span>
       </button>
 
-      <button class="pcard" onclick="startDantian()">
+      <div class="pcard" role="button" tabindex="0" onclick="startDantian()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startDantian();}">
         <span class="pnum">2</span>
         <span class="pbody">
           <span class="ptitle" id="t-c2">채우고 · 단전주선</span>
@@ -290,7 +290,7 @@
         </span>
         <span class="pgo">▶</span>
         <div class="chips pchips" onclick="event.stopPropagation()" id="min-chips"></div>
-      </button>
+      </div>
 
       <button class="pcard" onclick="startCombined()">
         <span class="pnum">3</span>
@@ -549,7 +549,7 @@
     "t-hint":     {ko:"소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.", en:"If you hear nothing, check the phone volume and your earphones. Inside an in-app browser (KakaoTalk, etc.), open this page in Chrome or Samsung Internet."},
     "t-foot":     {ko:"교육과 자기관리를 위한 안내이며, 진단과 치료를 대신하지 않습니다.", en:"Guidance for education and self-care; it does not replace diagnosis or treatment."},
     "t-lymphkind":{ko:"LYMPHATIC CLEARING", en:"LYMPHATIC CLEARING"},
-    "t-lymph":    {ko:"비우고 · 림프절 순환", en:"Empty · clearing the lymph nodes"},
+    "t-lymph":    {ko:"비우고 · 림프절 순환", en:"Empty · lymphatic clearing"},
     "t-lymphnote":{ko:"1 귀밑에서 8 오금까지, 한 부위 20회. 말단에서 중심으로 가볍게 쓸어 비웁니다.", en:"From under the ear to behind the knee, twenty strokes at each site — always from the edge toward the centre."},
     "t-mapcap":   {ko:"1 귀밑에서 8 오금까지 · 말단에서 중심으로", en:"1 under the ear → 8 behind the knee · from the edges toward the centre"},
     "t-lymtime":  {ko:"수행 시간", en:"Session length"},
@@ -1324,7 +1324,7 @@
         sp.push({at:pa.per * 0.52, text:c.lymphMid});
         sp.push({at:pa.per * 0.8, text:c.lymphLast});
       }
-      steps.push(stepOf({dur:pa.per, kicker:(k+1)+" / "+list.length, site:(i+1)+". "+a.ring,
+      steps.push(stepOf({dur:pa.per, kicker:(single ? (i+1)+" / "+c.areas.length : (k+1)+" / "+list.length), site:(i+1)+". "+a.ring,
         count:20, caption:a.pos + " · " + a.dir, speech:sp, group:"area"+i, area:i}));
     });
     steps.push(stepOf({dur: single ? 12 : pa.close, kicker:c.closeSite, site:single ? c.closeSite : c.closeAll,
@@ -1587,7 +1587,7 @@
     if(!el) return;
     if(!lastSession.mode){ el.textContent = ""; return; }
     const ko = state.lang === "ko";
-    let txt = lastSession.label || "";
+    let txt = diaryLabel(lastSession);
     if(lastSession.minutes) txt += " · " + lastSession.minutes + (ko ? "분 수행" : " min practiced");
     el.textContent = txt;
   }
