@@ -2060,7 +2060,7 @@
 
     const km = {jeong:"jeong", lymph:"lymph", lymphOne:"lymph", dantian:"dantian", axis:"axis",
                 circuit:"circuit", circuitOne:"pair", lymphdan:"lymphDan", full:"circuit"};
-    session.kick = (mode === "full") ? c.fullKind : c.kick[km[mode] || "circuit"];
+    session.kick = (mode === "full") ? "1 · 6 · 8" : c.kick[km[mode] || "circuit"];
 
     $("p-kind").textContent = session.kind;
     $("p-kick").textContent = session.kick;
