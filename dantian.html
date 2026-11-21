@@ -118,7 +118,7 @@
 
   /* ---------- lymph map ---------- */
   .mapbox{margin:4px 0 12px;padding:10px 6px 6px;border-radius:18px;background:var(--cream-l);border:1px solid var(--sand);text-align:center}
-  .mapimg{display:block;width:100%;max-width:300px;height:auto;margin:0 auto}
+  .mapimg{display:block;width:100%;max-width:274px;height:auto;margin:0 auto}
   .mapcap{font-size:13px;color:#8A7A5C;line-height:1.6;padding:2px 8px 6px;word-break:keep-all}
 
   /* ---------- area rows ---------- */
@@ -524,18 +524,18 @@
   const UI = {
     "t-eyebrow":  {ko:"日常回復研究所", en:"DAILY RECOVERY LAB"},
     "t-brand":    {ko:"내 손안의 림프·선(禪) 리셋", en:"Lymph &amp; Seon Reset in My Hand"},
-    "t-brandsub": {ko:"비우고 림프절 순환 · 채우고 단전주선", en:"Empty with the lymph nodes · fill with the lower dantian"},
-    "t-hero1":    {ko:"오늘은 세 가지 중 하나", en:"One of three, today"},
-    "t-hero2":    {ko:"비우고 · 채우고 · 5분 통합 — 몸이 원하는 것부터.", en:"Empty · fill · five-minute together — begin where your body asks."},
-    "t-c1":       {ko:"비우고 · 림프절 순환", en:"Empty · clearing the lymph nodes"},
-    "t-c1s":      {ko:"말단에서 중심으로, 여덟 부위를 차례로", en:"from the edges toward the centre, eight sites in order"},
+    "t-brandsub": {ko:"비우고 림프절 순환 · 채우고 단전주선", en:"Emptying the lymph nodes · filling the lower dantian"},
+    "t-hero1":    {ko:"오늘은 세 가지 중 하나", en:"One of three today"},
+    "t-hero2":    {ko:"비우고 · 채우고 · 5분 통합 — 몸이 원하는 것부터.", en:"Empty · fill · five minutes together — begin where your body asks."},
+    "t-c1":       {ko:"비우고 · 림프절 순환", en:"Empty · lymphatic clearing"},
+    "t-c1s":      {ko:"말단에서 중심으로, 여덟 부위를 차례로", en:"eight sites in order, from the edges toward the centre"},
     "t-c1m":      {ko:"8부위 · 부위당 20회 · 10분 / 15분", en:"8 sites · 20 strokes each · 10 or 15 min"},
     "t-c2":       {ko:"채우고 · 단전주선", en:"Fill · dantian breathing"},
     "t-c2s":      {ko:"들숨은 길게, 날숨은 짧고 부드럽게", en:"a long in-breath, a short and soft out-breath"},
     "t-c2m":      {ko:"3분 · 5분 · 10분 · 20분", en:"3 · 5 · 10 · 20 minutes"},
-    "t-c3":       {ko:"림프절 순환 + 단전주선", en:"Lymph nodes + dantian"},
+    "t-c3":       {ko:"림프절 순환 + 단전주선", en:"Lymphatic clearing + dantian"},
     "t-c3s":      {ko:"앉아서나 서서, 5분 안에 한 번에", en:"seated or standing, in five minutes"},
-    "t-c3m":      {ko:"여덟 부위 빠르게 → 하단전 2분", en:"eight sites quickly → two quiet minutes below the navel"},
+    "t-c3m":      {ko:"여덟 부위 빠르게 → 하단전 2분", en:"eight sites quickly → two quiet minutes in the belly"},
     "t-bentry":   {ko:"1분 호흡 재기", en:"One-minute breath count"},
     "t-bentrys":  {ko:"수행 전·후 분당 호흡 수를 재어 일기에 남깁니다", en:"count your breaths before and after, and keep them in the journal"},
     "t-guide":    {ko:"안내와 요령 보기", en:"Practice notes"},
@@ -592,13 +592,20 @@
       appName:"내 손안의 림프·선(禪) 리셋",
       lymphTitle:"비우고 · 림프절 순환",
       lymphKind:"림프절 순환",
+      lymphSite:"림프절 순환",
       lymphSub:"1 귀밑에서 8 오금까지, 한 부위 20회. 말단에서 중심으로 가볍게 쓸어 비웁니다.",
       lymphIntro:"지금부터 림프절을 부드럽게 쓸어 비웁니다. 앉아서도, 서서도, 누워서도 좋습니다. 아기 피부를 만지듯 가볍게, 한 부위 스무 번. 언제나 말단에서 중심으로 — 손끝에서 겨드랑이로, 발끝에서 서혜로, 그리고 쇄골 아래로 모읍니다. 시작합니다.",
       lymphIntroCap:"아기 피부를 만지듯, 가볍게.",
       lymphMid:"힘을 빼고, 피부 위를 바람이 지나가듯.",
       lymphLast:"마지막 다섯 회, 조금 더 가볍게.",
       lymphClose:"여덟 부위를 모두 마쳤습니다. 두 손을 배꼽 아래에 포개어 세 호흡, 가슴에서 발끝까지 한 번 쓸어 내리며 마칩니다.",
+      singleIntro:"한 부위만 골라 하겠습니다. 아기 피부를 만지듯 가볍게, 스무 번. 시작합니다.",
+      singleClose:"한 부위를 마쳤습니다. 손을 배꼽 아래에 잠시 두고 숨을 고르세요.",
       closeSite:"마무리",
+      closeAll:"여덟 부위 완료",
+      kLymph:"비우고",
+      kDan:"채우기",
+      kBridge:"이어서",,
       countUnit:"회",
       minutes:[{v:10,l:"10분"},{v:15,l:"15분"}],
       areas:[
@@ -644,7 +651,7 @@
       cmbIntroCap:"앉아서나 서서, 편한 자세로.",
       cmbBridge:"여덟 부위를 마쳤습니다. 두 손을 배꼽 아래에 포개고, 어깨를 내립니다. 이제 하단전으로 내려갑니다.",
       cmbClose:"오늘의 5분을 마쳤습니다. 아랫배의 온기를 잠시 느끼며 숨을 고르세요.",
-      cmbSite:"하단전",
+      cmbSite:"림프절 + 하단전",
       cmbQuick:"빠르고 가볍게",
       complete:"오늘의 수행을 마쳤습니다. 아랫배의 따뜻한 온기를 느끼며 편안히 숨을 고르세요. 수고하셨습니다.",
       minLabel:"분",
@@ -699,15 +706,22 @@
 
     en:{
       appName:"Lymph & Seon Reset in My Hand",
-      lymphTitle:"Empty · clearing the lymph nodes",
+      lymphTitle:"Empty · lymphatic clearing",
       lymphKind:"LYMPHATIC CLEARING",
+      lymphSite:"Lymphatic clearing",
       lymphSub:"From under the ear to behind the knee, twenty strokes at each site — always from the edge toward the centre.",
       lymphIntro:"We begin by gently stroking the lymph nodes to clear them. You may sit, stand, or lie down. Light as a baby's skin, twenty strokes at each site. Always from the edges toward the centre — hands to the armpit, feet to the groin, then down below the collarbone. Let us begin.",
       lymphIntroCap:"Light as a baby's skin.",
       lymphMid:"Let the hand go weightless, as light as a breeze across the skin.",
       lymphLast:"The last five strokes — even lighter.",
       lymphClose:"All eight sites are done. Fold both hands below the navel for three breaths, then sweep once from the chest down to the toes to close.",
+      singleIntro:"Just one site. Light as a baby\u2019s skin, twenty strokes. Let us begin.",
+      singleClose:"That site is done. Rest the hands below the navel for a moment, and let the breath settle.",
       closeSite:"Closing",
+      closeAll:"All eight done",
+      kLymph:"EMPTY",
+      kDan:"FILL",
+      kBridge:"NEXT",,
       countUnit:"",
       minutes:[{v:10,l:"10 min"},{v:15,l:"15 min"}],
       areas:[
@@ -746,14 +760,14 @@
       danEnd:"Leave the breath as it is, and rest for a moment in the warmth of your lower belly. Well done.",
       danSite:"Lower dantian",
       danMinutes:[{v:3,l:"3 min"},{v:5,l:"5 min"},{v:10,l:"10 min"},{v:20,l:"20 min"}],
-      cmbTitle:"Lymph nodes + dantian",
+      cmbTitle:"Lymphatic clearing + dantian",
       cmbKind:"LYMPH + DANTIAN · 5 MIN",
       cmbSub:"Seated or standing, in a comfortable posture. Eight sites quickly, then down into the lower belly.",
       cmbIntro:"Seated or standing, in a comfortable posture. Let the shoulders drop and rest the hands lightly. We sweep the eight sites twenty quick, light strokes each, then spend the rest of the time in the lower belly. Let us begin.",
       cmbIntroCap:"Seated or standing, comfortably.",
       cmbBridge:"The eight sites are done. Fold both hands below the navel and let the shoulders drop. Now down into the lower belly.",
       cmbClose:"Your five minutes are complete. Rest in the warmth of the lower belly, and breathe at ease.",
-      cmbSite:"Lower dantian",
+      cmbSite:"Lymph + dantian",
       cmbQuick:"quick and light",
       complete:"You have finished today's practice. Rest in the warmth of your lower belly, and breathe at ease. Well done.",
       minLabel:" min",
@@ -1014,8 +1028,8 @@
         '<span class="abody">' +
           '<span class="atop"><span class="aname">' + a.name + '</span>' +
           '<span class="acount">20' + (state.lang === "ko" ? "회" : "") + '</span></span>' +
+          '<span class="ahow">' + a.pos + '</span>' +
           '<span class="adir">' + a.dir + ' · ' + a.hand + '</span>' +
-          '<span class="ahow">' + a.pos + '에서 스무 번.</span>' +
         '</span>' +
         '<span class="aplay">▶</span>';
       row.onclick = ()=> startLymphOne(i);
@@ -1300,8 +1314,9 @@
     const steps = [];
     const pa = perAreaSeconds(min);
     const list = (onlyIndex === undefined || onlyIndex === null) ? c.areas.map((a,i)=>i) : [onlyIndex];
-    steps.push(stepOf({dur: onlyIndex === undefined ? pa.intro : 10, kicker:c.lymphKind, site:c.lymphKind,
-      count:0, caption:c.lymphIntroCap, speech:[{at:0, text:c.lymphIntro}], group:"intro"}));
+    const single = !(onlyIndex === undefined || onlyIndex === null);
+    steps.push(stepOf({dur: single ? 12 : pa.intro, kicker:c.kLymph, site:c.lymphSite,
+      count:0, caption:c.lymphIntroCap, speech:[{at:0, text:single ? c.singleIntro : c.lymphIntro}], group:"intro"}));
     list.forEach((i, k)=>{
       const a = c.areas[i];
       const sp = [{at:0, text:a.text}];
@@ -1312,8 +1327,9 @@
       steps.push(stepOf({dur:pa.per, kicker:(k+1)+" / "+list.length, site:(i+1)+". "+a.ring,
         count:20, caption:a.pos + " · " + a.dir, speech:sp, group:"area"+i, area:i}));
     });
-    steps.push(stepOf({dur: onlyIndex === undefined ? pa.close : 12, kicker:c.closeSite, site:c.closeSite,
-      count:0, caption:c.lymphClose, speech:[{at:0, text:c.lymphClose}], group:"close"}));
+    steps.push(stepOf({dur: single ? 12 : pa.close, kicker:c.closeSite, site:single ? c.closeSite : c.closeAll,
+      count:0, caption:single ? c.singleClose : c.lymphClose,
+      speech:[{at:0, text:single ? c.singleClose : c.lymphClose}], group:"close"}));
     return steps;
   }
 
@@ -1322,7 +1338,7 @@
     const steps = [];
     const total = min * 60;
     const intro = 36, close = 20;
-    steps.push(stepOf({dur:intro, kicker:c.danKind, site:c.danSite, count:0,
+    steps.push(stepOf({dur:intro, kicker:c.kDan, site:c.danSite, count:0,
       caption:c.danIntroCap, speech:[{at:0, text:c.danIntro}], group:"intro"}));
     let used = intro;
     let i = 0;
@@ -1330,7 +1346,7 @@
       const left = total - close - used;
       const d = Math.min(45, left);
       const cue = c.danCues[i % c.danCues.length];
-      steps.push(stepOf({dur:d, kicker:c.danKind, site:c.danSite, count:0,
+      steps.push(stepOf({dur:d, kicker:c.kDan, site:c.danSite, count:0,
         caption:cue, speech:[{at:0, text:cue}], group:"dan"}));
       used += d; i++;
     }
@@ -1345,24 +1361,22 @@
     const quick = 20;      /* seconds per site in the quick sweep */
     const total = 5 * 60;
     const intro = 16, bridge = 10, close = 16;
-    steps.push(stepOf({dur:intro, kicker:c.cmbKind, site:c.cmbSite, count:0,
+    steps.push(stepOf({dur:intro, kicker:c.kLymph, site:c.cmbSite, count:0,
       caption:c.cmbIntroCap, speech:[{at:0, text:c.cmbIntro}], group:"intro"}));
     c.areas.forEach((a, i)=>{
       steps.push(stepOf({dur:quick, kicker:(i+1)+" / 8", site:(i+1)+". "+a.ring,
         count:20, caption:a.dir + " · " + C().cmbQuick,
-        speech:[{at:0, text:(i+1)+". "+a.ring+". "+a.dir+", 스무 번."}], group:"area"+i, area:i}));
+        speech:[{at:0, text:(i+1)+". "+a.ring+". "+a.dir+(state.lang === "ko" ? ", 스무 번." : ".")}], group:"area"+i, area:i}));
     });
-    steps.push(stepOf({dur:bridge, kicker:c.closeSite, site:c.cmbSite, count:0,
+    steps.push(stepOf({dur:bridge, kicker:c.kBridge, site:c.cmbSite, count:0,
       caption:c.cmbBridge, speech:[{at:0, text:c.cmbBridge}], group:"bridge"}));
-    let used = intro + quick * 8 + bridge;
-    const danTotal = total - close;
-    let i = 0;
-    while(used < danTotal){
-      const d = Math.min(30, danTotal - used);
+    const used = intro + quick * 8 + bridge;
+    const danSpan = total - close - used;
+    const nCue = Math.max(1, Math.round(danSpan / 45));
+    for(let i = 0; i < nCue; i++){
       const cue = c.danCues[i % c.danCues.length];
-      steps.push(stepOf({dur:d, kicker:c.cmbKind, site:c.cmbSite, count:0,
+      steps.push(stepOf({dur:danSpan / nCue, kicker:c.kDan, site:c.cmbSite, count:0,
         caption:cue, speech:[{at:0, text:cue}], group:"dan"}));
-      used += d; i++;
     }
     steps.push(stepOf({dur:close, kicker:c.closeSite, site:c.closeSite, count:0,
       caption:c.cmbClose, speech:[{at:0, text:c.cmbClose}], group:"close"}));
@@ -1388,7 +1402,6 @@
     session.startedAt = Date.now();
 
     session.spoken = new Set();
-    steps.forEach(()=> {});
 
     $("p-kind").textContent = kick;
     showScreen("practice");
@@ -1453,9 +1466,8 @@
     if(s.count){
       const n = Math.min(s.count, 1 + Math.floor((e / s.dur) * s.count));
       $("p-count").textContent = n + " / " + s.count + (state.lang === "ko" ? "회" : "");
-      $("p-count").classList.remove("hidden");
     }else{
-      $("p-count").classList.add("hidden");
+      $("p-count").textContent = "\u00a0";
     }
     $("p-time").textContent = fmt(left);
     $("p-caption").textContent = s.caption;
@@ -1757,7 +1769,6 @@
       mode: mode,
       areaIndex: lastSession.areaIndex || 0,
       min: lastSession.min || 0,
-      label: lastSession.label || "",
       minutes: lastSession.minutes || 0,
       lymphV: ckValue("lymph-chips"),
       danV: ckValue("dan-chips"),
@@ -1777,12 +1788,13 @@
   }
 
   function diaryLabel(item){
-    if(item.label) return item.label;
     const c = C();
     if(item.mode === "lymph") return c.lymphTitle;
+    if(item.mode === "lymphOne") return c.areas[item.areaIndex || 0] ? c.areas[item.areaIndex || 0].name : c.lymphTitle;
     if(item.mode === "dantian") return c.danTitle;
     if(item.mode === "combined") return c.cmbTitle;
-    return c.breath.label;
+    if(item.mode === "breath") return c.breath.label;
+    return item.label || item.mode || c.breath.label;
   }
 
   function renderDiary(){
