@@ -95,30 +95,49 @@
   .hero-txt .h2{font-size:14.5px;color:#6B5B3E;line-height:1.65;margin-top:4px}
 
   /* ---------- practice cards ---------- */
-  .pcards{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+  .pcards{margin-top:16px;display:flex;flex-direction:column;gap:11px}
   .pcard{
-    display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:14px;row-gap:12px;
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:13px;row-gap:10px;
     width:100%;text-align:left;
     background:#FFFFFF;border:1px solid var(--line);border-radius:var(--r);
-    padding:18px 16px;box-shadow:var(--shadow);
+    padding:16px 16px;box-shadow:var(--shadow);
     transition:transform .12s ease, box-shadow .12s ease;
   }
-  .pcard > .pchips{grid-column:1 / -1;margin-top:0}
+  .pcard > .pchips{grid-column:2 / -1;margin-top:0;padding-top:1px}
   .pcard:active{transform:scale(.985);box-shadow:0 3px 10px rgba(140,110,60,.08)}
   .pnum{
-    flex:0 0 auto;width:44px;height:44px;border-radius:50%;
+    flex:0 0 auto;width:42px;height:42px;border-radius:50%;
     background:var(--cream);color:var(--gold-d);
     display:flex;align-items:center;justify-content:center;
-    font-size:19px;font-weight:900;line-height:1;
+    font-size:18px;font-weight:900;line-height:1;
   }
   .pbody{flex:1;min-width:0;display:block}
-  .ptitle{display:block;font-size:19.5px;font-weight:700;color:var(--ink);line-height:1.45}
-  .psub{display:block;font-size:14.5px;color:var(--muted);line-height:1.6;margin-top:3px}
+  .ptitle{display:block;font-size:18.5px;font-weight:800;color:var(--ink);line-height:1.4;letter-spacing:-.02em;word-break:keep-all;
+    text-align:left;margin:0}
+  .psub{display:block;font-size:14px;color:var(--muted);font-weight:400;line-height:1.55;margin:3px 0 0;
+    word-break:keep-all;text-align:left}
   .pgo{
-    flex:0 0 auto;width:40px;height:40px;border-radius:50%;
+    flex:0 0 auto;width:36px;height:36px;border-radius:50%;
     border:1.5px solid var(--gold-l);color:var(--gold-d);
-    display:flex;align-items:center;justify-content:center;font-size:15px;
+    display:flex;align-items:center;justify-content:center;font-size:13px;
   }
+
+  /* ---------- compact secondary rows ---------- */
+  .minirow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}
+  .minibtn{
+    padding:13px 8px;border-radius:13px;border:1px solid var(--line);background:#FFFFFF;
+    color:var(--ink2);font-size:14.5px;font-weight:700;line-height:1.4;letter-spacing:-.01em;
+  }
+  .minibtn:active{transform:translateY(1px)}
+  .entrybtn{
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:12px;
+    width:100%;margin-top:11px;padding:14px 16px;border-radius:16px;
+    border:1px solid var(--sand);background:var(--cream-l);text-align:left;
+  }
+  .entrybtn .ei{font-size:20px;line-height:1}
+  .entrybtn .et{display:block;font-size:15.5px;font-weight:800;color:var(--gold-d);line-height:1.4;letter-spacing:-.02em;word-break:keep-all}
+  .entrybtn .es{display:block;font-size:13px;color:#8A7A5C;font-weight:400;line-height:1.5;margin-top:2px;word-break:keep-all}
+  .entrybtn .eg{color:var(--gold-d);font-size:13px}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .pcard .chips{margin-top:11px}
   .chip{
@@ -223,26 +242,34 @@
     color:var(--muted);font-size:16px;background:#FFFFFF;
     display:flex;align-items:center;justify-content:center;
   }
-  .ring{position:relative;width:268px;height:268px;margin:12px auto 4px}
+  .ring{position:relative;width:270px;height:270px;margin:10px auto 4px}
   .ring-glow{
     position:absolute;inset:34px;border-radius:50%;
     background:radial-gradient(circle,rgba(240,206,132,.42) 0%,rgba(245,235,217,.20) 55%,rgba(255,255,255,0) 72%);
     animation:breathe 8s ease-in-out infinite;
   }
   @keyframes breathe{0%,100%{transform:scale(.9);opacity:.55}50%{transform:scale(1.06);opacity:1}}
-  .ring-svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+  .ring-svg{position:absolute;inset:0;width:100%;height:100%}
   .ring-track{fill:none;stroke:#EFE4CF;stroke-width:7}
-  .ring-arc{fill:none;stroke:var(--gold);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .5s linear}
+  .ring-arc{fill:none;stroke:var(--gold);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .6s linear}
+  .ring-tip{fill:#FFFFFF;stroke:var(--gold);stroke-width:3.4;transition:opacity .3s}
   .ring-inner{
-    position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;
+    position:absolute;inset:30px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+  }
+  .ring-kind{
+    font-size:11.5px;font-weight:800;color:var(--gold-l);line-height:1.3;
+    letter-spacing:.18em;text-transform:uppercase;margin:0;
+  }
+  .ring-site{
+    font-size:20px;font-weight:900;color:var(--gold-d);line-height:1.3;margin-top:5px;
+    letter-spacing:-.03em;word-break:keep-all;max-width:100%;
   }
   .ring-time{
-    font-size:52px;font-weight:700;color:var(--ink);line-height:1.1;
-    font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+    font-size:44px;font-weight:700;color:var(--ink);line-height:1.12;margin-top:4px;
+    font-variant-numeric:tabular-nums;letter-spacing:-.03em;
   }
-  .ring-sub{font-size:14px;color:#5C5346;margin-top:6px;line-height:1.4}
-  .ring-kind{font-size:14.5px;font-weight:700;color:var(--gold-d);margin-top:8px;line-height:1.4}
+  .ring-sub{font-size:12.5px;color:#5C5346;margin-top:3px;line-height:1.4;font-weight:500}
 
   .caption{
     margin-top:16px;padding:20px 18px;border-radius:20px;
@@ -298,18 +325,41 @@
   .field-label{font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 9px;line-height:1.5}
 
   /* ---------- diary ---------- */
-  .bars{display:flex;align-items:flex-end;gap:10px;height:150px;padding:10px 4px 0}
+  .bars{display:flex;align-items:flex-end;gap:8px;height:150px;padding:10px 2px 0}
   .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:5px}
+  .bar-pair{display:flex;align-items:flex-end;justify-content:center;gap:5px;width:100%;height:100%}
+  .bar-thin{width:13px;border-radius:6px 6px 2px 2px;min-height:8px}
+  .bar-thin.lym{background:linear-gradient(180deg,#D9B369,#B8860B)}
+  .bar-thin.dan{background:linear-gradient(180deg,#CDBCA2,#8A7A5C)}
   .bar-fill{width:100%;max-width:30px;border-radius:7px 7px 3px 3px;
     background:linear-gradient(180deg,#C9A25D,#B8860B);min-height:6px}
   .bar-val{font-size:12.5px;font-weight:700;color:var(--gold-d);line-height:1}
   .bar-date{font-size:11.5px;color:var(--muted);line-height:1}
+  .legend{display:flex;gap:15px;justify-content:center;font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.4}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:middle}
+  .ck-lab{font-size:13.5px;font-weight:800;color:var(--gold-d);letter-spacing:.02em;line-height:1.4;margin-bottom:8px}
+  .brow{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
+  .bcell{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted);font-weight:700;line-height:1.3}
+  .bcell input{
+    width:100%;padding:11px 8px;border-radius:12px;border:1.5px solid var(--line);
+    font-family:inherit;font-size:19px;font-weight:800;text-align:center;color:var(--ink);background:#FFFFFF;
+    line-height:1.2;
+  }
+  .bmeasure{
+    padding:0 14px;height:46px;border-radius:12px;border:1.5px solid var(--line);
+    background:#FFFFFF;color:var(--gold-d);font-size:14.5px;font-weight:800;white-space:nowrap;
+  }
   .d-item{padding:15px 0;border-top:1px solid var(--line);font-size:15.5px;line-height:1.75}
   .d-item:first-child{border-top:none;padding-top:2px}
   .d-top{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:15.5px;line-height:1.5}
   .d-score{color:var(--gold-d);flex:0 0 auto}
   .d-meta{font-size:14px;color:var(--muted);line-height:1.6;margin-top:2px}
   .d-memo{margin-top:6px;color:var(--ink2)}
+  .d-tag{
+    display:inline-block;margin:7px 6px 0 0;padding:3px 10px;border-radius:999px;
+    background:var(--cream-l);border:1px solid var(--sand);color:#6B5B3E;
+    font-size:13px;font-weight:700;line-height:1.55;
+  }
   .empty-note{color:var(--muted);font-size:15.5px;text-align:center;padding:18px 0;line-height:1.7}
 
   /* ---------- 1·6·8 circuit ---------- */
@@ -444,53 +494,62 @@
         </g>
       </svg>
       <div class="hero-txt">
-        <div class="h1" id="t-hero1">오늘은 원하는 단계만 골라 하셔도 됩니다</div>
-        <div class="h2" id="t-hero2">1 · 6 · 8 순서대로 이어도 되고, 몸이 원하는 곳부터 시작하셔도 됩니다.</div>
+        <div class="h1" id="t-hero1">오늘은 네 가지 중 원하는 것만</div>
+        <div class="h2" id="t-hero2">단전주 · 림프절 · 경선 · 통합 — 몸이 원하는 곳부터 하셔도 됩니다.</div>
       </div>
     </div>
 
     <div class="pcards">
-      <button class="pcard" onclick="startJeong()">
+      <div class="pcard" onclick="startDantian()" role="button" tabindex="0">
         <span class="pnum">1</span>
         <span class="pbody">
-          <span class="ptitle" id="t-c1">마음 고르기</span>
-          <span class="psub" id="t-c1s">입정 1분 · 앉아서 몸과 마음의 자리를 잡습니다</span>
+          <span class="ptitle" id="t-c1">단전주 (하단전 채우기)</span>
+          <span class="psub" id="t-c1s">들숨 길게 · 날숨 짧게 · 시간 골라 시작</span>
+        </span>
+        <span class="pgo">▶</span>
+        <div class="chips pchips" onclick="event.stopPropagation()" id="min-chips"></div>
+      </div>
+
+      <button class="pcard" onclick="openLymph()">
+        <span class="pnum">2</span>
+        <span class="pbody">
+          <span class="ptitle" id="t-c2">림프절 순환 (8부위 비우기)</span>
+          <span class="psub" id="t-c2s">1 귀밑 → 8 오금 · 말단에서 중심으로</span>
         </span>
         <span class="pgo">▶</span>
       </button>
 
       <button class="pcard" onclick="openCircuit()">
-        <span class="pnum">2</span>
-        <span class="pbody">
-          <span class="ptitle" id="t-c2">1·6·8 경선·림프 서킷</span>
-          <span class="psub" id="t-c2s">축(임독맥) → 6경선 여섯 쌍 · 비움·채움·안정 처방</span>
-        </span>
-        <span class="pgo">▶</span>
-      </button>
-
-      <button class="pcard" onclick="openLymph()">
         <span class="pnum">3</span>
         <span class="pbody">
-          <span class="ptitle" id="t-c3">림프절 비우기 (8부위)</span>
-          <span class="psub" id="t-c3s">귀밑 → 목 → 쇄골 → 겨드랑 → 팔꿈치 → 복부 → 서혜 → 오금</span>
+          <span class="ptitle" id="t-c3">경선 (1·6·8 경선·림프 서킷)</span>
+          <span class="psub" id="t-c3s">임독맥 축 → 6경선 여섯 쌍 · 비움·채움·안정</span>
         </span>
         <span class="pgo">▶</span>
       </button>
 
-      <div class="pcard" onclick="startDantian()" role="button" tabindex="0">
+      <button class="pcard" onclick="startLymphDan()">
         <span class="pnum">4</span>
         <span class="pbody">
-          <span class="ptitle" id="t-c4">하단전 채우기</span>
-          <span class="psub" id="t-c4s">단전 호흡 · 시간을 골라 시작합니다</span>
+          <span class="ptitle" id="t-c4">단전주 + 림프절 (통합 수행)</span>
+          <span class="psub" id="t-c4s">8부위 비우기 → 하단전 채우기 · 한 번에</span>
         </span>
         <span class="pgo">▶</span>
-        <div class="chips pchips" onclick="event.stopPropagation()" id="min-chips"></div>
-      </div>
+      </button>
     </div>
 
-    <button class="linkbtn" onclick="startFull()">
-      <span class="lb1" id="t-c5">이어서 전체 하기 (1·6·8)</span>
-      <span class="lb2" id="t-c5s">마음 고르기 → 1·6·8 서킷 → 8부위 → 하단전 채우기</span>
+    <div class="minirow">
+      <button class="minibtn" onclick="startJeong()" id="t-c5">입정 1분 · 마음 고르기</button>
+      <button class="minibtn" onclick="startFull()" id="t-c6">전체 이어서 (1·6·8)</button>
+    </div>
+
+    <button class="entrybtn" onclick="showTab('breath')">
+      <span class="ei">🌬️</span>
+      <span>
+        <span class="et" id="t-c7">1분 호흡 재기</span>
+        <span class="es" id="t-c7s">수행 전·후 분당 호흡 수를 재어 일기에 남깁니다</span>
+      </span>
+      <span class="eg">›</span>
     </button>
 
     <button class="linkbtn" onclick="openEbook()" style="border-style:solid;background:#FFFFFF">
@@ -588,12 +647,12 @@
   <section id="screen-lymph" class="screen hidden">
     <div class="pr-top">
       <button class="pr-close" onclick="showScreen('home')">✕</button>
-      <span class="pr-kind" id="t-lymphkind">LYMPHATIC CLEARING</span>
+      <span class="pr-kind" id="t-lymphkind">림프절 순환 · 8부위</span>
       <span style="width:42px"></span>
     </div>
     <div class="card" style="margin-top:10px">
-      <div class="sec-title"><span id="t-lymph">림프절 비우기</span></div>
-      <div class="sec-note" id="t-lymphnote">귀밑에서 시작해 여덟 정거장을 차례로. 한 부위만 골라 들을 수도 있습니다.</div>
+      <div class="sec-title"><span id="t-lymph">림프절 순환 · 8부위</span></div>
+      <div class="sec-note" id="t-lymphnote">1 귀밑에서 8 오금까지 차례대로. 한 부위만 골라 들을 수도 있습니다.</div>
       <div class="mode-note" id="lymph-mode-note"></div>
 
       <div class="field-label" style="margin-top:4px" id="t-perarea">부위당 시간</div>
@@ -618,13 +677,15 @@
 
     <div class="ring">
       <div class="ring-glow"></div>
-      <svg class="ring-svg" viewBox="0 0 240 240">
+      <svg class="ring-svg" viewBox="0 0 240 240" aria-hidden="true">
         <circle class="ring-track" cx="120" cy="120" r="106"></circle>
-        <circle class="ring-arc" id="ring-arc" cx="120" cy="120" r="106"></circle>
+        <path class="ring-arc" id="ring-arc" d="M120 14 A106 106 0 1 1 120 226 A106 106 0 1 1 120 14"></path>
+        <circle class="ring-tip" id="ring-tip" cx="120" cy="14" r="5.4"></circle>
       </svg>
       <div class="ring-inner">
+        <div class="ring-kind" id="p-kick">단전주</div>
+        <div class="ring-site" id="p-part">하단전</div>
         <div class="ring-time" id="p-time">01:00</div>
-        <div class="ring-kind" id="p-part">마음 고르기</div>
         <div class="ring-sub" id="p-sub"></div>
       </div>
     </div>
@@ -683,21 +744,23 @@
     <div class="card">
       <div id="breath-compare" class="result-box hidden" style="margin-top:0"></div>
 
-      <div class="field-label" id="t-score">오늘 수행 후 평온감</div>
-      <div style="display:flex;align-items:baseline;gap:8px">
-        <span class="score-val" id="score-val">8</span>
-        <span style="font-size:15px;color:var(--muted)" id="t-score10">/ 10</span>
+      <div class="field-label" style="margin-top:2px" id="t-check">오늘의 몸 — 림프절과 단전</div>
+      <div class="ck-lab" id="t-ckl">림프절 순환</div>
+      <div class="chips" id="lymph-chips"></div>
+      <div class="ck-lab" style="margin-top:14px" id="t-ckd">단전</div>
+      <div class="chips" id="dan-chips"></div>
+
+      <div class="field-label" id="t-feel">주관적 느낌 · 여러 개 고르셔도 됩니다</div>
+      <div class="chips" id="feel-chips"></div>
+
+      <div class="field-label" id="t-breathin">1분 호흡 (분당 회수)</div>
+      <div class="brow">
+        <label class="bcell"><span id="t-bb">수행 전</span><input type="number" id="breath-before-in" min="0" max="60" inputmode="numeric" placeholder="—" /></label>
+        <label class="bcell"><span id="t-ba">수행 후</span><input type="number" id="breath-after-in" min="0" max="60" inputmode="numeric" placeholder="—" /></label>
+        <button class="bmeasure" onclick="showTab('breath')" id="t-bmeasure">호흡 재기</button>
       </div>
-      <input type="range" min="1" max="10" value="8" id="score" oninput="document.getElementById('score-val').textContent=this.value" />
-      <div class="scale"><span id="t-slow1">1 어수선했다</span><span id="t-slow10">10 깊이 고요했다</span></div>
 
-      <div class="field-label" id="t-body">몸의 감각</div>
-      <div class="chips" id="body-chips"></div>
-
-      <div class="field-label" id="t-mind">마음의 감정</div>
-      <div class="chips" id="mind-chips"></div>
-
-      <div class="field-label" id="t-memo">한 줄 감상</div>
+      <div class="field-label" id="t-memo">한 줄 메모</div>
       <textarea id="memo" placeholder="오늘 몸과 마음에서 느껴진 점을 한 줄로 남겨 보세요."></textarea>
 
       <div style="margin-top:20px">
@@ -713,12 +776,13 @@
   <!-- ================= DIARY ================= -->
   <section id="screen-diary" class="screen hidden">
     <div class="card">
-      <div class="sec-title"><span id="t-chart">최근 7회 평온감</span></div>
+      <div class="sec-title"><span id="t-chart">최근 7회 · 림프절과 단전</span></div>
       <div class="bars" id="chart"></div>
+      <div class="legend" id="t-legend"><span><i style="background:#B8860B"></i>림프절</span><span><i style="background:#8A7A5C"></i>단전</span></div>
     </div>
     <div class="card">
       <div class="sec-title">
-        <span id="t-journal">감각·감정 일기</span>
+        <span id="t-journal">수련 일기</span>
         <button class="chip" style="font-size:14px;padding:7px 13px" onclick="copyAll()" id="t-copy">전체 복사</button>
       </div>
       <div id="diary-list"></div>
@@ -748,18 +812,20 @@
     "t-eyebrow":      {ko:"日常回復研究所", en:"DAILY RECOVERY LAB"},
     "t-brand":        {ko:"내 손안의 림프·선(禪) 리셋", en:"Lymph &amp; Seon Reset in My Hand"},
     "t-brandsub":     {ko:"1·6·8 경선·림프 서킷 — 축으로 열고, 사슬로 잇고, 여덟 정거장에서 내립니다", en:"The 1·6·8 circuit — open the axis, link the six chains, release at eight stations"},
-    "t-hero1":        {ko:"오늘은 원하는 단계만 골라 하셔도 됩니다", en:"Today you may take any single stage"},
-    "t-hero2":        {ko:"1 · 6 · 8 순서대로 이어도 되고, 몸이 원하는 곳부터 시작하셔도 됩니다.", en:"Follow 1 · 6 · 8 in order, or begin wherever your body asks."},
-    "t-c1":           {ko:"마음 고르기", en:"Mind Settling"},
-    "t-c1s":          {ko:"입정 1분 · 앉아서 몸과 마음의 자리를 잡습니다", en:"1 min · settling body and mind before you begin"},
-    "t-c2":           {ko:"1·6·8 경선·림프 서킷", en:"The 1·6·8 Circuit"},
-    "t-c2s":          {ko:"축(임독맥) → 6경선 여섯 쌍 · 비움·채움·안정 처방", en:"axis → six meridian pairs · empty, fill or calm prescription"},
-    "t-c3":           {ko:"림프절 비우기 (8부위)", en:"Lymphatic Clearing (8 areas)"},
-    "t-c3s":          {ko:"귀밑 → 목 → 쇄골 → 겨드랑 → 팔꿈치 → 복부 → 서혜 → 오금", en:"ear → neck → collarbone → armpit → elbow → abdomen → groin → behind the knee"},
-    "t-c4":           {ko:"하단전 채우기", en:"Dantian Breathing"},
-    "t-c4s":          {ko:"단전 호흡 · 시간을 골라 시작합니다", en:"Lower dantian breathing · choose your time"},
-    "t-c5":           {ko:"이어서 전체 하기 (1·6·8)", en:"The full 1·6·8"},
-    "t-c5s":          {ko:"마음 고르기 → 1·6·8 서킷 → 8부위 → 하단전 채우기", en:"settling → circuit → eight areas → dantian"},
+    "t-hero1":        {ko:"오늘은 네 가지 중 원하는 것만", en:"Today, any one of the four"},
+    "t-hero2":        {ko:"단전주 · 림프절 · 경선 · 통합 — 몸이 원하는 곳부터 하셔도 됩니다.", en:"Dantian · lymph · meridians · together — begin wherever your body asks."},
+    "t-c1":           {ko:"단전주 (하단전 채우기)", en:"Dantian (lower belly)"},
+    "t-c1s":          {ko:"들숨 길게 · 날숨 짧게 · 시간 골라 시작", en:"long in-breath · short out-breath · pick your time"},
+    "t-c2":           {ko:"림프절 순환 (8부위 비우기)", en:"Lymphatic clearing (8 areas)"},
+    "t-c2s":          {ko:"1 귀밑 → 8 오금 · 말단에서 중심으로", en:"1 under the ear → 8 behind the knee · end toward centre"},
+    "t-c3":           {ko:"경선 (1·6·8 경선·림프 서킷)", en:"Meridians (the 1·6·8 circuit)"},
+    "t-c3s":          {ko:"임독맥 축 → 6경선 여섯 쌍 · 비움·채움·안정", en:"axis → six meridian pairs · empty, fill or calm"},
+    "t-c4":           {ko:"단전주 + 림프절 (통합 수행)", en:"Dantian + lymph (together)"},
+    "t-c4s":          {ko:"8부위 비우기 → 하단전 채우기 · 한 번에", en:"eight areas → lower dantian, in one sitting"},
+    "t-c5":           {ko:"입정 1분 · 마음 고르기", en:"1 min settling"},
+    "t-c6":           {ko:"전체 이어서 (1·6·8)", en:"Full 1·6·8"},
+    "t-c7":           {ko:"1분 호흡 재기", en:"One-minute breath count"},
+    "t-c7s":          {ko:"수행 전·후 분당 호흡 수를 재어 일기에 남깁니다", en:"count your breaths before and after, and keep them in the journal"},
     "t-ebook":        {ko:"📕 전자책 《하루 15분, 림프경선 셀프 리셋 처방전》과 함께 쓰기", en:"📕 Use it with the e-book · 15 Minutes a Day: Lymph Meridian Self-Reset"},
     "t-ebooksub":     {ko:"책에서 그림과 손의 방향을, 앱에서 소리와 시간을", en:"the book for pictures and hand directions, the app for voice and timing"},
     "t-cykind":       {ko:"1·6·8 CIRCUIT", en:"1·6·8 CIRCUIT"},
@@ -784,9 +850,9 @@
     "t-bgm":          {ko:"잔잔한 배경음", en:"Soft background tone"},
     "t-hint":         {ko:"소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.", en:"If you hear nothing, check the phone volume and your earphones. Inside an in-app browser (KakaoTalk, etc.), open this page in Chrome or Samsung Internet."},
     "t-guide":        {ko:"안내와 요령 보기", en:"Practice notes"},
-    "t-lymphkind":    {ko:"LYMPHATIC CLEARING", en:"LYMPHATIC CLEARING"},
-    "t-lymph":        {ko:"림프절 비우기", en:"Lymphatic Clearing"},
-    "t-lymphnote":    {ko:"귀밑에서 시작해 여덟 정거장을 차례로. 한 부위만 골라 들을 수도 있습니다.", en:"Eight stations, starting under the ear. You may play a single area on its own."},
+    "t-lymphkind":    {ko:"림프절 순환 · 8부위", en:"LYMPHATIC CLEARING"},
+    "t-lymph":        {ko:"림프절 순환 · 8부위", en:"Lymphatic Clearing"},
+    "t-lymphnote":    {ko:"1 귀밑에서 8 오금까지 차례대로. 한 부위만 골라 들을 수도 있습니다.", en:"Eight stations, starting under the ear. You may play a single area on its own."},
     "t-perarea":      {ko:"부위당 시간", en:"Time per area"},
     "t-all8":         {ko:"여덟 정거장 순서대로 시작", en:"Start all eight stations in order"},
     "t-restart":      {ko:"⟲ 처음부터", en:"⟲ Restart"},
@@ -797,18 +863,21 @@
     "t-tap":          {ko:"내쉴 때 탭", en:"tap on each out-breath"},
     "t-breset":       {ko:"초기화", en:"Reset"},
     "t-done":         {ko:"오늘의 수행을 마쳤습니다", en:"Today's practice is complete"},
-    "t-score":        {ko:"오늘 수행 후 평온감", en:"Calmness after practice"},
-    "t-score10":      {ko:"/ 10", en:"/ 10"},
-    "t-slow1":        {ko:"1 어수선했다", en:"1 scattered"},
-    "t-slow10":       {ko:"10 깊이 고요했다", en:"10 deeply still"},
-    "t-body":         {ko:"몸의 감각", en:"In the body"},
-    "t-mind":         {ko:"마음의 감정", en:"In the mind"},
-    "t-memo":         {ko:"한 줄 감상", en:"A line to keep"},
+    "t-check":        {ko:"오늘의 몸 — 림프절과 단전", en:"Today's body — lymph and dantian"},
+    "t-ckl":          {ko:"림프절 순환", en:"Lymphatic clearing"},
+    "t-ckd":          {ko:"단전", en:"Dantian"},
+    "t-feel":         {ko:"주관적 느낌 · 여러 개 고르셔도 됩니다", en:"How you felt · choose as many as you like"},
+    "t-breathin":     {ko:"1분 호흡 (분당 회수)", en:"Breaths per minute"},
+    "t-bb":           {ko:"수행 전", en:"Before"},
+    "t-ba":           {ko:"수행 후", en:"After"},
+    "t-bmeasure":     {ko:"호흡 재기", en:"Measure"},
+    "t-memo":         {ko:"한 줄 메모", en:"A line to keep"},
     "t-save":         {ko:"일기 저장하기", en:"Save to journal"},
     "t-nosave":       {ko:"저장하지 않고 나가기", en:"Leave without saving"},
     "t-again":        {ko:"한 번 더 하기", en:"One more round"},
-    "t-chart":        {ko:"최근 7회 평온감", en:"Last seven sessions · calmness"},
-    "t-journal":      {ko:"감각·감정 일기", en:"Sensation &amp; feeling journal"},
+    "t-chart":        {ko:"최근 7회 · 림프절과 단전", en:"Last seven sessions · lymph &amp; dantian"},
+    "t-legend":       {ko:"<span><i style=\"background:#B8860B\"></i>림프절</span><span><i style=\"background:#8A7A5C\"></i>단전</span>", en:"<span><i style=\"background:#B8860B\"></i>lymph</span><span><i style=\"background:#8A7A5C\"></i>dantian</span>"},
+    "t-journal":      {ko:"수련 일기", en:"Practice journal"},
     "t-copy":         {ko:"전체 복사", en:"Copy all"},
     "t-navhome":      {ko:"수행", en:"Practice"},
     "t-navbreath":    {ko:"호흡", en:"Breath"},
@@ -900,23 +969,28 @@
         ],
         foot: "림프절은 언제나 말단에서 중심으로. 수술한 쪽 겨드랑이는 누르지 말고 손바닥으로 덮기만 하세요. 교육과 자기관리를 위한 안내이며 진단과 치료를 대신하지 않습니다."
       },
-      lymphTitle: "림프경선 비우기",
-      lymphKind: "림프경선 비우기",
+      lymphTitle: "림프절 순환",
+      lymphKind: "림프절 순환",
       lymphIntro: "지금부터 몸의 림프절을 부드럽게 열어 막힌 기운을 비웁니다. 앉아서도, 누워서도, 서서도, 걸으면서도 할 수 있습니다. 절대 세게 누르지 말고, 아기 피부를 만지듯 가볍게 쓸어 주세요. 시작합니다.",
       lymphIntroCap: "세게 누르지 말고, 아기 피부를 만지듯 가볍게.",
       lymphMid: "힘을 빼고, 피부 위를 바람이 지나가듯 가볍게 쓸어 주세요.",
       lymphEnd: "여덟 정거장을 모두 지났습니다. 두 손을 배꼽 아래에 포개어 시계방향 열두 번, 세 호흡. 마지막으로 가슴에서 발끝까지 한 번 쓸어 내리며 하단전으로 회수합니다.",
       ord: ["첫 번째","두 번째","세 번째","네 번째","다섯 번째","여섯 번째","일곱 번째","여덟 번째"],
       areas: [
-        {name:"귀밑", guide:"귀 뒤 턱 경계의 우묵한 곳. 손끝으로 귀밑 → 턱선 → 목 방향으로 5회, 가볍게."},
-        {name:"목", guide:"목 옆과 뒤. 기관은 누르지 않습니다. 귀밑 → 목 → 쇄골 위로 손바닥 5회."},
-        {name:"쇄골", guide:"쇄골 위 우묵한 곳. 겨드랑이·목에서 쇄골 위 → 목 아래로 손끝 5회."},
-        {name:"겨드랑", guide:"겨드랑이 깊은 곳. 팔 안쪽 → 겨드랑이 → 쇄골로, 손바닥을 덮어 5회. 수술한 쪽은 누르지 않습니다."},
-        {name:"팔꿈치 (척택)", guide:"팔꿈치 앞 안쪽 주름의 엄지 쪽. 손끝 → 팔꿈치 → 겨드랑이로 엄지 5회, 가볍게."},
-        {name:"복부", guide:"배꼽 주위와 옆구리. 서혜 → 아랫배 → 배꼽 시계방향으로 손바닥 12회."},
-        {name:"서혜 (사타구니)", guide:"사타구니 주름. 허벅지 안 → 서혜 → 아랫배로 손날 5회."},
-        {name:"오금 (위중)", guide:"무릎 뒤 오금 주름 한가운데. 종아리 → 오금 → 허벅지 뒤로 손바닥 5회, 가볍게."}
+        {name:"귀밑", short:"턱선으로", guide:"귀 뒤 턱 경계의 우묵한 곳. 손끝으로 귀밑 → 턱선 → 목 방향으로 5회, 가볍게."},
+        {name:"목", short:"쇄골로", guide:"목 옆과 뒤. 기관은 누르지 않습니다. 귀밑 → 목 → 쇄골 위로 손바닥 5회."},
+        {name:"쇄골", short:"목 아래로", guide:"쇄골 위 우묵한 곳. 겨드랑이·목에서 쇄골 위 → 목 아래로 손끝 5회."},
+        {name:"겨드랑", short:"쇄골로", guide:"겨드랑이 깊은 곳. 팔 안쪽 → 겨드랑이 → 쇄골로, 손바닥을 덮어 5회. 수술한 쪽은 누르지 않습니다."},
+        {name:"팔꿈치 (척택)", short:"겨드랑이로", guide:"팔꿈치 앞 안쪽 주름의 엄지 쪽. 손끝 → 팔꿈치 → 겨드랑이로 엄지 5회, 가볍게."},
+        {name:"복부", short:"시계방향", guide:"배꼽 주위와 옆구리. 서혜 → 아랫배 → 배꼽 시계방향으로 손바닥 12회."},
+        {name:"서혜 (사타구니)", short:"아랫배로", guide:"사타구니 주름. 허벅지 안 → 서혜 → 아랫배로 손날 5회."},
+        {name:"오금 (위중)", short:"허벅지로", guide:"무릎 뒤 오금 주름 한가운데. 종아리 → 오금 → 허벅지 뒤로 손바닥 5회, 가볍게."}
       ],
+      lymphDanLabel: "단전주 + 림프절",
+      lymphDanKind: "통합 수행",
+      closeSite: "마무리",
+      danSite: "하단전",
+      kick: { jeong:"입정", axis:"경선 · 축", pair:"경선", circuit:"경선", lymph:"림프절 순환", dantian:"단전주", lymphDan:"통합 수행" },
       danTitle: "하단전 채우기",
       danKind: "하단전 채우기",
       danIntro: "이제 마음을 아랫배 하단전으로 편안히 내려놓고, 맑은 기운을 채우는 단전주선을 시작합니다. 앉아서도, 누워서도, 서서도, 걸으면서도 좋습니다. 들숨은 길고 깊게, 날숨은 짧고 부드럽게. 머리가 아니라 아랫배의 따뜻한 느낌에 마음을 머뭅니다. 시작합니다.",
@@ -970,8 +1044,10 @@
         before:"수행 전", after:"수행 후",
         result:(mode,n)=>`${mode} 결과: 1분에 ${n}회`,
         cmp:(a,b)=>`수행 전 ${a}회 → 수행 후 ${b}회`,
+        diaryBtn:"이 호흡 수로 일기 쓰기",
+        label:"1분 호흡 측정",
         none:"아직 저장된 일기가 없습니다.",
-        chartEmpty:"수행 후 일기를 저장하면 그래프가 나타납니다."
+        chartEmpty:"수행을 마치고 일기를 저장하면 그래프가 나타납니다."
       },
       evalBreath(n){
         if(n<=5) return "매우 깊은 명상 호흡 상태입니다.";
@@ -1071,15 +1147,20 @@
       lymphEnd: "All eight stations are done. Fold both hands below the navel, twelve clockwise circles and three breaths. Then sweep once from the chest down to the toes, drawing everything back into the lower dantian.",
       ord: ["First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth"],
       areas: [
-        {name:"Under the ear", guide:"The hollow where the jaw meets the ear. With the fingertips, 5 light strokes from under the ear along the jaw toward the neck."},
-        {name:"Neck", guide:"The sides and back of the neck; never press the windpipe. 5 strokes with the palm, from under the ear through the neck to above the collarbone."},
-        {name:"Collarbone", guide:"The hollow above the collarbone. 5 strokes with the fingertips, from the armpit and neck over the collarbone and down."},
-        {name:"Armpit", guide:"Deep in the armpit. From the inner arm through the armpit to the collarbone, covering with the palm 5 times. Never press the operated side."},
-        {name:"Elbow (Chize)", guide:"The inner crease of the elbow, thumb side. 5 light strokes with the thumb from the hand through the elbow toward the armpit."},
-        {name:"Abdomen", guide:"Around the navel and the sides. From the groin up to the lower belly, then 12 clockwise circles with the palm."},
-        {name:"Groin", guide:"The crease of the groin. 5 strokes with the edge of the hand from the inner thigh through the groin to the lower belly."},
-        {name:"Behind the knee (Weizhong)", guide:"The centre of the crease behind the knee. 5 light strokes with the palm, from the calf through the knee up the back of the thigh."}
+        {name:"Under the ear", short:"along the jaw", guide:"The hollow where the jaw meets the ear. With the fingertips, 5 light strokes from under the ear along the jaw toward the neck."},
+        {name:"Neck", short:"to the collarbone", guide:"The sides and back of the neck; never press the windpipe. 5 strokes with the palm, from under the ear through the neck to above the collarbone."},
+        {name:"Collarbone", short:"below the neck", guide:"The hollow above the collarbone. 5 strokes with the fingertips, from the armpit and neck over the collarbone and down."},
+        {name:"Armpit", short:"to the collarbone", guide:"Deep in the armpit. From the inner arm through the armpit to the collarbone, covering with the palm 5 times. Never press the operated side."},
+        {name:"Elbow (Chize)", short:"to the armpit", guide:"The inner crease of the elbow, thumb side. 5 light strokes with the thumb from the hand through the elbow toward the armpit."},
+        {name:"Abdomen", short:"clockwise", guide:"Around the navel and the sides. From the groin up to the lower belly, then 12 clockwise circles with the palm."},
+        {name:"Groin", short:"to the lower belly", guide:"The crease of the groin. 5 strokes with the edge of the hand from the inner thigh through the groin to the lower belly."},
+        {name:"Behind the knee (Weizhong)", short:"up the thigh", guide:"The centre of the crease behind the knee. 5 light strokes with the palm, from the calf through the knee up the back of the thigh."}
       ],
+      lymphDanLabel: "Dantian + lymph",
+      lymphDanKind: "TOGETHER",
+      closeSite: "Closing",
+      danSite: "Lower dantian",
+      kick: { jeong:"SETTLING", axis:"MERIDIANS · AXIS", pair:"MERIDIANS", circuit:"MERIDIANS", lymph:"LYMPH", dantian:"DANTIAN", lymphDan:"TOGETHER" },
       danTitle: "Filling the lower dantian",
       danKind: "DANTIAN BREATHING",
       danIntro: "Now let your mind settle into the lower dantian, and begin filling it with clear, quiet energy. You may sit, lie down, stand, or walk. Breathe in long and deep, breathe out short and soft. Rest your attention not in the head, but in the warmth of the lower belly. Let us begin.",
@@ -1133,6 +1214,8 @@
         before:"Before", after:"After",
         result:(mode,n)=>`${mode}: ${n} breaths in one minute`,
         cmp:(a,b)=>`Before ${a} → after ${b}`,
+        diaryBtn:"Write this into the journal",
+        label:"One-minute breath count",
         none:"No journal entries yet.",
         chartEmpty:"Your graph appears once you save an entry."
       },
@@ -1165,6 +1248,30 @@
     {k:"rest",  ko:"답답함", en:"Restlessness"},
     {k:"sad",   ko:"슬픔", en:"Sadness"},
     {k:"numb",  ko:"무덤덤", en:"Unmoved"}
+  ];
+
+  /* 주관적 느낌 — 일기에서 여러 개 고를 수 있는 태그 */
+  const FEEL = [
+    {k:"light",  ko:"몸이 가벼워짐", en:"Lighter body"},
+    {k:"warmh",  ko:"손발이 따뜻함", en:"Warm hands and feet"},
+    {k:"deep",   ko:"호흡이 깊어짐", en:"Deeper breath"},
+    {k:"neck",   ko:"어깨·목이 풀림", en:"Shoulders and neck released"},
+    {k:"quiet",  ko:"마음이 고요함", en:"Mind at ease"},
+    {k:"clear",  ko:"머리가 맑아짐", en:"Clearer head"},
+    {k:"sleepy", ko:"잠이 올 듯함", en:"Sleepy"},
+    {k:"tired",  ko:"조금 피곤함", en:"A little tired"}
+  ];
+
+  /* 림프절·단전 한 줄 체크 (동작마다 점수 대신) */
+  const LYMPH_CK = [
+    {k:"l3", v:3, ko:"덜 붓고 가벼움", en:"Lighter, less puffy"},
+    {k:"l2", v:2, ko:"시원하게 흐름", en:"Cool and flowing"},
+    {k:"l1", v:1, ko:"아직 뭉침", en:"Still tight"}
+  ];
+  const DAN_CK = [
+    {k:"d3", v:3, ko:"따뜻하고 고요", en:"Warm and still"},
+    {k:"d2", v:2, ko:"잔잔함", en:"Quiet"},
+    {k:"d1", v:1, ko:"아직 어수선", en:"Still restless"}
   ];
 
   /* =========================================================
@@ -1789,7 +1896,7 @@
   function pushAxisSegments(segs, c){
     c.axis.steps.forEach((line, i)=>{
       segs.push({
-        dur: 20, part: c.axis.kind + " " + (i + 1) + "/" + c.axis.steps.length,
+        dur: 20, part: c.axis.kind, site: c.axis.kind, group: "axis",
         caption: line, speech: line, resume: line, axis: true
       });
     });
@@ -1810,18 +1917,53 @@
       segs.push({
         dur: dur,
         part: p.no + " " + p.name,
+        site: p.no + " " + p.name,
+        group: "pair" + p.no,
         caption: p.pose + " · " + p.sound,
         speech: line, resume: line, pair: p.no
       });
     }
   }
 
+  function pushLymphSegments(segs, c, perArea, introDur){
+    segs.push({dur: introDur || 32, part: c.lymphKind, site: c.lymphKind, group: "lymph",
+      caption: c.lymphIntroCap, speech: c.lymphIntro, resume: ""});
+    c.areas.forEach((a, i)=>{
+      const site = (i + 1) + ". " + a.name + (a.short ? " · " + a.short : "");
+      const say = c.ord[i] + " " + a.name + ". " + a.guide;
+      segs.push({dur: perArea, part: site, site: site, group: "lymph",
+        caption: a.guide, speech: say, resume: a.name + ". " + c.lymphMid});
+    });
+    segs.push({dur: 22, part: c.closeSite, site: c.closeSite, group: "lymph",
+      caption: c.lymphEnd, speech: c.lymphEnd, resume: c.lymphEnd});
+  }
+
+  function pushDantianSegments(segs, c, min, introDur){
+    const target = min * 60;
+    const mark = c.danSite;
+    segs.push({dur: introDur || 38, part: mark, site: mark, group: "dantian",
+      caption: c.danIntroCap, speech: c.danIntro, resume: ""});
+    let used = introDur || 38;
+    const closing = 22;
+    let i = 0;
+    while(used < target - closing){
+      const left = target - closing - used;
+      const d = Math.min(45, left);
+      const cue = c.danCues[i % c.danCues.length];
+      segs.push({dur: d, part: mark, site: mark, group: "dantian",
+        caption: cue, speech: cue, resume: cue});
+      used += d; i++;
+    }
+    segs.push({dur: closing, part: mark, site: mark, group: "dantian",
+      caption: c.danEnd, speech: c.danEnd, resume: c.danEnd});
+  }
+
   function buildSegments(mode, opt){
     const c = C();
     const segs = [];
     const m = modeObj(opt && opt.modeKey);
-    const push = (dur, part, caption, speech, resume) =>
-      segs.push({dur, part, caption, speech: speech || "", resume: resume || ""});
+    const push = (dur, site, caption, speech, resume, group) =>
+      segs.push({dur: dur, part: site, site: site, caption: caption, speech: speech || "", resume: resume || "", group: group || ""});
 
     if(mode === "axis"){
       pushAxisSegments(segs, c);
@@ -1832,7 +1974,7 @@
       pairIndexOrder(opt && opt.order).forEach(i=>{
         pushPairSegments(segs, c, c.pairs[i], opt && opt.turn, m);
       });
-      push(20, c.circuitKind, c.circuitEnd, c.circuitEnd, c.circuitEnd);
+      push(20, c.closeSite, c.circuitEnd, c.circuitEnd, c.circuitEnd, "close");
     }
 
     if(mode === "circuitOne"){
@@ -1842,72 +1984,41 @@
 
     if(mode === "jeong"){
       c.jeong.forEach((line, i)=>{
-        push(15, (i + 1) + " / " + c.jeong.length, line, line, line);
+        push(15, c.jeongTitle, line, line, line, "jeong");
       });
     }
 
     if(mode === "lymph"){
-      push(32, c.lymphKind, c.lymphIntroCap, c.lymphIntro, "");
-      c.areas.forEach((a, i)=>{
-        const say = c.ord[i] + " " + a.name + ". " + a.guide;
-        push(opt.perArea, (i + 1) + " / 8", a.guide, say, a.name + ". " + c.lymphMid);
-      });
-      push(24, c.lymphKind, c.lymphEnd, c.lymphEnd, c.lymphEnd);
+      pushLymphSegments(segs, c, opt.perArea, 32);
     }
 
     if(mode === "lymphOne"){
       const a = c.areas[opt.areaIndex];
       const half = Math.round(opt.perArea / 2);
+      const site = (opt.areaIndex + 1) + ". " + a.name + (a.short ? " · " + a.short : "");
       const say = a.name + ". " + a.guide;
-      push(half, a.name, a.guide, say, say);
-      push(opt.perArea - half, a.name, c.lymphMid, c.lymphMid, c.lymphMid);
+      push(half, site, a.guide, say, say, "lymph");
+      push(opt.perArea - half, site, c.lymphMid, c.lymphMid, c.lymphMid, "lymph");
     }
 
     if(mode === "dantian"){
-      const target = opt.min * 60;
-      const mark = opt.min + c.minLabel;
-      push(38, mark, c.danIntroCap, c.danIntro, "");
-      let used = 38;
-      const closing = 22;
-      let i = 0;
-      while(used < target - closing){
-        const left = target - closing - used;
-        const d = Math.min(45, left);
-        const cue = c.danCues[i % c.danCues.length];
-        push(d, mark, cue, cue, cue);
-        used += d;
-        i++;
-      }
-      push(closing, mark, c.danEnd, c.danEnd, c.danEnd);
+      pushDantianSegments(segs, c, opt.min, 38);
+    }
+
+    if(mode === "lymphdan"){
+      pushLymphSegments(segs, c, opt.perArea, 30);
+      pushDantianSegments(segs, c, opt.min, 34);
     }
 
     if(mode === "full"){
-      c.jeong.forEach((line, i) => push(15, (i + 1) + " / " + c.jeong.length, line, line, line));
+      c.jeong.forEach((line, i) => push(15, c.jeongTitle, line, line, line, "jeong"));
       pushAxisSegments(segs, c);
       pairIndexOrder(state.pairOrder).forEach(i=>{
         pushPairSegments(segs, c, c.pairs[i], state.pairTurn, m);
       });
-      push(20, c.circuitKind, c.circuitEnd, c.circuitEnd, c.circuitEnd);
-      push(30, c.lymphKind, c.lymphIntroCap, c.lymphIntro, "");
-      c.areas.forEach((a, i)=>{
-        const say = c.ord[i] + " " + a.name + ". " + a.guide;
-        push(opt.perArea, (i + 1) + " / 8", a.guide, say, a.name + ". " + c.lymphMid);
-      });
-      push(22, c.lymphKind, c.lymphEnd, c.lymphEnd, c.lymphEnd);
-      const target = opt.min * 60;
-      const mark = opt.min + c.minLabel;
-      push(34, mark, c.danIntroCap, c.danIntro, "");
-      let used = 34;
-      const closing = 20;
-      let i = 0;
-      while(used < target - closing){
-        const left = target - closing - used;
-        const d = Math.min(45, left);
-        const cue = c.danCues[i % c.danCues.length];
-        push(d, mark, cue, cue, cue);
-        used += d; i++;
-      }
-      push(closing, mark, c.danEnd, c.danEnd, c.danEnd);
+      push(20, c.closeSite, c.circuitEnd, c.circuitEnd, c.circuitEnd, "close");
+      pushLymphSegments(segs, c, opt.perArea, 30);
+      pushDantianSegments(segs, c, opt.min, 34);
     }
 
     return segs;
@@ -1942,8 +2053,14 @@
     if(mode === "full") session.kind = c.fullKind;
     if(mode === "axis") session.kind = c.axis.kind;
     if(mode === "circuit" || mode === "circuitOne") session.kind = c.circuitKind;
+    if(mode === "lymphdan") session.kind = c.lymphDanKind;
+
+    const km = {jeong:"jeong", lymph:"lymph", lymphOne:"lymph", dantian:"dantian", axis:"axis",
+                circuit:"circuit", circuitOne:"pair", lymphdan:"lymphDan", full:"circuit"};
+    session.kick = (mode === "full") ? c.fullKind : c.kick[km[mode] || "circuit"];
 
     $("p-kind").textContent = session.kind;
+    $("p-kick").textContent = session.kick;
     refreshPlayLabel();
     showScreen("practice");
     requestWakeLock();
@@ -1963,6 +2080,8 @@
     if(s.mode === "dantian") return c.danTitle;
     if(s.mode === "full") return c.fullLabel;
     if(s.mode === "axis") return c.axis.title;
+    if(s.mode === "lymphdan") return c.lymphDanLabel;
+    if(s.mode === "breath") return c.breath.label;
     if(s.mode === "circuit") return c.circuitTitle;
     if(s.mode === "circuitOne"){
       const p = c.pairs[s.pairIndex] || c.pairs[0];
@@ -1985,7 +2104,8 @@
     session.segLeft = s.dur;
     if(s.pair && session.pairs.indexOf(s.pair) < 0) session.pairs.push(s.pair);
     if(s.axis) session.axisDone = true;
-    $("p-part").textContent = s.part;
+    $("p-part").textContent = s.site || s.part;
+    $("p-kick").textContent = session.kick;
     $("p-caption").textContent = s.caption;
     updateRing();
 
@@ -2018,9 +2138,7 @@
 
   function currentSegmentKind(){
     const s = session.segs[session.idx];
-    if(!s) return "";
-    if(s.part === C().lymphTitle || s.part.indexOf("/8") > -1) return "lymph";
-    return s.part;
+    return s ? (s.group || s.part || "") : "";
   }
 
   function fmt(sec){
@@ -2029,14 +2147,23 @@
     return m + ":" + String(s).padStart(2, "0");
   }
 
+  const RING_R = 106, RING_CX = 120, RING_CY = 120, RING_LEN = 2 * Math.PI * 106;
+
   function updateRing(){
-    const c = C();
     $("p-time").textContent = fmt(session.segLeft);
     const pct = session.total ? Math.min(1, Math.max(0, session.elapsed / session.total)) : 0;
-    const R = 106, LEN = 2 * Math.PI * R;
     const arc = $("ring-arc");
-    arc.style.strokeDasharray = LEN.toFixed(1);
-    arc.style.strokeDashoffset = (LEN * pct).toFixed(1);
+    if(!arc) return;
+    arc.style.strokeDasharray = RING_LEN.toFixed(1);
+    /* 호가 12시에서 반시계(오른쪽→왼쪽)로 줄어듭니다 */
+    arc.style.strokeDashoffset = (RING_LEN * pct).toFixed(1);
+    const tip = $("ring-tip");
+    if(tip){
+      const a = (360 * (1 - pct) - 90) * Math.PI / 180;
+      tip.setAttribute("cx", (RING_CX + RING_R * Math.cos(a)).toFixed(1));
+      tip.setAttribute("cy", (RING_CY + RING_R * Math.sin(a)).toFixed(1));
+      tip.style.opacity = (pct <= 0.001 || pct >= 0.999) ? "0" : "1";
+    }
     const left = Math.max(0, session.total - session.elapsed);
     $("p-sub").textContent = state.lang === "ko"
       ? "전체 " + fmt(session.total) + " · 남은 " + fmt(left)
@@ -2051,12 +2178,13 @@
       stopSpeaking();
       $("play-ic").textContent = "▶";
       $("play-tx").textContent = c.resumeLbl;
-      $("p-part").textContent = c.paused;
+      $("p-kick").textContent = c.paused;
     }else{
       $("play-ic").textContent = "❚❚";
       $("play-tx").textContent = c.pauseLbl;
+      $("p-kick").textContent = session.kick;
       const s = session.segs[session.idx];
-      $("p-part").textContent = s.part;
+      $("p-part").textContent = s.site || s.part;
       if(s.resume) speak(s.resume);
     }
   }
@@ -2084,6 +2212,27 @@
   function stopSession(){
     if(!session.active){ showScreen("home"); return; }
     finish("stopped");
+  }
+
+  function updateBreathCompare(){
+    const c = C(), cmp = $("breath-compare");
+    if(!cmp) return;
+    const before = (state.breathBefore === null || state.breathBefore === undefined) ? "-" : state.breathBefore;
+    const after = (state.breathAfter === null || state.breathAfter === undefined) ? "-" : state.breathAfter;
+    if(before === "-" && after === "-"){
+      cmp.classList.add("hidden");
+      return;
+    }
+    cmp.innerHTML = "<strong>" + c.breath.cmp(before, after) + "</strong>";
+    cmp.classList.remove("hidden");
+  }
+
+  function breathToDiary(){
+    lastSession = {mode:"breath", minutes:0, areaIndex:0, min:state.dantianMin, pairs:[], circuitMode:null, axisDone:false};
+    showScreen("complete");
+    renderCompleteSummary();
+    updateBreathCompare();
+    prepareComplete();
   }
 
   function finish(reason){
@@ -2114,17 +2263,8 @@
 
     showScreen("complete");
     renderCompleteSummary();
-
-    const cmp = $("breath-compare");
-    if(state.breathBefore !== null && state.breathAfter !== null){
-      cmp.innerHTML = "<strong>" + c.breath.cmp(state.breathBefore, state.breathAfter) + "</strong>";
-      cmp.classList.remove("hidden");
-    }else if(state.breathBefore !== null){
-      cmp.innerHTML = "<strong>" + c.breath.cmp(state.breathBefore, "-") + "</strong>";
-      cmp.classList.remove("hidden");
-    }else{
-      cmp.classList.add("hidden");
-    }
+    prepareComplete();
+    updateBreathCompare();
 
     if(reason === "done"){
       speak(c.complete);
@@ -2163,6 +2303,7 @@
       dantian: ()=> startSession("dantian", {min: lastSession.min || state.dantianMin}),
       full: ()=> startSession("full", {perArea: state.perArea, min: lastSession.min || state.dantianMin}),
       axis: ()=> startSession("axis", {}),
+      lymphdan: ()=> startSession("lymphdan", {perArea: state.perArea, min: lastSession.min || state.dantianMin}),
       circuit: ()=> startSession("circuit", {turn: lastSession.turn || state.pairTurn, order: lastSession.order || state.pairOrder, modeKey: lastSession.circuitMode || state.circuitMode, withAxis: true}),
       circuitOne: ()=> startSession("circuitOne", {pairIndex: lastSession.pairIndex || 0, turn: lastSession.turn || state.pairTurn, modeKey: lastSession.circuitMode || state.circuitMode})
     };
@@ -2176,6 +2317,7 @@
   function startCircuitOne(i){ startSession("circuitOne", {pairIndex: i, turn: state.pairTurn, modeKey: state.circuitMode}); }
   function startLymphAll(){ startSession("lymph", {perArea: state.perArea}); }
   function startLymphOne(i){ startSession("lymphOne", {perArea: state.perArea, areaIndex: i}); }
+  function startLymphDan(){ startSession("lymphdan", {perArea: state.perArea, min: state.dantianMin}); }
   function startDantian(){ startSession("dantian", {min: state.dantianMin}); }
   function startFull(){ startSession("full", {perArea: state.perArea, min: state.dantianMin}); }
 
@@ -2221,6 +2363,7 @@
         if(state.breathBefore !== null && state.breathAfter !== null){
           html += "<br><br>" + c.breath.cmp(state.breathBefore, state.breathAfter);
         }
+        html += '<div style="margin-top:14px"><button class="btn btn-gold" style="font-size:16px;padding:14px" onclick="breathToDiary()">' + c.breath.diaryBtn + '</button></div>';
         box.innerHTML = html;
         box.classList.remove("hidden");
         refreshBreathLabels();
@@ -2249,26 +2392,58 @@
      ========================================================= */
   function chipLabel(list, key){
     const f = list.find(x => x.k === key);
-    if(f) return f[state.lang];
-    return key;
+    return f ? f[state.lang] : key;
+  }
+
+  function selectedKeys(boxId){
+    const box = $(boxId);
+    if(!box) return [];
+    return Array.from(box.querySelectorAll(".chip.on")).map(b => b.dataset.k);
+  }
+
+  function fillChips(box, src, multi, keep){
+    if(!box) return;
+    const on = keep || [];
+    box.innerHTML = "";
+    src.forEach(item=>{
+      const b = document.createElement("button");
+      b.className = "chip" + (on.indexOf(item.k) > -1 ? " on" : "");
+      b.dataset.k = item.k;
+      if(item.v) b.dataset.v = item.v;
+      b.textContent = item[state.lang];
+      b.onclick = ()=>{
+        if(multi){
+          b.classList.toggle("on");
+        }else{
+          box.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+          b.classList.add("on");
+        }
+      };
+      box.appendChild(b);
+    });
   }
 
   function renderChips(){
-    ["body","mind"].forEach(kind=>{
-      const box = $(kind + "-chips");
-      if(!box) return;
-      const keep = Array.from(box.querySelectorAll(".chip.on")).map(b => b.dataset.k);
-      box.innerHTML = "";
-      const src = kind === "body" ? BODY : MIND;
-      src.forEach(item=>{
-        const b = document.createElement("button");
-        b.className = "chip" + (keep.indexOf(item.k) > -1 ? " on" : "");
-        b.dataset.k = item.k;
-        b.textContent = item[state.lang];
-        b.onclick = ()=> b.classList.toggle("on");
-        box.appendChild(b);
-      });
+    fillChips($("feel-chips"), FEEL, true, selectedKeys("feel-chips"));
+    fillChips($("lymph-chips"), LYMPH_CK, false, selectedKeys("lymph-chips"));
+    fillChips($("dan-chips"), DAN_CK, false, selectedKeys("dan-chips"));
+  }
+
+  function ckValue(boxId){
+    const el = document.querySelector("#" + boxId + " .chip.on");
+    return el && el.dataset.v ? Number(el.dataset.v) : null;
+  }
+
+  /* 완료·일기 화면을 지금 기록에 맞춰 비웁니다 */
+  function prepareComplete(){
+    const bb = $("breath-before-in"), ba = $("breath-after-in");
+    if(bb) bb.value = (state.breathBefore === null || state.breathBefore === undefined) ? "" : state.breathBefore;
+    if(ba) ba.value = (state.breathAfter === null || state.breathAfter === undefined) ? "" : state.breathAfter;
+    ["feel-chips","lymph-chips","dan-chips"].forEach(id=>{
+      const box = $(id);
+      if(box) box.querySelectorAll(".chip.on").forEach(c => c.classList.remove("on"));
     });
+    if($("memo")) $("memo").value = "";
   }
 
   function getDiaries(){
@@ -2276,11 +2451,20 @@
   }
 
   function diaryLabel(item){
+    if(item.mode === "breath") return (C().breath && C().breath.label) || "1분 호흡";
     if(item.mode){
       const s = sessionLabelText({mode: item.mode, areaIndex: item.areaIndex, min: item.min});
       if(s) return s;
     }
     return item.label || item.level || (state.lang === "ko" ? "수행" : "Practice");
+  }
+
+  function numOrNull(v){
+    if(v === null || v === undefined) return null;
+    const t = String(v).trim();
+    if(t === "") return null;
+    const n = Number(t);
+    return isNaN(n) ? null : n;
   }
 
   function saveDiary(){
@@ -2289,28 +2473,33 @@
     const dateStr = now.getFullYear() + "-" + pad(now.getMonth()+1) + "-" + pad(now.getDate()) +
                     " " + pad(now.getHours()) + ":" + pad(now.getMinutes());
 
-    const bodySel = Array.from(document.querySelectorAll("#body-chips .chip.on")).map(b => b.dataset.k);
-    const mindSel = Array.from(document.querySelectorAll("#mind-chips .chip.on")).map(b => b.dataset.k);
+    const feelSel = selectedKeys("feel-chips");
+    const bbIn = numOrNull($("breath-before-in") ? $("breath-before-in").value : "");
+    const baIn = numOrNull($("breath-after-in") ? $("breath-after-in").value : "");
+    const mode = lastSession.mode || "breath";
     const list = getDiaries();
     list.unshift({
       date: dateStr,
-      mode: lastSession.mode,
+      mode: mode,
       areaIndex: lastSession.areaIndex || 0,
       min: lastSession.min || state.dantianMin,
       circuitMode: lastSession.circuitMode || null,
       pairs: (lastSession.pairs || []).slice(),
       axisDone: !!lastSession.axisDone,
-      label: sessionLabelText(lastSession),
+      label: mode === "breath" ? C().breath.label : sessionLabelText(lastSession),
       minutes: lastSession.minutes || 0,
-      score: Number($("score").value),
-      breathBefore: state.breathBefore,
-      breathAfter: state.breathAfter,
-      body: bodySel,
-      mind: mindSel,
+      lymphV: ckValue("lymph-chips"),
+      danV: ckValue("dan-chips"),
+      feel: feelSel,
+      breathBefore: bbIn === null ? state.breathBefore : bbIn,
+      breathAfter: baIn === null ? state.breathAfter : baIn,
       memo: $("memo").value.trim()
     });
     try{ localStorage.setItem(DIARY_KEY, JSON.stringify(list)); }catch(e){}
-    document.querySelectorAll("#body-chips .chip.on, #mind-chips .chip.on").forEach(c => c.classList.remove("on"));
+    ["feel-chips","lymph-chips","dan-chips"].forEach(id=>{
+      const box = $(id);
+      if(box) box.querySelectorAll(".chip.on").forEach(c => c.classList.remove("on"));
+    });
     $("memo").value = "";
     showTab("diary");
     toast(state.lang === "ko" ? "일기를 저장했습니다." : "Saved to your journal.");
@@ -2318,6 +2507,7 @@
 
   function renderDiary(){
     const list = getDiaries();
+    const ko = state.lang === "ko";
     const chart = $("chart");
     if(chart){
       chart.innerHTML = "";
@@ -2326,11 +2516,16 @@
         chart.innerHTML = '<div class="empty-note" style="align-self:center;width:100%">' + C().breath.chartEmpty + '</div>';
       }else{
         recent.forEach(item=>{
+          let lv = item.lymphV;
+          if(!lv && item.score) lv = Math.max(1, Math.min(3, Math.round(item.score / 3.4)));
+          const dv = item.danV || 0;
           const col = document.createElement("div");
           col.className = "bar-col";
-          col.innerHTML = '<div class="bar-val">' + item.score + '</div>' +
-                          '<div class="bar-fill" style="height:' + Math.max(10, item.score * 10) + '%"></div>' +
-                          '<div class="bar-date">' + String(item.date || "").slice(5, 10) + '</div>';
+          let inner = '<div class="bar-pair">';
+          if(lv) inner += '<div class="bar-thin lym" style="height:' + (lv * 32) + '%"></div>';
+          if(dv) inner += '<div class="bar-thin dan" style="height:' + (dv * 32) + '%"></div>';
+          inner += '</div>';
+          col.innerHTML = inner + '<div class="bar-date">' + String(item.date || "").slice(5, 10) + '</div>';
           chart.appendChild(col);
         });
       }
@@ -2343,25 +2538,38 @@
       return;
     }
     dl.innerHTML = list.map(item=>{
+      const feel = (item.feel || []).map(k => chipLabel(FEEL, k));
       const body = (item.body || []).map(k => chipLabel(BODY, k)).join(", ");
       const mind = (item.mind || []).map(k => chipLabel(MIND, k)).join(", ");
       let meta = diaryLabel(item);
       if(item.minutes) meta += " · " + item.minutes + C().minLabel;
+      let right = "";
+      if(item.lymphV || item.danV){
+        right = (ko ? "림프 " : "lymph ") + (item.lymphV || "-") + " · " +
+                (ko ? "단전 " : "dantian ") + (item.danV || "-");
+      }else if(item.score){
+        right = (ko ? "평온 " : "calm ") + item.score + "/10";
+      }
       let html = '<div class="d-item">' +
-        '<div class="d-top"><span>' + item.date + '</span><span class="d-score">' +
-        (state.lang === "ko" ? "평온 " : "calm ") + item.score + '/10</span></div>' +
+        '<div class="d-top"><span>' + item.date + '</span>' +
+        (right ? '<span class="d-score">' + right + '</span>' : '') + '</div>' +
         '<div class="d-meta">' + meta + '</div>';
       if(item.circuitMode){
         let cl = "🔁 1·6·8 · " + modeName(item.circuitMode);
         if((item.pairs || []).length) cl += " · " + item.pairs.join(" ") + " (" + item.pairs.length + "/6)";
-        if(item.axisDone) cl += state.lang === "ko" ? " · 축 포함" : " · with axis";
+        if(item.axisDone) cl += ko ? " · 축 포함" : " · with axis";
         html += '<div class="d-meta">' + cl + '</div>';
       }
-      if(item.breathBefore !== null && item.breathBefore !== undefined || item.breathAfter !== null && item.breathAfter !== undefined){
+      const hasB = (item.breathBefore !== null && item.breathBefore !== undefined) ||
+                   (item.breathAfter !== null && item.breathAfter !== undefined);
+      if(hasB){
         const bb = (item.breathBefore === null || item.breathBefore === undefined) ? "-" : item.breathBefore;
         const ba = (item.breathAfter === null || item.breathAfter === undefined) ? "-" : item.breathAfter;
-        html += '<div class="d-meta">🌬️ ' + (state.lang === "ko" ? "호흡 " : "breath ") +
-          bb + " → " + ba + '</div>';
+        html += '<div class="d-meta">🌬️ ' + (ko ? "호흡 " : "breath ") + bb + " → " + ba +
+                (ko ? "회/분" : " per min") + '</div>';
+      }
+      if(feel.length){
+        html += '<div>' + feel.map(t => '<span class="d-tag">' + t + '</span>').join("") + '</div>';
       }
       if(body) html += '<div class="d-meta">🌿 ' + body + '</div>';
       if(mind) html += '<div class="d-meta">💛 ' + mind + '</div>';
@@ -2373,23 +2581,33 @@
 
   function copyAll(){
     const list = getDiaries();
+    const ko = state.lang === "ko";
     if(!list.length){
-      toast(state.lang === "ko" ? "복사할 일기가 없습니다." : "There is nothing to copy yet.");
+      toast(ko ? "복사할 일기가 없습니다." : "There is nothing to copy yet.");
       return;
     }
     const txt = list.map(i=>{
+      const feel = (i.feel || []).map(k => chipLabel(FEEL, k)).join(", ");
       const body = (i.body || []).map(k => chipLabel(BODY, k)).join(", ");
       const mind = (i.mind || []).map(k => chipLabel(MIND, k)).join(", ");
+      const bits = [];
+      if(i.lymphV || i.danV) bits.push((ko ? "림프 " : "lymph ") + (i.lymphV || "-") + " · " + (ko ? "단전 " : "dantian ") + (i.danV || "-"));
+      else if(i.score) bits.push((ko ? "평온 " : "calm ") + i.score + "/10");
+      if(i.breathBefore !== null && i.breathBefore !== undefined || i.breathAfter !== null && i.breathAfter !== undefined){
+        bits.push("호흡 " + ((i.breathBefore === null || i.breathBefore === undefined) ? "-" : i.breathBefore) + " → " + ((i.breathAfter === null || i.breathAfter === undefined) ? "-" : i.breathAfter));
+      }
+      if(feel) bits.push(feel);
       return "[" + i.date + "] " + diaryLabel(i) +
         (i.circuitMode ? " · " + modeName(i.circuitMode) : "") +
         (i.pairs && i.pairs.length ? " · " + i.pairs.join(" ") : "") +
-        " · " + (state.lang === "ko" ? "평온 " : "calm ") + i.score + "/10" +
+        (bits.length ? " · " + bits.join(" · ") : "") +
+        (body ? " · " + body : "") + (mind ? " · " + mind : "") +
         (i.memo ? "\n" + i.memo : "");
     }).join("\n\n");
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(txt).then(
-        ()=> toast(state.lang === "ko" ? "전체 일기를 복사했습니다." : "Copied all entries."),
-        ()=> toast(state.lang === "ko" ? "복사하지 못했습니다." : "Could not copy.")
+        ()=> toast(ko ? "전체 일기를 복사했습니다." : "Copied all entries."),
+        ()=> toast(ko ? "복사하지 못했습니다." : "Could not copy.")
       );
     }
   }
@@ -2465,6 +2683,8 @@
   window.closeEbook = closeEbook;
   window.startLymphAll = startLymphAll;
   window.startLymphOne = startLymphOne;
+  window.startLymphDan = startLymphDan;
+  window.breathToDiary = breathToDiary;
   window.startDantian = startDantian;
   window.startFull = startFull;
   window.togglePause = togglePause;
