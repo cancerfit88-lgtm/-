@@ -667,6 +667,7 @@
       complete:"오늘의 수행을 마쳤습니다. 아랫배의 따뜻한 온기를 느끼며 편안히 숨을 고르세요. 수고하셨습니다.",
       doneTitle:"오늘의 수행을 마쳤습니다",
       evalTitle:"주관적 평가",
+      evalNote:"오늘 몸과 마음에서 느낀 것을 그대로 남겨 둡니다.",
       minLabel:"분",
       perAreaNote:(s,m)=> "부위당 " + s + " · 한 부위 20회 · 모두 " + m,
       guideTitle:"안내와 요령",
@@ -777,6 +778,7 @@
       complete:"You have finished today's practice. Rest in the warmth of your lower belly, and breathe at ease. Well done.",
       doneTitle:"Today's practice is complete",
       evalTitle:"Subjective check-in",
+      evalNote:"A quiet place to keep what today's body and mind felt like.",
       minLabel:" min",
       perAreaNote:(s,m)=> s + " per site · twenty strokes each · " + m + " in all",
       guideTitle:"Practice notes",
@@ -1653,6 +1655,7 @@
     if(!el) return;
     if(!lastSession.mode){ el.textContent = ""; return; }
     const ko = state.lang === "ko";
+    if(lastSession.mode === "eval"){ el.textContent = C().evalNote; return; }
     let txt = diaryLabel(lastSession);
     if(lastSession.minutes) txt += " · " + lastSession.minutes + (ko ? "분 수행" : " min practiced");
     el.textContent = txt;
