@@ -648,7 +648,7 @@
   <section id="screen-lymph" class="screen hidden">
     <div class="pr-top">
       <button class="pr-close" onclick="showScreen('home')">✕</button>
-      <span class="pr-kind" id="t-lymphkind">림프절 순환 · 8부위</span>
+      <span class="pr-kind" id="t-lymphkind">LYMPHATIC CLEARING</span>
       <span style="width:42px"></span>
     </div>
     <div class="card" style="margin-top:10px">
@@ -851,7 +851,7 @@
     "t-bgm":          {ko:"잔잔한 배경음", en:"Soft background tone"},
     "t-hint":         {ko:"소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.", en:"If you hear nothing, check the phone volume and your earphones. Inside an in-app browser (KakaoTalk, etc.), open this page in Chrome or Samsung Internet."},
     "t-guide":        {ko:"안내와 요령 보기", en:"Practice notes"},
-    "t-lymphkind":    {ko:"림프절 순환 · 8부위", en:"LYMPHATIC CLEARING"},
+    "t-lymphkind":    {ko:"LYMPHATIC CLEARING", en:"LYMPHATIC CLEARING"},
     "t-lymph":        {ko:"림프절 순환 · 8부위", en:"Lymphatic Clearing"},
     "t-lymphnote":    {ko:"1 귀밑에서 8 오금까지 차례대로. 한 부위만 골라 들을 수도 있습니다.", en:"Eight stations, starting under the ear. You may play a single area on its own."},
     "t-perarea":      {ko:"부위당 시간", en:"Time per area"},
@@ -2056,7 +2056,7 @@
     if(mode === "full") session.kind = c.fullKind;
     if(mode === "axis") session.kind = c.axis.kind;
     if(mode === "circuit" || mode === "circuitOne") session.kind = c.circuitKind;
-    if(mode === "lymphdan") session.kind = c.lymphDanKind;
+    if(mode === "lymphdan") session.kind = c.lymphDanLabel;
 
     const km = {jeong:"jeong", lymph:"lymph", lymphOne:"lymph", dantian:"dantian", axis:"axis",
                 circuit:"circuit", circuitOne:"pair", lymphdan:"lymphDan", full:"circuit"};
@@ -2078,7 +2078,7 @@
     if(s.mode === "lymph") return state.lang === "ko" ? "림프절 비우기 8부위" : "Lymphatic clearing · 8 areas";
     if(s.mode === "lymphOne"){
       const a = c.areas[s.areaIndex] || c.areas[0];
-      return a.name;
+      return c.lymphTitle + " · " + a.name;
     }
     if(s.mode === "dantian") return c.danTitle;
     if(s.mode === "full") return c.fullLabel;
@@ -2226,7 +2226,16 @@
       cmp.classList.add("hidden");
       return;
     }
-    cmp.innerHTML = "<strong>" + c.breath.cmp(before, after) + "</strong>";
+    const ko = state.lang === "ko";
+    let txt;
+    if(before === "-"){
+      txt = ko ? ("수행 후 " + after + "회 · 수행 전은 재지 않았습니다") : ("After " + after + " · no before count");
+    }else if(after === "-"){
+      txt = ko ? ("수행 전 " + before + "회 · 수행 후는 아직") : ("Before " + before + " · no after count yet");
+    }else{
+      txt = c.breath.cmp(before, after);
+    }
+    cmp.innerHTML = "<strong>" + txt + "</strong>";
     cmp.classList.remove("hidden");
   }
 
