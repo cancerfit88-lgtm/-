@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#F5EBD9" />
-<title>비우고 채우는 단전주선 · Empty &amp; Fill</title>
+<title>내 손안의 림프·선(禪) 리셋 · Lymph &amp; Seon Reset in My Hand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -312,6 +312,59 @@
   .d-memo{margin-top:6px;color:var(--ink2)}
   .empty-note{color:var(--muted);font-size:15.5px;text-align:center;padding:18px 0;line-height:1.7}
 
+  /* ---------- 1·6·8 circuit ---------- */
+  .mode-note{
+    margin-top:12px;padding:13px 15px;border-radius:13px;
+    background:var(--cream-l);border:1px solid var(--sand);
+    font-size:15px;color:#5A4A2C;line-height:1.7;
+  }
+  .circuit-row{
+    display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+    padding:15px 0;border-top:1px solid var(--line);background:none;
+  }
+  .circuit-row:first-child{border-top:none}
+  .cdot{
+    flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+    border:1px solid rgba(0,0,0,.16);box-shadow:inset 0 0 0 2px #FFFFFF;
+  }
+  .cno{
+    flex:0 0 auto;width:24px;text-align:center;
+    font-size:16px;font-weight:900;color:var(--gold-d);line-height:1;
+  }
+  .cname{display:block;font-size:16.5px;font-weight:700;color:var(--ink);line-height:1.45}
+  .cmeta{display:block;font-size:14.5px;color:var(--muted);line-height:1.6;margin-top:2px}
+  .csound{
+    display:inline-block;margin-left:6px;padding:1px 9px;border-radius:999px;
+    background:var(--cream);color:var(--gold-d);font-size:13.5px;font-weight:700;line-height:1.7;
+  }
+  .seq-note{font-size:13.5px;color:var(--muted);line-height:1.7;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+
+  /* ---------- modal ---------- */
+  .modal{
+    position:fixed;inset:0;z-index:70;background:rgba(31,25,14,.42);
+    display:flex;align-items:flex-end;justify-content:center;
+  }
+  .modal-card{
+    position:relative;width:100%;max-width:540px;max-height:86vh;overflow-y:auto;
+    background:#FFFFFF;border-radius:22px 22px 0 0;
+    padding:24px 20px calc(30px + env(safe-area-inset-bottom));
+    box-shadow:0 -10px 30px rgba(60,45,20,.2);
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line);background:#FFFFFF;color:var(--muted);font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .modal-title{font-size:19.5px;font-weight:900;color:var(--ink);line-height:1.5;padding-right:46px}
+  .modal-sub{font-size:14.5px;color:var(--muted);line-height:1.65;margin-top:5px}
+  .how-item{padding:13px 0;border-top:1px solid var(--line);font-size:15.5px;color:var(--ink2);line-height:1.8}
+  .how-item:first-of-type{border-top:none;padding-top:4px}
+  .how-n{display:inline-block;min-width:24px;font-weight:900;color:var(--gold-d)}
+  .modal-foot{
+    margin-top:16px;padding:14px 15px;border-radius:13px;background:var(--cream-l);
+    border:1px solid var(--sand);font-size:14.5px;color:#5A4A2C;line-height:1.75;
+  }
+
   /* ---------- bottom nav ---------- */
   .bnav{
     position:fixed;left:0;right:0;bottom:0;z-index:40;
@@ -347,8 +400,8 @@
       <button id="lang-en" onclick="setLang('en')">English</button>
     </div>
     <div class="eyebrow" id="t-eyebrow">日常回復研究所</div>
-    <h1 class="brand" id="t-brand">비우고 채우는 단전주선<span class="rule"></span></h1>
-    <div class="brand-sub" id="t-brandsub">림프경선 비우기로 열고, 하단전에 고요히 채우는 수행</div>
+    <h1 class="brand" id="t-brand">내 손안의 림프·선(禪) 리셋<span class="rule"></span></h1>
+    <div class="brand-sub" id="t-brandsub">1·6·8 경선·림프 서킷 — 축으로 열고, 사슬로 잇고, 여덟 정거장에서 내립니다</div>
   </header>
 
   <div class="inapp" id="inapp"></div>
@@ -391,8 +444,8 @@
         </g>
       </svg>
       <div class="hero-txt">
-        <div class="h1" id="t-hero1">오늘은 원하는 연습만 골라 하셔도 됩니다</div>
-        <div class="h2" id="t-hero2">순서는 자유롭게. 몸이 원하는 것부터 시작해 보세요.</div>
+        <div class="h1" id="t-hero1">오늘은 원하는 단계만 골라 하셔도 됩니다</div>
+        <div class="h2" id="t-hero2">1 · 6 · 8 순서대로 이어도 되고, 몸이 원하는 곳부터 시작하셔도 됩니다.</div>
       </div>
     </div>
 
@@ -406,20 +459,29 @@
         <span class="pgo">▶</span>
       </button>
 
-      <button class="pcard" onclick="openLymph()">
+      <button class="pcard" onclick="openCircuit()">
         <span class="pnum">2</span>
         <span class="pbody">
-          <span class="ptitle" id="t-c2">림프절 비우기</span>
-          <span class="psub" id="t-c2s">8부위 순환 · 한 부위만 골라 들을 수도 있습니다</span>
+          <span class="ptitle" id="t-c2">1·6·8 경선·림프 서킷</span>
+          <span class="psub" id="t-c2s">축(임독맥) → 6경선 여섯 쌍 · 비움·채움·안정 처방</span>
+        </span>
+        <span class="pgo">▶</span>
+      </button>
+
+      <button class="pcard" onclick="openLymph()">
+        <span class="pnum">3</span>
+        <span class="pbody">
+          <span class="ptitle" id="t-c3">림프절 비우기 (8부위)</span>
+          <span class="psub" id="t-c3s">귀밑 → 목 → 쇄골 → 겨드랑 → 팔꿈치 → 복부 → 서혜 → 오금</span>
         </span>
         <span class="pgo">▶</span>
       </button>
 
       <div class="pcard" onclick="startDantian()" role="button" tabindex="0">
-        <span class="pnum">3</span>
+        <span class="pnum">4</span>
         <span class="pbody">
-          <span class="ptitle" id="t-c3">하단전 채우기</span>
-          <span class="psub" id="t-c3s">단전 호흡 · 시간을 골라 시작합니다</span>
+          <span class="ptitle" id="t-c4">하단전 채우기</span>
+          <span class="psub" id="t-c4s">단전 호흡 · 시간을 골라 시작합니다</span>
         </span>
         <span class="pgo">▶</span>
         <div class="chips pchips" onclick="event.stopPropagation()" id="min-chips"></div>
@@ -427,8 +489,13 @@
     </div>
 
     <button class="linkbtn" onclick="startFull()">
-      <span class="lb1" id="t-c4">이어서 전체 하기</span>
-      <span class="lb2" id="t-c4s">마음 고르기 → 림프절 비우기 → 하단전 채우기</span>
+      <span class="lb1" id="t-c5">이어서 전체 하기 (1·6·8)</span>
+      <span class="lb2" id="t-c5s">마음 고르기 → 1·6·8 서킷 → 8부위 → 하단전 채우기</span>
+    </button>
+
+    <button class="linkbtn" onclick="openEbook()" style="border-style:solid;background:#FFFFFF">
+      <span class="lb1" id="t-ebook">📕 전자책 《하루 15분, 림프경선 셀프 리셋 처방전》과 함께 쓰기</span>
+      <span class="lb2" id="t-ebooksub">책에서 그림과 손의 방향을, 앱에서 소리와 시간을</span>
     </button>
 
     <div class="card">
@@ -466,7 +533,57 @@
     </div>
   </section>
 
-  <!-- ================= LYMPH DETAIL ================= -->
+  <!-- ================= 1·6·8 CIRCUIT ================= -->
+  <section id="screen-circuit" class="screen hidden">
+    <div class="pr-top">
+      <button class="pr-close" onclick="showScreen('home')">✕</button>
+      <span class="pr-kind" id="t-cykind">1·6·8 CIRCUIT</span>
+      <span style="width:42px"></span>
+    </div>
+    <div class="card" style="margin-top:10px">
+      <div class="sec-title"><span id="t-cy">1·6·8 경선·림프 서킷</span></div>
+      <div class="sec-note" id="t-cynote">축 하나(임독맥), 사슬 여섯(6경선), 정거장 여덟(8림프절). 자리를 옮기지 않고 끊김 없이 잇습니다.</div>
+
+      <div class="field-label" style="margin-top:2px" id="t-mode">오늘의 처방</div>
+      <div class="chips" id="mode-chips"></div>
+      <div class="mode-note" id="mode-note"></div>
+
+      <div class="field-label" id="t-turn">한 쌍에 주는 시간</div>
+      <div class="chips" id="turn-chips"></div>
+
+      <button class="btn btn-gold" style="margin-top:18px" onclick="startCircuit()" id="t-cystart">서킷 시작 — 축 → 여섯 쌍</button>
+      <div class="row2" style="margin-top:10px">
+        <button class="btn btn-line" style="font-size:16px" onclick="startAxis()" id="t-axisonly">1 · 축만 먼저</button>
+        <button class="btn btn-soft" style="font-size:16px" onclick="openLymph()" id="t-to8">이어서 8부위 →</button>
+      </div>
+    </div>
+
+    <div class="card" style="padding-top:12px">
+      <div class="sec-title"><span id="t-pairs">여섯 쌍 — 하나씩 골라 들을 수도 있습니다</span></div>
+      <div class="field-label" style="margin-top:2px" id="t-order">여섯 쌍 듣는 순서</div>
+      <div class="chips" id="order-chips"></div>
+      <div id="circuit-list" style="margin-top:14px"></div>
+      <div class="seq-note" id="order-note"></div>
+    </div>
+
+    <button class="linkbtn" onclick="openEbook()" style="border-style:solid;background:#FFFFFF">
+      <span class="lb1" id="t-ebook2">📕 《하루 15분, 림프경선 셀프 리셋 처방전》과 함께</span>
+      <span class="lb2" id="t-ebooksub2">책의 노선도 색과 앱의 색이 같습니다 · 안내 보기</span>
+    </button>
+  </section>
+
+  <!-- ================= EBOOK MODAL ================= -->
+  <div class="modal hidden" id="modal-ebook" onclick="if(event.target===this)closeEbook()">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="ebook-title">
+      <button class="modal-close" onclick="closeEbook()" aria-label="close">✕</button>
+      <div class="modal-title" id="ebook-title"></div>
+      <div class="modal-sub" id="ebook-sub"></div>
+      <div id="ebook-body"></div>
+      <div class="modal-foot" id="ebook-foot"></div>
+      <button class="btn btn-gold" style="margin-top:16px" onclick="closeEbook()" id="t-ebookok">알겠습니다</button>
+    </div>
+  </div>
+
   <section id="screen-lymph" class="screen hidden">
     <div class="pr-top">
       <button class="pr-close" onclick="showScreen('home')">✕</button>
@@ -475,7 +592,8 @@
     </div>
     <div class="card" style="margin-top:10px">
       <div class="sec-title"><span id="t-lymph">림프절 비우기</span></div>
-      <div class="sec-note" id="t-lymphnote">원하는 부위만 골라 들을 수도 있고, 여덟 부위를 순서대로 이어서 할 수도 있습니다.</div>
+      <div class="sec-note" id="t-lymphnote">귀밑에서 시작해 여덟 정거장을 차례로. 한 부위만 골라 들을 수도 있습니다.</div>
+      <div class="mode-note" id="lymph-mode-note"></div>
 
       <div class="field-label" style="margin-top:4px" id="t-perarea">부위당 시간</div>
       <div class="chips" id="perarea-chips"></div>
@@ -627,18 +745,35 @@
      ========================================================= */
   const UI = {
     "t-eyebrow":      {ko:"日常回復研究所", en:"DAILY RECOVERY LAB"},
-    "t-brand":        {ko:"비우고 채우는 단전주선", en:"Empty &amp; Fill · Dantian Seon"},
-    "t-brandsub":     {ko:"림프경선 비우기로 열고, 하단전에 고요히 채우는 수행", en:"Clearing the lymph lines, then quietly filling the lower dantian"},
-    "t-hero1":        {ko:"오늘은 원하는 연습만 골라 하셔도 됩니다", en:"Today you may take any single practice"},
-    "t-hero2":        {ko:"순서는 자유롭게. 몸이 원하는 것부터 시작해 보세요.", en:"In whatever order you like — begin with what your body asks for."},
+    "t-brand":        {ko:"내 손안의 림프·선(禪) 리셋", en:"Lymph &amp; Seon Reset in My Hand"},
+    "t-brandsub":     {ko:"1·6·8 경선·림프 서킷 — 축으로 열고, 사슬로 잇고, 여덟 정거장에서 내립니다", en:"The 1·6·8 circuit — open the axis, link the six chains, release at eight stations"},
+    "t-hero1":        {ko:"오늘은 원하는 단계만 골라 하셔도 됩니다", en:"Today you may take any single stage"},
+    "t-hero2":        {ko:"1 · 6 · 8 순서대로 이어도 되고, 몸이 원하는 곳부터 시작하셔도 됩니다.", en:"Follow 1 · 6 · 8 in order, or begin wherever your body asks."},
     "t-c1":           {ko:"마음 고르기", en:"Mind Settling"},
     "t-c1s":          {ko:"입정 1분 · 앉아서 몸과 마음의 자리를 잡습니다", en:"1 min · settling body and mind before you begin"},
-    "t-c2":           {ko:"림프절 비우기", en:"Lymphatic Clearing"},
-    "t-c2s":          {ko:"8부위 순환 · 한 부위만 골라 들을 수도 있습니다", en:"8 areas · play one area on its own, or all in order"},
-    "t-c3":           {ko:"하단전 채우기", en:"Dantian Breathing"},
-    "t-c3s":          {ko:"단전 호흡 · 시간을 골라 시작합니다", en:"Lower dantian breathing · choose your time"},
-    "t-c4":           {ko:"이어서 전체 하기", en:"The full sequence"},
-    "t-c4s":          {ko:"마음 고르기 → 림프절 비우기 → 하단전 채우기", en:"settling → clearing → filling"},
+    "t-c2":           {ko:"1·6·8 경선·림프 서킷", en:"The 1·6·8 Circuit"},
+    "t-c2s":          {ko:"축(임독맥) → 6경선 여섯 쌍 · 비움·채움·안정 처방", en:"axis → six meridian pairs · empty, fill or calm prescription"},
+    "t-c3":           {ko:"림프절 비우기 (8부위)", en:"Lymphatic Clearing (8 areas)"},
+    "t-c3s":          {ko:"귀밑 → 목 → 쇄골 → 겨드랑 → 팔꿈치 → 복부 → 서혜 → 오금", en:"ear → neck → collarbone → armpit → elbow → abdomen → groin → behind the knee"},
+    "t-c4":           {ko:"하단전 채우기", en:"Dantian Breathing"},
+    "t-c4s":          {ko:"단전 호흡 · 시간을 골라 시작합니다", en:"Lower dantian breathing · choose your time"},
+    "t-c5":           {ko:"이어서 전체 하기 (1·6·8)", en:"The full 1·6·8"},
+    "t-c5s":          {ko:"마음 고르기 → 1·6·8 서킷 → 8부위 → 하단전 채우기", en:"settling → circuit → eight areas → dantian"},
+    "t-ebook":        {ko:"📕 전자책 《하루 15분, 림프경선 셀프 리셋 처방전》과 함께 쓰기", en:"📕 Use it with the e-book · 15 Minutes a Day: Lymph Meridian Self-Reset"},
+    "t-ebooksub":     {ko:"책에서 그림과 손의 방향을, 앱에서 소리와 시간을", en:"the book for pictures and hand directions, the app for voice and timing"},
+    "t-cykind":       {ko:"1·6·8 CIRCUIT", en:"1·6·8 CIRCUIT"},
+    "t-cy":           {ko:"1·6·8 경선·림프 서킷", en:"The 1·6·8 Circuit"},
+    "t-cynote":       {ko:"축 하나(임독맥), 사슬 여섯(6경선), 정거장 여덟(8림프절). 자리를 옮기지 않고 끊김 없이 잇습니다.", en:"One axis, six chains, eight stations — linked without changing position."},
+    "t-mode":         {ko:"오늘의 처방", en:"Today's prescription"},
+    "t-turn":         {ko:"한 쌍에 주는 시간", en:"Time for each pair"},
+    "t-cystart":      {ko:"서킷 시작 — 축 → 여섯 쌍", en:"Start the circuit — axis → six pairs"},
+    "t-axisonly":     {ko:"1 · 축만 먼저", en:"1 · axis only"},
+    "t-to8":          {ko:"이어서 8부위 →", en:"On to the eight areas →"},
+    "t-pairs":        {ko:"여섯 쌍 — 하나씩 골라 들을 수도 있습니다", en:"Six pairs — or play any one on its own"},
+    "t-order":        {ko:"여섯 쌍 듣는 순서", en:"Order of the six pairs"},
+    "t-ebook2":       {ko:"📕 《하루 15분, 림프경선 셀프 리셋 처방전》과 함께", en:"📕 Pair it with the e-book"},
+    "t-ebooksub2":    {ko:"책의 노선도 색과 앱의 색이 같습니다 · 안내 보기", en:"the same colours as the book's route map · how to pair them"},
+    "t-ebookok":      {ko:"알겠습니다", en:"Got it"},
     "t-sound":        {ko:"소리와 목소리", en:"Voice &amp; Sound"},
     "t-soundnote":    {ko:"기기에 깔린 목소리 중에서 고르시면 가장 자연스럽습니다.", en:"Choosing one of your device's own voices sounds the most natural."},
     "t-voice":        {ko:"음성 안내", en:"Voice guidance"},
@@ -650,9 +785,9 @@
     "t-guide":        {ko:"안내와 요령 보기", en:"Practice notes"},
     "t-lymphkind":    {ko:"LYMPHATIC CLEARING", en:"LYMPHATIC CLEARING"},
     "t-lymph":        {ko:"림프절 비우기", en:"Lymphatic Clearing"},
-    "t-lymphnote":    {ko:"원하는 부위만 골라 들을 수도 있고, 여덟 부위를 순서대로 이어서 할 수도 있습니다.", en:"Play a single area on its own, or run all eight in sequence."},
+    "t-lymphnote":    {ko:"귀밑에서 시작해 여덟 정거장을 차례로. 한 부위만 골라 들을 수도 있습니다.", en:"Eight stations, starting under the ear. You may play a single area on its own."},
     "t-perarea":      {ko:"부위당 시간", en:"Time per area"},
-    "t-all8":         {ko:"여덟 부위 순서대로 시작", en:"Start all eight in order"},
+    "t-all8":         {ko:"여덟 정거장 순서대로 시작", en:"Start all eight stations in order"},
     "t-restart":      {ko:"⟲ 처음부터", en:"⟲ Restart"},
     "t-next":         {ko:"다음 →", en:"Next →"},
     "t-stop":         {ko:"마치고 기록하기", en:"Finish and record"},
@@ -691,22 +826,95 @@
         "혀끝을 입천장에 가볍게 대고, 숨을 코로 고르게 오가게 합니다.",
         "들숨은 길고 깊게, 날숨은 짧고 부드럽게. 마음을 아랫배에 내려놓습니다."
       ],
+      appName: "내 손안의 림프·선(禪) 리셋",
+      circuitTitle: "1·6·8 경선·림프 서킷",
+      circuitKind: "1·6·8 CIRCUIT",
+      circuitIntroCap: "축 → 여섯 사슬 → 여덟 정거장, 끊김 없이.",
+      circuitEnd: "여섯 쌍을 모두 이었습니다. 이제 여덟 정거장에서 쓸어 모아 하단전으로 회수합니다. 잠시 숨을 고르세요.",
+      axis: {
+        title: "1 · 임독맥 중심축",
+        kind: "1 · 임독맥",
+        caption: "정중선 한 줄 — 좌우로 기울이지 않습니다",
+        steps: [
+          "서기 — 발 안쪽을 모아 바닥을 지탱하고, 두 손을 가슴 앞에서 깍지 낍니다. 무릎은 펴되 잠그지 않습니다.",
+          "올리기 — 코로 숨을 마시며 깍지 낀 두 팔을 머리 위로 뻗습니다. 턱을 들어 시선은 손등으로. 발끝에서 머리까지 한 줄로 뻗고, 들숨 육 초로 세 호흡을 유지합니다.",
+          "내리기 — 날숨 팔 초에 팔을 앞으로 천천히 내립니다. 혀끝을 입천장에 붙이고 어깨와 목의 힘을 풉니다. 기가 앞 정중선을 따라 배꼽 아래 하단전으로 내려옵니다.",
+          "머물기 — 세 번 반복한 뒤 두 손을 배꼽 아래에 포개고 세 호흡. 배꼽 아래가 따뜻해지면 축이 켜진 것입니다. 이제 여섯 사슬로 이어집니다."
+        ]
+      },
+      modes: [
+        {k:"empty", name:"비움", sub:"해독", when:"부종·뭉침·답답함, 얼굴이 붓는 날", breath:"들숨 4 : 날숨 8", hold:"짧게 2호흡", lymph:"두 바퀴 (각 10회)", sound:"소리 길게", line:"유지 없이 흐르게, 소리는 길게 이어갑니다."},
+        {k:"fill", name:"채움", sub:"활력", when:"무기력·피로, 몸이 무거운 아침", breath:"들숨 6 : 날숨 6", hold:"길게 5호흡", lymph:"한 바퀴 + 톡톡", sound:"소리 보통", line:"한 자세를 붙잡고 다섯 호흡을 함께합니다."},
+        {k:"calm", name:"안정", sub:"이완", when:"통증·불면·불안, 저녁 수업", breath:"들숨 4 : 날숨 6", hold:"60 퍼센트 범위", lymph:"귀밑·쇄골만", sound:"허밍·웃음", line:"범위를 육십 퍼센트로 줄이고, 다음 자세로 천천히 넘어갑니다."}
+      ],
+      modeLine: (m)=> m.name + " (" + m.sub + ") · " + m.when + " · 호흡 " + m.breath + " · 유지 " + m.hold + " · 8림프절 " + m.lymph,
+      turns: [{v:80,l:"15분"},{v:180,l:"30분"},{v:270,l:"45분"}],
+      turnNote: "한 쌍에 1분 20초면 15분 서킷, 3분이면 30분, 4분 30초면 45분입니다.",
+      orders: {
+        flow: {label:"연결 순서", note:"①~⑥은 경락이 흐르는 순서가 아니라 몸에서 끊김 없이 잇기 쉬운 순서입니다 — ① 폐·대장 → ② 심·소장 → ③ 심포·삼초 → ④ 간·담 → ⑤ 비·위 → ⑥ 신·방광."},
+        meridian: {label:"경락 순서", note:"경락이 흐르는 순서입니다 — 폐·대장 → 심·소장 → 비·위 → 신·방광 → 심포·삼초 → 간·담. 이 순서에서는 동작 사이의 연결이 한 번씩 끊깁니다."}
+      },
+      pairs: [
+        {no:"①", name:"폐 · 대장", color:"흰색 · 은색", dot:"linear-gradient(135deg,#FFFFFF,#BFB9AE)", pose:"등 뒤 깍지 가슴 열기", sound:"스~~",
+         script:"첫 번째, 폐·대장. 서서 등 뒤로 두 손을 깍지 끼고 팔을 아래로 뻗어 가슴을 폅니다. 들숨 사 초에 가슴을 펴고, 날숨에 스으— 육 초. 팔은 뒤에서 조금씩 더 들어 올립니다. 세 번 반복합니다. 손끝을 높이는 것이 아니라 가슴이 열리는 것이 목적입니다.",
+         hold:"가슴을 편 채로 스으— 소리를 이어갑니다. 어깨는 귀에서 멀리.",
+         tip:"어깨를 귀에서 멀리, 갈비뼈가 옆으로 벌어지는 데서 멈춥니다.",
+         bridge:"깍지를 풀어 한 팔을 머리 위로 넘깁니다."},
+        {no:"②", name:"심 · 소장", color:"빨강 · 핑크", dot:"linear-gradient(135deg,#C0272D,#EF8FA0)", pose:"머리 뒤 팔꿈치 당기기", sound:"하~~",
+         script:"두 번째, 심·소장. 한 팔을 머리 위로 넘겨 반대 손으로 팔꿈치를 잡아 가슴 쪽으로 당깁니다. 들숨 사 초에 겨드랑이를 열고, 날숨에 하— 육 초. 좌우 세 번씩. 목을 잡아당기지 말고 팔꿈치만 당깁니다.",
+         hold:"겨드랑이를 연 채로 하— 소리를 이어갑니다. 당기는 쪽 어깨가 올라가지 않게.",
+         tip:"수술한 쪽은 당기지 말고 손바닥으로 덮어 주기만 하세요.",
+         bridge:"팔을 앞으로 풀어 손깍지를 끼고 손바닥을 뒤집습니다."},
+        {no:"③", name:"심포 · 삼초", color:"남색 · 보라", dot:"linear-gradient(135deg,#3B4A8C,#8A6BB8)", pose:"앞으로 깍지 밀기", sound:"하·호·허",
+         script:"세 번째, 심포·삼초. 두 손을 깍지 끼어 가슴 앞에서 앞으로 밀며 등을 둥글게 폅니다. 밀면서 하, 호, 허 — 웃음소리를 세 번 냅니다. 작게 내도 충분합니다. 손목이 아프면 손바닥을 맞대고 밉니다.",
+         hold:"등을 둥글게 편 채로 하, 호, 허를 작게 이어갑니다.",
+         tip:"손목이 아프면 손바닥을 맞대고 밉니다. 등이 둥글어지는 것이 목적입니다.",
+         bridge:"깍지 낀 팔을 하늘로 올리며 한 발을 반대쪽 뒤로 교차합니다."},
+        {no:"④", name:"간 · 담", color:"초록 · 파랑", dot:"linear-gradient(135deg,#2E7D4F,#4C8FD4)", pose:"다리 교차 옆구리 활", sound:"쉬~~",
+         script:"네 번째, 간·담. 두 다리를 교차해 서서 깍지 낀 팔을 하늘로 올리고, 한쪽으로 기울이며 쉬— 육 초. 반대쪽 옆구리가 당기는 데서 멈춥니다. 좌우 세 번씩. 균형이 어려우면 벽을 잡으세요.",
+         hold:"옆구리를 길게 편 채로 쉬— 소리를 이어갑니다. 골반은 반대쪽으로 밉니다.",
+         tip:"기울이는 각도보다 옆선이 길어지는 것이 먼저입니다.",
+         bridge:"교차한 발을 뒤로 크게 내디뎌 앞무릎을 구십 도 굽힙니다."},
+        {no:"⑤", name:"비 · 위", color:"주황 · 노랑", dot:"linear-gradient(135deg,#E07B26,#F0C238)", pose:"전사 1번 전면 늘이기", sound:"후~~",
+         script:"다섯 번째, 비·위. 앞무릎을 굽히고 뒷발을 길게 뒤로 두고, 두 팔을 위로 뻗어 가슴을 듭니다. 들숨 사 초, 날숨에 후— 육 초. 갈비뼈가 옆으로 벌어지는 느낌에서 멈춥니다. 세 번. 무릎이 불편하면 보폭을 절반으로 줄이세요.",
+         hold:"가슴을 든 채로 후— 소리를 이어갑니다. 뒷발 뒤꿈치가 들려도 됩니다.",
+         tip:"무릎이 불편하면 보폭을 좁게, 의자를 곁에 두세요.",
+         bridge:"뒷발을 모으며 앞발 뒤꿈치를 밀어 발끝을 당깁니다."},
+        {no:"⑥", name:"신 · 방광", color:"검정 · 회색", dot:"linear-gradient(135deg,#2A2A2A,#8C8C8C)", pose:"한 발 뒤꿈치 뻗기", sound:"우~~",
+         script:"여섯 번째, 신·방광. 두 발을 모아 서서 한 발을 뒤로 뻗어 뒤꿈치를 바닥에 누르고 발끝을 당깁니다. 날숨에 우— 육 초. 좌우 세 번씩. 허리를 숙이지 말고 발끝에서만 당깁니다.",
+         hold:"뒤꿈치를 누른 채로 우— 소리를 이어갑니다. 발끝이 저리면 힘을 빼세요.",
+         tip:"허리를 숙이지 않습니다 — 발끝에서만 당깁니다.",
+         bridge:"뒤꿈치를 내려 발바닥을 붙이고, 오금에서 서혜로 쓸어 올립니다."}
+      ],
+      pairCount: (n)=> n + "쌍",
+      ebook: {
+        title: "《하루 15분, 림프경선 셀프 리셋 처방전》과 함께",
+        sub: "책과 앱은 같은 노선도 하나를 나누어 씁니다 — 책은 그림과 손의 방향, 앱은 소리와 시간.",
+        items: [
+          {n:"1", t:"책에서 오늘의 처방을 고릅니다. 부종·뭉침이면 <strong>비움</strong>, 무기력하면 <strong>채움</strong>, 통증·불면이면 <strong>안정</strong>. 앱에서 같은 모드를 눌러 주세요."},
+          {n:"2", t:"책 앞장의 <strong>노선도 색</strong>과 앱의 색이 같습니다 — 흰·은색 폐·대장, 빨강 심·소장, 남·보라 심포·삼초, 초록·파랑 간·담, 주황·노랑 비·위, 검정·회색 신·방광."},
+          {n:"3", t:"<strong>1단계 임독맥 → 2단계 6경선 → 3단계 8림프절</strong> 순서가 같습니다. 앱의 서킷 시작을 누르면 1단계부터 소리로 따라갑니다."},
+          {n:"4", t:"책에서 <strong>손의 방향과 횟수</strong>를, 앱에서 <strong>호흡과 시간</strong>을 맡습니다. 여덟 정거장은 앱이 순서대로 세어 줍니다."},
+          {n:"5", t:"끝나면 <strong>일기 탭</strong>에 오늘의 모드(비움·채움·안정)와 들은 쌍이 남습니다. 책 뒤의 자가 점검표와 함께 4주를 이어 가세요."}
+        ],
+        foot: "림프절은 언제나 말단에서 중심으로. 수술한 쪽 겨드랑이는 누르지 말고 손바닥으로 덮기만 하세요. 교육과 자기관리를 위한 안내이며 진단과 치료를 대신하지 않습니다."
+      },
       lymphTitle: "림프경선 비우기",
       lymphKind: "림프경선 비우기",
       lymphIntro: "지금부터 몸의 림프절을 부드럽게 열어 막힌 기운을 비웁니다. 앉아서도, 누워서도, 서서도, 걸으면서도 할 수 있습니다. 절대 세게 누르지 말고, 아기 피부를 만지듯 가볍게 쓸어 주세요. 시작합니다.",
       lymphIntroCap: "세게 누르지 말고, 아기 피부를 만지듯 가볍게.",
       lymphMid: "힘을 빼고, 피부 위를 바람이 지나가듯 가볍게 쓸어 주세요.",
-      lymphEnd: "여덟 부위를 모두 비웠습니다. 어깨를 한 번 크게 올렸다 내려놓고, 숨을 세 번 깊게 내쉬어 주세요.",
+      lymphEnd: "여덟 정거장을 모두 지났습니다. 두 손을 배꼽 아래에 포개어 시계방향 열두 번, 세 호흡. 마지막으로 가슴에서 발끝까지 한 번 쓸어 내리며 하단전으로 회수합니다.",
       ord: ["첫 번째","두 번째","세 번째","네 번째","다섯 번째","여섯 번째","일곱 번째","여덟 번째"],
       areas: [
-        {name:"쇄골 아래 림프절", guide:"빗장뼈 위아래를 안쪽에서 바깥쪽으로, 아기 피부를 만지듯 가볍게 쓸어 줍니다."},
-        {name:"귀밑·턱선 림프절", guide:"귀 아래 턱선 뒤쪽을 손가락 끝으로 둥글게 풀며 목 옆으로 흘려보냅니다."},
-        {name:"목 옆선 림프절", guide:"귀 뒤에서 쇄골 방향으로 목 옆선을 따라 천천히 쓸어 내립니다."},
-        {name:"겨드랑이 림프절", guide:"겨드랑이 안쪽을 가볍게 감싸 쥐듯 두드리며 막힌 기운을 엽니다."},
-        {name:"팔 안쪽·팔꿈치", guide:"팔꿈치 안쪽에서 겨드랑이 방향으로 손바닥으로 부드럽게 쓸어 올립니다."},
-        {name:"복부·배꼽 주변", guide:"배꼽 주변과 아랫배를 시계 방향으로 큰 원을 그리며 따뜻하게 어루만집니다."},
-        {name:"서혜부(사타구니)", guide:"사타구니 접히는 부위를 손바닥으로 지그시 쓸어 순환시킵니다."},
-        {name:"무릎 뒤 오금·종아리", guide:"무릎 뒤 오금과 종아리를 아래에서 위로 부드럽게 쓸어 올립니다."}
+        {name:"귀밑", guide:"귀 뒤 턱 경계의 우묵한 곳. 손끝으로 귀밑 → 턱선 → 목 방향으로 5회, 가볍게."},
+        {name:"목", guide:"목 옆과 뒤. 기관은 누르지 않습니다. 귀밑 → 목 → 쇄골 위로 손바닥 5회."},
+        {name:"쇄골", guide:"쇄골 위 우묵한 곳. 겨드랑이·목에서 쇄골 위 → 목 아래로 손끝 5회."},
+        {name:"겨드랑", guide:"겨드랑이 깊은 곳. 팔 안쪽 → 겨드랑이 → 쇄골로, 손바닥을 덮어 5회. 수술한 쪽은 누르지 않습니다."},
+        {name:"팔꿈치 (척택)", guide:"팔꿈치 앞 안쪽 주름의 엄지 쪽. 손끝 → 팔꿈치 → 겨드랑이로 엄지 5회, 가볍게."},
+        {name:"복부", guide:"배꼽 주위와 옆구리. 서혜 → 아랫배 → 배꼽 시계방향으로 손바닥 12회."},
+        {name:"서혜 (사타구니)", guide:"사타구니 주름. 허벅지 안 → 서혜 → 아랫배로 손날 5회."},
+        {name:"오금 (위중)", guide:"무릎 뒤 오금 주름 한가운데. 종아리 → 오금 → 허벅지 뒤로 손바닥 5회, 가볍게."}
       ],
       danTitle: "하단전 채우기",
       danKind: "하단전 채우기",
@@ -723,21 +931,22 @@
         "지금 이 자리, 이 숨에 온전히 머뭅니다."
       ],
       danEnd: "숨을 그대로 두고, 아랫배의 온기를 잠시 느껴 봅니다. 수고하셨습니다.",
-      fullLabel: "전체 수행",
-      fullKind: "비우고 채우는 단전주선",
-      complete: "오늘의 비우고 채우는 단전주선을 마쳤습니다. 아랫배의 따뜻한 온기를 느끼며 편안히 숨을 고르세요. 수고하셨습니다.",
+      fullLabel: "전체 수행 (1·6·8)",
+      fullKind: "1·6·8 전체 수행",
+      complete: "오늘의 1·6·8 수행을 마쳤습니다. 아랫배의 따뜻한 온기를 느끼며 편안히 숨을 고르세요. 수고하셨습니다.",
       scripts: {
-        empty: "림프절 비우기는 몸의 림프 순환을 도와 노폐물과 긴장을 비우는 운동입니다. 세게 누르지 말고 아기 피부를 만지듯 가볍게 쓸어 주세요.",
+        empty: "림프절 비우기는 몸의 림프 순환을 도와 노폐물과 긴장을 비우는 운동입니다. 세게 누르지 말고 아기 피부를 만지듯 가볍게 쓸어 주세요. 언제나 말단에서 중심으로 — 발끝에서 오금으로, 손끝에서 팔꿈치·겨드랑이로, 겨드랑이와 목에서 쇄골로.",
         fill: "하단전 채우기는 마음을 아랫배에 내려놓고 맑은 기운을 채우는 수행입니다. 들숨은 길고 깊게, 날숨은 짧고 부드럽게 내쉬어 주세요.",
-        effect: "비우고 채우는 단전주선은 림프 순환을 도와 노폐물과 긴장을 비우고, 위로 뜨기 쉬운 열기를 아랫배로 내려 마음의 안정과 숙면에 도움을 줍니다.",
-        caution: "수행 중에는 몸에 힘을 주지 마시고, 머리가 더워지거나 답답하면 날숨을 길게 내쉬며 마음을 아랫배로 내려 주세요. 림프절은 절대 세게 누르지 마시고, 식사 직후나 음주 후에는 피하시기 바랍니다. 임신 중이거나 치료 중인 질환이 있으시면 의료진과 상의해 주세요."
+        effect: "1·6·8 서킷은 축을 세우고 사슬을 이어 기혈을 돌린 뒤, 여덟 정거장에서 노폐물을 쓸어 모아 하단전으로 내립니다. 부기와 뭉침을 덜고 마음의 안정과 숙면에 도움을 줍니다.",
+        caution: "수행 중에는 몸에 힘을 주지 마시고, 머리가 더워지거나 답답하면 날숨을 길게 내쉬며 마음을 아랫배로 내려 주세요. 림프절은 절대 세게 누르지 마시고, 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 않고 손바닥으로 덮기만 하세요. 식사 직후나 음주 후에는 피하시기 바랍니다. 임신 중이거나 치료 중인 질환이 있으시면 의료진과 상의해 주세요."
       },
       guide: {
         items: [
-          {n:"하단전 (아랫배 · 기해)", t:"배꼽에서 손가락 세 개 폭 아래, 피부가 아닌 몸속 중심에 마음을 툭 내려놓습니다. 머리가 더워지면 즉시 날숨을 길게 내쉬고 아랫배로 돌아옵니다."},
-          {n:"림프경선 비우기 8부위", t:"쇄골 → 귀밑 → 목 옆선 → 겨드랑이 → 팔 안쪽·팔꿈치 → 복부(시계방향) → 서혜부 → 무릎 뒤 오금·종아리 순으로 아기 피부를 만지듯 부드럽게 쓸어 줍니다."},
-          {n:"주의할 점", t:"세게 누르지 않습니다. 식사 직후와 음주 후는 피합니다. 임신 중이거나 치료 중인 질환이 있으면 의료진과 상의해 주세요."},
-          {n:"기대 효과", t:"림프 순환을 도와 노폐물과 긴장을 비우고, 뜨기 쉬운 열기를 아랫배로 내려 마음의 안정과 깊은 잠에 도움을 줍니다."}
+          {n:"1 · 임독맥 (축)", t:"정중선 한 줄에서만 움직입니다. 팔을 올려 독맥을 따라 정수리로, 내리며 임맥을 따라 하단전으로. 좌우로 기울이거나 옆구리를 쓰지 않습니다."},
+          {n:"2 · 6경선 (사슬)", t:"① 폐·대장 → ② 심·소장 → ③ 심포·삼초 → ④ 간·담 → ⑤ 비·위 → ⑥ 신·방광. 손은 깍지에서 풀리지 않고 발은 뒤로 내딛습니다. 쌍마다 소리호흡 하나 — 스·하·하호허·쉬·후·우."},
+          {n:"3 · 8림프절 (배출)", t:"1 귀밑 → 2 목 → 3 쇄골 → 4 겨드랑 → 5 팔꿈치(척택) → 6 복부 → 7 서혜 → 8 오금(위중). 언제나 말단에서 중심으로 쓸고, 마지막에 하단전으로 회수합니다."},
+          {n:"주의할 점", t:"세게 누르지 않습니다. 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 않고 손바닥으로 덮기만 합니다. 식사 직후와 음주 후는 피하고, 임신 중이거나 치료 중인 질환이 있으면 의료진과 상의해 주세요."},
+          {n:"기대 효과", t:"축을 세우고 사슬을 이어 기혈을 돌리고, 여덟 정거장에서 노폐물을 쓸어 모아 하단전으로 내립니다 — 부기와 뭉침을 덜고 마음의 안정과 깊은 잠에 도움을 줍니다."}
         ],
         listen: "설명 듣기"
       },
@@ -780,22 +989,95 @@
         "Rest your tongue lightly on the roof of your mouth, and let the breath move evenly through your nose.",
         "Breathe in long and deep, breathe out short and soft. Let your mind settle into the lower belly."
       ],
+      appName: "Lymph & Seon Reset in My Hand",
+      circuitTitle: "The 1·6·8 Circuit",
+      circuitKind: "1·6·8 CIRCUIT",
+      circuitIntroCap: "Axis → six chains → eight stations, without a break.",
+      circuitEnd: "All six pairs are linked. Now gather at the eight stations and draw it back into the lower dantian. Rest a moment.",
+      axis: {
+        title: "1 · The Ren–Du axis",
+        kind: "1 · THE AXIS",
+        caption: "One centre line — never lean to the sides",
+        steps: [
+          "Standing — bring the inner edges of the feet together and interlace the hands in front of the chest. Knees straight but not locked.",
+          "Rising — breathe in through the nose and reach the clasped arms overhead, chin lifted, eyes on the backs of the hands. One line from toes to crown; hold for three breaths, six seconds in.",
+          "Descending — breathe out for eight as the arms lower slowly in front. Tongue on the roof of the mouth; shoulders and neck soft. The breath runs down the front line into the lower belly.",
+          "Resting — after three rounds, fold both hands below the navel for three breaths. When the belly feels warm, the axis is lit. Now the six chains begin."
+        ]
+      },
+      modes: [
+        {k:"empty", name:"Empty", sub:"detox", when:"swelling, heaviness, a puffy face", breath:"in 4 : out 8", hold:"brief, 2 breaths", lymph:"two rounds (10 each)", sound:"long sound", line:"No holding — keep flowing, and let the sound run long."},
+        {k:"fill", name:"Fill", sub:"vitality", when:"fatigue, a heavy morning", breath:"in 6 : out 6", hold:"long, 5 breaths", lymph:"one round + tapping", sound:"steady sound", line:"Hold each shape for five breaths."},
+        {k:"calm", name:"Calm", sub:"release", when:"pain, sleeplessness, evening class", breath:"in 4 : out 6", hold:"60 percent range", lymph:"ear and collarbone only", sound:"humming, laughing", line:"Keep to sixty percent of your range, and take the bridges slowly."}
+      ],
+      modeLine: (m)=> m.name + " (" + m.sub + ") · " + m.when + " · breath " + m.breath + " · hold " + m.hold + " · lymph " + m.lymph,
+      turns: [{v:80,l:"15 min"},{v:180,l:"30 min"},{v:270,l:"45 min"}],
+      turnNote: "1 min 20 sec for each pair makes a 15-minute circuit, 3 minutes makes 30, 4 min 30 sec makes 45.",
+      orders: {
+        flow: {label:"Linked order", note:"①–⑥ is not the order the meridians flow, but the order that links without a break — ① lungs · large intestine → ② heart · small intestine → ③ pericardium · triple burner → ④ liver · gallbladder → ⑤ spleen · stomach → ⑥ kidney · bladder."},
+        meridian: {label:"Meridian order", note:"The order the meridians flow — lungs · large intestine → heart · small intestine → spleen · stomach → kidney · bladder → pericardium · triple burner → liver · gallbladder. The links between shapes break once in this order."}
+      },
+      pairs: [
+        {no:"①", name:"Lungs · Large Intestine", color:"white · silver", dot:"linear-gradient(135deg,#FFFFFF,#BFB9AE)", pose:"Clasp behind the back, open the chest", sound:"Sss~~",
+         script:"First, lungs and large intestine. Standing, clasp your hands behind your back and reach the arms down to open the chest. Breathe in for four as the chest opens, breathe out for six with sss—. Lift the arms a little further behind you. Three times. The aim is not higher hands but an open chest.",
+         hold:"Keep the chest open and continue the sss— sound. Shoulders away from the ears.",
+         tip:"Shoulders away from the ears; stop where the ribs widen to the sides.",
+         bridge:"Release the clasp and take one arm overhead."},
+        {no:"②", name:"Heart · Small Intestine", color:"red · pink", dot:"linear-gradient(135deg,#C0272D,#EF8FA0)", pose:"Elbow pull behind the head", sound:"Haa~~",
+         script:"Second, heart and small intestine. Take one arm overhead, hold the elbow with the other hand and draw it toward the chest. Breathe in for four to open the armpit, breathe out for six with haa—. Three times each side. Draw the elbow, never pull the neck.",
+         hold:"Keep the armpit open and continue the haa— sound. Let the pulling shoulder stay down.",
+         tip:"On the operated side, do not pull — simply cover with the palm.",
+         bridge:"Bring the arms forward, interlace the fingers and turn the palms out."},
+        {no:"③", name:"Pericardium · Triple Burner", color:"navy · violet", dot:"linear-gradient(135deg,#3B4A8C,#8A6BB8)", pose:"Press the clasp forward", sound:"Ha · Ho · Heo",
+         script:"Third, pericardium and triple burner. Interlace the fingers at the chest and press forward, rounding the back. With the press, sound ha, ho, heo — the laughing breath, three times. Softly is enough. If the wrists hurt, press palm to palm.",
+         hold:"Keep the back rounded and continue ha, ho, heo softly.",
+         tip:"If the wrists hurt, press palm to palm; rounding the back is the point.",
+         bridge:"Raise the clasped arms overhead and cross one foot behind the other."},
+        {no:"④", name:"Liver · Gallbladder", color:"green · blue", dot:"linear-gradient(135deg,#2E7D4F,#4C8FD4)", pose:"Crossed legs, side arch", sound:"Shee~~",
+         script:"Fourth, liver and gallbladder. Stand with the legs crossed, raise the clasped arms and arch to one side with shee— for six. Stop where the opposite waist pulls. Three times each side. Hold a wall if balance is unsure.",
+         hold:"Keep the side long and continue the shee— sound. Push the hip to the opposite side.",
+         tip:"A longer side line matters more than a deeper tilt.",
+         bridge:"Step the crossed foot back into a long lunge, front knee at ninety degrees."},
+        {no:"⑤", name:"Spleen · Stomach", color:"orange · yellow", dot:"linear-gradient(135deg,#E07B26,#F0C238)", pose:"Warrior 1, front stretch", sound:"Hoo~~",
+         script:"Fifth, spleen and stomach. Bend the front knee, the back leg long, and reach both arms up to lift the chest. Breathe in for four, breathe out for six with hoo—. Stop where the ribs widen. Three times. If the knees complain, halve the stance.",
+         hold:"Keep the chest lifted and continue the hoo— sound. The back heel may lift.",
+         tip:"Narrow the stance and keep a chair nearby if the knees are unhappy.",
+         bridge:"Gather the back foot in and press the front heel forward, drawing the toes back."},
+        {no:"⑥", name:"Kidney · Bladder", color:"black · grey", dot:"linear-gradient(135deg,#2A2A2A,#8C8C8C)", pose:"One heel extended back", sound:"Woo~~",
+         script:"Sixth, kidney and bladder. Stand with the feet together, extend one leg back and press the heel into the floor, drawing the toes back. Breathe out with woo— for six. Three times each side. Do not bend the waist — draw from the toes only.",
+         hold:"Keep the heel pressing and continue the woo— sound. If the toes tingle, soften.",
+         tip:"Never bend the waist — draw from the toes only.",
+         bridge:"Lower the heel, place the sole down, and stroke from behind the knee up to the groin."}
+      ],
+      pairCount: (n)=> n + (n === 1 ? " pair" : " pairs"),
+      ebook: {
+        title: "With the e-book · 15 Minutes a Day: Lymph Meridian Self-Reset",
+        sub: "The book and the app share one route map — the book for pictures and hand directions, the app for voice and timing.",
+        items: [
+          {n:"1", t:"Choose today's prescription in the book: <strong>empty</strong> for swelling and heaviness, <strong>fill</strong> for fatigue, <strong>calm</strong> for pain or sleeplessness. Then press the same mode in the app."},
+          {n:"2", t:"The colours of the book's route map match the app — white / silver lungs · large intestine, red heart · small intestine, navy / violet pericardium · triple burner, green / blue liver · gallbladder, orange / yellow spleen · stomach, black / grey kidney · bladder."},
+          {n:"3", t:"The order is the same: <strong>axis → six chains → eight stations</strong>. Press Start the circuit and the voice leads you from the axis."},
+          {n:"4", t:"The book gives the <strong>direction and number of strokes</strong>; the app keeps the <strong>breath and the time</strong>, counting the eight stations in order."},
+          {n:"5", t:"When you finish, the <strong>Journal tab</strong> keeps today's mode and the pairs you practised. Follow it for four weeks alongside the self-check pages at the back of the book."}
+        ],
+        foot: "Always stroke from the outer end toward the centre. Never press the operated armpit — cover it with the palm. This is guidance for education and self-care, not a substitute for diagnosis or treatment."
+      },
       lymphTitle: "Clearing the lymph lines",
       lymphKind: "LYMPHATIC CLEARING",
       lymphIntro: "We begin by gently opening the lymph nodes to clear what has grown stagnant. You may do this sitting, lying down, standing, or walking. Never press hard — stroke as lightly as you would a baby's skin. Let us begin.",
       lymphIntroCap: "Never press hard — light as a baby's skin.",
       lymphMid: "Let the hand go weightless, as light as a breeze across the skin.",
-      lymphEnd: "All eight areas are cleared. Lift your shoulders once and let them fall, then take three long breaths out.",
+      lymphEnd: "All eight stations are done. Fold both hands below the navel, twelve clockwise circles and three breaths. Then sweep once from the chest down to the toes, drawing everything back into the lower dantian.",
       ord: ["First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth"],
       areas: [
-        {name:"Collarbone nodes", guide:"Sweep above and below the collarbone, from the centre outward, light as a feather."},
-        {name:"Under the ear, along the jaw", guide:"With your fingertips, circle gently behind the jaw below the ear, letting the flow move down the side of the neck."},
-        {name:"Side of the neck", guide:"Stroke slowly down the side of the neck, from behind the ear toward the collarbone."},
-        {name:"Armpit nodes", guide:"Cupping the armpit lightly, tap and soften it, opening what has been held."},
-        {name:"Inner arm and elbow", guide:"Sweep the inner arm upward with your palm, from the elbow toward the armpit."},
-        {name:"Abdomen, around the navel", guide:"Trace large circles clockwise around the navel and the lower belly, warm and unhurried."},
-        {name:"Groin nodes", guide:"With a flat palm, stroke the crease of the groin gently, inviting the flow onward."},
-        {name:"Behind the knee and calf", guide:"From the calf upward, stroke softly behind the knee and up the leg."}
+        {name:"Under the ear", guide:"The hollow where the jaw meets the ear. With the fingertips, 5 light strokes from under the ear along the jaw toward the neck."},
+        {name:"Neck", guide:"The sides and back of the neck; never press the windpipe. 5 strokes with the palm, from under the ear through the neck to above the collarbone."},
+        {name:"Collarbone", guide:"The hollow above the collarbone. 5 strokes with the fingertips, from the armpit and neck over the collarbone and down."},
+        {name:"Armpit", guide:"Deep in the armpit. From the inner arm through the armpit to the collarbone, covering with the palm 5 times. Never press the operated side."},
+        {name:"Elbow (Chize)", guide:"The inner crease of the elbow, thumb side. 5 light strokes with the thumb from the hand through the elbow toward the armpit."},
+        {name:"Abdomen", guide:"Around the navel and the sides. From the groin up to the lower belly, then 12 clockwise circles with the palm."},
+        {name:"Groin", guide:"The crease of the groin. 5 strokes with the edge of the hand from the inner thigh through the groin to the lower belly."},
+        {name:"Behind the knee (Weizhong)", guide:"The centre of the crease behind the knee. 5 light strokes with the palm, from the calf through the knee up the back of the thigh."}
       ],
       danTitle: "Filling the lower dantian",
       danKind: "DANTIAN BREATHING",
@@ -812,21 +1094,22 @@
         "Rest completely here, in this place, in this breath."
       ],
       danEnd: "Leave the breath as it is, and rest for a moment in the warmth of your lower belly. Well done.",
-      fullLabel: "Full sequence",
-      fullKind: "Empty & Fill",
-      complete: "You have finished today's practice of emptying and filling. Rest in the warmth of your lower belly, and breathe at ease. Well done.",
+      fullLabel: "Full practice (1·6·8)",
+      fullKind: "The full 1·6·8",
+      complete: "You have finished today's 1·6·8 practice. Rest in the warmth of your lower belly, and breathe at ease. Well done.",
       scripts: {
-        empty: "Lymphatic clearing gently opens the lymph nodes to let go of what the body has been holding. Never press hard — stroke as lightly as a baby's skin.",
+        empty: "Clearing the lymph lines gently opens the lymph nodes to let go of what the body has been holding. Never press hard — stroke as lightly as a baby's skin. Always from the end toward the centre: toes to behind the knee, hands to elbow and armpit, armpit and neck to the collarbone.",
         fill: "Dantian breathing settles the mind into the lower belly and fills it with clear energy. Breathe in long and deep, and out short and soft.",
-        effect: "This practice of emptying and filling supports lymph circulation, releasing waste and tension, and draws rising heat down into the lower belly, helping the mind grow calm and sleep grow deep.",
-        caution: "Do not strain during practice. If your head grows hot or tight, breathe out long and bring your attention back to the belly. Never press the lymph nodes hard, and avoid practising right after a meal or alcohol. If you are pregnant or under treatment for an illness, please speak with your doctor first."
+        effect: "The 1·6·8 circuit sets the axis, links the six chains to move breath and blood, then gathers what the body has released at eight stations and draws it down into the lower belly — easing swelling and heaviness and helping a calm mind and deeper sleep.",
+        caution: "Do not strain during practice. If your head grows hot or tight, breathe out long and bring your attention back to the belly. Never press the lymph nodes hard, and never press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after a meal or alcohol. If you are pregnant or under treatment for an illness, please speak with your doctor first."
       },
       guide: {
         items: [
-          {n:"Lower dantian (the lower belly)", t:"Three fingers below the navel, at the centre of the body rather than on the skin, let your attention drop. If the head grows hot, breathe out long at once and return to the belly."},
-          {n:"The eight lymph areas", t:"Collarbone → under the ear → side of the neck → armpit → inner arm and elbow → abdomen (clockwise) → groin → behind the knee and calf, each stroked as lightly as a baby's skin."},
-          {n:"Cautions", t:"Never press hard. Avoid practising right after eating or drinking. If you are pregnant or under treatment, please consult your doctor."},
-          {n:"What it may bring", t:"It supports lymph circulation, releases waste and tension, and draws rising heat down into the lower belly — helping calm of mind and deeper sleep."}
+          {n:"1 · The axis (Ren–Du)", t:"Move only on the centre line. Arms rise up the spine to the crown, and lower down the front line into the lower belly. Never lean to the sides and leave the waist out of it."},
+          {n:"2 · Six chains (the meridians)", t:"① lungs · large intestine → ② heart · small intestine → ③ pericardium · triple burner → ④ liver · gallbladder → ⑤ spleen · stomach → ⑥ kidney · bladder. The hands stay clasped and the feet step back. One sound for each pair — sss, haa, ha-ho-heo, shee, hoo, woo."},
+          {n:"3 · Eight stations (release)", t:"1 under the ear → 2 neck → 3 collarbone → 4 armpit → 5 elbow (Chize) → 6 abdomen → 7 groin → 8 behind the knee (Weizhong). Always stroke from the end toward the centre, and draw everything into the lower belly at the close."},
+          {n:"Cautions", t:"Never press hard. Do not press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after eating or drinking, and if you are pregnant or under treatment, speak with your doctor first."},
+          {n:"What it may bring", t:"The axis is set, the chains are linked, and at the eight stations what the body has released is drawn down into the lower belly — easing swelling and heaviness, and helping the mind settle and sleep deepen."}
         ],
         listen: "Listen"
       },
@@ -895,6 +1178,9 @@
     voiceURI: {ko:"", en:""},
     dantianMin: 5,
     perArea: 45,
+    circuitMode: "empty",
+    pairTurn: 80,
+    pairOrder: "flow",
     breathBefore: null,
     breathAfter: null,
     breathMode: "before"
@@ -907,7 +1193,7 @@
     try{
       const s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
       if(s && typeof s === "object"){
-        ["lang","voice","bell","bgm","rate","dantianMin","perArea"].forEach(k=>{
+        ["lang","voice","bell","bgm","rate","dantianMin","perArea","circuitMode","pairTurn","pairOrder"].forEach(k=>{
           if(s[k] !== undefined) state[k] = s[k];
         });
         if(s.voiceURI && typeof s.voiceURI === "object"){
@@ -922,6 +1208,7 @@
       localStorage.setItem(SETTINGS_KEY, JSON.stringify({
         lang: state.lang, voice: state.voice, bell: state.bell, bgm: state.bgm,
         rate: state.rate, dantianMin: state.dantianMin, perArea: state.perArea,
+        circuitMode: state.circuitMode, pairTurn: state.pairTurn, pairOrder: state.pairOrder,
         voiceURI: state.voiceURI
       }));
     }catch(e){}
@@ -944,7 +1231,7 @@
       if(el) el.innerHTML = UI[id][l];
     });
 
-    document.title = l === "ko" ? "비우고 채우는 단전주선" : "Empty & Fill · Dantian Seon";
+    document.title = l === "ko" ? "내 손안의 림프·선(禪) 리셋" : "Lymph & Seon Reset in My Hand";
 
     ["voice","bell","bgm"].forEach(k=>{
       const b = $("sw-" + k);
@@ -970,6 +1257,11 @@
     renderMinChips();
     renderRateChips();
     renderPerAreaChips();
+    renderModeChips();
+    renderTurnChips();
+    renderOrderChips();
+    renderCircuitList();
+    renderEbook();
     renderLymphList();
     renderGuide();
     renderChips();
@@ -1143,8 +1435,8 @@
     ensureAudio();
     const l = state.lang;
     const text = l === "ko"
-      ? "안녕하세요. 비우고 채우는 단전주선입니다. 어깨의 힘을 내려놓고, 아랫배로 편안히 숨을 내쉬어 보세요."
-      : "Hello. This is Empty and Fill, the dantian meditation. Let your shoulders drop, and breathe out gently into your lower belly.";
+      ? "안녕하세요. 내 손안의 림프·선 리셋입니다. 어깨의 힘을 내려놓고, 아랫배로 편안히 숨을 내쉬어 보세요."
+      : "Hello. This is Lymph and Seon Reset in My Hand. Let your shoulders drop, and breathe out gently into your lower belly.";
     speak(text);
   }
 
@@ -1250,14 +1542,14 @@
   /* =========================================================
      Screens / nav
      ========================================================= */
-  const SCREENS = ["home","lymph","practice","complete","breath","diary"];
+  const SCREENS = ["home","circuit","lymph","practice","complete","breath","diary"];
 
   function showScreen(name){
     SCREENS.forEach(s=>{
       const el = $("screen-" + s);
       if(el) el.classList.toggle("hidden", s !== name);
     });
-    document.body.classList.toggle("hide-nav", name === "practice" || name === "lymph");
+    document.body.classList.toggle("hide-nav", name === "practice" || name === "lymph" || name === "circuit");
     window.scrollTo(0, 0);
   }
   function showTab(name){
@@ -1307,6 +1599,133 @@
       box.appendChild(b);
     });
   }
+
+  /* =========================================================
+     1·6·8 circuit
+     ========================================================= */
+  function modeObj(k){
+    const list = C().modes;
+    const key = k || state.circuitMode;
+    return list.find(m => m.k === key) || list[0];
+  }
+  function modeName(k){ return modeObj(k).name; }
+
+  function pairIndexOrder(order){
+    const o = order || state.pairOrder;
+    return o === "meridian" ? [0,1,4,5,2,3] : [0,1,2,3,4,5];
+  }
+  function pairList(){ return pairIndexOrder().map(i => C().pairs[i]).filter(Boolean); }
+
+  function renderModeChips(){
+    const box = $("mode-chips");
+    if(!box) return;
+    box.innerHTML = "";
+    C().modes.forEach(m=>{
+      const b = document.createElement("button");
+      b.className = "chip" + (state.circuitMode === m.k ? " on" : "");
+      b.textContent = m.name + " · " + m.sub;
+      b.onclick = ()=>{ state.circuitMode = m.k; renderModeChips(); saveSettings(); };
+      box.appendChild(b);
+    });
+    renderModeNote();
+  }
+
+  function renderModeNote(){
+    const m = modeObj();
+    const n1 = $("mode-note");
+    if(n1) n1.textContent = C().modeLine(m);
+    const n2 = $("lymph-mode-note");
+    if(n2){
+      n2.textContent = state.lang === "ko"
+        ? "오늘의 처방 · " + m.name + " — 8림프절은 " + m.lymph + ", " + m.sound + "."
+        : "Today's prescription · " + m.name + " — lymph stations: " + m.lymph + ", " + m.sound + ".";
+    }
+  }
+
+  function renderTurnChips(){
+    const box = $("turn-chips");
+    if(!box) return;
+    box.innerHTML = "";
+    C().turns.forEach(t=>{
+      const b = document.createElement("button");
+      b.className = "chip" + (state.pairTurn === t.v ? " on" : "");
+      b.textContent = t.l;
+      b.onclick = ()=>{ state.pairTurn = t.v; renderTurnChips(); saveSettings(); };
+      box.appendChild(b);
+    });
+  }
+
+  function renderOrderChips(){
+    const box = $("order-chips");
+    if(!box) return;
+    const o = C().orders;
+    box.innerHTML = "";
+    [["flow", o.flow], ["meridian", o.meridian]].forEach(pair=>{
+      const b = document.createElement("button");
+      b.className = "chip" + (state.pairOrder === pair[0] ? " on" : "");
+      b.textContent = pair[1].label;
+      b.onclick = ()=>{ state.pairOrder = pair[0]; renderOrderChips(); renderCircuitList(); saveSettings(); };
+      box.appendChild(b);
+    });
+    const note = $("order-note");
+    if(note) note.textContent = o[state.pairOrder].note;
+  }
+
+  function renderCircuitList(){
+    const box = $("circuit-list");
+    if(!box) return;
+    const c = C();
+    box.innerHTML = "";
+
+    const axisRow = document.createElement("button");
+    axisRow.className = "circuit-row";
+    axisRow.innerHTML =
+      '<span class="cdot" style="background:linear-gradient(135deg,#FFFFFF,#B8860B)"></span>' +
+      '<span class="cno">1</span>' +
+      '<span class="pbody"><span class="cname">' + c.axis.title + '</span>' +
+      '<span class="cmeta">' + c.axis.caption + '</span></span>' +
+      '<span class="lplay">▶</span>';
+    axisRow.onclick = ()=> startAxis();
+    box.appendChild(axisRow);
+
+    pairIndexOrder().forEach(i=>{
+      const p = c.pairs[i];
+      if(!p) return;
+      const row = document.createElement("button");
+      row.className = "circuit-row";
+      row.innerHTML =
+        '<span class="cdot" style="background:' + p.dot + '"></span>' +
+        '<span class="cno">' + p.no + '</span>' +
+        '<span class="pbody"><span class="cname">' + p.name + '</span>' +
+        '<span class="cmeta">' + p.color + ' · ' + p.pose +
+        '<span class="csound">' + p.sound + '</span></span></span>' +
+        '<span class="lplay">▶</span>';
+      row.onclick = ()=> startCircuitOne(i);
+      box.appendChild(row);
+    });
+  }
+
+  function openCircuit(){
+    renderModeChips();
+    renderTurnChips();
+    renderOrderChips();
+    renderCircuitList();
+    showScreen("circuit");
+  }
+
+  /* ---------- ebook companion modal ---------- */
+  function renderEbook(){
+    const c = C().ebook;
+    if(!$("ebook-title")) return;
+    $("ebook-title").textContent = c.title;
+    $("ebook-sub").textContent = c.sub;
+    $("ebook-body").innerHTML = c.items.map(it=>
+      '<div class="how-item"><span class="how-n">' + it.n + '</span>' + it.t + '</div>'
+    ).join("");
+    $("ebook-foot").textContent = c.foot;
+  }
+  function openEbook(){ renderEbook(); $("modal-ebook").classList.remove("hidden"); }
+  function closeEbook(){ $("modal-ebook").classList.add("hidden"); }
 
   function renderLymphList(){
     const box = $("lymph-list");
@@ -1364,11 +1783,58 @@
     kind:"", label:"", startedAt:0
   };
 
+  function pushAxisSegments(segs, c){
+    c.axis.steps.forEach((line, i)=>{
+      segs.push({
+        dur: 20, part: c.axis.kind + " " + (i + 1) + "/" + c.axis.steps.length,
+        caption: line, speech: line, resume: line, axis: true
+      });
+    });
+  }
+
+  function pushPairSegments(segs, c, p, turn, m){
+    if(!p) return;
+    const chunk = 80;
+    let left = Math.max(40, turn || 80);
+    let i = 0;
+    while(left > 0){
+      const d = Math.min(chunk, left);
+      const first = i === 0;
+      const line = first ? (p.script + " " + m.line) : p.hold;
+      segs.push({
+        dur: d,
+        part: p.no + " " + p.name,
+        caption: p.pose + " · " + p.sound,
+        speech: line, resume: line, pair: p.no
+      });
+      left -= d;
+      i++;
+    }
+  }
+
   function buildSegments(mode, opt){
     const c = C();
     const segs = [];
+    const m = modeObj(opt && opt.modeKey);
     const push = (dur, part, caption, speech, resume) =>
       segs.push({dur, part, caption, speech: speech || "", resume: resume || ""});
+
+    if(mode === "axis"){
+      pushAxisSegments(segs, c);
+    }
+
+    if(mode === "circuit"){
+      if(!opt || opt.withAxis !== false) pushAxisSegments(segs, c);
+      pairIndexOrder(opt && opt.order).forEach(i=>{
+        pushPairSegments(segs, c, c.pairs[i], opt && opt.turn, m);
+      });
+      push(20, c.circuitKind, c.circuitEnd, c.circuitEnd, c.circuitEnd);
+    }
+
+    if(mode === "circuitOne"){
+      const p = c.pairs[(opt && opt.pairIndex) || 0] || c.pairs[0];
+      pushPairSegments(segs, c, p, opt && opt.turn, m);
+    }
 
     if(mode === "jeong"){
       c.jeong.forEach((line, i)=>{
@@ -1413,6 +1879,11 @@
 
     if(mode === "full"){
       c.jeong.forEach((line, i) => push(15, (i + 1) + " / " + c.jeong.length, line, line, line));
+      pushAxisSegments(segs, c);
+      pairIndexOrder(state.pairOrder).forEach(i=>{
+        pushPairSegments(segs, c, c.pairs[i], state.pairTurn, m);
+      });
+      push(20, c.circuitKind, c.circuitEnd, c.circuitEnd, c.circuitEnd);
       push(30, c.lymphKind, c.lymphIntroCap, c.lymphIntro, "");
       c.areas.forEach((a, i)=>{
         const say = c.ord[i] + " " + a.name + ". " + a.guide;
@@ -1452,6 +1923,12 @@
     session.paused = false;
     session.mode = mode;
     session.areaIndex = (opt && opt.areaIndex) || 0;
+    session.pairIndex = (opt && opt.pairIndex) || 0;
+    session.order = (opt && opt.order) || state.pairOrder;
+    session.turn = (opt && opt.turn) || state.pairTurn;
+    session.circuitMode = (opt && opt.modeKey) || state.circuitMode;
+    session.pairs = [];
+    session.axisDone = false;
 
     const c = C();
     session.min = (opt && opt.min) || state.dantianMin;
@@ -1459,6 +1936,8 @@
     if(mode === "lymph" || mode === "lymphOne") session.kind = c.lymphKind;
     if(mode === "dantian") session.kind = c.danKind;
     if(mode === "full") session.kind = c.fullKind;
+    if(mode === "axis") session.kind = c.axis.kind;
+    if(mode === "circuit" || mode === "circuitOne") session.kind = c.circuitKind;
 
     $("p-kind").textContent = session.kind;
     refreshPlayLabel();
@@ -1479,6 +1958,12 @@
     }
     if(s.mode === "dantian") return c.danTitle;
     if(s.mode === "full") return c.fullLabel;
+    if(s.mode === "axis") return c.axis.title;
+    if(s.mode === "circuit") return c.circuitTitle + (s.pairs ? " " + s.pairs.length + "/6" : "");
+    if(s.mode === "circuitOne"){
+      const p = c.pairs[s.pairIndex] || c.pairs[0];
+      return p.no + " " + p.name;
+    }
     return "";
   }
 
@@ -1494,6 +1979,8 @@
     if(!s){ finish("done"); return; }
 
     session.segLeft = s.dur;
+    if(s.pair && session.pairs.indexOf(s.pair) < 0) session.pairs.push(s.pair);
+    if(s.axis) session.axisDone = true;
     $("p-part").textContent = s.part;
     $("p-caption").textContent = s.caption;
     updateRing();
@@ -1608,7 +2095,13 @@
       mode: session.mode,
       areaIndex: session.areaIndex || 0,
       min: session.min,
-      minutes: Math.max(1, Math.round(session.elapsed / 60))
+      minutes: Math.max(1, Math.round(session.elapsed / 60)),
+      pairIndex: session.pairIndex || 0,
+      order: session.order || state.pairOrder,
+      turn: session.turn || state.pairTurn,
+      circuitMode: (session.mode === "circuit" || session.mode === "circuitOne" || session.mode === "full") ? session.circuitMode : null,
+      pairs: (session.pairs || []).slice(),
+      axisDone: !!session.axisDone
     };
 
     if(reason === "done"){
@@ -1634,14 +2127,27 @@
     }
   }
 
-  let lastSession = {mode:"", minutes:0, areaIndex:0, min:5};
+  let lastSession = {mode:"", minutes:0, areaIndex:0, min:5, pairs:[], circuitMode:null, axisDone:false};
+
+  function sessionSummaryText(s){
+    if(!s || !s.mode) return "";
+    const ko = state.lang === "ko";
+    let txt = sessionLabelText(s);
+    if(s.circuitMode){
+      txt += " · " + modeName(s.circuitMode);
+      const n = (s.pairs || []).length;
+      if(n) txt += " · " + (ko ? n + "/6 쌍" : n + "/6 pairs");
+      if(s.axisDone) txt += ko ? " · 축 포함" : " · with axis";
+    }
+    if(s.minutes) txt += " · " + (ko ? s.minutes + "분 수행" : s.minutes + " min practiced");
+    return txt;
+  }
 
   function renderCompleteSummary(){
     if(!lastSession.mode) return;
     const el = $("complete-summary");
     if(!el) return;
-    el.textContent = sessionLabelText(lastSession) + " · " +
-      (state.lang === "ko" ? lastSession.minutes + "분 수행" : lastSession.minutes + " min practiced");
+    el.textContent = sessionSummaryText(lastSession);
   }
 
   function again(){
@@ -1651,13 +2157,19 @@
       lymph: ()=> startSession("lymph", {perArea: state.perArea}),
       lymphOne: ()=> startSession("lymphOne", {perArea: state.perArea, areaIndex: lastSession.areaIndex || 0}),
       dantian: ()=> startSession("dantian", {min: lastSession.min || state.dantianMin}),
-      full: ()=> startSession("full", {perArea: state.perArea, min: lastSession.min || state.dantianMin})
+      full: ()=> startSession("full", {perArea: state.perArea, min: lastSession.min || state.dantianMin}),
+      axis: ()=> startSession("axis", {}),
+      circuit: ()=> startSession("circuit", {turn: lastSession.turn || state.pairTurn, order: lastSession.order || state.pairOrder, modeKey: lastSession.circuitMode || state.circuitMode, withAxis: true}),
+      circuitOne: ()=> startSession("circuitOne", {pairIndex: lastSession.pairIndex || 0, turn: lastSession.turn || state.pairTurn, modeKey: lastSession.circuitMode || state.circuitMode})
     };
     (map[lastSession.mode] || (()=> showScreen("home")))();
   }
 
   function startJeong(){ startSession("jeong", {}); }
   function openLymph(){ showScreen("lymph"); }
+  function startAxis(){ startSession("axis", {}); }
+  function startCircuit(){ startSession("circuit", {turn: state.pairTurn, order: state.pairOrder, modeKey: state.circuitMode, withAxis: true}); }
+  function startCircuitOne(i){ startSession("circuitOne", {pairIndex: i, turn: state.pairTurn, modeKey: state.circuitMode}); }
   function startLymphAll(){ startSession("lymph", {perArea: state.perArea}); }
   function startLymphOne(i){ startSession("lymphOne", {perArea: state.perArea, areaIndex: i}); }
   function startDantian(){ startSession("dantian", {min: state.dantianMin}); }
@@ -1781,6 +2293,9 @@
       mode: lastSession.mode,
       areaIndex: lastSession.areaIndex || 0,
       min: lastSession.min || state.dantianMin,
+      circuitMode: lastSession.circuitMode || null,
+      pairs: (lastSession.pairs || []).slice(),
+      axisDone: !!lastSession.axisDone,
       label: sessionLabelText(lastSession),
       minutes: lastSession.minutes || 0,
       score: Number($("score").value),
@@ -1832,6 +2347,12 @@
         '<div class="d-top"><span>' + item.date + '</span><span class="d-score">' +
         (state.lang === "ko" ? "평온 " : "calm ") + item.score + '/10</span></div>' +
         '<div class="d-meta">' + meta + '</div>';
+      if(item.circuitMode){
+        let cl = "🔁 1·6·8 · " + modeName(item.circuitMode);
+        if((item.pairs || []).length) cl += " · " + item.pairs.join(" ") + " (" + item.pairs.length + "/6)";
+        if(item.axisDone) cl += state.lang === "ko" ? " · 축 포함" : " · with axis";
+        html += '<div class="d-meta">' + cl + '</div>';
+      }
       if(item.breathBefore !== null && item.breathBefore !== undefined || item.breathAfter !== null && item.breathAfter !== undefined){
         const bb = (item.breathBefore === null || item.breathBefore === undefined) ? "-" : item.breathBefore;
         const ba = (item.breathAfter === null || item.breathAfter === undefined) ? "-" : item.breathAfter;
@@ -1856,6 +2377,8 @@
       const body = (i.body || []).map(k => chipLabel(BODY, k)).join(", ");
       const mind = (i.mind || []).map(k => chipLabel(MIND, k)).join(", ");
       return "[" + i.date + "] " + diaryLabel(i) +
+        (i.circuitMode ? " · " + modeName(i.circuitMode) : "") +
+        (i.pairs && i.pairs.length ? " · " + i.pairs.join(" ") : "") +
         " · " + (state.lang === "ko" ? "평온 " : "calm ") + i.score + "/10" +
         (i.memo ? "\n" + i.memo : "");
     }).join("\n\n");
@@ -1930,6 +2453,12 @@
   window.showTab = showTab;
   window.startJeong = startJeong;
   window.openLymph = openLymph;
+  window.openCircuit = openCircuit;
+  window.startAxis = startAxis;
+  window.startCircuit = startCircuit;
+  window.startCircuitOne = startCircuitOne;
+  window.openEbook = openEbook;
+  window.closeEbook = closeEbook;
   window.startLymphAll = startLymphAll;
   window.startLymphOne = startLymphOne;
   window.startDantian = startDantian;
