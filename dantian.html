@@ -1797,21 +1797,22 @@
 
   function pushPairSegments(segs, c, p, turn, m){
     if(!p) return;
-    const chunk = 80;
-    let left = Math.max(40, turn || 80);
-    let i = 0;
-    while(left > 0){
-      const d = Math.min(chunk, left);
-      const first = i === 0;
-      const line = first ? (p.script + " " + m.line) : p.hold;
+    const total = Math.max(40, turn || 80);
+    const n = Math.max(1, Math.round(total / 90));
+    const base = Math.floor(total / n);
+    for(let i = 0; i < n; i++){
+      const dur = (i === n - 1) ? total - base * (n - 1) : base;
+      let line;
+      if(n === 1) line = p.script + " " + m.line;
+      else if(i === 0) line = p.script + " " + m.line;
+      else if(i === n - 1) line = p.hold + " " + p.bridge;
+      else line = p.hold;
       segs.push({
-        dur: d,
+        dur: dur,
         part: p.no + " " + p.name,
         caption: p.pose + " · " + p.sound,
         speech: line, resume: line, pair: p.no
       });
-      left -= d;
-      i++;
     }
   }
 
