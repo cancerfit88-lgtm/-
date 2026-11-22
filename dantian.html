@@ -341,10 +341,14 @@
         <button class="switch" id="sw-bgm" onclick="toggleSwitch('bgm')">켜짐</button>
       </div>
       <div class="toggle-row">
-        <span class="lab" id="t-beat">20회 세기 보조음</span>
+        <span class="lab" id="t-beat">박자 효과음</span>
         <button class="switch" id="sw-beat" onclick="toggleSwitch('beat')">켜짐</button>
       </div>
       <div class="hint" id="t-beathint" style="margin-top:0"></div>
+      <div class="field-label" id="t-tickkind">효과음 종류</div>
+      <div class="chips" id="tick-chips"></div>
+      <button class="btn btn-line" style="margin-top:10px;font-size:16px;padding:14px" onclick="previewTickSound()" id="t-tickpreview">▶ 효과음 미리 들어보기</button>
+      <div class="hint" id="t-tickhint">종류를 누르면 그 소리를 바로 세 번 들려 드립니다. 차 안에서는 목탁이 가장 또렷하고, 스침은 손이 피부를 지나가는 결에 맞춰집니다.</div>
       <div class="hint" id="t-hint">소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.</div>
     </div>
 
@@ -552,7 +556,7 @@
     "t-hero2":    {ko:"비우고 · 채우고 · 그리고 오늘의 몸 살피기.", en:"Empty · fill · then a quiet look at today\u2019s body."},
     "t-c1":       {ko:"비우고 · 림프절 순환", en:"Empty · lymphatic clearing"},
     "t-c1s":      {ko:"말단에서 중심으로, 여덟 부위를 차례로", en:"eight sites in order, from the edges toward the centre"},
-    "t-c1m":      {ko:"8부위 · 부위당 20회 이상 · 10분 / 15분", en:"8 sites · 20 strokes or more · 10 or 15 min"},
+    "t-c1m":      {ko:"8부위 · 기본 10분(20회)<br>여유 15분(30회)", en:"8 sites · basic 10 min (20)<br>easy 15 min (30)"},
     "t-c2":       {ko:"채우고 · 단전주선", en:"Fill · dantian breathing"},
     "t-c2s":      {ko:"들숨은 길게, 날숨은 짧고 부드럽게", en:"a long in-breath, a short and soft out-breath"},
     "t-c3":       {ko:"주관적 평가", en:"Subjective check-in"},
@@ -569,13 +573,16 @@
     "t-tone":     {ko:"목소리 톤", en:"Voice tone"},
     "t-bell":     {ko:"싱잉볼 종소리", en:"Singing bowl"},
     "t-bgm":      {ko:"잔잔한 배경음", en:"Soft background tone"},
-    "t-beat":     {ko:"20회 세기 보조음", en:"Stroke-count tone"},
-    "t-beathint": {ko:"스무 번을 세기 어려울 때 아주 여린 물방울 소리로 박자를 알려 드립니다. 목소리 안내 중에는 울리지 않습니다.", en:"A very soft water-drop tone marks each stroke when counting is hard. It stays quiet while the voice is speaking."},
+    "t-beat":     {ko:"박자 효과음", en:"Stroke tone"},
+    "t-beathint": {ko:"세는 횟수가 헷갈릴 때 아주 여린 소리로 박자를 알려 드립니다. 기본 10분은 20회, 여유 15분은 30회에 맞춰 울리고, 목소리 안내 중에는 울리지 않습니다.", en:"A very soft tone marks each stroke when counting is hard — 20 on the basic 10 min course, 30 on the easy 15 min. It stays quiet while the voice is speaking."},
+    "t-tickkind": {ko:"효과음 종류", en:"Tone kind"},
+    "t-tickpreview":{ko:"▶ 효과음 미리 들어보기", en:"▶ Preview this tone"},
+    "t-tickhint": {ko:"종류를 누르면 그 소리를 바로 세 번 들려 드립니다. 차 안에서는 목탁이 가장 또렷하고, 스침은 손이 피부를 지나가는 결에 맞춰집니다.", en:"Tapping a kind plays it three times at once. In a car the wooden moktak carries best; the soft brush follows the path of a palm over the skin."},
     "t-hint":     {ko:"소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.", en:"If you hear nothing, check the phone volume and your earphones. Inside an in-app browser (KakaoTalk, etc.), open this page in Chrome or Samsung Internet."},
     "t-foot":     {ko:"교육과 자기관리를 위한 안내이며, 진단과 치료를 대신하지 않습니다.", en:"Guidance for education and self-care; it does not replace diagnosis or treatment."},
     "t-lymphkind":{ko:"LYMPHATIC CLEARING", en:"LYMPHATIC CLEARING"},
     "t-lymph":    {ko:"비우고 · 림프절 순환", en:"Empty · lymphatic clearing"},
-    "t-lymphnote":{ko:"1 귀밑에서 8 오금까지, 한 부위 20회 이상. 말단에서 중심으로 가볍게 쓸어 비웁니다.", en:"From under the ear to behind the knee, twenty strokes or more at each site — always from the edge toward the centre."},
+    "t-lymphnote":{ko:"1 귀밑에서 8 오금까지, 기본은 한 부위 20회·여유 15분은 30회. 말단에서 중심으로 가볍게 쓸어 비웁니다.", en:"From under the ear to behind the knee — twenty strokes at each site, thirty on the easy 15 min course — always from the edge toward the centre."},
     "t-mapcap":   {ko:"1 귀밑에서 8 오금까지 · 말단에서 중심으로", en:"1 under the ear → 8 behind the knee · from the edges toward the centre"},
     "t-lymtime":  {ko:"수행 시간", en:"Session length"},
     "t-all8":     {ko:"여덟 부위 순서대로 시작", en:"Start all eight sites in order"},
@@ -626,6 +633,9 @@
       lymphIntro:"비우는 림프절 순환은 서서, 앉아서, 누워서 할 수 있습니다. 깊은 호흡으로 흩어진 마음을 모읍니다. 손바닥을 비벼서 따뜻한 온기를 전신으로 가득 충전합니다. 시작하겠습니다.",
       lymphIntroCap:"손바닥을 비벼 온기를 전신에 채웁니다.",
       lymphLast:"마지막 다섯 회, 조금 더 가볍게.",
+      lymphMore:"편안히 열 번 더 이어갑니다.",
+      lymphMore2:"숨을 고르며, 천천히 이어가세요.",
+      lymphMore3:"어깨의 힘을 내리고, 같은 자리로 계속 쓸어 내립니다.",
       lymphAreaClose:"어깨에서 손끝까지 힘을 풀고 팔을 내려놓으세요. 단전에 잠시 기운을 모읍니다.",
       flip:"반대를 시작합니다.",
       restKind:"단전 휴식",
@@ -641,7 +651,7 @@
       kDan:"채우기",
       kBridge:"이어서",
       countUnit:"회",
-      minutes:[{v:10,l:"10분"},{v:15,l:"15분"}],
+      minutes:[{v:10,l:"기본 10분",strokes:20},{v:15,l:"여유 15분 (30회)",strokes:30}],
       areas:[
         {say:"귀밑", title:"귀밑 림프절 순환", name:"귀밑 · 턱선", pos:"귀 뒤 턱 경계의 우묵한 곳", dir:"귀밑 → 턱선 → 목", hand:"손바닥",
          text:"귀 뒤 턱 경계의 우묵한 곳에 손바닥을 대고, 귀밑에서 턱선을 따라 뒷목 쪽으로 스무 번 이상 가볍게 쓸어 내립니다."},
@@ -658,7 +668,8 @@
          text:"오른손으로 왼쪽 손끝에서 팔 안쪽과 팔꿈치를 지나 겨드랑이 방향으로 스무 번 이상 가볍게 쓸어 줍니다.",
          text2:"이제 왼손으로 오른쪽 팔도 같은 방법으로 스무 번 이상 가볍게 쓸어 줍니다."},
         {say:"복부", title:"복부 림프절 순환", name:"복부", pos:"배꼽 주위", dir:"시계방향", hand:"두 손바닥 겹쳐",
-         text:"배꼽 아래에서 시작해 시계방향으로 배꼽 주위를 두 손바닥으로 스무 바퀴, 천천히 쓰다듬습니다."},
+         text:"배꼽 아래에서 시작해 시계방향으로 배꼽 주위를 두 손바닥으로 스무 바퀴, 천천히 쓰다듬습니다.",
+         meal:"식사 직후에는 배를 세게 누르지 말고 가볍게 스치듯, 식후 20~30분 뒤에 서서 하세요."},
         {say:"서혜부", title:"서혜부 림프절 순환", name:"서혜부", pos:"사타구니 주름", dir:"허벅지 안 → 서혜 → 아랫배", hand:"손날",
          text:"허벅지 안쪽에서 사타구니 주름을 지나 아랫배로, 양쪽을 손날로 각각 스무 번 이상 가볍게 쓸어 줍니다."},
         {say:"무릎 뒤 오금", title:"무릎 뒤 오금 림프절 순환", name:"무릎 뒤 오금(위중) · 종아리", pos:"무릎 뒤 오금 주름 한가운데", dir:"종아리 → 오금 → 허벅지 뒤", hand:"손바닥",
@@ -688,13 +699,14 @@
       evalTitle:"주관적 평가",
       evalNote:"오늘 몸과 마음에서 느낀 것을 그대로 남겨 둡니다.",
       minLabel:"분",
-      perAreaNote:(s,m)=> "부위당 " + s + " (끝에 12초 단전 휴식 포함) · 한 부위 20회 이상 · 여덟 부위 " + m + " · 도입과 마무리는 따로",
+      perAreaNote:(s,m,rest,strokes)=> "부위당 " + s + " (끝에 " + rest + "초 단전 휴식 포함) · 한 부위 " + strokes + "회 · 여덟 부위 " + m + " · 도입과 마무리는 따로",
       guideTitle:"안내와 요령",
       guide:[
         {n:"1 · 비우기, 림프절 순환", t:"1 귀밑 → 2 목 옆선 → 3 쇄골 위·아래 → 4 겨드랑이 → 5 팔 안쪽·팔꿈치 → 6 복부 → 7 서혜부 → 8 오금·종아리. 부위로 넘어갈 때마다 '첫 번째, 귀밑 림프절 순환입니다'처럼 이름을 먼저 말해 주고, 한쪽씩 하는 목·쇄골·겨드랑이·팔에서는 중간에 '반대를 시작합니다'로 반대편을 알려 줍니다. 부위 끝마다 '어깨에서 손끝까지 힘을 풀고 팔을 내려놓으세요' 하고 약 12초 배경음만 흔르는 단전 휴식이 있습니다. 언제나 말단에서 중심으로, 한 부위 스무 번 이상, 손은 피부에 닿을 듯 가볍게."},
         {n:"2 · 채우기, 단전주선", t:"배꼽 아래 세 손가락 자리, 하단전에 마음을 내려놓습니다. 들숨은 길고 깊게, 날숨은 짧고 부드럽게. 생각이 떠오르면 붙잡지도 밀어내지도 말고 다시 아랫배로 돌아옵니다."},
         {n:"3 · 주관적 평가", t:"수행을 마친 뒤, 또는 하루 중 아무 때나 1분 호흡을 재고 오늘의 몸 느낌을 골라 한 줄 메모와 함께 일기에 남깁니다. 여덟 부위를 모두 마친 뒤에 기록하면 림프절과 단전의 느낌이 가장 잘 드러납니다."},
-        {n:"주의할 점", t:"림프절은 절대 세게 누르지 않습니다. 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 말고 손바닥으로 덮기만 합니다. 식사 직후나 음주 후에는 피하고, 임신 중이거나 치료 중인 질환이 있으면 의료진과 상의해 주세요."},
+        {n:"주의할 점", t:"림프절은 절대 세게 누르지 않습니다. 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 말고 손바닥으로 덮기만 합니다. 식사 직후나 음주 후에는 피하고, 임신 중이거나 치료 중인 질환이 있으면 의료진과 상의해 주세요. 식후 순환을 위해 15분 코스를 쓰실 때는 복부를 세게 누르지 말고 아주 가볍게 스치듯 하시거나, 식후 20~30분 뒤에 서서·앉아서 하세요."}, 
+        {n:"코스에 대해", t:"‘기본 10분’은 부위당 약 75초·20회, 부위 끝 단전 휴식 12초입니다. ‘여유 15분’은 부위당 약 113초·30회로, 설명이 끝나면 ‘편안히 열 번 더 이어갑니다’ 안내가 한 번 더 나오고 부위 끝 휴식도 18초로 넉넉합니다. 식후 가벼운 순환을 원하실 때 15분을 고르세요."},
         {n:"기대 효과", t:"부기와 뭉침을 덜고, 호흡이 깊어지며 마음이 가라앉습니다. 매일 같은 시간에 하면 몸이 리듬을 기억합니다."}
       ],
       listen:"설명 듣기",
@@ -702,9 +714,10 @@
         clear:"림프절 비우기는 림프 순환을 도와 노폐물과 긴장을 비우는 운동입니다. 세게 누르지 말고 아기 피부를 만지듯 가볍게 쓸어 주세요. 언제나 말단에서 중심으로 — 발끝에서 오금으로, 손끝에서 팔꿈치와 겨드랑이로, 겨드랑이와 목에서 쇄골로 모읍니다.",
         fill:"하단전 채우기는 마음을 아랫배에 내려놓고 맑은 기운을 채우는 수행입니다. 들숨은 길고 깊게, 날숨은 짧고 부드럽게 내쉬어 주세요.",
         effect:"여덟 부위를 쓸어 비우고 하단전을 채우면, 부기와 뭉침이 덜해지고 호흡이 깊어지며 마음이 가라앉습니다. 잠이 깊어지는 데에도 도움이 됩니다.",
-        caution:"수행 중에는 몸에 힘을 주지 마시고, 머리가 더워지거나 답답하면 날숨을 길게 내쉬며 마음을 아랫배로 내려 주세요. 림프절은 절대 세게 누르지 마시고, 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 않고 손바닥으로 덮기만 하세요. 식사 직후나 음주 후에는 피하시기 바랍니다. 임신 중이거나 치료 중인 질환이 있으시면 의료진과 상의해 주세요."
+        caution:"수행 중에는 몸에 힘을 주지 마시고, 머리가 더워지거나 답답하면 날숨을 길게 내쉬며 마음을 아랫배로 내려 주세요. 림프절은 절대 세게 누르지 마시고, 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 않고 손바닥으로 덮기만 하세요. 식사 직후나 음주 후에는 피하시기 바랍니다. 식후에 하실 때는 복부를 아주 가볍게 스치듯 하시고, 식후 20~30분 뒤에 서서나 앉아서 하시기를 권합니다. 임신 중이거나 치료 중인 질환이 있으시면 의료진과 상의해 주세요."
       },
       rates:[{v:0.78,l:"천천히"},{v:0.88,l:"보통"},{v:0.98,l:"조금 빠르게"}],
+      tickNames:[{k:"drop",l:"물방울"},{k:"moktak",l:"목탁"},{k:"singing",l:"작은 싱잉볼"},{k:"brush",l:"부드러운 스침"}],
       pitches:[{v:0.86,l:"중저음"},{v:0.92,l:"차분함"},{v:1.0,l:"기본"}],
       defaultVoiceOpt:"기기 기본 목소리 (자동)",
       voiceNote:"이 기기에서 쓸 수 있는 목소리가 하나뿐이라, 그 목소리로 차분하게 읽어 드립니다.",
@@ -748,6 +761,9 @@
       lymphIntro:"The emptying lymph circuit can be done standing, sitting, or lying down. A deep breath gathers the scattered mind. Rub your palms together and fill the whole body with that warmth. Let us begin.",
       lymphIntroCap:"Rub your palms warm, and fill the body.",
       lymphLast:"The last five strokes — even lighter.",
+      lymphMore:"Ten more, comfortably.",
+      lymphMore2:"Breathe easy and keep going, slowly.",
+      lymphMore3:"Let the shoulder soften, and keep sweeping the same path.",
       lymphAreaClose:"Let the shoulders and hands go soft, lower your arms, and gather the qi in the lower dantian for a moment.",
       flip:"Now the other side.",
       restKind:"DANTIAN REST",
@@ -763,7 +779,7 @@
       kDan:"FILL",
       kBridge:"NEXT",
       countUnit:"",
-      minutes:[{v:10,l:"10 min"},{v:15,l:"15 min"}],
+      minutes:[{v:10,l:"Basic 10 min",strokes:20},{v:15,l:"Easy 15 min (30)",strokes:30}],
       areas:[
         {say:"under the ear", title:"Under-the-ear lymph nodes", name:"Under the ear · jawline", pos:"the hollow where the jaw meets the ear", dir:"under the ear → jawline → neck", hand:"palm",
          text:"Set your palm in the hollow where the jaw meets the ear, then sweep lightly from under the ear along the jawline toward the back of the neck, twenty times or more."},
@@ -780,7 +796,8 @@
          text:"With your right hand, sweep lightly from the fingertips of the left hand along the inner arm and over the elbow toward the armpit, twenty times or more.",
          text2:"Now with your left hand, the right arm the same way, twenty times or more."},
         {say:"of the abdomen", title:"Abdominal lymph nodes", name:"Abdomen", pos:"around the navel", dir:"clockwise", hand:"both palms together",
-         text:"Starting below the navel, circle the navel clockwise with both palms together, twenty slow rounds."},
+         text:"Starting below the navel, circle the navel clockwise with both palms together, twenty slow rounds.",
+         meal:"Just after a meal, never press the belly — only graze it very lightly, or wait twenty to thirty minutes and do it sitting or standing."},
         {say:"of the groin", title:"Groin lymph nodes", name:"Groin", pos:"the crease of the groin", dir:"inner thigh → groin → lower belly", hand:"edge of the hand",
          text:"From the inner thigh across the groin crease to the lower belly, sweep lightly with the edge of the hand, twenty times or more on each side."},
         {say:"behind the knee", title:"Lymph nodes behind the knee", name:"Behind the knee (Weizhong) · calf", pos:"the centre of the crease behind the knee", dir:"calf → behind the knee → back of the thigh", hand:"palm",
@@ -810,13 +827,14 @@
       evalTitle:"Subjective check-in",
       evalNote:"A quiet place to keep what today's body and mind felt like.",
       minLabel:" min",
-      perAreaNote:(s,m)=> s + " per site (with a twelve-second dantian rest at its end) · twenty strokes or more · eight sites " + m + " · intro and closing on top",
+      perAreaNote:(s,m,rest,strokes)=> s + " per site (with a dantian rest of " + rest + " seconds at its end) · " + strokes + " strokes a site · eight sites " + m + " · intro and closing on top",
       guideTitle:"Practice notes",
       guide:[
         {n:"1 · Emptying, the lymph nodes", t:"1 under the ear → 2 side of the neck → 3 above and below the collarbone → 4 armpit → 5 inner arm and elbow → 6 abdomen → 7 groin → 8 behind the knee and calf. Each site is announced by name first — 'First, the lymph nodes under the ear' — and at the ones done one side at a time (neck, collarbone, armpit, arm) 'Now the other side' marks the turn. Every site ends with 'lower your arms' and about twelve seconds of quiet dantian rest with only the background tone. Always from the edges toward the centre, twenty strokes or more at each site, the hand barely touching the skin."},
         {n:"2 · Filling, the lower dantian", t:"Three fingers below the navel, let the mind come to rest. In long and deep, out short and soft. When a thought appears, neither hold it nor push it away — simply return to the belly."},
         {n:"3 · Subjective check-in", t:"After practice, or at any point in the day: count a minute of breaths, choose how today's body felt, and keep it with a line in the journal. Right after all eight sites it reads the clearest."},
-        {n:"Cautions", t:"Never press a lymph node hard. Do not press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after eating or drinking, and if you are pregnant or under treatment for an illness, please speak with your doctor first."},
+        {n:"Cautions", t:"Never press a lymph node hard. Do not press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after eating or drinking, and if you are pregnant or under treatment for an illness, please speak with your doctor first. On the 15 min course after a meal, never press the abdomen — graze it very lightly, or do it sitting or standing twenty to thirty minutes after eating."},
+        {n:"About the two courses", t:"The basic 10 min course gives each site about seventy-five seconds and twenty strokes, with a twelve-second dantian rest at its end. The easy 15 min course gives each site about 113 seconds and thirty strokes, adds a second 'ten more, comfortably' line once the description ends, and rests eighteen seconds at each site. Choose 15 min for a gentle circuit after a meal."},
         {n:"What it may bring", t:"Less swelling and heaviness, a deeper breath and a quieter mind. Done at the same time each day, the body learns the rhythm."}
       ],
       listen:"Listen",
@@ -824,9 +842,10 @@
         clear:"Clearing the lymph nodes helps the lymph move and lets the body release what it has been holding. Never press hard — stroke as lightly as you would a baby's skin. Always from the edges toward the centre: toes to behind the knee, hands to the elbow and armpit, armpit and neck to the collarbone.",
         fill:"Dantian breathing settles the mind into the lower belly and fills it with clear energy. Breathe in long and deep, and out short and soft.",
         effect:"Emptying the eight sites and filling the lower belly eases swelling and heaviness, deepens the breath and quiets the mind. It also helps sleep come more deeply.",
-        caution:"Do not strain during practice. If your head grows hot or tight, breathe out long and bring your attention back to the belly. Never press the lymph nodes hard, and never press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after a meal or alcohol. If you are pregnant or under treatment for an illness, please speak with your doctor first."
+        caution:"Do not strain during practice. If your head grows hot or tight, breathe out long and bring your attention back to the belly. Never press the lymph nodes hard, and never press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after a meal or alcohol. After eating, graze the abdomen very lightly, or practise sitting or standing twenty to thirty minutes later. If you are pregnant or under treatment for an illness, please speak with your doctor first."
       },
       rates:[{v:0.78,l:"Slow"},{v:0.88,l:"Normal"},{v:0.98,l:"A little faster"}],
+      tickNames:[{k:"drop",l:"Water drop"},{k:"moktak",l:"Wooden moktak"},{k:"singing",l:"Small singing bowl"},{k:"brush",l:"Soft brush"}],
       pitches:[{v:0.86,l:"Lower"},{v:0.92,l:"Calm"},{v:1.0,l:"Natural"}],
       defaultVoiceOpt:"Device default (automatic)",
       voiceNote:"This device offers only one voice, so it will read to you calmly in that voice.",
@@ -890,6 +909,7 @@
   const state = {
     lang:"ko",
     voice:true, bell:true, bgm:true, beat:true, rate:0.88, pitch:0.86,
+    tickSound:"drop",
     voiceURI:{ko:"", en:""},
     danMin:5,
     lymphMin:10,
@@ -909,9 +929,10 @@
         }
       }
       if(s && typeof s === "object"){
-        ["lang","voice","bell","bgm","beat","rate","pitch","danMin","lymphMin"].forEach(k=>{
+        ["lang","voice","bell","bgm","beat","rate","pitch","danMin","lymphMin","tickSound"].forEach(k=>{
           if(s[k] !== undefined) state[k] = s[k];
         });
+        if(!C().tickNames.some(t=> t.k === state.tickSound)) state.tickSound = "drop";
         if(s.voiceURI && typeof s.voiceURI === "object"){
           state.voiceURI.ko = s.voiceURI.ko || "";
           state.voiceURI.en = s.voiceURI.en || "";
@@ -924,6 +945,7 @@
       localStorage.setItem(SETTINGS_KEY, JSON.stringify({
         lang:state.lang, voice:state.voice, bell:state.bell, bgm:state.bgm, beat:state.beat,
         rate:state.rate, pitch:state.pitch, danMin:state.danMin, lymphMin:state.lymphMin,
+        tickSound:state.tickSound,
         voiceURI:state.voiceURI
       }));
     }catch(e){}
@@ -972,6 +994,7 @@
     renderMinChips();
     renderRateChips();
     renderToneChips();
+    renderTickChips();
     renderLymphChips();
     renderLymphList();
     renderGuide();
@@ -1063,6 +1086,32 @@
     });
   }
 
+  /* the four stroke tones: the water drop of the first version, a warm wooden
+     moktak that carries over a car's road noise, a small singing bowl, and the
+     brush of a palm over the skin */
+  function renderTickChips(){
+    const box = $("tick-chips");
+    if(!box) return;
+    box.innerHTML = "";
+    C().tickNames.forEach(t=>{
+      const b = document.createElement("button");
+      b.className = "chip" + (state.tickSound === t.k ? " on" : "");
+      b.textContent = t.l;
+      b.setAttribute("aria-pressed", state.tickSound === t.k ? "true" : "false");
+      b.onclick = ()=>{ state.tickSound = t.k; renderTickChips(); saveSettings(); previewTickSound(t.k); };
+      box.appendChild(b);
+    });
+  }
+
+  /* three hits at once, so the four can be compared without starting a session */
+  function previewTickSound(kind){
+    unlockTTS(); ensureAudio();
+    if(!audioCtx) return;
+    const k = kind || state.tickSound;
+    const t0 = audioCtx.currentTime + 0.05;
+    [0, 1, 2].forEach(i=> playTick(k, i === 2, t0 + i * 0.55));
+  }
+
   /* The eight sites fill the chosen minutes on their own — seventy-five seconds
      each on the 10-minute course — and the intro and the closing are read on
      their own blocks outside it, so the circuit is never pushed late. */
@@ -1070,6 +1119,14 @@
     const c = C();
     const per = Math.max(30, Math.round((min * 60) / c.areas.length));
     return {per:per, circuit:per * c.areas.length};
+  }
+
+  /* The two courses: the basic ten minutes counts twenty strokes a site, the easy
+     fifteen counts thirty and gives the arms a longer dantian rest (18 s). */
+  function courseOf(min){
+    const c = C();
+    const m = c.minutes.find(x=> x.v === min) || c.minutes[0];
+    return {strokes:m.strokes || 20, rest:(min >= 15 ? 18 : 12)};
   }
 
   function renderLymphChips(){
@@ -1080,17 +1137,20 @@
       const b = document.createElement("button");
       b.className = "chip" + (state.lymphMin === m.v ? " on" : "");
       b.textContent = m.l;
-      b.onclick = ()=>{ state.lymphMin = m.v; renderLymphChips(); saveSettings(); };
+      b.onclick = ()=>{ state.lymphMin = m.v; renderLymphChips(); renderLymphList(); saveSettings(); };
       box.appendChild(b);
     });
     const pa = perAreaSeconds(state.lymphMin);
-    $("lym-note").textContent = C().perAreaNote(C().duration(pa.per), state.lymphMin + C().minLabel);
+    const co = courseOf(state.lymphMin);
+    $("lym-note").textContent = C().perAreaNote(C().duration(pa.per), state.lymphMin + C().minLabel, co.rest, co.strokes);
   }
 
   function renderLymphList(){
     const box = $("lymph-list");
     if(!box) return;
     const c = C();
+    const n = courseOf(state.lymphMin).strokes;
+    const cnt = n + (state.lang === "ko" ? (n === 20 ? "회 이상" : "회") : "+");
     box.innerHTML = "";
     c.areas.forEach((a, i)=>{
       const row = document.createElement("button");
@@ -1099,7 +1159,7 @@
         '<span class="abadge">' + (i + 1) + '</span>' +
         '<span class="abody">' +
           '<span class="atop"><span class="aname">' + a.name + '</span>' +
-          '<span class="acount">20' + (state.lang === "ko" ? "회 이상" : "+") + '</span></span>' +
+          '<span class="acount">' + cnt + '</span></span>' +
           '<span class="ahow">' + a.pos + '</span>' +
           '<span class="adir">' + a.dir + ' · ' + a.hand + '</span>' +
         '</span>' +
@@ -1403,23 +1463,110 @@
       });
     }
   }
-  /* a very soft water drop, so the twenty strokes can be counted with eyes closed */
-  function playBeat(n){
-    if(!audioCtx) return;
-    try{
-      const t = audioCtx.currentTime + 0.02;
-      const accent = (n % 5 === 0);
+  /* a very soft water drop, so the twenty or thirty strokes can be counted with
+     eyes closed. previewTickSound plays it three times to compare the four. */
+  let noiseBuf = null;
+  function noiseBuffer(){
+    if(noiseBuf || !audioCtx) return noiseBuf;
+    const size = Math.floor(audioCtx.sampleRate * 0.5);
+    noiseBuf = audioCtx.createBuffer(1, size, audioCtx.sampleRate);
+    const d = noiseBuf.getChannelData(0);
+    for(let i = 0; i < size; i++) d[i] = Math.random() * 2 - 1;
+    return noiseBuf;
+  }
+
+  /* 1. the clear water drop of the first version */
+  function toneDrop(t, accent){
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(accent ? 784 : 659, t);
+    osc.frequency.exponentialRampToValueAtTime(accent ? 523 : 440, t + 0.18);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(accent ? 0.055 : 0.034, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
+    osc.connect(g); g.connect(audioCtx.destination);
+    osc.start(t); osc.stop(t + 0.38);
+  }
+
+  /* 2. a warm, clear wooden moktak: a short struck body with a wooden resonance
+     around 500 Hz and a small click, so it still reads over road noise */
+  function toneMoktak(t, accent){
+    const osc = audioCtx.createOscillator();
+    const bp = audioCtx.createBiquadFilter();
+    const g = audioCtx.createGain();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(accent ? 300 : 252, t);
+    osc.frequency.exponentialRampToValueAtTime(accent ? 165 : 140, t + 0.085);
+    bp.type = "bandpass"; bp.frequency.setValueAtTime(accent ? 640 : 520, t); bp.Q.value = 3.4;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(accent ? 0.30 : 0.20, t + 0.006);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.26);
+    osc.connect(bp); bp.connect(g); g.connect(audioCtx.destination);
+    osc.start(t); osc.stop(t + 0.3);
+
+    const nz = audioCtx.createBufferSource();
+    nz.buffer = noiseBuffer();
+    const hp = audioCtx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 1800;
+    const ng = audioCtx.createGain();
+    ng.gain.setValueAtTime(0.0001, t);
+    ng.gain.linearRampToValueAtTime(accent ? 0.05 : 0.035, t + 0.003);
+    ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+    nz.connect(hp); hp.connect(ng); ng.connect(audioCtx.destination);
+    nz.start(t); nz.stop(t + 0.06);
+  }
+
+  /* 3. a small singing bowl: a bell-like strike whose partials are not whole
+     multiples, so the metal rings softly rather than tuning to a note */
+  function toneSinging(t, accent){
+    const base = accent ? 700 : 620;
+    [[1, 0.075, 1.3], [2.76, 0.038, 0.95], [5.4, 0.019, 0.7], [8.93, 0.009, 0.45]].forEach(p=>{
       const osc = audioCtx.createOscillator();
       const g = audioCtx.createGain();
       osc.type = "sine";
-      osc.frequency.setValueAtTime(accent ? 784 : 659, t);
-      osc.frequency.exponentialRampToValueAtTime(accent ? 523 : 440, t + 0.18);
+      osc.frequency.setValueAtTime(base * p[0], t);
+      osc.frequency.linearRampToValueAtTime(base * p[0] * 0.998, t + p[2]);
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.linearRampToValueAtTime(accent ? 0.055 : 0.034, t + 0.012);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
+      g.gain.linearRampToValueAtTime(accent ? p[1] * 1.25 : p[1], t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + p[2]);
       osc.connect(g); g.connect(audioCtx.destination);
-      osc.start(t); osc.stop(t + 0.38);
+      osc.start(t); osc.stop(t + p[2] + 0.05);
+    });
+  }
+
+  /* 4. the palm passing over the skin: band-passed noise swept upward as the hand
+     moves, with a soft edge at both ends so it never sounds like a hiss */
+  function toneBrush(t, accent){
+    const nz = audioCtx.createBufferSource();
+    nz.buffer = noiseBuffer();
+    const bp = audioCtx.createBiquadFilter();
+    bp.type = "bandpass"; bp.Q.value = 1.1;
+    bp.frequency.setValueAtTime(700, t);
+    bp.frequency.exponentialRampToValueAtTime(accent ? 2400 : 1900, t + 0.16);
+    bp.frequency.exponentialRampToValueAtTime(820, t + 0.36);
+    const g = audioCtx.createGain();
+    const peak = accent ? 0.075 : 0.052;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(peak, t + 0.09);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
+    nz.connect(bp); bp.connect(g); g.connect(audioCtx.destination);
+    nz.start(t); nz.stop(t + 0.45);
+  }
+
+  function playTick(kind, accent, when){
+    if(!audioCtx) return;
+    const t = when || (audioCtx.currentTime + 0.02);
+    try{
+      if(kind === "moktak") toneMoktak(t, accent);
+      else if(kind === "singing") toneSinging(t, accent);
+      else if(kind === "brush") toneBrush(t, accent);
+      else toneDrop(t, accent);
     }catch(e){}
+  }
+
+  function playBeat(n){
+    if(!audioCtx) return;
+    try{ playTick(state.tickSound, (n % 5 === 0), audioCtx.currentTime + 0.02); }catch(e){}
   }
   function startBGM(){
     if(!state.bgm || bgmNodes) return;
@@ -1496,7 +1643,7 @@
 
   /* a site, spoken the way a car passenger listens: its name first, then the
      side being stroked, the turning cue for the mirrored sites, and the rest */
-  const REST_SEC = 12;        /* quiet at the end of every site, arms down */
+  const REST_SEC = 12;        /* quiet at the end of every site, arms down (10 min) */
   const SINGLE_SEC = 150;     /* one site on its own: two and a half minutes */
 
   function areaLead(c, i, a){
@@ -1508,23 +1655,27 @@
 
   /* Builds one site's lines and the moment its rest begins. The turn comes at the
      middle of the site, or as soon as the first side has been described — but
-     never so late that the second side or the rest has to be cut. */
-  function lymphAreaSpeech(a, per, c, idx){
+     never so late that the second side or the rest has to be cut.
+     co: {rest, strokes, fillers} — the easy fifteen-minute course rests longer
+     and drops two gentle lines into the quiet after the description. */
+  function lymphAreaSpeech(a, per, c, idx, co){
+    const restSec = (co && co.rest) || REST_SEC;
     const G = SPEECH_GAP_MS / 1000;
     const r1 = n => Math.round(n * 10) / 10;
     const lead = areaLead(c, idx, a);
     const leadDur = estSpeech(lead);
-    const aDur = estSpeech(a.text);
+    const aText = a.text + (a.meal ? " " + a.meal : "");
+    const aDur = estSpeech(aText);
     const bDur = a.text2 ? estSpeech(a.text2) : 0;
     const flipDur = a.text2 ? estSpeech(c.flip) : 0;
     const lastDur = estSpeech(c.lymphLast);
     const restCueDur = estSpeech(c.lymphAreaClose);
-    /* the rest cue ends exactly REST_SEC before the site's clock runs out */
-    const restAt = Math.max(per * 0.55, per - REST_SEC - restCueDur);
+    /* the rest cue ends exactly restSec before the site's clock runs out */
+    const restAt = Math.max(per * 0.55, per - restSec - restCueDur);
 
     const sp = [{at:0, text:lead}];
     const aAt = leadDur + G;
-    sp.push({at:r1(aAt), text:a.text});
+    sp.push({at:r1(aAt), text:aText});
 
     let cursor = aAt + aDur + G;
     if(a.text2){
@@ -1537,14 +1688,44 @@
     }
     /* the last-five cue sits late in the strokes, never on top of the rest */
     const lastAt = Math.max(cursor, restAt - G - lastDur);
-    if(lastAt + lastDur <= restAt - G) sp.push({at:r1(lastAt), text:c.lymphLast});
+    const lastFits = lastAt + lastDur <= restAt - 0.4;
+    if(lastFits) sp.push({at:r1(lastAt), text:c.lymphLast});
+
+    /* the easy fifteen-minute course explains itself once, then leaves a long
+       stretch of quiet — and on the two-sided sites the turn comes late, so the
+       widest silence sits in the middle. Each gentle line goes into the middle
+       of the widest empty stretch left, so the voice never leaves more than
+       about half a minute between lines. */
+    const fillers = (co && co.fillers) || [];
+    if(fillers.length){
+      const limitEnd = restAt - G;
+      const dmax = Math.max.apply(null, fillers.map(estSpeech));
+      const spots = [];
+      const busy = sp.map(u=>({s:u.at, e:u.at + estSpeech(u.text)}));
+      for(let f = 0; f < fillers.length; f++){
+        const sorted = busy.slice().sort((a,b)=> a.s - b.s);
+        let best = null;
+        for(let i = 0; i < sorted.length; i++){
+          const gs = sorted[i].e + 0.9;
+          const ge = (i + 1 < sorted.length ? sorted[i + 1].s : limitEnd) - 0.3;
+          if(ge - gs >= dmax + 1 && (!best || (ge - gs) > best.w)) best = {s:gs, w:ge - gs};
+        }
+        if(!best) break;
+        const at = best.s + (best.w - dmax) / 2;
+        spots.push(at);
+        busy.push({s:at, e:at + dmax});
+      }
+      /* the lines keep their own order however the gaps fell */
+      spots.sort((a,b)=> a - b);
+      spots.forEach((at, i)=>{ sp.push({at:r1(at), text:fillers[i]}); });
+    }
 
     /* nothing is ever talked over: if a line ran long, the rest waits for it,
        and the site takes the extra time rather than being cut short */
     let endOfSpeech = 0;
     sp.forEach(u=>{ endOfSpeech = Math.max(endOfSpeech, u.at + estSpeech(u.text)); });
     const rest = Math.max(restAt, endOfSpeech + 0.8);
-    const dur = Math.max(per, rest + restCueDur + REST_SEC);
+    const dur = Math.max(per, rest + restCueDur + restSec);
     sp.push({at:r1(rest), text:c.lymphAreaClose});
     return {speech:sp, restAt:r1(rest), dur:Math.round(dur)};
   }
@@ -1553,10 +1734,14 @@
     const c = C();
     const steps = [];
     const pa = perAreaSeconds(min);
+    const co = courseOf(min);
     const single = !(onlyIndex === undefined || onlyIndex === null);
     const list = single ? [onlyIndex] : c.areas.map((a,i)=>i);
     const introText = single ? c.singleIntro : c.lymphIntro;
     const closeText = single ? c.singleClose : c.lymphClose;
+    /* the easy fifteen-minute course has real quiet after each description, so
+       two gentle lines go in; the basic ten-minute one needs none */
+    const fillers = co.strokes > 20 ? [c.lymphMore, c.lymphMore2, c.lymphMore3] : [];
 
     const introDur = Math.max(12, Math.round(estSpeech(introText) + 3));
     const closeDur = Math.max(12, Math.round(estSpeech(closeText) + 4));
@@ -1564,15 +1749,15 @@
     const areaDur = single ? Math.max(90, SINGLE_SEC - introDur - closeDur) : pa.per;
 
     /* the intro is read on its own block before the circuit's clock starts, so
-       the seventy-five second sites keep their time */
+       the site's own time is never eaten */
     steps.push(stepOf({dur:introDur, kicker:c.kLymph, site:c.lymphSite, count:0,
       caption:single ? c.singleIntroCap : c.lymphIntroCap, speech:[{at:0, text:introText}], group:"intro"}));
     list.forEach((i, k)=>{
       const a = c.areas[i];
-      const laid = lymphAreaSpeech(a, areaDur, c, i);
+      const laid = lymphAreaSpeech(a, areaDur, c, i, {rest:co.rest, strokes:co.strokes, fillers:fillers});
       steps.push(stepOf({dur:Math.max(areaDur, laid.dur), restAt:laid.restAt,
         kicker:(k+1)+" / "+list.length, site:(i+1)+". "+a.title,
-        count:20, caption:a.pos + " · " + a.dir, speech:laid.speech, group:"area"+i, area:i}));
+        count:co.strokes, caption:a.pos + " · " + a.dir, speech:laid.speech, group:"area"+i, area:i}));
     });
     steps.push(stepOf({dur:closeDur, kicker:c.closeSite, site:single ? c.closeSite : c.closeAll,
       count:0, caption:closeText, speech:[{at:0, text:closeText}], group:"close"}));
@@ -2257,6 +2442,7 @@
   window.toggleSwitch = toggleSwitch;
   window.onVoiceChange = onVoiceChange;
   window.previewVoice = previewVoice;
+  window.previewTickSound = previewTickSound;
   window.playNote = playNote;
   window.toggleAcc = toggleAcc;
   window.setBreathMode = setBreathMode;
