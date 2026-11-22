@@ -271,15 +271,15 @@
     </div>
 
     <div class="pcards">
-      <button class="pcard" onclick="openLymph()">
+      <div class="pcard" role="button" tabindex="0" onclick="openLymph()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLymph();}">
         <span class="pnum">1</span>
         <span class="pbody">
           <span class="ptitle" id="t-c1">비우고 · 림프절 순환</span>
           <span class="psub" id="t-c1s">말단에서 중심으로, 여덟 부위를 차례로</span>
-          <span class="pmeta" id="t-c1m">8부위 · 부위당 20회 이상 · 10분 / 15분</span>
         </span>
         <span class="pgo">▶</span>
-      </button>
+        <div class="chips pchips" onclick="event.stopPropagation()" id="lym-min-chips"></div>
+      </div>
 
       <div class="pcard" role="button" tabindex="0" onclick="startDantian()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startDantian();}">
         <span class="pnum">2</span>
@@ -341,14 +341,10 @@
         <button class="switch" id="sw-bgm" onclick="toggleSwitch('bgm')">켜짐</button>
       </div>
       <div class="toggle-row">
-        <span class="lab" id="t-beat">박자 효과음</span>
+        <span class="lab" id="t-beat">20·30회 세기 보조음</span>
         <button class="switch" id="sw-beat" onclick="toggleSwitch('beat')">켜짐</button>
       </div>
       <div class="hint" id="t-beathint" style="margin-top:0"></div>
-      <div class="field-label" id="t-tickkind">효과음 종류</div>
-      <div class="chips" id="tick-chips"></div>
-      <button class="btn btn-line" style="margin-top:10px;font-size:16px;padding:14px" onclick="previewTickSound()" id="t-tickpreview">▶ 효과음 미리 들어보기</button>
-      <div class="hint" id="t-tickhint">종류를 누르면 그 소리를 바로 세 번 들려 드립니다. 차 안에서는 목탁이 가장 또렷하고, 스침은 손이 피부를 지나가는 결에 맞춰집니다.</div>
       <div class="hint" id="t-hint">소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.</div>
     </div>
 
@@ -556,7 +552,6 @@
     "t-hero2":    {ko:"비우고 · 채우고 · 그리고 오늘의 몸 살피기.", en:"Empty · fill · then a quiet look at today\u2019s body."},
     "t-c1":       {ko:"비우고 · 림프절 순환", en:"Empty · lymphatic clearing"},
     "t-c1s":      {ko:"말단에서 중심으로, 여덟 부위를 차례로", en:"eight sites in order, from the edges toward the centre"},
-    "t-c1m":      {ko:"8부위 · 기본 10분(20회)<br>여유 15분(30회)", en:"8 sites · basic 10 min (20)<br>easy 15 min (30)"},
     "t-c2":       {ko:"채우고 · 단전주선", en:"Fill · dantian breathing"},
     "t-c2s":      {ko:"들숨은 길게, 날숨은 짧고 부드럽게", en:"a long in-breath, a short and soft out-breath"},
     "t-c3":       {ko:"주관적 평가", en:"Subjective check-in"},
@@ -573,11 +568,8 @@
     "t-tone":     {ko:"목소리 톤", en:"Voice tone"},
     "t-bell":     {ko:"싱잉볼 종소리", en:"Singing bowl"},
     "t-bgm":      {ko:"잔잔한 배경음", en:"Soft background tone"},
-    "t-beat":     {ko:"박자 효과음", en:"Stroke tone"},
-    "t-beathint": {ko:"세는 횟수가 헷갈릴 때 아주 여린 소리로 박자를 알려 드립니다. 기본 10분은 20회, 여유 15분은 30회에 맞춰 울리고, 목소리 안내 중에는 울리지 않습니다.", en:"A very soft tone marks each stroke when counting is hard — 20 on the basic 10 min course, 30 on the easy 15 min. It stays quiet while the voice is speaking."},
-    "t-tickkind": {ko:"효과음 종류", en:"Tone kind"},
-    "t-tickpreview":{ko:"▶ 효과음 미리 들어보기", en:"▶ Preview this tone"},
-    "t-tickhint": {ko:"종류를 누르면 그 소리를 바로 세 번 들려 드립니다. 차 안에서는 목탁이 가장 또렷하고, 스침은 손이 피부를 지나가는 결에 맞춰집니다.", en:"Tapping a kind plays it three times at once. In a car the wooden moktak carries best; the soft brush follows the path of a palm over the skin."},
+    "t-beat":     {ko:"20·30회 세기 보조음", en:"Stroke-count tone"},
+    "t-beathint": {ko:"스무 번이나 서른 번을 세기 어려울 때 아주 여린 물방울 소리로 박자를 알려 드립니다. 목소리 안내 중에는 울리지 않습니다.", en:"A very soft water-drop tone marks each stroke when counting is hard — twenty on the basic course, thirty on the easy one. It stays quiet while the voice is speaking."},
     "t-hint":     {ko:"소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.", en:"If you hear nothing, check the phone volume and your earphones. Inside an in-app browser (KakaoTalk, etc.), open this page in Chrome or Samsung Internet."},
     "t-foot":     {ko:"교육과 자기관리를 위한 안내이며, 진단과 치료를 대신하지 않습니다.", en:"Guidance for education and self-care; it does not replace diagnosis or treatment."},
     "t-lymphkind":{ko:"LYMPHATIC CLEARING", en:"LYMPHATIC CLEARING"},
@@ -651,7 +643,7 @@
       kDan:"채우기",
       kBridge:"이어서",
       countUnit:"회",
-      minutes:[{v:10,l:"기본 10분",strokes:20},{v:15,l:"여유 15분 (30회)",strokes:30}],
+      minutes:[{v:10,l:"기본 10분 (20회)",strokes:20},{v:15,l:"여유 15분 (30회)",strokes:30}],
       areas:[
         {say:"귀밑", title:"귀밑 림프절 순환", name:"귀밑 · 턱선", pos:"귀 뒤 턱 경계의 우묵한 곳", dir:"귀밑 → 턱선 → 목", hand:"손바닥",
          text:"귀 뒤 턱 경계의 우묵한 곳에 손바닥을 대고, 귀밑에서 턱선을 따라 뒷목 쪽으로 스무 번 이상 가볍게 쓸어 내립니다."},
@@ -717,7 +709,6 @@
         caution:"수행 중에는 몸에 힘을 주지 마시고, 머리가 더워지거나 답답하면 날숨을 길게 내쉬며 마음을 아랫배로 내려 주세요. 림프절은 절대 세게 누르지 마시고, 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 않고 손바닥으로 덮기만 하세요. 식사 직후나 음주 후에는 피하시기 바랍니다. 식후에 하실 때는 복부를 아주 가볍게 스치듯 하시고, 식후 20~30분 뒤에 서서나 앉아서 하시기를 권합니다. 임신 중이거나 치료 중인 질환이 있으시면 의료진과 상의해 주세요."
       },
       rates:[{v:0.78,l:"천천히"},{v:0.88,l:"보통"},{v:0.98,l:"조금 빠르게"}],
-      tickNames:[{k:"drop",l:"물방울"},{k:"moktak",l:"목탁"},{k:"singing",l:"작은 싱잉볼"},{k:"brush",l:"부드러운 스침"}],
       pitches:[{v:0.86,l:"중저음"},{v:0.92,l:"차분함"},{v:1.0,l:"기본"}],
       defaultVoiceOpt:"기기 기본 목소리 (자동)",
       voiceNote:"이 기기에서 쓸 수 있는 목소리가 하나뿐이라, 그 목소리로 차분하게 읽어 드립니다.",
@@ -779,7 +770,7 @@
       kDan:"FILL",
       kBridge:"NEXT",
       countUnit:"",
-      minutes:[{v:10,l:"Basic 10 min",strokes:20},{v:15,l:"Easy 15 min (30)",strokes:30}],
+      minutes:[{v:10,l:"Basic 10 min (20)",strokes:20},{v:15,l:"Easy 15 min (30)",strokes:30}],
       areas:[
         {say:"under the ear", title:"Under-the-ear lymph nodes", name:"Under the ear · jawline", pos:"the hollow where the jaw meets the ear", dir:"under the ear → jawline → neck", hand:"palm",
          text:"Set your palm in the hollow where the jaw meets the ear, then sweep lightly from under the ear along the jawline toward the back of the neck, twenty times or more."},
@@ -845,7 +836,6 @@
         caution:"Do not strain during practice. If your head grows hot or tight, breathe out long and bring your attention back to the belly. Never press the lymph nodes hard, and never press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after a meal or alcohol. After eating, graze the abdomen very lightly, or practise sitting or standing twenty to thirty minutes later. If you are pregnant or under treatment for an illness, please speak with your doctor first."
       },
       rates:[{v:0.78,l:"Slow"},{v:0.88,l:"Normal"},{v:0.98,l:"A little faster"}],
-      tickNames:[{k:"drop",l:"Water drop"},{k:"moktak",l:"Wooden moktak"},{k:"singing",l:"Small singing bowl"},{k:"brush",l:"Soft brush"}],
       pitches:[{v:0.86,l:"Lower"},{v:0.92,l:"Calm"},{v:1.0,l:"Natural"}],
       defaultVoiceOpt:"Device default (automatic)",
       voiceNote:"This device offers only one voice, so it will read to you calmly in that voice.",
@@ -909,7 +899,6 @@
   const state = {
     lang:"ko",
     voice:true, bell:true, bgm:true, beat:true, rate:0.88, pitch:0.86,
-    tickSound:"drop",
     voiceURI:{ko:"", en:""},
     danMin:5,
     lymphMin:10,
@@ -929,10 +918,9 @@
         }
       }
       if(s && typeof s === "object"){
-        ["lang","voice","bell","bgm","beat","rate","pitch","danMin","lymphMin","tickSound"].forEach(k=>{
+        ["lang","voice","bell","bgm","beat","rate","pitch","danMin","lymphMin"].forEach(k=>{
           if(s[k] !== undefined) state[k] = s[k];
         });
-        if(!C().tickNames.some(t=> t.k === state.tickSound)) state.tickSound = "drop";
         if(s.voiceURI && typeof s.voiceURI === "object"){
           state.voiceURI.ko = s.voiceURI.ko || "";
           state.voiceURI.en = s.voiceURI.en || "";
@@ -945,7 +933,6 @@
       localStorage.setItem(SETTINGS_KEY, JSON.stringify({
         lang:state.lang, voice:state.voice, bell:state.bell, bgm:state.bgm, beat:state.beat,
         rate:state.rate, pitch:state.pitch, danMin:state.danMin, lymphMin:state.lymphMin,
-        tickSound:state.tickSound,
         voiceURI:state.voiceURI
       }));
     }catch(e){}
@@ -994,7 +981,6 @@
     renderMinChips();
     renderRateChips();
     renderToneChips();
-    renderTickChips();
     renderLymphChips();
     renderLymphList();
     renderGuide();
@@ -1086,32 +1072,6 @@
     });
   }
 
-  /* the four stroke tones: the water drop of the first version, a warm wooden
-     moktak that carries over a car's road noise, a small singing bowl, and the
-     brush of a palm over the skin */
-  function renderTickChips(){
-    const box = $("tick-chips");
-    if(!box) return;
-    box.innerHTML = "";
-    C().tickNames.forEach(t=>{
-      const b = document.createElement("button");
-      b.className = "chip" + (state.tickSound === t.k ? " on" : "");
-      b.textContent = t.l;
-      b.setAttribute("aria-pressed", state.tickSound === t.k ? "true" : "false");
-      b.onclick = ()=>{ state.tickSound = t.k; renderTickChips(); saveSettings(); previewTickSound(t.k); };
-      box.appendChild(b);
-    });
-  }
-
-  /* three hits at once, so the four can be compared without starting a session */
-  function previewTickSound(kind){
-    unlockTTS(); ensureAudio();
-    if(!audioCtx) return;
-    const k = kind || state.tickSound;
-    const t0 = audioCtx.currentTime + 0.05;
-    [0, 1, 2].forEach(i=> playTick(k, i === 2, t0 + i * 0.78));
-  }
-
   /* The eight sites fill the chosen minutes on their own — seventy-five seconds
      each on the 10-minute course — and the intro and the closing are read on
      their own blocks outside it, so the circuit is never pushed late. */
@@ -1130,19 +1090,27 @@
   }
 
   function renderLymphChips(){
-    const box = $("lym-chips");
-    if(!box) return;
-    box.innerHTML = "";
-    C().minutes.forEach(m=>{
-      const b = document.createElement("button");
-      b.className = "chip" + (state.lymphMin === m.v ? " on" : "");
-      b.textContent = m.l;
-      b.onclick = ()=>{ state.lymphMin = m.v; renderLymphChips(); renderLymphList(); saveSettings(); };
-      box.appendChild(b);
+    const boxes = ["lym-min-chips", "lym-chips"].map(id=> $(id)).filter(Boolean);
+    if(!boxes.length) return;
+    boxes.forEach(box=>{
+      box.innerHTML = "";
+      C().minutes.forEach(m=>{
+        const b = document.createElement("button");
+        b.className = "chip" + (state.lymphMin === m.v ? " on" : "");
+        b.textContent = m.l;
+        b.onclick = (e)=>{
+          if(e && e.stopPropagation) e.stopPropagation();
+          state.lymphMin = m.v; renderLymphChips(); renderLymphList(); saveSettings();
+        };
+        box.appendChild(b);
+      });
     });
-    const pa = perAreaSeconds(state.lymphMin);
-    const co = courseOf(state.lymphMin);
-    $("lym-note").textContent = C().perAreaNote(C().duration(pa.per), state.lymphMin + C().minLabel, co.rest, co.strokes);
+    const note = $("lym-note");
+    if(note){
+      const pa = perAreaSeconds(state.lymphMin);
+      const co = courseOf(state.lymphMin);
+      note.textContent = C().perAreaNote(C().duration(pa.per), state.lymphMin + C().minLabel, co.rest, co.strokes);
+    }
   }
 
   function renderLymphList(){
@@ -1464,109 +1432,23 @@
     }
   }
   /* a very soft water drop, so the twenty or thirty strokes can be counted with
-     eyes closed. previewTickSound plays it three times to compare the four. */
-  let noiseBuf = null;
-  function noiseBuffer(){
-    if(noiseBuf || !audioCtx) return noiseBuf;
-    const size = Math.floor(audioCtx.sampleRate * 0.5);
-    noiseBuf = audioCtx.createBuffer(1, size, audioCtx.sampleRate);
-    const d = noiseBuf.getChannelData(0);
-    for(let i = 0; i < size; i++) d[i] = Math.random() * 2 - 1;
-    return noiseBuf;
-  }
-
-  /* 1. the clear water drop of the first version */
-  function toneDrop(t, accent){
-    const osc = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(accent ? 784 : 659, t);
-    osc.frequency.exponentialRampToValueAtTime(accent ? 523 : 440, t + 0.18);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.linearRampToValueAtTime(accent ? 0.055 : 0.034, t + 0.012);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
-    osc.connect(g); g.connect(audioCtx.destination);
-    osc.start(t); osc.stop(t + 0.38);
-  }
-
-  /* 2. a warm, clear wooden moktak: a short struck body with a wooden resonance
-     around 500 Hz and a small click, so it still reads over road noise */
-  function toneMoktak(t, accent){
-    const osc = audioCtx.createOscillator();
-    const bp = audioCtx.createBiquadFilter();
-    const g = audioCtx.createGain();
-    osc.type = "triangle";
-    osc.frequency.setValueAtTime(accent ? 300 : 252, t);
-    osc.frequency.exponentialRampToValueAtTime(accent ? 165 : 140, t + 0.085);
-    bp.type = "bandpass"; bp.frequency.setValueAtTime(accent ? 640 : 520, t); bp.Q.value = 3.4;
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.linearRampToValueAtTime(accent ? 0.30 : 0.20, t + 0.006);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.26);
-    osc.connect(bp); bp.connect(g); g.connect(audioCtx.destination);
-    osc.start(t); osc.stop(t + 0.3);
-
-    const nz = audioCtx.createBufferSource();
-    nz.buffer = noiseBuffer();
-    const hp = audioCtx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 1800;
-    const ng = audioCtx.createGain();
-    ng.gain.setValueAtTime(0.0001, t);
-    ng.gain.linearRampToValueAtTime(accent ? 0.05 : 0.035, t + 0.003);
-    ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
-    nz.connect(hp); hp.connect(ng); ng.connect(audioCtx.destination);
-    nz.start(t); nz.stop(t + 0.06);
-  }
-
-  /* 3. a small singing bowl: a bell-like strike whose partials are not whole
-     multiples, so the metal rings softly rather than tuning to a note */
-  function toneSinging(t, accent){
-    const base = accent ? 700 : 620;
-    [[1, 0.075, 1.3], [2.76, 0.038, 0.95], [5.4, 0.019, 0.7], [8.93, 0.009, 0.45]].forEach(p=>{
+     eyes closed. It steps aside while the voice speaks and stays quiet in the rest. */
+  function playBeat(n){
+    if(!audioCtx) return;
+    try{
+      const t = audioCtx.currentTime + 0.02;
+      const accent = (n % 5 === 0);
       const osc = audioCtx.createOscillator();
       const g = audioCtx.createGain();
       osc.type = "sine";
-      osc.frequency.setValueAtTime(base * p[0], t);
-      osc.frequency.linearRampToValueAtTime(base * p[0] * 0.998, t + p[2]);
+      osc.frequency.setValueAtTime(accent ? 784 : 659, t);
+      osc.frequency.exponentialRampToValueAtTime(accent ? 523 : 440, t + 0.18);
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.linearRampToValueAtTime(accent ? p[1] * 1.25 : p[1], t + 0.008);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + p[2]);
+      g.gain.linearRampToValueAtTime(accent ? 0.055 : 0.034, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
       osc.connect(g); g.connect(audioCtx.destination);
-      osc.start(t); osc.stop(t + p[2] + 0.05);
-    });
-  }
-
-  /* 4. the palm passing over the skin: band-passed noise swept upward as the hand
-     moves, with a soft edge at both ends so it never sounds like a hiss */
-  function toneBrush(t, accent){
-    const nz = audioCtx.createBufferSource();
-    nz.buffer = noiseBuffer();
-    const bp = audioCtx.createBiquadFilter();
-    bp.type = "bandpass"; bp.Q.value = 1.1;
-    bp.frequency.setValueAtTime(700, t);
-    bp.frequency.exponentialRampToValueAtTime(accent ? 2400 : 1900, t + 0.16);
-    bp.frequency.exponentialRampToValueAtTime(820, t + 0.36);
-    const g = audioCtx.createGain();
-    const peak = accent ? 0.075 : 0.052;
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.linearRampToValueAtTime(peak, t + 0.09);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
-    nz.connect(bp); bp.connect(g); g.connect(audioCtx.destination);
-    nz.start(t); nz.stop(t + 0.45);
-  }
-
-  function playTick(kind, accent, when){
-    if(!audioCtx) return;
-    const t = when || (audioCtx.currentTime + 0.02);
-    try{
-      if(kind === "moktak") toneMoktak(t, accent);
-      else if(kind === "singing") toneSinging(t, accent);
-      else if(kind === "brush") toneBrush(t, accent);
-      else toneDrop(t, accent);
+      osc.start(t); osc.stop(t + 0.38);
     }catch(e){}
-  }
-
-  function playBeat(n){
-    if(!audioCtx) return;
-    try{ playTick(state.tickSound, (n % 5 === 0), audioCtx.currentTime + 0.02); }catch(e){}
   }
   function startBGM(){
     if(!state.bgm || bgmNodes) return;
@@ -2442,7 +2324,6 @@
   window.toggleSwitch = toggleSwitch;
   window.onVoiceChange = onVoiceChange;
   window.previewVoice = previewVoice;
-  window.previewTickSound = previewTickSound;
   window.playNote = playNote;
   window.toggleAcc = toggleAcc;
   window.setBreathMode = setBreathMode;
