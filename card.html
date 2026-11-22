@@ -55,15 +55,13 @@
     position:relative;
     border-radius:26px;
     border:1px solid var(--line);
-    background:linear-gradient(168deg,#FFFFFF 0%,#FFFAF0 42%,#F6EBD6 100%);
+    background:
+      linear-gradient(90deg,#1E3B31 0%,#2F5747 46%,#B08A3E 100%) top left / 100% 6px no-repeat,
+      linear-gradient(168deg,#FFFFFF 0%,#FFFAF0 42%,#F6EBD6 100%);
     box-shadow:0 10px 26px rgba(150,120,70,.10);
     padding:26px 20px 22px;
     text-align:center;
     overflow:hidden;
-  }
-  .hero:before{
-    content:"";position:absolute;left:0;right:0;top:0;height:5px;
-    background:linear-gradient(90deg,var(--green) 0%,var(--green-2) 45%,var(--gold) 100%);
   }
   .avatar{
     width:112px;height:112px;margin:2px auto 0;border-radius:50%;
@@ -123,7 +121,8 @@
     border:1px solid #16302A;
     font-size:17px;
   }
-  .btn-main .ico{font-size:19px;line-height:1}
+  .btn-main .ico{font-size:19px;line-height:1;flex:0 0 auto}
+  .keep{white-space:nowrap}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
   .btn-line{
     background:#FFFFFF;border:1.5px solid #DCCFB6;color:var(--green);
@@ -201,9 +200,15 @@
     margin:16px 0 6px;text-align:center;font-size:12.5px;color:#A2988A;letter-spacing:.02em
   }
 
-  @media (max-width:360px){
-    .name{font-size:32px}
+  @media (max-width:380px){
+    .name{font-size:33px}
     .role{font-size:16px}
+    .btn-main{font-size:16px}
+  }
+  @media (max-width:340px){
+    .name{font-size:31px}
+    .btn-main{font-size:15.5px}
+    .chip{font-size:14px;padding:7px 11px}
   }
   @media print{
     body{background:#fff}
@@ -232,7 +237,7 @@
 
   <nav class="cta" aria-label="주요 연락">
     <a class="btn btn-main" href="https://htmlpreview.github.io/?https://github.com/cancerfit88-lgtm/-/blob/main/dantian.html" target="_blank" rel="noopener">
-      <span class="ico">🌿</span> 내 손안의 림프·선(禪) 리셋 앱 열기
+      <span class="ico">🌿</span> 내 손안의 림프·선(禪) <span class="keep">리셋 앱 열기</span>
     </a>
     <div class="row2">
       <a class="btn btn-line" href="tel:01085545597">📞 전화 문의</a>
@@ -259,15 +264,15 @@
     <div class="card-head"><span class="bar"></span><h2>주요 경력</h2><span class="en">Career</span></div>
     <ul class="exp">
       <li>
-        <p class="t"><span class="past">전</span>서울 송도병원 홀론 암 면역센터</p>
+        <p class="t"><span class="past">전</span> 서울 송도병원 홀론 암 면역센터</p>
         <p class="d">심신증진 컨설턴트</p>
       </li>
       <li>
-        <p class="t"><span class="past">전</span>SD HOLON 힐링피트니스</p>
+        <p class="t"><span class="past">전</span> SD HOLON 힐링피트니스</p>
         <p class="d">총괄 센터장</p>
       </li>
       <li>
-        <p class="t"><span class="past">전</span>동의과학대학교</p>
+        <p class="t"><span class="past">전</span> 동의과학대학교</p>
         <p class="d">겸임교수</p>
       </li>
       <li>
