@@ -1109,7 +1109,7 @@
     if(!audioCtx) return;
     const k = kind || state.tickSound;
     const t0 = audioCtx.currentTime + 0.05;
-    [0, 1, 2].forEach(i=> playTick(k, i === 2, t0 + i * 0.55));
+    [0, 1, 2].forEach(i=> playTick(k, i === 2, t0 + i * 0.78));
   }
 
   /* The eight sites fill the chosen minutes on their own — seventy-five seconds
