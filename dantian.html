@@ -340,6 +340,11 @@
         <span class="lab" id="t-bgm">잔잔한 배경음</span>
         <button class="switch" id="sw-bgm" onclick="toggleSwitch('bgm')">켜짐</button>
       </div>
+      <div class="toggle-row">
+        <span class="lab" id="t-beat">20회 세기 보조음</span>
+        <button class="switch" id="sw-beat" onclick="toggleSwitch('beat')">켜짐</button>
+      </div>
+      <div class="hint" id="t-beathint" style="margin-top:0"></div>
       <div class="hint" id="t-hint">소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.</div>
     </div>
 
@@ -564,6 +569,8 @@
     "t-tone":     {ko:"목소리 톤", en:"Voice tone"},
     "t-bell":     {ko:"싱잉볼 종소리", en:"Singing bowl"},
     "t-bgm":      {ko:"잔잔한 배경음", en:"Soft background tone"},
+    "t-beat":     {ko:"20회 세기 보조음", en:"Stroke-count tone"},
+    "t-beathint": {ko:"스무 번을 세기 어려울 때 아주 여린 물방울 소리로 박자를 알려 드립니다. 목소리 안내 중에는 울리지 않습니다.", en:"A very soft water-drop tone marks each stroke when counting is hard. It stays quiet while the voice is speaking."},
     "t-hint":     {ko:"소리가 안 들리면 휴대폰 음량과 이어폰을 확인해 주세요. 카카오톡 안의 브라우저라면 크롬이나 삼성 인터넷으로 열어 주세요.", en:"If you hear nothing, check the phone volume and your earphones. Inside an in-app browser (KakaoTalk, etc.), open this page in Chrome or Samsung Internet."},
     "t-foot":     {ko:"교육과 자기관리를 위한 안내이며, 진단과 치료를 대신하지 않습니다.", en:"Guidance for education and self-care; it does not replace diagnosis or treatment."},
     "t-lymphkind":{ko:"LYMPHATIC CLEARING", en:"LYMPHATIC CLEARING"},
@@ -618,13 +625,16 @@
       lymphSub:"1 귀밑에서 8 오금까지, 한 부위 20회 이상. 말단에서 중심으로 가볍게 쓸어 비웁니다.",
       lymphIntro:"비우는 림프절 순환은 서서, 앉아서, 누워서 할 수 있습니다. 깊은 호흡으로 흩어진 마음을 모읍니다. 손바닥을 비벼서 따뜻한 온기를 전신으로 가득 충전합니다. 시작하겠습니다.",
       lymphIntroCap:"손바닥을 비벼 온기를 전신에 채웁니다.",
-      lymphMid:"힘을 빼고, 피부 위를 바람이 지나가듯.",
       lymphLast:"마지막 다섯 회, 조금 더 가볍게.",
-      lymphAreaClose:"어깨에서 손끝까지 힘을 풀고 단전에 잠시 기운을 모읍니다.",
+      lymphAreaClose:"어깨에서 손끝까지 힘을 풀고 팔을 내려놓으세요. 단전에 잠시 기운을 모읍니다.",
+      flip:"반대를 시작합니다.",
+      restKind:"단전 휴식",
+      restCap:"팔을 내리고 숨 고르기",
+      ordinals:["첫 번째","두 번째","세 번째","네 번째","다섯 번째","여섯 번째","일곱 번째","여덟 번째"],
       lymphClose:"이상 여덟 부위 림프절 순환으로 전신의 노폐물을 비우고, 맑은 기운으로 채웠습니다. 행복합니다. 감사합니다. 감사합니다. 이것으로 비우는 림프운동을 마치겠습니다.",
       singleIntro:"한 부위만 골라 하겠습니다. 아기 피부를 만지듯 가볍게, 스무 번 이상. 시작합니다.",
       singleIntroCap:"한 부위만, 가볍게 스무 번 이상.",
-      singleClose:"한 부위를 마쳤습니다. 손을 배꼽 아래에 잠시 두고 숨을 고르세요.",
+      singleClose:"한 부위를 가볍게 마쳤습니다. 수고하셨습니다.",
       closeSite:"마무리",
       closeAll:"여덟 부위 완료",
       kLymph:"비우고",
@@ -633,22 +643,26 @@
       countUnit:"회",
       minutes:[{v:10,l:"10분"},{v:15,l:"15분"}],
       areas:[
-        {ring:"귀밑 · 턱선", name:"귀밑 · 턱선", pos:"귀 뒤 턱 경계의 우묵한 곳", dir:"귀밑 → 턱선 → 목", hand:"손바닥",
-         text:"첫 번째, 귀밑과 턱선. 귀 뒤 턱 경계의 우묵한 곳에 손바닥을 대고, 귀밑에서 턱선을 따라 뒷목 쪽으로 스무 번 이상 가볍게 쓸어 내립니다."},
-        {ring:"목 옆선", name:"목 옆선", pos:"귀밑에서 쇄골 위까지", dir:"위에서 아래로", hand:"손바닥",
-         text:"두 번째, 목 옆선. 오른손바닥으로 왼쪽 귀밑에서 목 옆선을 따라 쇄골 위까지 스무 번 이상 가볍게 쓸어 줍니다. 목 앞 기관은 누르지 않습니다. 왼손바닥으로 오른쪽 귀밑에서 목 옆선을 따라 쇄골 위까지 스무 번 이상 가볍게 쓸어 줍니다."},
-        {ring:"쇄골 위 · 아래", name:"쇄골 위 · 아래", pos:"쇄골 위 우묵한 곳과 쇄골 아래", dir:"목 아래(쇄골 안쪽) 방향으로", hand:"손끝(지문 부위)",
-         text:"세 번째, 쇄골 위와 아래. 오른손으로 왼쪽 쇄골 위 우묵한 곳에서 바깥에서 목 아래 방향으로 스무 번 이상 가볍게 쓸어 주고, 이어 쇄골 아래를 손끝으로 스무 번 이상 가볍게 쓸어 줍니다. 왼손으로 오른쪽 쇄골 위 우묵한 곳에서 바깥에서 목 아래 방향으로 스무 번 이상 가볍게 쓸어 주고, 이어 쇄골 아래를 손끝으로 스무 번 이상 가볍게 쓸어 줍니다."},
-        {ring:"겨드랑이", name:"겨드랑이", pos:"겨드랑이 안쪽 우묵한 곳", dir:"겨드랑이 → 쇄골", hand:"손바닥 전체",
-         text:"네 번째, 겨드랑이. 왼손을 머리 위로 살짝 올리고, 오른손바닥으로 왼쪽 겨드랑이를 감싸듯 덮어 안쪽에서 바깥쪽으로 스무 번 이상 가볍게 쓸어 줍니다. 반대쪽도 같은 방법으로 스무 번 이상 쓸어 줍니다. 수술한 쪽은 누르지 말고 손바닥으로 가볍게 덮어 주기만 합니다."},
-        {ring:"팔꿈치(척택)", name:"팔 안쪽 · 팔꿈치(척택)", pos:"팔 안쪽 주름과 팔꿈치 안쪽", dir:"손끝 → 팔꿈치 → 겨드랑이", hand:"손바닥 전체",
-         text:"다섯 번째, 팔과 팔꿈치. 오른손으로 왼쪽 손끝에서 팔 안쪽과 팔꿈치를 지나 겨드랑이 방향으로 스무 번 이상 가볍게 쓸어 줍니다. 왼손으로 오른쪽 손끝에서 팔 안쪽과 팔꿈치를 지나 겨드랑이 방향으로 스무 번 이상 가볍게 쓸어 줍니다."},
-        {ring:"복부", name:"복부", pos:"배꼽 주위", dir:"시계방향", hand:"두 손바닥 겹쳐",
-         text:"여섯 번째, 복부. 배꼽 아래에서 시작해 시계방향으로 배꼽 주위를 두 손바닥으로 스무 바퀴, 천천히 쓰다듬습니다."},
-        {ring:"서혜부", name:"서혜부", pos:"사타구니 주름", dir:"허벅지 안 → 서혜 → 아랫배", hand:"손날",
-         text:"일곱 번째, 서혜부. 허벅지 안쪽에서 사타구니 주름을 지나 아랫배로, 양쪽을 손날로 각각 스무 번 이상 가볍게 쓸어 줍니다."},
-        {ring:"오금(위중)", name:"무릎 뒤 오금(위중) · 종아리", pos:"무릎 뒤 오금 주름 한가운데", dir:"종아리 → 오금 → 허벅지 뒤", hand:"손바닥",
-         text:"여덟 번째, 무릎 뒤 오금과 종아리. 종아리에서 오금 한가운데를 지나 허벅지 뒤로, 양쪽을 손바닥으로 각각 스무 번 이상 쓸어 줍니다."}
+        {say:"귀밑", title:"귀밑 림프절 순환", name:"귀밑 · 턱선", pos:"귀 뒤 턱 경계의 우묵한 곳", dir:"귀밑 → 턱선 → 목", hand:"손바닥",
+         text:"귀 뒤 턱 경계의 우묵한 곳에 손바닥을 대고, 귀밑에서 턱선을 따라 뒷목 쪽으로 스무 번 이상 가볍게 쓸어 내립니다."},
+        {say:"목", title:"목 림프절 순환", name:"목 옆선", pos:"귀밑에서 쇄골 위까지", dir:"위에서 아래로", hand:"손바닥",
+         text:"오른손바닥으로 왼쪽 귀밑에서 목 옆선을 따라 쇄골 위까지 스무 번 이상 가볍게 쓸어 줍니다. 목 앞 기관은 누르지 않습니다.",
+         text2:"이제 왼손으로 오른쪽 목 옆선도 같은 방법으로 스무 번 이상 가볍게 쓸어 줍니다."},
+        {say:"쇄골", title:"쇄골 림프절 순환", name:"쇄골 위 · 아래", pos:"쇄골 위 우묵한 곳과 쇄골 아래", dir:"목 아래(쇄골 안쪽) 방향으로", hand:"손끝(지문 부위)",
+         text:"오른손으로 왼쪽 쇄골 위 우묵한 곳에서 목 아래 방향으로 스무 번 이상 가볍게 쓸어 주고, 이어 쇄골 아래도 손끝으로 스무 번 이상 쓸어 줍니다.",
+         text2:"이제 왼손으로 오른쪽 쇄골도 같은 방법으로 스무 번 이상 가볍게 쓸어 줍니다."},
+        {say:"겨드랑이", title:"겨드랑이 림프절 순환", name:"겨드랑이", pos:"겨드랑이 안쪽 우묵한 곳", dir:"겨드랑이 → 쇄골", hand:"손바닥 전체",
+         text:"왼손을 머리 위로 올리고, 오른손바닥으로 왼쪽 겨드랑이를 감싸듯 덮어 안쪽에서 바깥쪽으로 스무 번 이상 가볍게 쓸어 줍니다.",
+         text2:"이제 오른손을 올려 오른쪽 겨드랑이도 스무 번 이상 가볍게 쓸어 줍니다. 수술한 쪽은 누르지 말고 덮기만 합니다."},
+        {say:"팔", title:"팔 림프절 순환", name:"팔 안쪽 · 팔꿈치(척택)", pos:"팔 안쪽 주름과 팔꿈치 안쪽", dir:"손끝 → 팔꿈치 → 겨드랑이", hand:"손바닥 전체",
+         text:"오른손으로 왼쪽 손끝에서 팔 안쪽과 팔꿈치를 지나 겨드랑이 방향으로 스무 번 이상 가볍게 쓸어 줍니다.",
+         text2:"이제 왼손으로 오른쪽 팔도 같은 방법으로 스무 번 이상 가볍게 쓸어 줍니다."},
+        {say:"복부", title:"복부 림프절 순환", name:"복부", pos:"배꼽 주위", dir:"시계방향", hand:"두 손바닥 겹쳐",
+         text:"배꼽 아래에서 시작해 시계방향으로 배꼽 주위를 두 손바닥으로 스무 바퀴, 천천히 쓰다듬습니다."},
+        {say:"서혜부", title:"서혜부 림프절 순환", name:"서혜부", pos:"사타구니 주름", dir:"허벅지 안 → 서혜 → 아랫배", hand:"손날",
+         text:"허벅지 안쪽에서 사타구니 주름을 지나 아랫배로, 양쪽을 손날로 각각 스무 번 이상 가볍게 쓸어 줍니다."},
+        {say:"무릎 뒤 오금", title:"무릎 뒤 오금 림프절 순환", name:"무릎 뒤 오금(위중) · 종아리", pos:"무릎 뒤 오금 주름 한가운데", dir:"종아리 → 오금 → 허벅지 뒤", hand:"손바닥",
+         text:"종아리에서 오금 한가운데를 지나 허벅지 뒤로, 양쪽을 손바닥으로 각각 스무 번 이상 쓸어 줍니다."}
       ],
       danTitle:"채우고 · 단전주선",
       danKind:"단전주선",
@@ -674,10 +688,10 @@
       evalTitle:"주관적 평가",
       evalNote:"오늘 몸과 마음에서 느낀 것을 그대로 남겨 둡니다.",
       minLabel:"분",
-      perAreaNote:(s,m)=> "부위당 " + s + " · 한 부위 20회 이상 · 여덟 부위 " + m + " · 도입과 마무리는 따로",
+      perAreaNote:(s,m)=> "부위당 " + s + " (끝에 12초 단전 휴식 포함) · 한 부위 20회 이상 · 여덟 부위 " + m + " · 도입과 마무리는 따로",
       guideTitle:"안내와 요령",
       guide:[
-        {n:"1 · 비우기, 림프절 순환", t:"1 귀밑 → 2 목 옆선 → 3 쇄골 위·아래 → 4 겨드랑이 → 5 팔 안쪽·팔꿈치 → 6 복부 → 7 서혜부 → 8 오금·종아리. 언제나 말단에서 중심으로, 한 부위 스무 번 이상. 손은 피부에 닿을 듯 가볍게. 부위 끝마다 어깨에서 손끝까지 힘을 풀고 단전에 잠시 기운을 모읍니다."},
+        {n:"1 · 비우기, 림프절 순환", t:"1 귀밑 → 2 목 옆선 → 3 쇄골 위·아래 → 4 겨드랑이 → 5 팔 안쪽·팔꿈치 → 6 복부 → 7 서혜부 → 8 오금·종아리. 부위로 넘어갈 때마다 '첫 번째, 귀밑 림프절 순환입니다'처럼 이름을 먼저 말해 주고, 한쪽씩 하는 목·쇄골·겨드랑이·팔에서는 중간에 '반대를 시작합니다'로 반대편을 알려 줍니다. 부위 끝마다 '어깨에서 손끝까지 힘을 풀고 팔을 내려놓으세요' 하고 약 12초 배경음만 흔르는 단전 휴식이 있습니다. 언제나 말단에서 중심으로, 한 부위 스무 번 이상, 손은 피부에 닿을 듯 가볍게."},
         {n:"2 · 채우기, 단전주선", t:"배꼽 아래 세 손가락 자리, 하단전에 마음을 내려놓습니다. 들숨은 길고 깊게, 날숨은 짧고 부드럽게. 생각이 떠오르면 붙잡지도 밀어내지도 말고 다시 아랫배로 돌아옵니다."},
         {n:"3 · 주관적 평가", t:"수행을 마친 뒤, 또는 하루 중 아무 때나 1분 호흡을 재고 오늘의 몸 느낌을 골라 한 줄 메모와 함께 일기에 남깁니다. 여덟 부위를 모두 마친 뒤에 기록하면 림프절과 단전의 느낌이 가장 잘 드러납니다."},
         {n:"주의할 점", t:"림프절은 절대 세게 누르지 않습니다. 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 말고 손바닥으로 덮기만 합니다. 식사 직후나 음주 후에는 피하고, 임신 중이거나 치료 중인 질환이 있으면 의료진과 상의해 주세요."},
@@ -733,13 +747,16 @@
       lymphSub:"From under the ear to behind the knee, twenty strokes or more at each site — always from the edge toward the centre.",
       lymphIntro:"The emptying lymph circuit can be done standing, sitting, or lying down. A deep breath gathers the scattered mind. Rub your palms together and fill the whole body with that warmth. Let us begin.",
       lymphIntroCap:"Rub your palms warm, and fill the body.",
-      lymphMid:"Let the hand go weightless, as light as a breeze across the skin.",
       lymphLast:"The last five strokes — even lighter.",
-      lymphAreaClose:"Let the shoulders and hands go soft, and gather the qi in the lower dantian for a moment.",
+      lymphAreaClose:"Let the shoulders and hands go soft, lower your arms, and gather the qi in the lower dantian for a moment.",
+      flip:"Now the other side.",
+      restKind:"DANTIAN REST",
+      restCap:"Arms down, let the breath settle",
+      ordinals:["First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth"],
       lymphClose:"With these eight sites the lymph circuit has emptied the whole body's waste and filled it with clear qi. I am happy. Thank you. Thank you. This closes the emptying lymph practice.",
       singleIntro:"Just one site. Light as a baby\u2019s skin, twenty strokes or more. Let us begin.",
       singleIntroCap:"Just one site, twenty strokes or more.",
-      singleClose:"That site is done. Rest the hands below the navel for a moment, and let the breath settle.",
+      singleClose:"One site, lightly done. Well done.",
       closeSite:"Closing",
       closeAll:"All eight done",
       kLymph:"EMPTY",
@@ -748,22 +765,26 @@
       countUnit:"",
       minutes:[{v:10,l:"10 min"},{v:15,l:"15 min"}],
       areas:[
-        {ring:"Under the ear", name:"Under the ear · jawline", pos:"the hollow where the jaw meets the ear", dir:"under the ear → jawline → neck", hand:"palm",
-         text:"First, under the ear and the jawline. Set your palm in the hollow where the jaw meets the ear, then sweep lightly from under the ear along the jawline toward the back of the neck, twenty times or more."},
-        {ring:"Side of the neck", name:"Side of the neck", pos:"from under the ear to above the collarbone", dir:"from top to bottom", hand:"palm",
-         text:"Second, the side of the neck. With your right palm, sweep lightly from under the left ear down the side of the neck to above the collarbone, twenty times or more. Never press the windpipe. Then with your left palm, sweep the right side the same way, twenty times or more."},
-        {ring:"Collarbone", name:"Above · below the collarbone", pos:"the hollow above the collarbone, and below it", dir:"toward the base of the neck", hand:"fingertips (pads)",
-         text:"Third, above and below the collarbone. With your right hand, sweep lightly from the hollow above the left collarbone outward toward the base of the neck, twenty times or more, then sweep below the collarbone with your fingertips twenty times or more. Then do the same on the right with your left hand."},
-        {ring:"Armpit", name:"Armpit", pos:"the hollow inside the armpit", dir:"armpit → collarbone", hand:"whole palm",
-         text:"Fourth, the armpit. Raise your left arm lightly overhead, and with your right palm cover the left armpit as if enclosing it, sweeping lightly from the inside outward twenty times or more. Do the same on the other side, twenty times or more. On the operated side, do not press — simply cover it lightly with the palm."},
-        {ring:"Elbow (Chize)", name:"Inner arm · elbow (Chize)", pos:"the inner crease of the arm and elbow", dir:"hand → elbow → armpit", hand:"whole palm",
-         text:"Fifth, the arm and the elbow. With your right hand, sweep lightly from the fingertips of the left hand along the inner arm and over the elbow toward the armpit, twenty times or more. Then with your left hand, the same on the right, twenty times or more."},
-        {ring:"Abdomen", name:"Abdomen", pos:"around the navel", dir:"clockwise", hand:"both palms together",
-         text:"Sixth, the abdomen. Starting below the navel, circle the navel clockwise with both palms together, twenty slow rounds."},
-        {ring:"Groin", name:"Groin", pos:"the crease of the groin", dir:"inner thigh → groin → lower belly", hand:"edge of the hand",
-         text:"Seventh, the groin. From the inner thigh across the groin crease to the lower belly, sweep lightly with the edge of the hand, twenty times or more on each side."},
-        {ring:"Behind the knee", name:"Behind the knee (Weizhong) · calf", pos:"the centre of the crease behind the knee", dir:"calf → behind the knee → back of the thigh", hand:"palm",
-         text:"Eighth, behind the knee and the calf. From the calf over the centre of the back of the knee to the back of the thigh, sweep with the palm, twenty times or more on each side."}
+        {say:"under the ear", title:"Under-the-ear lymph nodes", name:"Under the ear · jawline", pos:"the hollow where the jaw meets the ear", dir:"under the ear → jawline → neck", hand:"palm",
+         text:"Set your palm in the hollow where the jaw meets the ear, then sweep lightly from under the ear along the jawline toward the back of the neck, twenty times or more."},
+        {say:"at the side of the neck", title:"Lymph nodes of the neck", name:"Side of the neck", pos:"from under the ear to above the collarbone", dir:"from top to bottom", hand:"palm",
+         text:"With your right palm, sweep lightly from under the left ear down the side of the neck to above the collarbone, twenty times or more. Never press the windpipe.",
+         text2:"Now with your left hand, the right side of the neck the same way, twenty times or more."},
+        {say:"at the collarbone", title:"Collarbone lymph nodes", name:"Above · below the collarbone", pos:"the hollow above the collarbone, and below it", dir:"toward the base of the neck", hand:"fingertips (pads)",
+         text:"With your right hand, sweep lightly from the hollow above the left collarbone toward the base of the neck, twenty times or more, then below the collarbone with your fingertips.",
+         text2:"Now with your left hand, the right collarbone the same way, twenty times or more."},
+        {say:"in the armpit", title:"Armpit lymph nodes", name:"Armpit", pos:"the hollow inside the armpit", dir:"armpit → collarbone", hand:"whole palm",
+         text:"Raise your left arm overhead, and with your right palm cover the left armpit as if enclosing it, sweeping lightly from the inside outward twenty times or more.",
+         text2:"Now raise your right arm and sweep the right armpit the same way, twenty times or more. On the operated side, cover it lightly with the palm."},
+        {say:"of the arm", title:"Arm lymph nodes", name:"Inner arm · elbow (Chize)", pos:"the inner crease of the arm and elbow", dir:"hand → elbow → armpit", hand:"whole palm",
+         text:"With your right hand, sweep lightly from the fingertips of the left hand along the inner arm and over the elbow toward the armpit, twenty times or more.",
+         text2:"Now with your left hand, the right arm the same way, twenty times or more."},
+        {say:"of the abdomen", title:"Abdominal lymph nodes", name:"Abdomen", pos:"around the navel", dir:"clockwise", hand:"both palms together",
+         text:"Starting below the navel, circle the navel clockwise with both palms together, twenty slow rounds."},
+        {say:"of the groin", title:"Groin lymph nodes", name:"Groin", pos:"the crease of the groin", dir:"inner thigh → groin → lower belly", hand:"edge of the hand",
+         text:"From the inner thigh across the groin crease to the lower belly, sweep lightly with the edge of the hand, twenty times or more on each side."},
+        {say:"behind the knee", title:"Lymph nodes behind the knee", name:"Behind the knee (Weizhong) · calf", pos:"the centre of the crease behind the knee", dir:"calf → behind the knee → back of the thigh", hand:"palm",
+         text:"From the calf over the centre of the back of the knee to the back of the thigh, sweep with the palm, twenty times or more on each side."}
       ],
       danTitle:"Fill · dantian breathing",
       danKind:"DANTIAN BREATHING",
@@ -789,10 +810,10 @@
       evalTitle:"Subjective check-in",
       evalNote:"A quiet place to keep what today's body and mind felt like.",
       minLabel:" min",
-      perAreaNote:(s,m)=> s + " per site · twenty strokes or more · eight sites " + m + " · intro and closing on top",
+      perAreaNote:(s,m)=> s + " per site (with a twelve-second dantian rest at its end) · twenty strokes or more · eight sites " + m + " · intro and closing on top",
       guideTitle:"Practice notes",
       guide:[
-        {n:"1 · Emptying, the lymph nodes", t:"1 under the ear → 2 side of the neck → 3 above and below the collarbone → 4 armpit → 5 inner arm and elbow → 6 abdomen → 7 groin → 8 behind the knee and calf. Always from the edges toward the centre, twenty strokes or more at each site, the hand barely touching the skin. At the end of each site the shoulders and hands soften and the qi gathers for a moment in the lower dantian."},
+        {n:"1 · Emptying, the lymph nodes", t:"1 under the ear → 2 side of the neck → 3 above and below the collarbone → 4 armpit → 5 inner arm and elbow → 6 abdomen → 7 groin → 8 behind the knee and calf. Each site is announced by name first — 'First, the lymph nodes under the ear' — and at the ones done one side at a time (neck, collarbone, armpit, arm) 'Now the other side' marks the turn. Every site ends with 'lower your arms' and about twelve seconds of quiet dantian rest with only the background tone. Always from the edges toward the centre, twenty strokes or more at each site, the hand barely touching the skin."},
         {n:"2 · Filling, the lower dantian", t:"Three fingers below the navel, let the mind come to rest. In long and deep, out short and soft. When a thought appears, neither hold it nor push it away — simply return to the belly."},
         {n:"3 · Subjective check-in", t:"After practice, or at any point in the day: count a minute of breaths, choose how today's body felt, and keep it with a line in the journal. Right after all eight sites it reads the clearest."},
         {n:"Cautions", t:"Never press a lymph node hard. Do not press the windpipe or the armpit on the operated side — cover it with the palm. Avoid practising right after eating or drinking, and if you are pregnant or under treatment for an illness, please speak with your doctor first."},
@@ -868,7 +889,7 @@
      ========================================================= */
   const state = {
     lang:"ko",
-    voice:true, bell:true, bgm:true, rate:0.88, pitch:0.86,
+    voice:true, bell:true, bgm:true, beat:true, rate:0.88, pitch:0.86,
     voiceURI:{ko:"", en:""},
     danMin:5,
     lymphMin:10,
@@ -888,7 +909,7 @@
         }
       }
       if(s && typeof s === "object"){
-        ["lang","voice","bell","bgm","rate","pitch","danMin","lymphMin"].forEach(k=>{
+        ["lang","voice","bell","bgm","beat","rate","pitch","danMin","lymphMin"].forEach(k=>{
           if(s[k] !== undefined) state[k] = s[k];
         });
         if(s.voiceURI && typeof s.voiceURI === "object"){
@@ -901,7 +922,7 @@
   function saveSettings(){
     try{
       localStorage.setItem(SETTINGS_KEY, JSON.stringify({
-        lang:state.lang, voice:state.voice, bell:state.bell, bgm:state.bgm,
+        lang:state.lang, voice:state.voice, bell:state.bell, bgm:state.bgm, beat:state.beat,
         rate:state.rate, pitch:state.pitch, danMin:state.danMin, lymphMin:state.lymphMin,
         voiceURI:state.voiceURI
       }));
@@ -929,7 +950,7 @@
       ? "내 손안의 림프·선(禪) 리셋 · 비우고 림프절 순환 · 채우고 단전주선"
       : "Lymph & Seon Reset in My Hand";
 
-    ["voice","bell","bgm"].forEach(k=>{
+    ["voice","bell","bgm","beat"].forEach(k=>{
       const b = $("sw-" + k);
       if(!b) return;
       b.textContent = state[k] ? (state.lang === "ko" ? "켜짐" : "On") : (state.lang === "ko" ? "꺼짐" : "Off");
@@ -1063,7 +1084,7 @@
       box.appendChild(b);
     });
     const pa = perAreaSeconds(state.lymphMin);
-    $("lym-note").textContent = C().perAreaNote(C().duration(pa.per), C().duration(pa.circuit));
+    $("lym-note").textContent = C().perAreaNote(C().duration(pa.per), state.lymphMin + C().minLabel);
   }
 
   function renderLymphList(){
@@ -1128,6 +1149,10 @@
   let chainTimer = null;    /* the short pause between spoken sentences */
   let cueTimer = null;      /* the breath taken after cancel(), before speak() */
   let lastCue = "", lastCueAt = 0;
+  /* the breath left between one sentence and the next, so a senior or a patient
+     can follow along without being hurried */
+  const SPEECH_GAP_MS = 1450;
+  let voiceUntil = 0;        /* when the current line is expected to be finished */
 
   function langPrefix(){ return state.lang === "ko" ? "ko" : "en"; }
   function voicesFor(){
@@ -1249,6 +1274,7 @@
      cancel()), and only then speaks. The same cue is never started twice. */
   function stopSpeaking(){
     seq++;
+    voiceUntil = 0;
     clearTimeout(chainTimer); chainTimer = null;
     clearTimeout(cueTimer); cueTimer = null;
     if("speechSynthesis" in window){
@@ -1274,6 +1300,7 @@
     const parts = splitSentences(text);
     const voice = currentVoice();
     let i = 0;
+    voiceUntil = performance.now() + Math.round(estSpeech(text) * 1000) + 250;
 
     function next(){
       if(my !== seq) return;
@@ -1293,7 +1320,7 @@
         done = true;
         clearTimeout(timer);
         if(i >= parts.length){ duckBGM(false); return; }
-        chainTimer = setTimeout(next, 320);
+        chainTimer = setTimeout(next, SPEECH_GAP_MS);
       };
       u.onend = advance;
       u.onerror = advance;
@@ -1376,6 +1403,24 @@
       });
     }
   }
+  /* a very soft water drop, so the twenty strokes can be counted with eyes closed */
+  function playBeat(n){
+    if(!audioCtx) return;
+    try{
+      const t = audioCtx.currentTime + 0.02;
+      const accent = (n % 5 === 0);
+      const osc = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(accent ? 784 : 659, t);
+      osc.frequency.exponentialRampToValueAtTime(accent ? 523 : 440, t + 0.18);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.linearRampToValueAtTime(accent ? 0.055 : 0.034, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
+      osc.connect(g); g.connect(audioCtx.destination);
+      osc.start(t); osc.stop(t + 0.38);
+    }catch(e){}
+  }
   function startBGM(){
     if(!state.bgm || bgmNodes) return;
     ensureAudio();
@@ -1413,7 +1458,9 @@
   }
   async function requestWakeLock(){
     try{
-      if("wakeLock" in navigator) wakeLock = await navigator.wakeLock.request("screen");
+      if(!("wakeLock" in navigator) || wakeLock) return;
+      wakeLock = await navigator.wakeLock.request("screen");
+      wakeLock.addEventListener("release", ()=>{ wakeLock = null; });
     }catch(e){}
   }
   function releaseWakeLock(){
@@ -1426,59 +1473,109 @@
   const session = {
     active:false, paused:false, timer:null,
     steps:[], idx:0, stepBase:0, stepT0:0, elapsedBefore:0, total:0,
-    mode:"", kick:"", min:0, areaIndex:0, startedAt:0
+    mode:"", kick:"", min:0, areaIndex:0, startedAt:0, beatIdx:0
   };
 
-  function stepOf(o){ return Object.assign({dur:30, kicker:"", site:"", count:0, caption:"", speech:[], group:""}, o); }
+  function stepOf(o){ return Object.assign({dur:30, kicker:"", site:"", count:0, caption:"", speech:[], group:"", restAt:null}, o); }
 
   /* Roughly how long a line takes at the chosen pace: Korean speech runs about
-     five characters a second at rate 1 and each sentence waits a beat for the
+     five characters a second at rate 1 and each sentence waits a breath for the
      next, so a cue is never cut off by the step that follows it. */
   function estSpeech(text){
     const parts = splitSentences(text || "");
+    /* Korean runs about four characters a second at rate 1; English a good deal
+       faster, so the two are paced apart */
+    const cps = state.lang === "ko" ? 4.2 : 11.0;
     let s = 0;
-    parts.forEach((p, i)=>{ s += p.length / (4.8 * (state.rate || 1)); if(i) s += 0.32; });
+    parts.forEach((p, i)=>{
+      s += p.length / (cps * (state.rate || 1)) + 0.4;
+      if(i) s += SPEECH_GAP_MS / 1000;
+    });
     return s;
   }
 
-  /* A site's lines: its own instruction first, a breath cue in the middle when
-     there is room, and the shared closing about seven seconds before it ends. */
-  function lymphAreaSpeech(a, per, c){
-    const sp = [{at:0, text:a.text}];
-    const said = estSpeech(a.text);
-    const closeAt = Math.max(per * 0.55, per - Math.max(7, estSpeech(c.lymphAreaClose) + 1.2));
-    if(per >= 70){
-      const mid = Math.max(said + 2, per * 0.45);
-      if(mid < closeAt - 9){
-        sp.push({at:Math.round(mid * 10) / 10, text:c.lymphMid});
-        const last = Math.max(mid + 8, per * 0.75);
-        if(last < closeAt - 6) sp.push({at:Math.round(last * 10) / 10, text:c.lymphLast});
-      }
+  /* a site, spoken the way a car passenger listens: its name first, then the
+     side being stroked, the turning cue for the mirrored sites, and the rest */
+  const REST_SEC = 12;        /* quiet at the end of every site, arms down */
+  const SINGLE_SEC = 150;     /* one site on its own: two and a half minutes */
+
+  function areaLead(c, i, a){
+    const ord = (c.ordinals && c.ordinals[i]) || "";
+    return state.lang === "ko"
+      ? ord + ", " + a.say + " 림프절 순환입니다."
+      : ord + ", the lymph nodes " + a.say + ".";
+  }
+
+  /* Builds one site's lines and the moment its rest begins. The turn comes at the
+     middle of the site, or as soon as the first side has been described — but
+     never so late that the second side or the rest has to be cut. */
+  function lymphAreaSpeech(a, per, c, idx){
+    const G = SPEECH_GAP_MS / 1000;
+    const r1 = n => Math.round(n * 10) / 10;
+    const lead = areaLead(c, idx, a);
+    const leadDur = estSpeech(lead);
+    const aDur = estSpeech(a.text);
+    const bDur = a.text2 ? estSpeech(a.text2) : 0;
+    const flipDur = a.text2 ? estSpeech(c.flip) : 0;
+    const lastDur = estSpeech(c.lymphLast);
+    const restCueDur = estSpeech(c.lymphAreaClose);
+    /* the rest cue ends exactly REST_SEC before the site's clock runs out */
+    const restAt = Math.max(per * 0.55, per - REST_SEC - restCueDur);
+
+    const sp = [{at:0, text:lead}];
+    const aAt = leadDur + G;
+    sp.push({at:r1(aAt), text:a.text});
+
+    let cursor = aAt + aDur + G;
+    if(a.text2){
+      const latest = restAt - G - bDur - G - flipDur;
+      const flipAt = Math.min(Math.max(cursor, per * 0.5), Math.max(cursor, latest));
+      sp.push({at:r1(flipAt), text:c.flip});
+      const bAt = flipAt + flipDur + G;
+      sp.push({at:r1(bAt), text:a.text2});
+      cursor = bAt + bDur + G;
     }
-    sp.push({at:Math.round(closeAt * 10) / 10, text:c.lymphAreaClose});
-    return sp;
+    /* the last-five cue sits late in the strokes, never on top of the rest */
+    const lastAt = Math.max(cursor, restAt - G - lastDur);
+    if(lastAt + lastDur <= restAt - G) sp.push({at:r1(lastAt), text:c.lymphLast});
+
+    /* nothing is ever talked over: if a line ran long, the rest waits for it,
+       and the site takes the extra time rather than being cut short */
+    let endOfSpeech = 0;
+    sp.forEach(u=>{ endOfSpeech = Math.max(endOfSpeech, u.at + estSpeech(u.text)); });
+    const rest = Math.max(restAt, endOfSpeech + 0.8);
+    const dur = Math.max(per, rest + restCueDur + REST_SEC);
+    sp.push({at:r1(rest), text:c.lymphAreaClose});
+    return {speech:sp, restAt:r1(rest), dur:Math.round(dur)};
   }
 
   function buildLymph(min, onlyIndex){
     const c = C();
     const steps = [];
     const pa = perAreaSeconds(min);
-    const list = (onlyIndex === undefined || onlyIndex === null) ? c.areas.map((a,i)=>i) : [onlyIndex];
     const single = !(onlyIndex === undefined || onlyIndex === null);
+    const list = single ? [onlyIndex] : c.areas.map((a,i)=>i);
     const introText = single ? c.singleIntro : c.lymphIntro;
+    const closeText = single ? c.singleClose : c.lymphClose;
+
+    const introDur = Math.max(12, Math.round(estSpeech(introText) + 3));
+    const closeDur = Math.max(12, Math.round(estSpeech(closeText) + 4));
+    /* one site runs roomier: the whole round comes to two and a half minutes */
+    const areaDur = single ? Math.max(90, SINGLE_SEC - introDur - closeDur) : pa.per;
+
     /* the intro is read on its own block before the circuit's clock starts, so
        the seventy-five second sites keep their time */
-    steps.push(stepOf({dur:Math.max(10, Math.round(estSpeech(introText) + 3)), kicker:c.kLymph, site:c.lymphSite,
-      count:0, caption:single ? c.singleIntroCap : c.lymphIntroCap, speech:[{at:0, text:introText}], group:"intro"}));
+    steps.push(stepOf({dur:introDur, kicker:c.kLymph, site:c.lymphSite, count:0,
+      caption:single ? c.singleIntroCap : c.lymphIntroCap, speech:[{at:0, text:introText}], group:"intro"}));
     list.forEach((i, k)=>{
       const a = c.areas[i];
-      steps.push(stepOf({dur:pa.per, kicker:(single ? (i+1)+" / "+c.areas.length : (k+1)+" / "+list.length), site:(i+1)+". "+a.ring,
-        count:20, caption:a.pos + " · " + a.dir, speech:lymphAreaSpeech(a, pa.per, c), group:"area"+i, area:i}));
+      const laid = lymphAreaSpeech(a, areaDur, c, i);
+      steps.push(stepOf({dur:Math.max(areaDur, laid.dur), restAt:laid.restAt,
+        kicker:(k+1)+" / "+list.length, site:(i+1)+". "+a.title,
+        count:20, caption:a.pos + " · " + a.dir, speech:laid.speech, group:"area"+i, area:i}));
     });
-    const closeText = single ? c.singleClose : c.lymphClose;
-    steps.push(stepOf({dur:Math.max(12, Math.round(estSpeech(closeText) + 4)), kicker:c.closeSite, site:single ? c.closeSite : c.closeAll,
-      count:0, caption:single ? c.lymphAreaClose : c.lymphClose,
-      speech:[{at:0, text:closeText}], group:"close"}));
+    steps.push(stepOf({dur:closeDur, kicker:c.closeSite, site:single ? c.closeSite : c.closeAll,
+      count:0, caption:closeText, speech:[{at:0, text:closeText}], group:"close"}));
     return steps;
   }
 
@@ -1523,6 +1620,7 @@
     session.startedAt = Date.now();
 
     session.spoken = new Set();
+    session.beatIdx = 0;
 
     $("p-kind").textContent = kick;
     showScreen("practice");
@@ -1538,6 +1636,7 @@
     session.stepBase = 0;
     session.stepT0 = performance.now();
     session.spoken = new Set();
+    session.beatIdx = 0;
     if(session.idx === 0) playBell(1);
     renderPractice();
     if(s.speech.length){
@@ -1568,6 +1667,7 @@
     s.speech.forEach((sp, i)=>{
       if(!session.spoken.has(i) && e >= sp.at){ session.spoken.add(i); speak(sp.text); }
     });
+    beatTick(s, e);
     renderPractice();
   }
 
@@ -1579,23 +1679,47 @@
 
   const RING_R = 106, RING_CX = 120, RING_CY = 120, RING_LEN = 2 * Math.PI * 106;
 
+  /* the twenty strokes are counted across the site's working time, not its rest */
+  function countSpan(s){
+    const active = (s.restAt != null) ? s.restAt : s.dur;
+    return Math.max(4, active);
+  }
+
+  /* the soft stroke tone: only between spoken lines, never in the rest */
+  function beatTick(s, e){
+    if(!state.beat || !s.count) return;
+    if(s.restAt != null && e >= s.restAt) return;
+    const span = countSpan(s);
+    const k = Math.floor(e / (span / s.count));
+    if(k === session.beatIdx) return;
+    session.beatIdx = k;
+    if(k <= 0 || k > s.count) return;
+    if(performance.now() < voiceUntil) return;
+    playBeat(k);
+  }
+
   function renderPractice(){
     const s = session.steps[session.idx];
     if(!s) return;
     const e = stepElapsed();
     const left = Math.max(0, Math.ceil(s.dur - e));
+    const resting = s.restAt != null && e >= s.restAt;
 
-    $("p-kick").textContent = session.paused ? C().paused : s.kicker;
+    $("p-kick").textContent = session.paused ? C().paused : (resting ? C().restKind : s.kicker);
     $("p-site").textContent = s.site;
-    if(s.count){
-      const n = Math.min(s.count, 1 + Math.floor((e / s.dur) * s.count));
-      $("p-count").textContent = n + " / " + s.count + (state.lang === "ko" ? "회" : "");
-    }else{
+    if(resting){
       $("p-count").textContent = "\u00a0";
+      $("p-caption").textContent = C().restCap;
+    }else{
+      if(s.count){
+        const n = Math.min(s.count, 1 + Math.floor((e / countSpan(s)) * s.count));
+        $("p-count").textContent = n + " / " + s.count + (state.lang === "ko" ? "회" : "");
+      }else{
+        $("p-count").textContent = "\u00a0";
+      }
+      $("p-caption").textContent = s.caption;
     }
     $("p-time").textContent = fmt(left);
-    $("p-caption").textContent = s.caption;
-
     const totalElapsed = session.elapsedBefore + e;
     const pct = session.total ? Math.min(1, Math.max(0, totalElapsed / session.total)) : 0;
     const arc = $("ring-arc");
@@ -1625,6 +1749,7 @@
       session.paused = false;
       session.stepT0 = performance.now();
       session.timer = setInterval(tick, 250);
+      requestWakeLock();
       refreshPlayLabel();
       renderPractice();
       const s = session.steps[session.idx];
@@ -1634,6 +1759,7 @@
       session.paused = true;
       clearInterval(session.timer);
       stopSpeaking();
+      releaseWakeLock();
       refreshPlayLabel();
       renderPractice();
     }
@@ -1691,6 +1817,7 @@
       mode: session.mode,
       kick: session.kick,
       minutes: Math.max(1, Math.round(totalElapsed / 60)),
+      seconds: Math.round(totalElapsed),
       areaIndex: session.areaIndex || 0,
       min: session.min || 0,
       label: sessionLabel()
@@ -1731,7 +1858,8 @@
     const a = c.areas[lastSession.areaIndex || 0];
     const ko = state.lang === "ko";
     let txt = a ? a.name : c.lymphTitle;
-    if(lastSession.minutes) txt += " · " + lastSession.minutes + (ko ? "분" : " min");
+    if(lastSession.seconds) txt += " · " + c.duration(lastSession.seconds);
+    else if(lastSession.minutes) txt += " · " + lastSession.minutes + (ko ? "분" : " min");
     el.textContent = txt;
   }
 
@@ -2090,7 +2218,7 @@
 
     setLang(state.lang || "ko");
 
-    ["voice","bell","bgm"].forEach(k=>{
+    ["voice","bell","bgm","beat"].forEach(k=>{
       const b = $("sw-" + k);
       if(!b) return;
       b.classList.toggle("on", state[k]);
