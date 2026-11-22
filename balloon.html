@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>🎈 시니어 활쏘기 풍선 터뜨리기</title>
+  <meta name="description" content="큰 글씨 · 터치 한 번으로 즐기는 활쏘기 집중력 게임" />
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="🎈 시니어 활쏘기 풍선 터뜨리기" />
+  <meta property="og:description" content="큰 글씨 · 터치 한 번으로 즐기는 활쏘기 집중력 게임" />
+  <meta property="og:url" content="https://drena.co.kr/balloon.html" />
+  <meta property="og:image" content="https://drena.co.kr/og-balloon.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="시니어 활쏘기 풍선 터뜨리기 게임 화면" />
+  <meta property="og:site_name" content="김진유 · Dr ENA · 닥터에나" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🎈 시니어 활쏘기 풍선 터뜨리기" />
+  <meta name="twitter:description" content="큰 글씨 · 터치 한 번으로 즐기는 활쏘기 집중력 게임" />
+  <meta name="twitter:image" content="https://drena.co.kr/og-balloon.jpg" />
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+      background: linear-gradient(180deg, #dff3ff 0%, #f5fbff 75%, #cbe8b5 100%);
+      height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 2px solid #b8dff5;
+      z-index: 10;
+      gap: 8px;
+    }
+    .stat-box {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .stat {
+      background: #f0f8ff;
+      border: 2px solid #8ecae6;
+      border-radius: 14px;
+      padding: 6px 12px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #1d3557;
+    }
+    .stat span {
+      color: #e63946;
+      font-size: 24px;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+    }
+    .btn {
+      font-size: 18px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      background: #219ebc;
+      color: #fff;
+      box-shadow: 0 3px 0 #126782;
+    }
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #126782;
+    }
+    .btn.secondary {
+      background: #ffb703;
+      color: #1d3557;
+      box-shadow: 0 3px 0 #d99b00;
+    }
+    #game-area {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    #overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      z-index: 20;
+    }
+    #overlay.hidden {
+      display: none;
+    }
+    #overlay h1 {
+      font-size: 32px;
+      color: #1d3557;
+      margin: 0 0 12px;
+    }
+    #overlay p {
+      font-size: 21px;
+      line-height: 1.6;
+      color: #333;
+      margin: 0 0 22px;
+      max-width: 440px;
+    }
+    .speed-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .speed-btn {
+      font-size: 20px;
+      font-weight: 700;
+      padding: 12px 22px;
+      border-radius: 16px;
+      border: 3px solid #8ecae6;
+      background: #fff;
+      color: #1d3557;
+      cursor: pointer;
+    }
+    .speed-btn.active {
+      background: #219ebc;
+      color: #fff;
+      border-color: #126782;
+    }
+    .start-btn {
+      font-size: 26px;
+      font-weight: 800;
+      padding: 16px 40px;
+      border-radius: 20px;
+      border: none;
+      background: #e63946;
+      color: #fff;
+      box-shadow: 0 5px 0 #a8202c;
+      cursor: pointer;
+    }
+    .start-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #a8202c;
+    }
+    #toast {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(29, 53, 87, 0.88);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      padding: 8px 20px;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s;
+      z-index: 15;
+    }
+    #toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="stat-box">
+      <div class="stat">점수 <span id="score">0</span></div>
+      <div class="stat">남은 시간 <span id="time">60</span>초</div>
+    </div>
+    <div class="controls">
+      <button class="btn secondary" id="sound-btn" onclick="toggleSound()">🔊 소리 켜짐</button>
+      <button class="btn" onclick="showMenu()">처음으로</button>
+    </div>
+  </header>
+
+  <div id="game-area">
+    <canvas id="canvas"></canvas>
+    <div id="toast">명중! 잘하셨어요!</div>
+
+    <div id="overlay">
+      <h1 id="ov-title">🏹 풍선 활쏘기</h1>
+      <p id="ov-desc">
+        하늘로 날아오르는 알록달록 풍선을<br />
+        <strong>손가락으로 콕! 누르시면</strong> 화살이 날아가 터집니다.<br />
+        천천히 즐겨 보세요!
+      </p>
+      <div class="speed-group">
+        <button class="speed-btn active" id="spd-slow" onclick="setSpeed('slow')">🐢 천천히</button>
+        <button class="speed-btn" id="spd-normal" onclick="setSpeed('normal')">🐇 보통</button>
+      </div>
+      <button class="start-btn" onclick="startGame()">게임 시작하기</button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('score');
+    const timeEl = document.getElementById('time');
+    const overlay = document.getElementById('overlay');
+    const ovTitle = document.getElementById('ov-title');
+    const ovDesc = document.getElementById('ov-desc');
+    const toast = document.getElementById('toast');
+    const soundBtn = document.getElementById('sound-btn');
+
+    let W = 0, H = 0;
+    let score = 0;
+    let timeLeft = 60;
+    let running = false;
+    let speedMode = 'slow';
+    let soundOn = true;
+    let balloons = [];
+    let arrows = [];
+    let particles = [];
+    let bowAngle = -Math.PI / 2;
+    let timerId = null;
+    let spawnId = null;
+    let animId = null;
+    let toastTimer = null;
+
+    const COLORS = [
+      { fill: '#ff4d6d', shine: '#ff8fa3', name: '빨강' },
+      { fill: '#ffb703', shine: '#ffd166', name: '노랑' },
+      { fill: '#219ebc', shine: '#8ecae6', name: '파랑' },
+      { fill: '#2a9d8f', shine: '#76c893', name: '초록' },
+      { fill: '#9b5de5', shine: '#c77dff', name: '보라' },
+      { fill: '#fb5607', shine: '#ff9e6d', name: '주황' }
+    ];
+
+    const CHEERS = ['명중! 👏', '잘하셨어요! 👍', '정확해요! 🎯', '멋져요! ✨', '대단해요! 🌟'];
+
+    let audioCtx = null;
+    function playPopSound(freq = 520) {
+      if (!soundOn) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(160, audioCtx.currentTime + 0.14);
+        gain.gain.setValueAtTime(0.28, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.14);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.15);
+      } catch (e) {}
+    }
+
+    function playShootSound() {
+      if (!soundOn) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(280, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(520, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.09);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.1);
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundOn = !soundOn;
+      soundBtn.textContent = soundOn ? '🔊 소리 켜짐' : '🔇 소리 꺼짐';
+    }
+
+    function setSpeed(mode) {
+      speedMode = mode;
+      document.getElementById('spd-slow').classList.toggle('active', mode === 'slow');
+      document.getElementById('spd-normal').classList.toggle('active', mode === 'normal');
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 900);
+    }
+
+    function resize() {
+      const area = document.getElementById('game-area');
+      W = canvas.width = area.clientWidth;
+      H = canvas.height = area.clientHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function spawnBalloon() {
+      if (!running) return;
+      const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      const r = Math.max(32, Math.min(48, W * 0.085));
+      const baseSpeed = speedMode === 'slow' ? 1.15 : 2.1;
+      balloons.push({
+        x: r + 20 + Math.random() * (W - (r + 20) * 2),
+        y: H - 60,
+        r: r,
+        vy: baseSpeed + Math.random() * 0.7,
+        swayOffset: Math.random() * Math.PI * 2,
+        color
+      });
+    }
+
+    function shootTo(tx, ty) {
+      if (!running) return;
+      const bx = W / 2;
+      const by = H - 46;
+      const dx = tx - bx;
+      const dy = ty - by;
+      const angle = Math.atan2(dy, dx);
+      if (angle > -0.15 || angle < -Math.PI + 0.15) return; // keep upward
+      bowAngle = angle;
+      const speed = 15;
+      arrows.push({
+        x: bx,
+        y: by,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        angle
+      });
+      playShootSound();
+    }
+
+    canvas.addEventListener('pointerdown', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      shootTo(e.clientX - rect.left, e.clientY - rect.top);
+    });
+
+    function createBurst(x, y, color) {
+      for (let i = 0; i < 16; i++) {
+        const ang = (Math.PI * 2 * i) / 16 + Math.random() * 0.2;
+        const spd = 2 + Math.random() * 4.5;
+        particles.push({
+          x, y,
+          vx: Math.cos(ang) * spd,
+          vy: Math.sin(ang) * spd,
+          r: 5 + Math.random() * 5,
+          alpha: 1,
+          color
+        });
+      }
+    }
+
+    function drawBow() {
+      const bx = W / 2;
+      const by = H - 46;
+      ctx.save();
+      ctx.translate(bx, by);
+      ctx.rotate(bowAngle + Math.PI / 2);
+
+      // Bow arc
+      ctx.strokeStyle = '#7f4f24';
+      ctx.lineWidth = 8;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(0, 12, 46, Math.PI * 1.15, Math.PI * 1.85);
+      ctx.stroke();
+
+      // Bow string
+      ctx.strokeStyle = '#555';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(-40, -10);
+      ctx.lineTo(0, 6);
+      ctx.lineTo(40, -10);
+      ctx.stroke();
+
+      // Ready arrow
+      ctx.strokeStyle = '#333';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(0, 6);
+      ctx.lineTo(0, -44);
+      ctx.stroke();
+      ctx.fillStyle = '#e63946';
+      ctx.beginPath();
+      ctx.moveTo(0, -54);
+      ctx.lineTo(-7, -40);
+      ctx.lineTo(7, -40);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Draw gentle grass at bottom
+      ctx.fillStyle = '#80b918';
+      ctx.fillRect(0, H - 30, W, 30);
+
+      // Update & draw balloons
+      for (let i = balloons.length - 1; i >= 0; i--) {
+        const b = balloons[i];
+        b.y -= b.vy;
+        b.x += Math.sin(b.y * 0.02 + b.swayOffset) * 0.6;
+
+        // String
+        ctx.strokeStyle = '#777';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(b.x, b.y + b.r * 1.15);
+        ctx.quadraticCurveTo(b.x + 8, b.y + b.r * 1.6, b.x - 4, b.y + b.r * 2.1);
+        ctx.stroke();
+
+        // Balloon body
+        ctx.fillStyle = b.color.fill;
+        ctx.beginPath();
+        ctx.ellipse(b.x, b.y, b.r, b.r * 1.15, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Shine
+        ctx.fillStyle = b.color.shine;
+        ctx.beginPath();
+        ctx.ellipse(b.x - b.r * 0.32, b.y - b.r * 0.35, b.r * 0.22, b.r * 0.34, -0.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Knot
+        ctx.fillStyle = b.color.fill;
+        ctx.beginPath();
+        ctx.moveTo(b.x, b.y + b.r * 1.12);
+        ctx.lineTo(b.x - 6, b.y + b.r * 1.24);
+        ctx.lineTo(b.x + 6, b.y + b.r * 1.24);
+        ctx.closePath();
+        ctx.fill();
+
+        if (b.y < -b.r * 2) {
+          balloons.splice(i, 1);
+        }
+      }
+
+      // Update & draw arrows
+      for (let i = arrows.length - 1; i >= 0; i--) {
+        const a = arrows[i];
+        a.x += a.vx;
+        a.y += a.vy;
+
+        ctx.save();
+        ctx.translate(a.x, a.y);
+        ctx.rotate(a.angle + Math.PI / 2);
+        ctx.strokeStyle = '#3d2c2e';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(0, 22);
+        ctx.lineTo(0, -18);
+        ctx.stroke();
+        ctx.fillStyle = '#e63946';
+        ctx.beginPath();
+        ctx.moveTo(0, -28);
+        ctx.lineTo(-7, -14);
+        ctx.lineTo(7, -14);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        // Hit test
+        let hit = false;
+        for (let j = balloons.length - 1; j >= 0; j--) {
+          const b = balloons[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          if (Math.hypot(dx, dy) <= b.r + 16) {
+            createBurst(b.x, b.y, b.color.fill);
+            balloons.splice(j, 1);
+            score += 10;
+            scoreEl.textContent = score;
+            playPopSound(480 + Math.random() * 180);
+            showToast(CHEERS[Math.floor(Math.random() * CHEERS.length)]);
+            hit = true;
+            break;
+          }
+        }
+        if (hit || a.x < -40 || a.x > W + 40 || a.y < -40) {
+          arrows.splice(i, 1);
+        }
+      }
+
+      // Update & draw particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.03;
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+
+      drawBow();
+      if (running) animId = requestAnimationFrame(loop);
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 60;
+      balloons = [];
+      arrows = [];
+      particles = [];
+      scoreEl.textContent = '0';
+      timeEl.textContent = '60';
+      overlay.classList.add('hidden');
+      running = true;
+
+      clearInterval(timerId);
+      clearInterval(spawnId);
+      cancelAnimationFrame(animId);
+
+      spawnBalloon();
+      spawnId = setInterval(spawnBalloon, speedMode === 'slow' ? 1200 : 850);
+      timerId = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+      loop();
+    }
+
+    function endGame() {
+      running = false;
+      clearInterval(timerId);
+      clearInterval(spawnId);
+      cancelAnimationFrame(animId);
+      ovTitle.textContent = '🎉 수고하셨습니다!';
+      ovDesc.innerHTML = `최종 점수는 <strong style="color:#e63946;font-size:28px;">${score}점</strong>입니다!<br />한 판 더 즐겨 보실까요?`;
+      overlay.classList.remove('hidden');
+    }
+
+    function showMenu() {
+      running = false;
+      clearInterval(timerId);
+      clearInterval(spawnId);
+      cancelAnimationFrame(animId);
+      ovTitle.textContent = '🏹 풍선 활쏘기';
+      ovDesc.innerHTML = '하늘로 날아오르는 알록달록 풍선을<br /><strong>손가락으로 콕! 누르시면</strong> 화살이 날아가 터집니다.<br />천천히 즐겨 보세요!';
+      overlay.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
