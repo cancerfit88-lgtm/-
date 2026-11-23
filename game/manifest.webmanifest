@@ -1,0 +1,16 @@
+{
+  "name": "시니어 활쏘기 풍선 터뜨리기",
+  "short_name": "풍선 게임",
+  "description": "큰 글씨 · 터치 한 번으로 즐기는 활쏘기 집중력 게임",
+  "lang": "ko",
+  "start_url": "/game/",
+  "scope": "/game/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#dff3ff",
+  "theme_color": "#dff3ff",
+  "icons": [
+    { "src": "/icon-192-game.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512-game.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "내 손안의 림프·단전 리셋",
+  "short_name": "단전·림프",
+  "description": "하루 10분, 비우는 림프절 순환과 채우는 단전주선",
+  "lang": "ko",
+  "start_url": "/lymph/",
+  "scope": "/lymph/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5EBD9",
+  "theme_color": "#F5EBD9",
+  "icons": [
+    { "src": "/icon-192-lymph.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512-lymph.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
