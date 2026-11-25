@@ -1,7 +1,7 @@
 {
-  "name": "내 손안의 림프·단전 리셋",
-  "short_name": "단전·림프",
-  "description": "하루 10분, 비우는 림프절 순환과 채우는 단전주선",
+  "name": "내 손안의 하루 15분 림프 리셋",
+  "short_name": "림프 15분",
+  "description": "하루 15분 — 숨 고르기 · 8부위 림프 비우기 · 온기 채우기",
   "lang": "ko",
   "start_url": "/lymph/",
   "scope": "/lymph/",
