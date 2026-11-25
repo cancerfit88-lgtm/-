@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#F5EBD9" />
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64-lymph.png?v=3" />
 <link rel="apple-touch-icon" href="icon-180-lymph.png?v=3" />
-<meta name="apple-mobile-web-app-title" content="림프 15분" />
-<title>내 손안의 하루 15분 림프 리셋 · 비우고 채우고</title>
-<meta name="description" content="하루 15분, 배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기 · 온기 채우기 — 김진유 박사의 자기건강 웰니스 앱." />
+<meta name="apple-mobile-web-app-title" content="림프 · 선 리셋" />
+<title>림프 · 선 리셋 · 하루 15분</title>
+<meta name="description" content="하루 15분, 배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기 · 여덟 부위 전신 쓸기 · 온기 채우기 — 김진유 박사의 자기건강 웰니스 앱." />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="내 손안의 하루 15분 림프 리셋" />
-<meta property="og:description" content="하루 15분 — 숨 고르기 · 8부위 림프 비우기 · 온기 채우기" />
+<meta property="og:title" content="림프 · 선 리셋 · 하루 15분" />
+<meta property="og:description" content="하루 15분 — 숨 고르기 · 8부위 림프 비우기 · 전신 쓸기 · 온기 채우기" />
 <meta property="og:url" content="https://drena.co.kr/dantian.html" />
 <meta property="og:image" content="https://drena.co.kr/og-lymph.jpg?v=3" />
 <meta property="og:image:width" content="1200" />
@@ -19,8 +19,8 @@
 <meta property="og:site_name" content="김진유 · Dr ENA · 닥터에나" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="내 손안의 하루 15분 림프 리셋" />
-<meta name="twitter:description" content="하루 15분 — 숨 고르기 · 8부위 림프 비우기 · 온기 채우기" />
+<meta name="twitter:title" content="림프 · 선 리셋 · 하루 15분" />
+<meta name="twitter:description" content="하루 15분 — 숨 고르기 · 8부위 림프 비우기 · 전신 쓸기 · 온기 채우기" />
 <meta name="twitter:image" content="https://drena.co.kr/og-lymph.jpg?v=3" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -72,6 +72,10 @@
 
   .inapp{display:none;margin:14px 0 0;padding:14px 16px;border-radius:14px;background:#FFF8E6;border:1px solid #EBD49A;color:#5A4406;font-size:15px;line-height:1.65}
   .inapp.show{display:block}
+  .inapp svg{width:17px;height:17px;display:inline-block;vertical-align:-3.5px;margin-right:5px}
+  .mark{width:54px;height:54px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;background:var(--cream-l);border:1px solid var(--sand);color:var(--gold-d)}
+  .mark svg{width:27px;height:27px;display:block}
+  .d-meta svg{width:14px;height:14px;display:inline-block;vertical-align:-2.5px;margin-right:3px}
 
   /* ---------- hero ---------- */
   .hero{margin-top:18px;border-radius:24px;overflow:hidden;background:linear-gradient(160deg,#FBF2E0 0%,#F5EBD9 48%,#EFDFC4 100%);border:1px solid var(--sand);display:flex;align-items:center;gap:8px;padding:10px 16px 10px 8px}
@@ -98,7 +102,8 @@
   .chip.on{background:var(--cream);border-color:var(--gold-l);color:var(--gold-d);font-weight:700}
 
   .entrybtn{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:12px;width:100%;margin-top:11px;padding:14px 16px;border-radius:16px;border:1px solid var(--sand);background:var(--cream-l);text-align:left}
-  .entrybtn .ei{font-size:20px;line-height:1}
+  .entrybtn .ei{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--cream);border:1px solid var(--sand);color:var(--gold-d);line-height:0}
+  .entrybtn .ei svg{width:19px;height:19px;display:block}
   .entrybtn .et{display:block;font-size:15.5px;font-weight:800;color:var(--gold-d);line-height:1.4;letter-spacing:-.02em;word-break:keep-all}
   .entrybtn .es{display:block;font-size:13px;color:#8A7A5C;font-weight:400;line-height:1.5;margin-top:2px;word-break:keep-all}
   .entrybtn .eg{color:var(--gold-d);font-size:13px}
@@ -245,7 +250,8 @@
   .bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
   .bnav-in{max-width:540px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
   .bnav button{padding:11px 4px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:12.5px;font-weight:700;line-height:1.3}
-  .bnav button .ic{font-size:20px;line-height:1}
+  .bnav button .ic{width:23px;height:23px;line-height:0;display:inline-flex;align-items:center;justify-content:center}
+  .bnav button .ic svg{width:23px;height:23px;display:block}
   .bnav button.on{color:var(--gold-d)}
 
   .toast{position:fixed;left:50%;bottom:calc(104px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);opacity:0;pointer-events:none;background:#2B2B2B;color:#FFFFFF;padding:12px 20px;border-radius:999px;font-size:15px;line-height:1.4;max-width:88vw;text-align:center;transition:opacity .2s, transform .2s;z-index:60}
@@ -261,7 +267,7 @@
       <button id="lang-en" onclick="setLang('en')">English</button>
     </div>
     <div class="eyebrow" id="t-eyebrow">하루 15분 · 매일의 회복</div>
-    <h1 class="brand" id="t-brand">내 손안의 하루 15분 림프 리셋<span class="rule"></span></h1>
+    <h1 class="brand" id="t-brand">림프 · 선 리셋<span class="rule"></span></h1>
     <div class="brand-sub" id="t-brandsub">배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기 · 온기 채우기</div>
   </header>
 
@@ -312,21 +318,32 @@
     <div class="effectline" id="t-effect">막힌 8곳의 림프길을 열어, 붓기·만성 염증·피로의 길을 비웁니다.</div>
 
     <button class="btn btn-gold" style="margin-top:2px" onclick="startFifteen()" id="t-start15">15분 시작</button>
-    <div class="hint" style="text-align:center;margin:8px 6px 0" id="t-starthint">한 번 누르면 숨 고르기부터 온기 채우기까지 15분이 이어집니다.</div>
+    <div class="hint" style="text-align:center;margin:8px 6px 0" id="t-starthint">한 번 누르면 숨 고르기부터 전신 쓸기·온기 채우기까지 15분이 이어집니다.</div>
 
     <div class="pcards">
       <div class="pcard" role="button" tabindex="0" onclick="openLymph()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLymph();}">
         <span class="pnum">1</span>
         <span class="pbody">
           <span class="ptitle" id="t-c1">하루 15분 · 비우고 채우고</span>
-          <span class="psub" id="t-c1s">배꼽 아래 단전에 숨 고르기 → 8부위 림프 비우기 → 온기 채우기</span>
+          <span class="psub" id="t-c1s">숨 고르기 · 8부위 림프 비우기 · 전신 쓸기 · 온기 채우기</span>
           <span class="pmeta" id="t-c1m">한 번에 15분 · 지도와 여덟 부위 보기</span>
         </span>
         <span class="pgo">▶</span>
       </div>
 
-      <button class="pcard" onclick="openEval()">
+      <div class="pcard" role="button" tabindex="0" onclick="startDantian()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startDantian();}">
         <span class="pnum">2</span>
+        <span class="pbody">
+          <span class="ptitle" id="t-c2">채우고 · 단전주선</span>
+          <span class="psub" id="t-c2s">내 숨 길이 그대로, 아랫배에 마음을 두기</span>
+          <span class="pmeta" id="t-c2m">5분 · 10분 · 20분 중에 골라서</span>
+        </span>
+        <span class="pgo">▶</span>
+        <div class="chips pchips" onclick="event.stopPropagation()" id="min-chips"></div>
+      </div>
+
+      <button class="pcard" onclick="openEval()">
+        <span class="pnum">3</span>
         <span class="pbody">
           <span class="ptitle" id="t-c3">주관적 평가</span>
           <span class="psub" id="t-c3s">1분 호흡 측정 · 오늘의 몸 느낌 · 일기</span>
@@ -337,7 +354,7 @@
     </div>
 
     <button class="entrybtn" onclick="showTab('breath')">
-      <span class="ei">🌬️</span>
+      <span class="ei"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 8.2h9.5a2.55 2.55 0 1 0-2.55-2.55"/><path d="M3.4 13.2h11.7a2.55 2.55 0 1 1-2.55 2.55"/><path d="M3.4 18.2h6.3"/></svg></span>
       <span>
         <span class="et" id="t-bentry">1분 호흡 재기</span>
         <span class="es" id="t-bentrys">운동 전·후 분당 호흡 수를 재어 일기에 남깁니다</span>
@@ -446,7 +463,7 @@
         <div class="mapcap" id="t-mapcap">1 귀밑 · 2 목 · 3 쇄골 · 4 겨드랑이 · 5 팔꿈치 · 6 복부 · 7 서혜부 · 8 무릎 뒤 오금</div>
       </div>
 
-      <div class="sec-note" style="margin:12px 0 0;text-align:center" id="t-lymtime">15분 코스 — 부위당 약 1분 26초 · 스무 번 이상</div>
+      <div class="sec-note" style="margin:12px 0 0;text-align:center" id="t-lymtime">15분 코스 — 부위당 1분 33초(한쪽 40초씩, 2초에 1회 스무 번) · 끝마다 손·팔 풀기 5초</div>
 
       <div style="margin-top:14px">
         <button class="btn btn-gold" onclick="startFifteen()" id="t-all8">15분 시작</button>
@@ -502,7 +519,7 @@
   <!-- ================= LIGHT (one lymph site) ================= -->
   <section id="screen-light" class="screen hidden">
     <div class="card" style="text-align:center;margin-top:28px">
-      <div style="font-size:26px;line-height:1">🌿</div>
+      <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.6v-6.3"/><path d="M12 14.3c0-3.6-2.5-6.5-6.5-6.5 0 3.6 2.5 6.5 6.5 6.5z"/><path d="M12 14.3c0-3.6 2.5-6.5 6.5-6.5 0 3.6-2.5 6.5-6.5 6.5z"/></svg></div>
       <div class="sec-title" style="justify-content:center;margin-top:10px"><span id="t-light">가볍게 마쳤습니다</span></div>
       <div class="sec-note" style="text-align:center;margin-bottom:0" id="light-summary"></div>
     </div>
@@ -546,7 +563,7 @@
   <!-- ================= COMPLETE ================= -->
   <section id="screen-complete" class="screen hidden">
     <div class="card" style="text-align:center;margin-top:24px">
-      <div style="font-size:26px;line-height:1">🌿</div>
+      <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.6v-6.3"/><path d="M12 14.3c0-3.6-2.5-6.5-6.5-6.5 0 3.6 2.5 6.5 6.5 6.5z"/><path d="M12 14.3c0-3.6 2.5-6.5 6.5-6.5 0 3.6-2.5 6.5-6.5 6.5z"/></svg></div>
       <div class="sec-title" style="justify-content:center;margin-top:10px"><span id="t-done">오늘의 순환을 마쳤습니다</span></div>
       <div class="sec-note" style="text-align:center;margin-bottom:0" id="complete-summary"></div>
     </div>
@@ -603,9 +620,9 @@
 
 <nav class="bnav">
   <div class="bnav-in">
-    <button id="nav-home" class="on" onclick="showTab('home')"><span class="ic">🧘</span><span id="t-navhome">운동</span></button>
-    <button id="nav-breath" onclick="showTab('breath')"><span class="ic">🌬️</span><span id="t-navbreath">호흡</span></button>
-    <button id="nav-diary" onclick="showTab('diary')"><span class="ic">📔</span><span id="t-navdiary">일기</span></button>
+    <button id="nav-home" class="on" onclick="showTab('home')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2.2"/><path d="M12 6.9v6.5"/><path d="M6.9 9.4 12 10.9l5.1-1.5"/><path d="m12 13.4-3.1 6.4"/><path d="m12 13.4 3.1 6.4"/></svg></span><span id="t-navhome">운동</span></button>
+    <button id="nav-breath" onclick="showTab('breath')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 8.2h9.5a2.55 2.55 0 1 0-2.55-2.55"/><path d="M3.4 13.2h11.7a2.55 2.55 0 1 1-2.55 2.55"/><path d="M3.4 18.2h6.3"/></svg></span><span id="t-navbreath">호흡</span></button>
+    <button id="nav-diary" onclick="showTab('diary')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5.2A1.7 1.7 0 0 1 6.7 3.5H19v15.3H6.7A1.7 1.7 0 0 0 5 20.5z"/><path d="M5 17.4h14"/><path d="M8.6 7.4h6.6"/><path d="M8.6 10.6h4.4"/></svg></span><span id="t-navdiary">일기</span></button>
   </div>
 </nav>
 
@@ -622,12 +639,15 @@
      ========================================================= */
   const UI = {
     "t-eyebrow":  {ko:"하루 15분 · 매일의 회복", en:"15 MINUTES A DAY"},
-    "t-brand":    {ko:"내 손안의 하루 15분 림프 리셋", en:"My 15-Minute Lymph Reset"},
+    "t-brand":    {ko:"림프 · 선 리셋", en:"Lymph · Seon Reset"},
     "t-brandsub": {ko:"배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기 · 온기 채우기", en:"Settle below the navel · clear the eight sites · gather the warmth"},
     "t-hero1":    {ko:"오늘도 몸의 강물을 맑게", en:"Let the river of the body run clear"},
     "t-hero2":    {ko:"하루 15분, 한 번이면 충분합니다.", en:"Fifteen minutes a day is enough — once."},
     "t-c1":       {ko:"하루 15분 · 비우고 채우고", en:"15 minutes · empty and fill"},
-    "t-c1s":      {ko:"배꼽 아래 단전에 숨 고르기 → 8부위 림프 비우기 → 온기 채우기", en:"settle · clear the eight sites · gather the warmth"},
+    "t-c1s":      {ko:"숨 고르기 · 8부위 림프 비우기 · 전신 쓸기 · 온기 채우기", en:"settle · clear the eight sites · the full sweep · gather the warmth"},
+    "t-c2":       {ko:"채우고 · 단전주선", en:"Fill · dantian sitting"},
+    "t-c2s":      {ko:"내 숨 길이 그대로, 아랫배에 마음을 두기", en:"your own breath as it is, the mind resting in the lower belly"},
+    "t-c2m":      {ko:"5분 · 10분 · 20분 중에 골라서", en:"choose 5, 10 or 20 minutes"},
     "t-c3":       {ko:"주관적 평가", en:"Subjective check-in"},
     "t-c3s":      {ko:"1분 호흡 측정 · 오늘의 몸 느낌 · 일기", en:"a breath count, today\u2019s body, a line in the journal"},
     "t-c3m":      {ko:"오늘 순환을 마친 뒤가 아니어도 언제든", en:"open any time, not only after a round"},
@@ -650,7 +670,7 @@
     "t-lymph":    {ko:"비우고 · 림프절 순환", en:"Empty · lymphatic clearing"},
     "t-lymphnote":{ko:"1 귀밑에서 8 오금까지, 한 부위 스무 번 이상, 내 몸이 편안한 만큼. 말단에서 중심으로 가볍게 쓸어 비웁니다.", en:"From under the ear to behind the knee — twenty strokes or more at each site, as many as feel comfortable, always from the edge toward the centre."},
     "t-mapcap":   {ko:"1 귀밑 · 2 목 · 3 쇄골 · 4 겨드랑이 · 5 팔꿈치 · 6 복부 · 7 서혜부 · 8 무릎 뒤 오금", en:"1 under the ear · 2 neck · 3 collarbone · 4 armpit · 5 elbow · 6 abdomen · 7 groin · 8 behind the knee"},
-    "t-lymtime":  {ko:"15분 코스 — 부위당 약 1분 26초 · 스무 번 이상", en:"The 15-minute course — about 86 seconds a site, twenty strokes or more"},
+    "t-lymtime":  {ko:"15분 코스 — 부위당 1분 33초(한쪽 40초씩, 2초에 1회 스무 번) · 끝마다 손·팔 풀기 5초", en:"The 15-minute course — 93 seconds a site (40 seconds a side, twenty strokes at two seconds each), then 5 seconds to let the arms down"},
     "t-all8":     {ko:"15분 시작", en:"Start the 15 minutes"},
     "t-lymlist":  {ko:"여덟 부위 — 하나씩 골라 들을 수도 있습니다", en:"The eight sites — or play any one of them"},
     "t-restart":  {ko:"⟲ 처음부터", en:"⟲ Restart"},
@@ -687,7 +707,7 @@
     "t-effect":   {ko:"막힌 8곳의 림프길을 열어, 붓기·만성 염증·피로의 길을 비웁니다.", en:"Open the eight blocked lymphatic paths — the way out for swelling, chronic inflammation and fatigue."},
     "t-c1m":      {ko:"한 번에 15분 · 지도와 여덟 부위 보기", en:"15 minutes at once · see the map and the eight sites"},
     "t-start15":  {ko:"15분 시작", en:"Start the 15 minutes"},
-    "t-starthint":{ko:"한 번 누르면 숨 고르기부터 온기 채우기까지 15분이 이어집니다.", en:"One tap carries you from the settling breath to the warmth — 15 minutes."},
+    "t-starthint":{ko:"한 번 누르면 숨 고르기부터 전신 쓸기·온기 채우기까지 15분이 이어집니다.", en:"One tap carries you from the settling breath through the full sweep to the warmth — 15 minutes."},
     "t-after":    {ko:"오늘 한 번 하고 나면", en:"After one round today"},
     "t-afterbody":{ko:"<ul> <li>붓기와 무거움이 덜해지고, 손발이 따뜻해집니다.</li> <li>어깨·목이 풀리고 호흡이 한결 깊어집니다.</li> <li>머리가 맑아지고 마음이 가라앉습니다.</li> <li>매일 같은 시간에 하면 잠이 깊어지는 데 도움이 됩니다.</li> </ul>", en:"<ul><li>Swelling and heaviness ease, and the hands and feet grow warm.</li><li>Shoulders and neck let go, and the breath deepens.</li><li>The head clears and the mind settles.</li><li>Done at the same time each day, it helps sleep come deeper.</li></ul>"},
     "t-research": {ko:"왜 림프절인가요? — 림프 전이·만성 염증·피로 연구 근거", en:"Why the lymph nodes? — the evidence"},
@@ -699,36 +719,36 @@
      ========================================================= */
   const CONTENT = {
     ko:{
-      appName:"내 손안의 하루 15분 림프 리셋",
+      appName:"림프 · 선 리셋",
       fifteenTitle:"하루 15분 · 비우고 채우고",
+      dantianTitle:"채우고 · 단전주선",
       lymphTitle:"비우고 · 림프절 순환",
       lymphKind:"하루 15분 순환",
       lymphSite:"림프절 순환",
       lymphSub:"1 귀밑에서 8 오금까지, 한 부위 스무 번 이상, 내 몸이 편안한 만큼. 말단에서 중심으로 가볍게 쓸어 비웁니다.",
       gatherSite:"아랫배 · 단전",
       gatherCap:"아랫배에 마음을 모으고, 편안하게 숨을 고릅니다.",
-      gatherIntro:"배꼽 아래 단전에 마음을 모으고, 편안하게 몸과 마음을 이완하며 숨을 고릅니다. 서서, 앉아서, 누워서 어느 자세든 좋습니다. 이제 두 손바닥을 따뜻하게 비벼 주세요. 이 손의 온기로 여덟 곳의 림프절을 스무 번 이상 부드럽게 순환합니다.",
-      gatherCue2:"이제부터 여덟 부위를 하나씩, 말단에서 중심으로 가볍게 쓸어 비웁니다. 힘은 빼고, 손은 피부에 닿을 듯 가볍게.",
+      gatherIntro:"여덟 곳의 림프길을 열어 붓기와 피로, 만성 염증을 비우는 하루 15분 순환을 시작합니다. 배꼽 아래 단전에 마음을 모으고 몸과 마음을 편안히 이완해 주세요. 두 손바닥을 따뜻하게 비벼 주세요. 내 몸을 사랑스럽게 쓰다듬듯, 아기를 다루듯 부드럽고 적절한 세기로 쓸어 줄 때 림프 순환이 가장 잘 됩니다.",
+      gatherCue2:"이제부터 여덟 부위를 말단에서 중심으로 가볍게 쓸어 비웁니다. 힘은 빼고, 손은 피부에 닿을 듯 가볍게.",
       fillSite:"아랫배 · 단전",
       fillLead:"여덟 부위의 길을 모두 열었습니다. 이제 두 손을 아랫배에 얹고, 따뜻한 온기를 느낍니다.",
       fillCues:[
-        "두 손을 아랫배에 겹쳐 얹고, 손바닥의 온기를 느껴 봅니다.",
-        "숨은 세지 않고, 내 숨 길이 그대로. 숨이 단전을 지나갑니다.",
-        "아랫배가 따뜻해지는 느낌을 그대로 두고, 판단하지 않고 지켜봅니다.",
-        "머리에 모인 힘은 날숨과 함께 아랫배로 내려보냅니다.",
-        "어깨와 배의 힘을 풀고, 숨이 저절로 오가도록 맡깁니다.",
         "숨은 세지 않고 내 숨 길이 그대로, 바람에 스치듯 온몸의 피로가 가볍게 빠져나갑니다."
       ],
-      fifteenClose:"오늘도 몸의 강물이 맑게 열렸습니다. 가볍고 편안한 하루 보내세요.",
+      fifteenClose:"여덟 부위 순환과 전신 쓸기, 아랫배 온기 채우기를 모두 마쳤습니다. 붓기와 뭉침이 풀리고 호흡이 깊어지며, 숙면과 면역 회복에도 도움이 됩니다. 오늘도 몸의 강물이 맑게 열렸습니다. 가볍고 편안한 하루 보내세요.",
       lymphIntro:"편안하게 몸과 마음을 이완하며 숨을 고릅니다. 서서, 앉아서, 누워서 어느 자세든 좋습니다.",
       lymphIntroCap:"편안하게 숨을 고릅니다.",
       lymphMore:"편안히 이어가세요. 손은 피부에 닿을 듯 가볍게.",
       lymphAreaClose:"팔을 내려놓고 손끝을 가볍게 털어 주세요. 손에 뭉친 힘을 비워야 다음 순환이 더 잘 열립니다.",
       restLines:[
-        ["팔을 내려놓고 손끝을 가볍게 털어 주세요.", "손에 뭉친 힘을 비워야 다음 순환이 더 잘 열립니다."],
-        ["어깨와 손목을 툭 풀어 숨을 고릅니다.", "손끝이 가벼워져야 다음 부위로 온기가 잘 전해집니다."],
-        ["두 팔을 편안히 내리고 손목을 돌려 풀어 줍니다.", "고른 숨과 함께 다음 순환을 준비합니다."]
+        ["팔 내려놓고 손끝을 가볍게 털며 다음 순환을 준비합니다."],
+        ["어깨와 손목을 툭 풀어 다음 부위로 온기를 이어갑니다."],
+        ["두 팔을 내리고 손목을 돌려 풀며 다음 순환을 준비합니다."]
       ],
+      kSweep:"전신 쓸기",
+      sweepSite:"여덟 부위 전신 쓸기",
+      sweepCap:"여덟 부위를 하나로, 위에서 아래·중심으로 크게 쓸어 내립니다.",
+      sweepLead:"여덟 부위를 모두 열었습니다. 이제 귀밑에서 목과 쇄골, 가슴과 복부를 지나 다리 끝까지, 여덟 부위 전신을 위에서 아래·중심 방향으로 크게 쓸어 내리며 흐름을 하나로 이어 줍니다.",
       flip:"반대쪽도 같은 방향으로 합니다.",
       restKind:"숨 고르기",
       restCap:"팔을 내려놓고 숨 고르기",
@@ -770,7 +790,7 @@
          text2:"반대쪽 오금도 허벅지·서혜부 방향으로 쓸어 올립니다."}
       ],
       danTitle:"아랫배 단전에 온기 채우기",
-      danKind:"온기 채우기",
+      danKind:"단전주선",
       danSub:"숨은 억지로 세지 않고, 내 숨 길이 그대로. 마음을 아랫배에 내려놓습니다.",
       danIntro:"이제 마음을 아랫배 단전으로 내려놓고, 온기를 채웁니다. 앉아서도, 누워서도, 서서도 좋습니다. 숨은 몇 초로 재지 않습니다. 내 숨 길이 그대로 오가게 두고, 마음만 배꼽 아래의 따뜻한 느낌에 머뭅니다.",
       danIntroCap:"내 숨 길이 그대로, 마음은 아랫배에.",
@@ -784,7 +804,7 @@
       ],
       danEnd:"숨을 그대로 두고, 아랫배의 온기를 잠시 느껴 봅니다. 오늘도 몸의 강물이 맑게 열렸습니다. 가볍고 편안한 하루 보내세요.",
       danSite:"아랫배 · 단전",
-      danMinutes:[{v:2,l:"2분"}],
+      danMinutes:[{v:5,l:"5분"},{v:10,l:"10분"},{v:20,l:"20분"}],
       cmbTitle:"하루 15분 · 비우고 채우고",
       complete:"",
       doneTitle:"오늘의 순환을 마쳤습니다",
@@ -795,11 +815,12 @@
       guideTitle:"안내와 요령",
       guide:[
         {n:"1 · 숨 고르기 (아랫배·단전)", t:"시작하면 먼저 아랫배 단전에 마음을 모으고, 편안하게 몸과 마음을 이완하며 숨을 고릅니다. 두 손바닥을 비벼 따뜻해진 온기로 여덟 곳의 림프절을 스무 번 이상 부드럽게 순환합니다. 서서, 앉아서, 누워서 어느 자세든 좋습니다."},
-        {n:"2 · 비우기, 여덟 부위", t:"1 귀밑(양손으로 귀 뒤 턱 아래에서 뒷목으로) → 2 목(양손으로 뒷목에서 목 옆선을 따라 쇄골로) → 3 쇄골(한쪽씩, 검지·중지로 위 우묵한 곳을 중앙으로, 아래는 바깥에서 안쪽으로) → 4 겨드랑이(한쪽씩, 왼팔을 머리 위에 얹고 오른손으로 바깥에서 가슴 중앙으로, 톡톡) → 5 팔꿈치(한쪽씩, 손끝에서 팔꿈치를 지나 겨드랑이·쇄골로) → 6 복부(두 손 겹쳐, 내 손이 약손이다, 시계 방향) → 7 서혜부(아래에서 아랫배로 쓸어 올리거나 손날로 톡톡) → 8 오금(오금에서 허벅지를 타고 서혜부로). 부위마다 스무 번 이상, 내 몸이 편안한 만큼. 언제나 말단에서 중심으로, 손은 피부에 닿을 듯 가볍게. 한 부위가 끝나면 팔을 내려놓고 손끝을 털며 약 12초 쉽니다."},
-        {n:"3 · 온기 채우기 (아랫배·단전)", t:"두 손을 아랫배에 겹쳐 얹고, 따뜻한 온기를 느낍니다. 숨은 몇 초로 정하지 않고, 내 숨 길이 그대로 편안하게 오가게 둡니다. 생각이 떠오르면 붙잡지도 밀어내지도 말고 다시 아랫배로 돌아옵니다."},
-        {n:"4 · 주관적 평가", t:"운동을 마친 뒤, 또는 하루 중 아무 때나 1분 호흡을 재고 오늘의 몸 느낌을 골라 한 줄 메모와 함께 일기에 남깁니다."},
+        {n:"2 · 비우기, 여덟 부위", t:"1 귀밑(양손으로 귀 뒤 턱 아래에서 뒷목으로) → 2 목(양손으로 뒷목에서 목 옆선을 따라 쇄골로) → 3 쇄골(한쪽씩, 검지·중지로 위 우묵한 곳을 중앙으로, 아래는 바깥에서 안쪽으로) → 4 겨드랑이(한쪽씩, 왼팔을 머리 위에 얹고 오른손으로 바깥에서 가슴 중앙으로, 톡톡) → 5 팔꿈치(한쪽씩, 손끝에서 팔꿈치를 지나 겨드랑이·쇄골로) → 6 복부(두 손 겹쳐, 내 손이 약손이다, 시계 방향) → 7 서혜부(아래에서 아랫배로 쓸어 올리거나 손날로 톡톡) → 8 오금(오금에서 허벅지를 타고 서혜부로). 부위마다 스무 번 이상, 내 몸이 편안한 만큼. 언제나 말단에서 중심으로, 손은 피부에 닿을 듯 가볍게. 한 부위가 끝나면 팔을 내려놓고 손끝을 털며 약 5초 쉽니다."},
+        {n:"3 · 여덟 부위 전신 쓸기", t:"여덟 부위를 모두 열면, 귀밑에서 목과 쇄골, 가슴과 복부를 지나 다리 끝까지 여덟 부위 전신을 위에서 아래·중심 방향으로 크게 쓸어 내리며 흐름을 하나로 이어 줍니다. 동작이 끝난 뒤 몸이 하나로 가벼워지는 느낌을 잠시 느껴 봅니다."},
+        {n:"4 · 온기 채우기 (아랫배·단전)", t:"두 손을 아랫배에 겹쳐 얹고, 따뜻한 온기를 느낍니다. 숨은 몇 초로 정하지 않고, 내 숨 길이 그대로 편안하게 오가게 둡니다. 생각이 떠오르면 붙잡지도 밀어내지도 말고 다시 아랫배로 돌아옵니다."},
+        {n:"5 · 주관적 평가", t:"운동을 마친 뒤, 또는 하루 중 아무 때나 1분 호흡을 재고 오늘의 몸 느낌을 골라 한 줄 메모와 함께 일기에 남깁니다."},
         {n:"주의할 점", t:"림프절은 절대 세게 누르지 않습니다. 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 말고 손바닥으로 덮기만 합니다. 식사 후 가볍게 몸을 비우는 운동으로도 활용할 수 있으며, 식후라면 복부만 누르지 말고 살며시 스치듯 지나갑니다. 음주 후에는 무리하지 마세요. 임신 중이거나 치료 중인 질환이 있으면 의료진과 상의해 주세요."},
-        {n:"코스에 대해", t:"하루 한 번 15분입니다. 숨 고르기 약 1분, 여덟 부위 부위당 약 1분 26초(스무 번 이상, 부위 끝 손·팔 풀며 숨 고르기 12초 포함), 온기 채우기 약 2분, 마무리 인사로 이어집니다. 10분·15분을 고르지 않고 15분 하나로 두었습니다."},
+        {n:"코스에 대해", t:"하루 한 번, 전체 15분입니다. 숨 고르기와 마사지 강도 안내로 시작해, 여덟 부위를 부위당 1분 33초(한쪽 40초씩 2초에 1회 스무 번, 부위 끝 손·팔 풀기 5초)씩 순환하고, 여덟 부위 전신 쓸기 35초, 아랫배 온기 채우기, 마지막 효과와 마무리 인사로 이어집니다. 전체는 15분 25초입니다. 단전주선만 따로 하실 때는 5분·10분·20분 중에 고르시면 됩니다."},
         {n:"기대 효과", t:"부기와 뭉침을 덜고, 호흡이 깊어지며 마음이 가라앉습니다. 매일 같은 시간에 하면 몸이 리듬을 기억합니다."}
       ],
       listen:"설명 듣기",
@@ -845,36 +866,36 @@
     },
 
     en:{
-      appName:"My 15-Minute Lymph Reset",
+      appName:"Lymph · Seon Reset",
       fifteenTitle:"15 minutes · empty and fill",
+      dantianTitle:"Fill · dantian sitting",
       lymphTitle:"Empty · lymphatic clearing",
       lymphKind:"15-MINUTE ROUND",
       lymphSite:"Lymphatic clearing",
       lymphSub:"From under the ear to behind the knee, twenty strokes or more at each site — as many as feel comfortable. Always from the edge toward the centre.",
       gatherSite:"Lower belly · dantian",
       gatherCap:"Settle the mind in the lower belly and let the breath come easily.",
-      gatherIntro:"Let the mind gather below the navel, and let the body and mind soften as the breath settles. Standing, sitting or lying down — any position is fine. Now rub your palms together warm. With that warmth, circulate the eight lymph sites gently, twenty strokes or more.",
+      gatherIntro:"We begin the fifteen-minute round that opens the eight lymphatic paths and empties swelling, fatigue and chronic inflammation. Gather the mind below the navel, and let body and mind soften and relax. Now rub your palms together warm. Swept with love, as gently as you would handle a baby, at a pressure that is just right — that is when lymph flows best.",
       gatherCue2:"Now we clear the eight sites one by one, from the edges toward the centre. No force — the hand barely touching the skin.",
       fillSite:"Lower belly · dantian",
       fillLead:"The paths of all eight sites are open. Now rest both hands on the lower belly and feel the warmth.",
       fillCues:[
-        "Rest both palms together on the lower belly and feel the warmth of your hands.",
-        "No counting — let the breath keep its own length and pass through the lower belly.",
-        "Leave the warmth in the belly exactly as it is, and watch it without judging.",
-        "Send any heat gathered in the head down to the lower belly with the out-breath.",
-        "Let the shoulders and the belly soften, and let the breath come and go on its own.",
         "No counting, your own breath as it is — light as a passing breeze, the fatigue of the whole body slips away."
       ],
-      fifteenClose:"Today the river of the body has opened clear again. Have a light and comfortable day.",
+      fifteenClose:"The eight sites, the full sweep and the warmth below the navel are all complete. Swelling and tightness ease, the breath deepens, and it helps deep sleep and immune recovery. Today the river of the body has opened clear again. Have a light and comfortable day.",
       lymphIntro:"Let the body and mind soften as the breath settles. Standing, sitting or lying down — any position is fine.",
       lymphIntroCap:"Let the breath settle easily.",
       lymphMore:"Keep going comfortably — the hand barely touching the skin.",
       lymphAreaClose:"Let the arms down and shake the fingertips lightly. Releasing the grip in the hands opens the next round.",
       restLines:[
-        ["Let the arms down and shake the fingertips lightly.", "Releasing the grip in the hands opens the next round."],
-        ["Let the shoulders and wrists go soft, and take a breath.", "Light fingertips carry the warmth to the next site."],
-        ["Lower both arms comfortably and roll the wrists loose.", "With an even breath, get ready for the next round."]
+        ["Let the arms down and shake the fingertips lightly, ready for the next round."],
+        ["Let the shoulders and wrists go soft, carrying the warmth to the next site."],
+        ["Lower both arms and roll the wrists loose, ready for the next round."]
       ],
+      kSweep:"FULL SWEEP",
+      sweepSite:"The sweep over all eight sites",
+      sweepCap:"All eight sites as one long sweep, from above downward toward the centre.",
+      sweepLead:"All eight sites are open. Now, from under the ear through the neck and collarbone, the chest and the abdomen, down to the ends of the legs — sweep the whole body from above downward, toward the centre, and let the flow become one.",
       flip:"Now the other side, the same direction.",
       restKind:"BREATH",
       restCap:"Arms down, let the breath settle",
@@ -916,7 +937,7 @@
          text2:"The other side too, along the thigh toward the groin."}
       ],
       danTitle:"Gather the warmth below the navel",
-      danKind:"GATHERING WARMTH",
+      danKind:"DANTIAN SITTING",
       danSub:"No counting, no set length \u2014 your own breath, at its own pace. Let the mind rest in the lower belly.",
       danIntro:"Now let the mind settle in the lower belly and gather the warmth there. Sit, lie down, or stand as you like. There is no number of seconds to count; let the breath keep its own length and rest your attention in the warmth below the navel.",
       danIntroCap:"Your own breath, at its own pace, the mind in the lower belly.",
@@ -930,7 +951,7 @@
       ],
       danEnd:"Leave the breath as it is, and rest a moment in the warmth of the lower belly. Today the river of the body has opened clear. Have a light and comfortable day.",
       danSite:"Lower belly · dantian",
-      danMinutes:[{v:2,l:"2 min"}],
+      danMinutes:[{v:5,l:"5 min"},{v:10,l:"10 min"},{v:20,l:"20 min"}],
       cmbTitle:"15 minutes · empty and fill",
       complete:"",
       doneTitle:"Today\u2019s round is complete",
@@ -941,11 +962,12 @@
       guideTitle:"Practice notes",
       guide:[
         {n:"1 · Settling (lower belly · dantian)", t:"First the mind gathers in the lower belly, and the body and mind soften as the breath settles. Rub the palms warm, and with that warmth circulate the eight lymph sites gently, twenty strokes or more. Standing, sitting or lying down — any position is fine."},
-        {n:"2 · Emptying, the eight sites", t:"1 under the ear (both hands, from the hollow behind the ear toward the nape) → 2 neck (both hands, nape along the side of the neck to the collarbone) → 3 collarbone (one side, two fingers gathering the hollow toward the centre, the palm below sweeping from the outside in) → 4 armpit (one side, left arm over the head, right hand from the outside toward the centre of the chest, then pat) → 5 elbow (one side, fingertips past the elbow toward the armpit and collarbone) → 6 abdomen (both palms, my hand is a healing hand, clockwise) → 7 groin (sweep up toward the lower belly, or pat with the edge of the hand) → 8 behind the knee (up along the thigh toward the groin). Twenty strokes or more a site, as many as feel comfortable — always from the edges toward the centre, the hand barely touching the skin. Each site ends by letting the arms down and shaking the fingertips, with about twelve seconds of rest."},
-        {n:"3 · Gathering the warmth (lower belly · dantian)", t:"Both palms together in the lower belly, feeling the warmth. There is no set number of seconds; the breath keeps its own length. When a thought appears, neither hold it nor push it away — simply return to the lower belly."},
-        {n:"4 · Subjective check-in", t:"After practice, or at any point in the day: count a minute of breaths, choose how today's body felt, and keep it with a line in the journal."},
+        {n:"2 · Emptying, the eight sites", t:"1 under the ear (both hands, from the hollow behind the ear toward the nape) → 2 neck (both hands, nape along the side of the neck to the collarbone) → 3 collarbone (one side, two fingers gathering the hollow toward the centre, the palm below sweeping from the outside in) → 4 armpit (one side, left arm over the head, right hand from the outside toward the centre of the chest, then pat) → 5 elbow (one side, fingertips past the elbow toward the armpit and collarbone) → 6 abdomen (both palms, my hand is a healing hand, clockwise) → 7 groin (sweep up toward the lower belly, or pat with the edge of the hand) → 8 behind the knee (up along the thigh toward the groin). Twenty strokes or more a site, as many as feel comfortable — always from the edges toward the centre, the hand barely touching the skin. Each site ends by letting the arms down and shaking the fingertips, with about five seconds of rest."},
+        {n:"3 · The sweep over all eight sites", t:"Once all eight are open, sweep the whole body — from under the ear through the neck and collarbone, the chest and the abdomen, down to the ends of the legs — from above downward toward the centre, and let the flow become one. Then rest a moment in how the body feels, lighter and joined together."},
+        {n:"4 · Gathering the warmth (lower belly · dantian)", t:"Both palms together in the lower belly, feeling the warmth. There is no set number of seconds; the breath keeps its own length. When a thought appears, neither hold it nor push it away — simply return to the lower belly."},
+        {n:"5 · Subjective check-in", t:"After practice, or at any point in the day: count a minute of breaths, choose how today's body felt, and keep it with a line in the journal."},
         {n:"Cautions", t:"Never press a lymph node hard. Do not press the windpipe or the armpit on the operated side — cover it with the palm. The fifteen minutes can also serve as a light after-meal practice for clearing the body; right after eating, do not press the abdomen, just let the hand pass lightly over it. Do not overdo it after drinking. If you are pregnant or under treatment for an illness, please speak with your doctor first."},
-        {n:"About this course", t:"One round a day, fifteen minutes: about a minute of settling, about eighty-six seconds for each of the eight sites (twenty strokes or more, including twelve seconds of letting the arms down at its end), about two minutes of gathering warmth, then the closing words. There is no 10- or 15-minute choice — just the one fifteen-minute course."},
+        {n:"About this course", t:"One round a day, fifteen minutes in all: the settling breath and the note on pressure, then the eight sites at ninety-three seconds each (forty seconds a side, twenty strokes at two seconds each, and five seconds to let the arms down), a thirty-five-second sweep over all eight sites, gathering the warmth below the navel, and the closing words with the effect — fifteen minutes twenty-five seconds in all. The dantian sitting on its own comes in five, ten or twenty minutes."},
         {n:"What it may bring", t:"Less swelling and heaviness, a deeper breath and a quieter mind. Done at the same time each day, the body learns the rhythm."}
       ],
       listen:"Listen",
@@ -1076,8 +1098,8 @@
     });
 
     document.title = state.lang === "ko"
-      ? "내 손안의 하루 15분 림프 리셋 · 비우고 채우고"
-      : "My 15-Minute Lymph Reset";
+      ? "림프 · 선 리셋 · 하루 15분"
+      : "Lymph · Seon Reset";
 
     ["voice","bell","bgm","beat"].forEach(k=>{
       const b = $("sw-" + k);
@@ -1092,12 +1114,13 @@
     const banner = $("inapp");
     if(banner && banner.classList.contains("show")){
       banner.innerHTML = state.lang === "ko"
-        ? "📱 카카오톡 같은 앱 안의 브라우저에서는 안내 음성이 들리지 않을 수 있습니다. 오른쪽 위 <strong>⋮ → 다른 브라우저로 열기</strong>를 눌러 크롬이나 삼성 인터넷으로 열어 주세요."
-        : "📱 Inside an in-app browser (such as KakaoTalk) the spoken guidance may not play. Tap <strong>⋮ → Open in browser</strong> and choose Chrome or Samsung Internet.";
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.6" y="2.8" width="10.8" height="18.4" rx="2.4"/><path d="M10.6 18.4h2.8"/></svg>카카오톡 같은 앱 안의 브라우저에서는 안내 음성이 들리지 않을 수 있습니다. 오른쪽 위 <strong>⋮ → 다른 브라우저로 열기</strong>를 눌러 크롬이나 삼성 인터넷으로 열어 주세요.'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.6" y="2.8" width="10.8" height="18.4" rx="2.4"/><path d="M10.6 18.4h2.8"/></svg>Inside an in-app browser (such as KakaoTalk) the spoken guidance may not play. Tap <strong>⋮ → Open in browser</strong> and choose Chrome or Samsung Internet.';
     }
 
     $("map-img").alt = state.lang === "ko" ? "림프절 부위 지도" : "Map of the eight lymph sites";
 
+    renderMinChips();
     renderRateChips();
     renderToneChips();
     renderLymphList();
@@ -1168,6 +1191,19 @@
   /* =========================================================
      Chips
      ========================================================= */
+  function renderMinChips(){
+    const box = $("min-chips");
+    if(!box) return;
+    box.innerHTML = "";
+    C().danMinutes.forEach(m=>{
+      const b = document.createElement("button");
+      b.className = "chip" + (state.danMin === m.v ? " on" : "");
+      b.textContent = m.l;
+      b.onclick = (e)=>{ e.stopPropagation(); state.danMin = m.v; renderMinChips(); saveSettings(); };
+      box.appendChild(b);
+    });
+  }
+
   function renderRateChips(){
     const box = $("rate-chips");
     box.innerHTML = "";
@@ -1204,7 +1240,7 @@
      lower belly, eight sites at eighty-six seconds each (twenty strokes or more,
      twelve seconds of quiet at the end), about two minutes gathering the warmth,
      then the closing words. */
-  const FIFTEEN = {per:86, rest:12, strokes:20, fill:19};
+  const FIFTEEN = {per:93, rest:5, strokes:20, fill:14, sweep:35};
 
   function renderLymphList(){
     const box = $("lymph-list");
@@ -1742,16 +1778,17 @@
     const per = FIFTEEN.per, rest = FIFTEEN.rest, strokes = FIFTEEN.strokes;
     const G = SPEECH_GAP_MS / 1000;
 
-    /* ① 아랫배 단전에 마음 모으고 숨 고르기 — 한 문장씩, 자막도 한 줄씩 */
+    /* ① 숨 고르기 — 첫 멘트는 효과부터, 이어서 마사지 강도 — 한 문장씩, 자막도 한 줄씩 */
     const gsp = [];
     const g1End = pushSentences(gsp, c.gatherIntro, 0, G);
-    const g2At = g1End + 4;
+    const g2At = g1End + 2.5;
     const g2End = pushSentences(gsp, c.gatherCue2, g2At, G);
-    const gDur = Math.max(30, Math.round(g2End + 4));
+    const gDur = Math.max(30, Math.round(g2End + 3));
     steps.push(stepOf({dur:gDur, kicker:c.kGather, site:c.gatherSite, count:0,
       caption:c.gatherCap, speech:gsp}));
 
-    /* ② 여덟 부위 림프 비우기 — 양손 부위에만 중간 안내 한 줄, 끝마다 손·팔 풀기 3문장 순환 */
+    /* ② 여덟 부위 림프 비우기 — 부위당 93초(동작 약 79초, 한쪽 40초씩 + 손·팔 풀기 5초),
+          양손 부위에만 중간 안내 한 줄, 끝마다 손·팔 풀기 한 줄이 3가지로 순환 */
     c.areas.forEach((a, i)=>{
       const laid = lymphAreaSpeech(a, per, c, i, {
         rest:rest, strokes:strokes,
@@ -1764,7 +1801,14 @@
         speech:laid.speech, group:"area" + i, area:i}));
     });
 
-    /* ③ 아랫배에 온기 채우기 */
+    /* ③ 여덟 부위 전신 쓸기 — 귀밑에서 다리 끝까지, 위에서 아래·중심으로 크게 한 번에 */
+    const ssp = [];
+    const swEnd = pushSentences(ssp, c.sweepLead, 0, G);
+    steps.push(stepOf({dur:Math.max(FIFTEEN.sweep, Math.round(swEnd + 3)),
+      kicker:c.kSweep, site:c.sweepSite, count:0, caption:c.sweepCap,
+      speech:ssp, group:"sweep"}));
+
+    /* ④ 아랫배에 온기 채우기 */
     steps.push(stepOf({dur:Math.max(16, Math.round(estSpeech(c.fillLead) + 3)),
       kicker:c.kFill, site:c.fillSite, count:0, caption:c.fillLead,
       speech:[{at:0, text:c.fillLead}], group:"filllead", endOnSpeech:true}));
@@ -1773,12 +1817,13 @@
         caption:q, speech:[{at:0, text:q}], group:"fill"}));
     });
 
-    /* ④ 마무리 인사 — 마지막 안내가 끝나면 1초 남짓 뒤에 이어집니다 */
+    /* ⑤ 마지막 효과와 마무리 인사 — 마지막 안내가 끝나면 1초 남짓 뒤에 이어집니다 */
     const csp = [];
     const cEnd = pushSentences(csp, c.fifteenClose, 0, G);
-    const closeDur = Math.max(10, Math.round(cEnd + 1.4));
+    const closeDur = Math.max(10, Math.round(cEnd + 2));
     steps.push(stepOf({dur:closeDur, kicker:c.closeSite, site:c.closeAll, count:0,
       caption:c.fifteenClose, speech:csp, group:"close"}));
+
     return steps;
   }
 
@@ -1807,6 +1852,37 @@
       caption:a.pos + " · " + a.dir, speech:laid.speech, group:"area" + idx, area:idx}));
     steps.push(stepOf({dur:closeDur, kicker:c.closeSite, site:c.closeSite, count:0,
       caption:c.singleClose, speech:csp, group:"close"}));
+    return steps;
+  }
+
+  /* the dantian sitting on its own: 5, 10 or 20 minutes, no counting of the breath */
+  function buildDantian(min){
+    const c = C();
+    const steps = [];
+    const total = Math.max(120, Math.round(min * 60));
+    const G = SPEECH_GAP_MS / 1000;
+    const intro = Math.max(12, Math.round(estSpeech(c.danIntro) + 2));
+    const csp = [];
+    const cEnd = pushSentences(csp, c.danEnd, 0, G);
+    const close = Math.max(12, Math.round(cEnd + 2));
+
+    steps.push(stepOf({dur:intro, kicker:c.kDan, site:c.danSite, count:0,
+      caption:c.danIntroCap, speech:[{at:0, text:c.danIntro}], group:"intro", endOnSpeech:true}));
+
+    /* the quiet between cues is one long breath and a half — a cue every forty-five seconds */
+    const span = Math.max(60, total - intro - close);
+    const n = Math.max(1, Math.round(span / 45));
+    const each = Math.floor(span / n);
+    let used = intro;
+    for(let i = 0; i < n; i++){
+      const d = (i === n - 1) ? (total - close - used) : each;
+      const cue = c.danCues[i % c.danCues.length];
+      steps.push(stepOf({dur:Math.max(12, d), kicker:c.kDan, site:c.danSite, count:0,
+        caption:cue, speech:[{at:0, text:cue}], group:"dan"}));
+      used += Math.max(12, d);
+    }
+    steps.push(stepOf({dur:Math.max(close, total - used), kicker:c.closeSite, site:c.closeSite, count:0,
+      caption:c.danEnd, speech:csp, group:"close"}));
     return steps;
   }
 
@@ -2067,6 +2143,7 @@
   function sessionLabel(){
     const c = C();
     if(session.mode === "lymphOne") return c.areas[session.areaIndex].name;
+    if(session.mode === "dantian") return c.dantianTitle;
     return c.fifteenTitle;
   }
 
@@ -2096,10 +2173,15 @@
   function again(){
     if(!lastSession.mode){ showTab("home"); return; }
     if(lastSession.mode === "lymphOne") startLymphOne(lastSession.areaIndex || 0);
+    else if(lastSession.mode === "dantian") startDantian(lastSession.min || lastSession.minutes || state.danMin);
     else startFifteen();
   }
 
   function startFifteen(){ startSession(buildFifteen(), "fifteen", C().lymphKind, {min:15}); }
+  function startDantian(min){
+    const m = min || state.danMin || 5;
+    startSession(buildDantian(m), "dantian", C().danKind, {min:m});
+  }
   function startLymphAll(){ startFifteen(); }
   function startLymphOne(i){ startSession(buildLymphOne(i), "lymphOne", C().lymphKind, {areaIndex:i, min:15}); }
 
@@ -2300,9 +2382,12 @@
     toast(state.lang === "ko" ? "일기를 저장했습니다." : "Saved to your journal.");
   }
 
+  const BREATH_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 8.2h9.5a2.55 2.55 0 1 0-2.55-2.55"/><path d="M3.4 13.2h11.7a2.55 2.55 0 1 1-2.55 2.55"/><path d="M3.4 18.2h6.3"/></svg>';
+
   function diaryLabel(item){
     const c = C();
-    if(item.mode === "fifteen" || item.mode === "lymph" || item.mode === "dantian" || item.mode === "combined") return c.fifteenTitle;
+    if(item.mode === "dantian") return c.dantianTitle;
+    if(item.mode === "fifteen" || item.mode === "lymph" || item.mode === "combined") return c.fifteenTitle;
     if(item.mode === "lymphOne") return c.areas[item.areaIndex || 0] ? c.areas[item.areaIndex || 0].name : c.lymphTitle;
     if(item.mode === "eval") return c.evalTitle;
     if(item.mode === "breath") return c.breath.label;
@@ -2352,7 +2437,7 @@
       if(hasB){
         const bb = (item.breathBefore === null || item.breathBefore === undefined) ? "-" : item.breathBefore;
         const ba = (item.breathAfter === null || item.breathAfter === undefined) ? "-" : item.breathAfter;
-        html += '<div class="d-meta">🌬️ ' + (ko ? "호흡 " : "breath ") + bb + " → " + ba +
+        html += '<div class="d-meta">' + BREATH_ICON + ' ' + (ko ? "호흡 " : "breath ") + bb + " → " + ba +
                 (ko ? "회/분" : " per min") + '</div>';
       }
       if(item.lymphV || item.danV){
@@ -2462,6 +2547,7 @@
   window.showTab = showTab;
   window.openLymph = openLymph;
   window.startFifteen = startFifteen;
+  window.startDantian = startDantian;
   window.startLymphAll = startFifteen;
   window.startLymphOne = startLymphOne;
   window.openEval = openEval;
