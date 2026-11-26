@@ -1808,6 +1808,7 @@
   }
   /* every line starts the same way, so its real ending can be timed */
   function speakCue(sp){
+    if(sp.plan == null) sp.plan = sp.at;   /* 자리를 옮기기 전의 원래 시각 */
     session.lastSpokenAt = sp.at;
     session.cueText = sp.text;
     session.cueStartAt = stepElapsed();
@@ -2464,7 +2465,8 @@
          예상보다 빠르면 기다리지 않고, 늦어도 앞 줄을 끊지 않습니다 */
       if(i > 0 && s.pace && session.cueEndAt != null && session.cueEndFor === s.speech[i - 1].at){
         const prev = s.speech[i - 1];
-        const plannedGap = sp.at - (prev.at + estSpeech(prev.text, s.pace));
+        const prevPlan = (prev.plan == null) ? prev.at : prev.plan;
+        const plannedGap = sp.at - (prevPlan + estSpeech(prev.text, s.pace));
         /* 같은 숨으로 이어지는 줄만 당깁니다. 일부러 두는 긴 침묵(쓰다듬는 시간)은 그대로 */
         if(plannedGap <= 1.2){
           at = Math.max(sp.at - 20, Math.min(sp.at, session.cueEndAt + s.pace.gap + 0.12));
