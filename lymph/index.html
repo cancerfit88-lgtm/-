@@ -1795,8 +1795,6 @@
     if(!session || !session.active) return;
     const st = session.steps[session.idx];
     if(!st) return;
-    const last = st.speech[st.speech.length - 1];
-    if(!last || last.text !== text) return;
     const at = stepElapsed();
     /* a line cannot be read in half a second — an engine that says so is
        reporting early, and the estimate keeps the pace instead */
@@ -1804,7 +1802,8 @@
       session.cueEndAt = at;
       session.cueEndFor = session.lastSpokenAt;
     }
-    if(st.endOnSpeech && session.voiceEnd == null) session.voiceEnd = at;
+    const last = st.speech[st.speech.length - 1];
+    if(st.endOnSpeech && session.voiceEnd == null && last && last.text === text) session.voiceEnd = at;
   }
   /* every line starts the same way, so its real ending can be timed */
   function speakCue(sp){
