@@ -367,6 +367,24 @@
   .bar-thin.dan{background:linear-gradient(180deg,#E4C580,#8E6B23)}
   .legend i.leaf{background:#4E6E58}
   .legend i.gold{background:#8E6B23}
+
+  /* ---------- 부제목·설명문 정렬 통일 ---------- */
+  /* 카드 좌우 여백 16px — 카드마다 글 시작선이 어긋나지 않게 */
+  .duo-card{padding-left:16px;padding-right:16px}
+  .card{padding-left:16px;padding-right:16px}
+  .acc-head{padding-left:16px;padding-right:16px}
+  .acc-body{padding-left:16px;padding-right:16px}
+  /* 부제목·설명문 — 왼쪽 정렬, 줄간격 1.6~1.7, 제목 아래 5px */
+  .duo-sub,.psub,.pmeta,.entrybtn .es,.ahow,.g-how,.ptxt span,.sec-note,.ev-note,.hint,.mapcap{text-align:left;word-break:keep-all;text-wrap:pretty}
+  .duo-sub{margin-top:7px;font-size:15px;line-height:1.6}
+  .psub{margin-top:5px;font-size:14.5px;line-height:1.6}
+  .pmeta{margin-top:5px;line-height:1.55}
+  .g-how,.ptxt span,.ahow,.sec-note{line-height:1.7}
+  .core-note{line-height:1.75}
+  /* 상단 히어로 부제목 — 의미 단위 두 줄, 가운데 정렬 */
+  .brand-sub{margin-top:10px;line-height:1.65;text-align:center}
+  .hero-txt .h2{text-wrap:balance}
+  html[lang="en"] .brand-sub{font-size:14.5px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -379,7 +397,7 @@
     </div>
     <div class="eyebrow" id="t-eyebrow">하루 15분 · 매일의 회복</div>
     <h1 class="brand" id="t-brand">림프 · 선(禪) 리셋<span class="rule"></span></h1>
-    <div class="brand-sub" id="t-brandsub">배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기 · 전신 쓸기 · 온기 채우기</div>
+    <div class="brand-sub" id="t-brandsub">배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기<br />전신 쓸기 · 온기 채우기</div>
     <div class="visits" id="visits" aria-live="polite"></div>
   </header>
 
@@ -827,8 +845,8 @@
 
 <nav class="bnav">
   <div class="bnav-in">
-    <button id="nav-home" class="on" onclick="showTab('home')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2.2"/><path d="M12 6.9v6.5"/><path d="M6.9 9.4 12 10.9l5.1-1.5"/><path d="m12 13.4-3.1 6.4"/><path d="m12 13.4 3.1 6.4"/></svg></span><span id="t-navhome">운동</span></button>
-    <button id="nav-breath" onclick="showTab('breath')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 8.2h9.5a2.55 2.55 0 1 0-2.55-2.55"/><path d="M3.4 13.2h11.7a2.55 2.55 0 1 1-2.55 2.55"/><path d="M3.4 18.2h6.3"/></svg></span><span id="t-navbreath">호흡</span></button>
+    <button id="nav-home" class="on" onclick="showTab('home')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2.2"/><path d="M12 6.9v6.5"/><path d="M6.9 9.4 12 10.9l5.1-1.5"/><path d="m12 13.4-3.1 6.4"/><path d="m12 13.4 3.1 6.4"/></svg></span><span id="t-navhome">림프·선</span></button>
+    <button id="nav-breath" onclick="showTab('breath')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 8.2h9.5a2.55 2.55 0 1 0-2.55-2.55"/><path d="M3.4 13.2h11.7a2.55 2.55 0 1 1-2.55 2.55"/><path d="M3.4 18.2h6.3"/></svg></span><span id="t-navbreath">호흡재기</span></button>
     <button id="nav-diary" onclick="showTab('diary')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5.2A1.7 1.7 0 0 1 6.7 3.5H19v15.3H6.7A1.7 1.7 0 0 0 5 20.5z"/><path d="M5 17.4h14"/><path d="M8.6 7.4h6.6"/><path d="M8.6 10.6h4.4"/></svg></span><span id="t-navdiary">일기</span></button>
   </div>
 </nav>
@@ -847,7 +865,7 @@
   const UI = {
     "t-eyebrow":  {ko:"하루 15분 · 매일의 회복", en:"15 MINUTES A DAY"},
     "t-brand":    {ko:"림프 · 선(禪) 리셋", en:"Lymph · Seon Reset"},
-    "t-brandsub": {ko:"배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기 · 전신 쓸기 · 온기 채우기", en:"Settle below the navel · clear the eight sites · sweep the whole body · gather the warmth"},
+    "t-brandsub": {ko:"배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기<br />전신 쓸기 · 온기 채우기", en:"Settle below the navel · clear the eight sites<br />Sweep the whole body · gather the warmth"},
     "t-hero1":    {ko:"오늘도 몸의 강물을 맑게", en:"Let the river of the body run clear"},
     "t-hero2":    {ko:"하루 15분, 한 번이면 충분합니다.", en:"Fifteen minutes a day is enough — once."},
     "t-c1":       {ko:"비우기 · 림프 순환", en:"Empty · lymphatic clearing"},
@@ -926,8 +944,8 @@
     "t-legend":   {ko:"<span><i class=\"leaf\"></i>1 비우기 · 림프 순환</span><span><i class=\"gold\"></i>2 채우기 · 단전주선</span>", en:"<span><i class=\"leaf\"></i>1 Empty · lymph</span><span><i class=\"gold\"></i>2 Fill · dantian</span>"},
     "t-journal":  {ko:"건강 일기", en:"Health journal"},
     "t-copy":     {ko:"전체 복사", en:"Copy all"},
-    "t-navhome":  {ko:"운동", en:"Practice"},
-    "t-navbreath":{ko:"호흡", en:"Breath"},
+    "t-navhome":  {ko:"림프·선", en:"Reset"},
+    "t-navbreath":{ko:"호흡재기", en:"Breath"},
     "t-navdiary": {ko:"일기", en:"Journal"},
     "t-effect":   {ko:"막힌 8곳의 림프길을 열어, 붓기·만성 염증·피로의 길을 비웁니다.", en:"Open the eight blocked lymphatic paths — the way out for swelling, chronic inflammation and fatigue."},
     "t-c1m":      {ko:"여덟 부위 지도 보기 ›", en:"see the map of the eight sites ›"},
