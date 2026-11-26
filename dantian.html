@@ -1796,9 +1796,10 @@
     const st = session.steps[session.idx];
     if(!st) return;
     const at = stepElapsed();
-    /* a line cannot be read in half a second — an engine that says so is
-       reporting early, and the estimate keeps the pace instead */
-    if(session.cueStartAt != null && at - session.cueStartAt >= 0.5){
+    /* a line that says it has finished in a third of the time it needs is
+       reporting early — then the estimate keeps the pace instead */
+    const floorDur = Math.max(0.5, estSpeech(session.cueText || "", st.pace || null) * 0.35);
+    if(session.cueStartAt != null && at - session.cueStartAt >= floorDur){
       session.cueEndAt = at;
       session.cueEndFor = session.lastSpokenAt;
     }
@@ -1808,6 +1809,7 @@
   /* every line starts the same way, so its real ending can be timed */
   function speakCue(sp){
     session.lastSpokenAt = sp.at;
+    session.cueText = sp.text;
     session.cueStartAt = stepElapsed();
     speak(sp.text);
   }
@@ -2409,6 +2411,7 @@
     session.cueEndAt = null;
     session.cueEndFor = null;
     session.cueStartAt = null;
+    session.cueText = "";
     session.lastSpokenAt = null;
     if(session.idx === 0 && !session.noStartBell) playBell(1);
     renderPractice();
@@ -2460,9 +2463,8 @@
       /* 줄이 끝난 그 자리에서 다음 줄이 이어지도록 — 이 기기의 목소리가
          예상보다 빠르면 기다리지 않고, 늦어도 앞 줄을 끊지 않습니다 */
       if(i > 0 && s.pace && session.cueEndAt != null && session.cueEndFor === s.speech[i - 1].at){
-        const g = (s.pace ? s.pace.gap : SPEECH_GAP_MS / 1000);
-        const floorAt = sp.at - Math.max(1.5, estSpeech(sp.text, s.pace || null) * 0.7);
-        at = Math.max(floorAt, Math.min(sp.at, session.cueEndAt + g + 0.12));
+        const g = s.pace.gap;
+        at = Math.max(sp.at - 20, Math.min(sp.at, session.cueEndAt + g + 0.12));
       }
       if(e >= at){
         /* 앞당겨 말한 줄은 자막의 시각도 함께 당겨, 목소리와 자막이 어긋나지 않게 */
