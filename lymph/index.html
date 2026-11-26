@@ -2805,7 +2805,7 @@
         : (kind === "dan" ? (item.danV ? ["d" + item.danV] : []) : (item.lymphV ? ["l" + item.lymphV] : []));
       if(kind){
         html += '<div><span class="d-tag ' + (kind === "dan" ? "gold" : "leaf") + '">' +
-          (kind === "dan" ? (ko ? "2 채우기 · 단전주선" : "2 Fill · dantian") : (ko ? "1 비우기 · 림프 순환" : "1 Empty · lymph")) +
+          (kind === "dan" ? (ko ? "단전주선" : "dantian") : (ko ? "림프 순환" : "lymph")) +
           '</span></div>';
       }
       if(keys.length){
