@@ -1789,14 +1789,28 @@
   }
   /* A preamble step marked endOnSpeech records the moment its last line
      really finished, so the first action can follow within a breath instead
-     of waiting out the estimated reading time. */
+     of waiting out the estimated reading time. Every finished line also marks
+     its own end, so the next line can follow the voice this phone really has. */
   function noteCueDone(text){
     if(!session || !session.active) return;
     const st = session.steps[session.idx];
-    if(!st || !st.endOnSpeech || session.voiceEnd != null) return;
+    if(!st) return;
     const last = st.speech[st.speech.length - 1];
     if(!last || last.text !== text) return;
-    session.voiceEnd = stepElapsed();
+    const at = stepElapsed();
+    /* a line cannot be read in half a second — an engine that says so is
+       reporting early, and the estimate keeps the pace instead */
+    if(session.cueStartAt != null && at - session.cueStartAt >= 0.5){
+      session.cueEndAt = at;
+      session.cueEndFor = session.lastSpokenAt;
+    }
+    if(st.endOnSpeech && session.voiceEnd == null) session.voiceEnd = at;
+  }
+  /* every line starts the same way, so its real ending can be timed */
+  function speakCue(sp){
+    session.lastSpokenAt = sp.at;
+    session.cueStartAt = stepElapsed();
+    speak(sp.text);
   }
 
   function speak(text, opts){
@@ -2265,7 +2279,7 @@
     const cEnd = pushSentences(csp, c.fifteenClose, 0, G, pace);
     const closeDur = Math.max(10, Math.round(cEnd + 7));
     steps.push(stepOf({dur:closeDur, kicker:c.closeSite, site:c.closeAll, count:0,
-      caption:c.fifteenClose, speech:csp, pace:pace, group:"close",
+      caption:c.fifteenClose, speech:csp, pace:pace, group:"close", endOnSpeech:true,
       bellEnd:Math.round(cEnd * 10) / 10, bellDeep:true}));
 
     return steps;
@@ -2393,11 +2407,15 @@
     session.bell1 = false;
     session.bell2 = false;
     session.drop1 = false;
+    session.cueEndAt = null;
+    session.cueEndFor = null;
+    session.cueStartAt = null;
+    session.lastSpokenAt = null;
     if(session.idx === 0 && !session.noStartBell) playBell(1);
     renderPractice();
     if(s.speech.length){
       session.spoken.add(0);          /* the first cue is spoken here, and tick must not repeat it */
-      if(speakNow !== false) speak(s.speech[0].text);
+      if(speakNow !== false) speakCue(s.speech[0]);
     }
     session.timer = setInterval(tick, 250);
   }
@@ -2415,10 +2433,15 @@
     const e = stepElapsed();
     /* 싱잉볼은 단계 안의 정해진 순간에 한 번씩 — 목소리가 없어도 같은 자리에서 울립니다 */
     if(s.bellAt != null && !session.bell1 && e >= s.bellAt){ session.bell1 = true; playBell(1); }
-    /* 마무리의 깊은 싱잉볼은 「종소리」 그대로, 한 번만 */
-    if(s.bellEnd != null && !session.bell2 && e >= s.bellEnd){
-      session.bell2 = true;
-      if(s.bellDeep) playDeepBowl(); else playBell(1);
+    /* 마무리의 깊은 싱잉볼은 「종소리」 그대로, 한 번만 —
+       목소리가 있으면 마지막 말이 끝난 바로 그 자리에서 울립니다 */
+    if(s.bellEnd != null && !session.bell2){
+      const bellAt = (s.bellDeep && session.voiceEnd != null)
+        ? Math.min(s.bellEnd, session.voiceEnd + 0.3) : s.bellEnd;
+      if(e >= bellAt){
+        session.bell2 = true;
+        if(s.bellDeep) playDeepBowl(); else playBell(1);
+      }
     }
     /* 부위가 바뀌는 자리의 맑은 물방울 */
     if(s.dropAt != null && !session.drop1 && e >= s.dropAt){ session.drop1 = true; playDrop(); }
@@ -2433,7 +2456,16 @@
       return;
     }
     s.speech.forEach((sp, i)=>{
-      if(!session.spoken.has(i) && e >= sp.at){ session.spoken.add(i); speak(sp.text); }
+      if(session.spoken.has(i)) return;
+      let at = sp.at;
+      /* 줄이 끝난 그 자리에서 다음 줄이 이어지도록 — 이 기기의 목소리가
+         예상보다 빠르면 기다리지 않고, 늦어도 앞 줄을 끊지 않습니다 */
+      if(i > 0 && s.pace && session.cueEndAt != null && session.cueEndFor === s.speech[i - 1].at){
+        const g = (s.pace ? s.pace.gap : SPEECH_GAP_MS / 1000);
+        const floorAt = sp.at - Math.max(1.5, estSpeech(sp.text, s.pace || null) * 0.7);
+        at = Math.max(floorAt, Math.min(sp.at, session.cueEndAt + g + 0.12));
+      }
+      if(e >= at){ session.spoken.add(i); speakCue(sp); }
     });
     beatTick(s, e);
     renderPractice();
@@ -2529,7 +2561,15 @@
       refreshPlayLabel();
       renderPractice();
       const s = session.steps[session.idx];
-      if(s){ const line = captionAt(s, stepElapsed()); if(line) speak(line, {force:true}); }
+      if(s){
+        const line = captionAt(s, stepElapsed());
+        if(line){
+          const u = s.speech.filter(x=> x.text === line).pop();
+          session.lastSpokenAt = u ? u.at : null;
+          session.cueStartAt = stepElapsed();
+          speak(line, {force:true});
+        }
+      }
     }else{
       session.stepBase = stepElapsed();
       session.paused = true;
