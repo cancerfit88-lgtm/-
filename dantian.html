@@ -2237,7 +2237,7 @@
     const g2End = pushSentences(gsp, c.gatherCue2, g2At, G, pace);
     const gDur = Math.max(30, Math.round(g2End + 1.5));
     steps.push(stepOf({dur:gDur, kicker:c.kGather, site:c.gatherSite, count:0,
-      caption:c.gatherCap, speech:gsp, pace:pace}));
+      caption:c.gatherCap, speech:gsp, pace:pace, endOnSpeech:true}));
 
     /* ② 여덟 부위 림프 비우기 — 부위마다 이름·동작·안내가 1초 안쪽으로 이어지고,
           손·팔 풀기 뒤 호흡 한 번으로 다음 부위로. 그 자리에서 물방울이 울립니다 */
@@ -2446,8 +2446,13 @@
         if(s.bellDeep) playDeepBowl(); else playBell(1);
       }
     }
-    /* 부위가 바뀌는 자리의 맑은 물방울 */
-    if(s.dropAt != null && !session.drop1 && e >= s.dropAt){ session.drop1 = true; playDrop(); }
+    /* 부위가 바뀌는 자리의 맑은 물방울 — 호흡 멘트가 끝나면 그 자리에서 */
+    if(s.dropAt != null && !session.drop1){
+      const lastCue = s.speech[s.speech.length - 1];
+      const realDrop = (session.cueEndAt != null && lastCue && session.cueEndFor === lastCue.at)
+        ? Math.min(s.dropAt, session.cueEndAt + 0.45) : s.dropAt;
+      if(e >= realDrop){ session.drop1 = true; playDrop(); }
+    }
     /* the preamble ends with its own words, not with the estimate */
     const wordsDone = s.endOnSpeech && session.voiceEnd != null && e >= session.voiceEnd + 1.0;
     const cap = (s.endOnSpeech && cueLive) ? s.dur + 12 : s.dur;
