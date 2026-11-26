@@ -2254,7 +2254,7 @@
       steps.push(stepOf({dur:Math.max(per, laid.dur), restAt:laid.restAt, dropAt:laid.dropAt,
         kicker:(i + 1) + " / 8", site:(i + 1) + ". " + a.title,
         count:strokes, caption:a.pos + " · " + a.dir,
-        speech:laid.speech, pace:pace, group:"area" + i, area:i}));
+        speech:laid.speech, pace:pace, group:"area" + i, area:i, endOnSpeech:true}));
     });
 
     /* ③ 여덟 부위 전신 쓸기 — 귀밑에서 다리 끝까지 크게 쓸고,
@@ -2265,7 +2265,7 @@
     const swEnd = pushSentences(ssp, c.sweepClose, swCloseAt, G, pace);
     steps.push(stepOf({dur:Math.max(FIFTEEN.sweep, Math.round(swEnd + 1.5)),
       kicker:c.kSweep, site:c.sweepSite, count:0, caption:c.sweepCap,
-      speech:ssp, pace:pace, group:"sweep"}));
+      speech:ssp, pace:pace, group:"sweep", endOnSpeech:true}));
 
     /* ④ 아랫배에 온기 채우기 */
     steps.push(stepOf({dur:Math.max(16, Math.round(estSpeech(c.fillLead, pace) + 1.5)),
@@ -2310,7 +2310,7 @@
     });
     steps.push(stepOf({dur:Math.max(areaDur, laid.dur), restAt:laid.restAt,
       kicker:"1 / 1", site:(idx + 1) + ". " + a.title, count:FIFTEEN.strokes,
-      caption:a.pos + " · " + a.dir, speech:laid.speech, pace:pace, group:"area" + idx, area:idx}));
+      caption:a.pos + " · " + a.dir, speech:laid.speech, pace:pace, group:"area" + idx, area:idx, endOnSpeech:true}));
     steps.push(stepOf({dur:closeDur, kicker:c.closeSite, site:c.closeSite, count:0,
       caption:c.singleClose, speech:csp, pace:pace, group:"close"}));
     return steps;
