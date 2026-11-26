@@ -2474,7 +2474,10 @@
       }
       if(e >= at){
         /* 앞당겨 말한 줄은 자막의 시각도 함께 당겨, 목소리와 자막이 어긋나지 않게 */
-        if(at < sp.at) sp.at = Math.round(at * 10) / 10;
+        if(at < sp.at){
+          if(sp.plan == null) sp.plan = sp.at;   /* 옮기기 전의 편성 시각을 남겨 둠 */
+          sp.at = Math.round(at * 10) / 10;
+        }
         session.spoken.add(i); speakCue(sp);
       }
     });
