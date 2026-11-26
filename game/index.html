@@ -657,7 +657,12 @@
         if (demo) {
           if (roll < 0.18) kind = 'bonus';
         } else {
-          if (roll < cfg.hazard) kind = 'hazard';
+          var hazards = 0;
+          for (var i = 0; i < balloons.length; i++) {
+            if (balloons[i].kind === 'hazard') hazards++;
+          }
+          var hazardsAllowed = (GAME_TIME - timeShown) >= 3 && hazards < 2;
+          if (hazardsAllowed && roll < cfg.hazard) kind = 'hazard';
           else if (roll < cfg.hazard + cfg.bonus) kind = 'bonus';
         }
 
