@@ -1816,6 +1816,12 @@
   }
 
   function speak(text, opts){
+    /* 한 줄이 아직 울리고 있으면 끊지 않고 그 줄이 끝난 뒤로 미룹니다 */
+    if(cueLive && !(opts && opts.force)){
+      clearTimeout(cueTimer);
+      cueTimer = setTimeout(()=> speak(text, opts), 400);
+      return;
+    }
     cueLive = false;
     if(!state.voice || !text || !("speechSynthesis" in window)) return;
     const key = String(text).replace(/\s+/g, " ").slice(0, 90);
@@ -2096,7 +2102,11 @@
     const parts = splitSentences(text || "");
     /* Korean runs about four characters a second at rate 1; English a good deal
        faster, so the two are paced apart */
-    const cps = state.lang === "ko" ? 4.2 : 11.0;
+    /* Korean runs about five and a half characters a second at rate 1 on the
+       voices phones carry (measured: 6.2–6.5); English a good deal faster, so
+       the two are paced apart. Slightly slower than measured, so a line is never
+       scheduled to end before it has been read. */
+    const cps = state.lang === "ko" ? 5.5 : 11.0;
     const gap = pace ? pace.gap : SPEECH_GAP_MS / 1000;
     const pad = pace ? pace.pad : 0.4;
     let s = 0;
@@ -2474,7 +2484,7 @@
         const plannedGap = sp.at - (prevPlan + estSpeech(prev.text, s.pace));
         /* 같은 숨으로 이어지는 줄만 당깁니다. 일부러 두는 긴 침묵(쓰다듬는 시간)은 그대로 */
         if(plannedGap <= 1.2){
-          at = Math.max(sp.at - 20, Math.min(sp.at, session.cueEndAt + s.pace.gap + 0.12));
+          at = Math.max(sp.at - 20, session.cueEndAt + s.pace.gap + 0.12);
         }
       }
       if(e >= at){
