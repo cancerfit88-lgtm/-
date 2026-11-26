@@ -642,16 +642,16 @@
           <!-- 이름표 -->
           <g font-family="'Noto Sans KR','Noto Sans',sans-serif">
             <line x1="160" y1="47" x2="216" y2="47" stroke="#C9A25D" stroke-width="1.1" stroke-dasharray="3 3" opacity=".75"/>
-            <text x="222" y="43" font-size="17" font-weight="800" fill="#8E6B23">상단전</text>
-            <text x="222" y="60" font-size="13" fill="#75695A">정수리</text>
+            <text id="sv-l1a" x="222" y="43" font-size="17" font-weight="800" fill="#8E6B23">상단전</text>
+            <text id="sv-l1b" x="222" y="60" font-size="13" fill="#75695A">정수리</text>
             <line x1="160" y1="150" x2="216" y2="150" stroke="#C9A25D" stroke-width="1.1" stroke-dasharray="3 3" opacity=".75"/>
-            <text x="222" y="146" font-size="17" font-weight="800" fill="#8E6B23">중단전</text>
-            <text x="222" y="163" font-size="13" fill="#75695A">가슴 중앙</text>
+            <text id="sv-l2a" x="222" y="146" font-size="17" font-weight="800" fill="#8E6B23">중단전</text>
+            <text id="sv-l2b" x="222" y="163" font-size="13" fill="#75695A">가슴 중앙</text>
             <line x1="160" y1="214" x2="212" y2="214" stroke="#C9A25D" stroke-width="1.1" stroke-dasharray="3 3" opacity=".75"/>
             <rect x="216" y="190" width="116" height="48" rx="13" fill="#F6EEDB" stroke="#E6D6AE" stroke-width="1.2"/>
-            <text x="226" y="211" font-size="17" font-weight="900" fill="#75581A">하단전</text>
-            <text x="226" y="228" font-size="13" fill="#6E5A2E">배꼽 아래</text>
-            <text x="30" y="332" font-size="11.5" fill="#8C8172">몸의 중심선을 따라</text>
+            <text id="sv-l3a" x="226" y="211" font-size="17" font-weight="900" fill="#75581A">하단전</text>
+            <text id="sv-l3b" x="226" y="228" font-size="13" fill="#6E5A2E">배꼽 아래</text>
+            <text id="sv-cap" x="30" y="332" font-size="11.5" fill="#8C8172">몸의 중심선을 따라</text>
           </g>
         </svg>
       </div>
@@ -1398,6 +1398,9 @@
     }
 
     $("map-img").alt = state.lang === "ko" ? "림프절 부위 지도" : "Map of the eight lymph sites";
+    [["sv-l1a","상단전","Upper"],["sv-l1b","정수리","crown"],["sv-l2a","중단전","Middle"],["sv-l2b","가슴 중앙","chest centre"],
+     ["sv-l3a","하단전","Lower"],["sv-l3b","배꼽 아래","below the navel"],["sv-cap","몸의 중심선을 따라","along the body's centre line"]]
+      .forEach(([id,ko,en])=>{ const el = $(id); if(el) el.textContent = state.lang === "ko" ? ko : en; });
 
     renderMinChips();
     renderRateChips();
@@ -1430,7 +1433,7 @@
       const el = $("screen-" + s);
       if(el) el.classList.toggle("hidden", s !== name);
     });
-    document.body.classList.toggle("hide-nav", name === "practice" || name === "lymph");
+    document.body.classList.toggle("hide-nav", name === "practice" || name === "lymph" || name === "dantian");
     window.scrollTo(0, 0);
   }
   function showTab(name){
@@ -1853,20 +1856,20 @@
     ensureAudio();
     if(!audioCtx) return;
     const count = times || 1;
-    const freqs = [196, 352, 528, 880];
-    const amps  = [0.16, 0.08, 0.045, 0.018];
+    const freqs = [196, 293.7, 352, 522, 880, 1174];
+    const amps  = [0.15, 0.062, 0.07, 0.038, 0.018, 0.009];
     for(let c = 0; c < count; c++){
-      const startAt = audioCtx.currentTime + c * 2.4;
+      const startAt = audioCtx.currentTime + c * 3.2;
       freqs.forEach((f, idx)=>{
         const osc = audioCtx.createOscillator();
         const g = audioCtx.createGain();
         osc.type = "sine";
         osc.frequency.setValueAtTime(f, startAt);
         g.gain.setValueAtTime(0.0001, startAt);
-        g.gain.linearRampToValueAtTime(amps[idx], startAt + 0.02);
-        g.gain.exponentialRampToValueAtTime(0.0001, startAt + 3.4 - idx * 0.4);
+        g.gain.linearRampToValueAtTime(amps[idx], startAt + 0.018);
+        g.gain.exponentialRampToValueAtTime(0.0001, startAt + 4.4 - idx * 0.42);
         osc.connect(g); g.connect(audioCtx.destination);
-        osc.start(startAt); osc.stop(startAt + 3.6);
+        osc.start(startAt); osc.stop(startAt + 4.7);
       });
     }
   }
