@@ -228,8 +228,8 @@
   .pr-stop{margin-top:10px;width:100%;padding:16px;border-radius:14px;border:1.5px solid var(--line);background:#FFFFFF;color:var(--ink2);font-size:16.5px;font-weight:700}
   .pr-stop.quiet{color:var(--muted);border-color:#F0E8DA;margin-top:10px}
   /* 앞뒤 부위로 바로 건너뛰는 작은 버튼 — 연습할 때 원하는 부위로 한 번에 */
-  .row3{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:8px;margin-top:10px}
-  .row3 .pr-stop{width:auto;margin-top:0;padding:13px 4px;font-size:15px;letter-spacing:-.04em;white-space:nowrap}
+  .row3{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);gap:8px;margin-top:10px}
+  .row3 .pr-stop{width:auto;min-width:0;margin-top:0;padding:13px 2px;font-size:15px;letter-spacing:-.04em;white-space:nowrap;overflow:hidden}
   .row3 .pr-stop.skip{background:var(--cream-l);border-color:var(--sand);color:var(--gold-d)}
   body.mode-lym .row3 .pr-stop.skip{color:var(--sage-d)}
   .hide-nav{padding-bottom:44px}
