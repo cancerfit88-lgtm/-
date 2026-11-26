@@ -13,13 +13,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="림프 · 선(禪) 리셋" />
-<link rel="canonical" href="https://drena.co.kr/dantian.html" />
+<link rel="canonical" href="https://drena.co.kr/lymph/" />
 <title>림프 · 선(禪) 리셋 · 하루 15분</title>
 <meta name="description" content="하루 15분, 배꼽 아래 단전에 숨 고르기 · 8부위 림프 비우기 · 전신 쓸기 · 온기 채우기 — 김진유 박사의 자기건강 웰니스 앱." />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="림프 · 선(禪) 리셋 · 하루 15분" />
 <meta property="og:description" content="하루 15분 — 숨 고르기 · 8부위 림프 비우기 · 전신 쓸기 · 온기 채우기" />
-<meta property="og:url" content="https://drena.co.kr/dantian.html" />
+<meta property="og:url" content="https://drena.co.kr/lymph/" />
 <meta property="og:image" content="https://drena.co.kr/og-lymph.jpg?v=3" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -116,6 +116,11 @@
   .duo-chips{margin-top:11px;display:flex;gap:8px}
   .duo-chips .chip{flex:1;display:flex;align-items:center;justify-content:center;padding:12px 4px;border-radius:14px;font-size:17px;font-weight:800}
   .duo-go{margin-top:10px;font-size:19px;padding:16px}
+  /* 안내 멘트 / 싱잉볼만 — 작은 알약 토글 */
+  .mode-pills{display:flex;gap:8px;margin-top:11px}
+  .mpill{padding:8px 15px;border-radius:999px;border:1.5px solid var(--line);background:#FFFFFF;color:var(--muted);font-size:14.5px;font-weight:800;line-height:1.35;white-space:nowrap;letter-spacing:-.01em}
+  .mpill.on{background:var(--warm-l);border-color:var(--warm-line);color:var(--warm-d)}
+  .duo-hint{margin-top:8px;font-size:12.5px;color:var(--muted);line-height:1.55;word-break:keep-all}
   .pcard.solo{grid-template-columns:1fr auto}
 
 
@@ -323,7 +328,19 @@
 
   /* 평가 종류 고르기 */
   .kswitch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:2px 0 12px}
-  .ks{border:1.5px solid var(--line);border-radius:14px;padding:12px 6px;font-size:15px;font-weight:800;color:var(--muted);background:#FFFFFF;line-height:1.4;text-align:center;transition:background .15s,color .15s,border-color .15s}
+  /* 두 버튼은 390px에서도 반드시 한 줄 — 글자를 줄이고 줄바꿈을 막습니다 */
+  .ks{border:1.5px solid var(--line);border-radius:14px;padding:12px 4px;font-size:14px;font-weight:800;color:var(--muted);background:#FFFFFF;line-height:1.35;text-align:center;white-space:nowrap;letter-spacing:-.03em;overflow:hidden;transition:background .15s,color .15s,border-color .15s}
+  @media (max-width:380px){ .ks{font-size:13.5px;padding:12px 2px} }
+
+  /* 완료·평가 화면의 홈으로 돌아가기 */
+  .backlink{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:9px 15px;border-radius:999px;border:1.5px solid var(--line);background:#FFFFFF;color:var(--ink2);font-size:15px;font-weight:800;line-height:1.3;white-space:nowrap}
+
+  /* 자세 · 단전 그림 모달 */
+  .modal{position:fixed;inset:0;z-index:90;display:flex;align-items:flex-end;justify-content:center;background:rgba(30,24,14,.44)}
+  .modal.hidden{display:none !important}
+  .modal-sheet{width:100%;max-width:540px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#FFFFFF;border-radius:24px 24px 0 0;padding:12px 18px 0;box-shadow:0 -12px 40px rgba(70,48,12,.26)}
+  body.modal-open{overflow:hidden}
+  .modal-actions{position:sticky;bottom:0;margin-top:14px;padding:10px 0 calc(14px + env(safe-area-inset-bottom));background:#FFFFFF}
   .ks.ks-lym.on{background:var(--sage);border-color:var(--sage);color:#FFFFFF}
   .ks.ks-dan.on{background:var(--warm);border-color:var(--warm);color:#FFFFFF}
   .ev-note{font-size:13.5px;color:var(--muted);line-height:1.6;margin:0 0 9px;word-break:keep-all}
@@ -474,8 +491,14 @@
           </span>
         </div>
         <div class="duo-sub" id="t-c2s">내 숨 길이 그대로, 아랫배에 마음을 두기</div>
+        <button class="duo-alt" onclick="openPosture()" id="t-c2m">자세 · 단전 그림 보기 ›</button>
         <div class="chips duo-chips" id="min-chips"></div>
-        <button class="btn btn-warm duo-go" onclick="openDantian()" id="t-c2go">자세 안내하고 시작하기</button>
+        <div class="mode-pills" id="dan-mode-pills">
+          <button class="mpill on" data-mode="guide" onclick="setDanMode('guide')" id="t-dm-guide">안내 멘트</button>
+          <button class="mpill" data-mode="bowl" onclick="setDanMode('bowl')" id="t-dm-bowl">싱잉볼만</button>
+        </div>
+        <div class="duo-hint" id="t-c2h">안내 멘트는 초보자용, 싱잉볼만은 입정 뒤 중간 말 없이 고요히 이어집니다.</div>
+        <button class="btn btn-warm duo-go" onclick="startDantian()" id="t-c2go">바로 시작하기</button>
       </section>
     </div>
 
@@ -605,17 +628,18 @@
     </div>
   </section>
 
-  <!-- ================= DANTIAN · posture card ================= -->
-  <section id="screen-dantian" class="screen hidden">
-    <div class="pr-top">
-      <button class="pr-close" onclick="showTab('home')" aria-label="close">✕</button>
-      <span class="pr-kind" id="t-dankind">DANTIAN SITTING · 集中禪</span>
+  <!-- ================= DANTIAN · posture modal (안내 전용) ================= -->
+  <div class="modal hidden" id="posture-modal" role="dialog" aria-modal="true" aria-labelledby="t-dantitle" onclick="if(event.target===this) closePosture()">
+    <div class="modal-sheet">
+    <div class="pr-top" style="padding:2px 0 6px">
       <span class="pr-spacer"></span>
+      <span class="pr-kind" id="t-dankind">DANTIAN SITTING · 集中禪</span>
+      <button class="pr-close" onclick="closePosture()" aria-label="close">✕</button>
     </div>
 
-    <div class="card" style="margin-top:10px">
+    <div>
       <div class="sec-title"><span id="t-dantitle">자세를 갖추고 시작합니다</span></div>
-      <div class="sec-note" id="t-dannote">허리를 세우고 두 손을 아랫배에 포갠 뒤, 하단전에 마음을 내려놓습니다.</div>
+      <div class="sec-note" id="t-dannote">의자에 앉거나 바닥에 편히 평좌해 허리를 세웁니다. 두 손은 허벅지 위에 올리거나 아랫배 아래에 포개어 둡니다.</div>
 
       <div class="posture-fig">
         <svg viewBox="0 0 360 336" role="img" aria-label="좌선 자세와 상·중·하단전의 위치">
@@ -686,7 +710,7 @@
       </div>
       <div class="prow">
         <span class="pnum2">2</span>
-        <span class="ptxt"><b id="t-dp2">두 손은 아랫배에</b><span id="t-dp2s">두 손을 아랫배 앞에 편안히 포갭니다. 손바닥은 따뜻하게, 손과 팔의 힘은 뺍니다.</span></span>
+        <span class="ptxt"><b id="t-dp2">두 손</b><span id="t-dp2s">엄지와 검지를 가볍게 맞대어 허벅지 위에 올리거나, 아랫배 아래에 편안히 포개어 둡니다. 손바닥은 따뜻하게, 손과 팔의 힘은 뺍니다.</span></span>
       </div>
       <div class="prow">
         <span class="pnum2">3</span>
@@ -695,14 +719,14 @@
 
       <div class="core-note" id="t-dancore">상단전(정수리), 중단전(가슴 중앙), 하단전(배꼽 아래) 중 어느 곳에 마음을 두어도 좋으나, 결국 <b>하단전(배꼽 아래)에 마음을 모아 집중선(集中禪)</b>이 되도록 합니다. 호흡은 편하고 자연스럽게 이어갑니다.</div>
 
-      <div class="field-label" id="t-danlbl">시간</div>
-      <div class="chips" id="dan-min-chips"></div>
-      <div style="margin-top:16px">
-        <button class="btn btn-warm" onclick="startDantian()" id="t-danstart">5분 시작하기</button>
+      <div class="hint" style="text-align:center;margin-top:14px;margin-bottom:0" id="t-danhint">‘이대로 시작하기’를 누르면 고른 시간으로 바로 시작합니다.</div>
+      <div class="row2 modal-actions">
+        <button class="btn btn-line" style="font-size:16.5px;padding:14px" onclick="closePosture()" id="t-postclose">닫기</button>
+        <button class="btn btn-warm" style="font-size:16.5px;padding:14px" onclick="startFromPosture()" id="t-poststart">이대로 시작하기</button>
       </div>
-      <div class="hint" style="text-align:center" id="t-danhint">준비가 끝나면 “이제 시작합니다” 안내 뒤에 싱잉볼이 울립니다.</div>
     </div>
-  </section>
+    </div>
+  </div>
 
   <!-- ================= PRACTICE ================= -->
   <section id="screen-practice" class="screen hidden">
@@ -791,7 +815,10 @@
 
   <!-- ================= COMPLETE ================= -->
   <section id="screen-complete" class="screen hidden">
-    <div class="card" style="text-align:center;margin-top:24px">
+    <div class="pr-top" style="padding:6px 0 0;justify-content:flex-start">
+      <button class="backlink" onclick="showTab('home')" id="t-homeback">← 홈으로 돌아가기</button>
+    </div>
+    <div class="card" style="text-align:center;margin-top:12px">
       <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.6v-6.3"/><path d="M12 14.3c0-3.6-2.5-6.5-6.5-6.5 0 3.6 2.5 6.5 6.5 6.5z"/><path d="M12 14.3c0-3.6 2.5-6.5 6.5-6.5 0 3.6-2.5 6.5-6.5 6.5z"/></svg></div>
       <div class="sec-title" style="justify-content:center;margin-top:10px"><span id="t-done">오늘의 순환을 마쳤습니다</span></div>
       <div class="sec-note" style="text-align:center;margin-bottom:0" id="complete-summary"></div>
@@ -880,9 +907,12 @@
     "t-c1s":      {ko:"8부위 림프 순환 · 전신 쓸기 · 온기 채우기", en:"the eight sites · the full sweep · gather the warmth"},
     "t-c2":       {ko:"채우기 · 단전주선", en:"Fill · dantian sitting"},
     "t-c2t":      {ko:"5 · 10 · 20분", en:"5 · 10 · 20 min"},
-    "t-c2go":     {ko:"자세 안내하고 시작하기", en:"Posture, then begin"},
+    "t-c2go":     {ko:"바로 시작하기", en:"Begin now"},
     "t-c2s":      {ko:"내 숨 길이 그대로, 아랫배에 마음을 두기", en:"your own breath as it is, the mind resting in the lower belly"},
-    "t-c2m":      {ko:"5분 · 10분 · 20분 중에 골라서", en:"choose 5, 10 or 20 minutes"},
+    "t-c2m":      {ko:"자세 · 단전 그림 보기 ›", en:"Posture · the three dantian ›"},
+    "t-dm-guide": {ko:"안내 멘트", en:"Guidance"},
+    "t-dm-bowl":  {ko:"싱잉볼만", en:"Bowl only"},
+    "t-c2h":      {ko:"안내 멘트는 초보자용, 싱잉볼만은 입정 뒤 중간 말 없이 고요히 이어집니다.", en:"Guidance for beginners; Bowl only keeps the sitting silent after the opening."},
     "t-c3":       {ko:"주관적 평가", en:"Subjective check-in"},
     "t-c3s":      {ko:"1분 호흡 측정 · 오늘의 몸 느낌 · 일기", en:"a breath count, today\u2019s body, a line in the journal"},
     "t-c3m":      {ko:"오늘 순환을 마친 뒤가 아니어도 언제든", en:"open any time, not only after a round"},
@@ -922,23 +952,24 @@
     "t-lightmap": {ko:"여덟 부위 지도로", en:"Back to the eight sites"},
     "t-lighthome":{ko:"홈으로", en:"Home"},
     "t-check":    {ko:"오늘의 평가", en:"Today's check-in"},
-    "t-ksl":      {ko:"1 비우기 · 림프 순환", en:"1 Empty · lymph"},
+    "t-ksl":      {ko:"1 비우기 · 림프", en:"1 Empty · lymph"},
     "t-ksd":      {ko:"2 채우기 · 단전주선", en:"2 Fill · dantian"},
+    "t-homeback": {ko:"← 홈으로 돌아가기", en:"← Back home"},
+    "t-postclose":{ko:"닫기", en:"Close"},
+    "t-poststart":{ko:"이대로 시작하기", en:"Begin like this"},
     "t-evhint":   {ko:"오늘 한 쪽만 골라 기록합니다. 두 쪽 다 했다면 하나씩 따로 남길 수 있습니다.", en:"Record one side today. If you did both, keep them as two separate entries."},
     "t-ckhint":   {ko:"림프 순환 평가", en:"Lymphatic clearing"},
     "t-dankind":  {ko:"단전주선 · 集中禪", en:"DANTIAN SITTING · 集中禪"},
     "t-dantitle": {ko:"자세를 갖추고 시작합니다", en:"Settle into the posture"},
-    "t-dannote":  {ko:"허리를 세우고 두 손을 아랫배에 포갠 뒤, 하단전에 마음을 내려놓습니다.", en:"Waist tall, both hands folded on the lower belly, the mind set below the navel."},
+    "t-dannote":  {ko:"의자에 앉거나 바닥에 편히 평좌해 허리를 세웁니다. 두 손은 허벅지 위에 올리거나 아랫배 아래에 포개어 둡니다.", en:"Sit on a chair, or cross-legged on the floor, with the waist tall. Rest the hands on the thighs, or fold them below the lower belly."},
     "t-dp1":      {ko:"허리와 머리", en:"Back and head"},
     "t-dp1s":     {ko:"등받이 없이 앉아 허리를 세우고, 턱을 살짝 당겨 머리를 바로 세웁니다. 몸의 중심선이 흔들리지 않게 합니다.", en:"Sit without leaning back, let the waist rise tall, and tuck the chin slightly so the body keeps one centre line."},
-    "t-dp2":      {ko:"두 손은 아랫배에", en:"Both hands on the lower belly"},
-    "t-dp2s":     {ko:"두 손을 아랫배 앞에 편안히 포갭니다. 손바닥은 따뜻하게, 손과 팔의 힘은 뺍니다.", en:"Fold both hands in front of the lower belly, palms warm, letting the hands and arms go."},
+    "t-dp2":      {ko:"두 손", en:"Both hands"},
+    "t-dp2s":     {ko:"엄지와 검지를 가볍게 맞대어 허벅지 위에 올리거나, 아랫배 아래에 편안히 포개어 둡니다. 손바닥은 따뜻하게, 손과 팔의 힘은 뺍니다.", en:"Bring the thumb and index finger lightly together and rest the hands on the thighs, or fold them comfortably below the lower belly. Palms warm, the hands and arms let go."},
     "t-dp3":      {ko:"눈과 어깨", en:"Eyes and shoulders"},
     "t-dp3s":     {ko:"눈은 감거나 반쯤 내리뜨고, 어깨를 한 번 올렸다 내리며 힘을 뺍니다. 배에는 힘을 주지 않습니다.", en:"Close the eyes or lower them halfway; lift the shoulders once and let them drop. Keep the belly soft."},
     "t-dancore":  {ko:"상단전(정수리), 중단전(가슴 중앙), 하단전(배꼽 아래) 중 어느 곳에 마음을 두어도 좋으나, 결국 <b>하단전(배꼽 아래)에 마음을 모아 집중선(集中禪)</b>이 되도록 합니다. 호흡은 편하고 자연스럽게 이어갑니다.", en:"The crown (upper dantian), the centre of the chest (middle dantian) and below the navel (lower dantian) are all fine places for the mind — in the end we gather it <b>below the navel so that it becomes one quiet concentration (集中禪)</b>. The breath stays easy and natural."},
-    "t-danlbl":   {ko:"시간", en:"Length"},
-    "t-danstart": {ko:"5분 시작하기", en:"Begin 5 minutes"},
-    "t-danhint":  {ko:"준비가 끝나면 “이제 시작합니다” 안내 뒤에 싱잉볼이 울립니다.", en:"When the settling ends, the bowl sounds just after “We begin now.”"},
+    "t-danhint":  {ko:"‘이대로 시작하기’를 누르면 고른 시간으로 바로 시작합니다.", en:"Tap “Begin like this” to start right away with the minutes you chose."},
     "t-feel":     {ko:"주관적 느낌 · 여러 개 고르셔도 됩니다", en:"How you felt · choose as many as you like"},
     "t-breathin": {ko:"1분 호흡 (분당 회수)", en:"Breaths per minute"},
     "t-bb":       {ko:"운동 전", en:"Before"},
@@ -1051,18 +1082,20 @@
       danSub:"숨은 그대로 두고, 마음을 배꼽 아래 하단전에 내려놓습니다.",
       danPosture:[
         {n:"허리와 머리", t:"등받이 없이 앉아 허리를 세우고, 턱을 살짝 당겨 머리를 바로 세웁니다. 몸의 중심선이 흔들리지 않게 합니다."},
-        {n:"두 손은 아랫배에", t:"두 손을 아랫배 앞에 편안히 포갭니다. 손바닥은 따뜻하게, 손과 팔의 힘은 뺍니다."},
+        {n:"두 손", t:"엄지와 검지를 가볍게 맞대어 허벅지 위에 올리거나, 아랫배 아래에 편안히 포개어 둡니다. 손바닥은 따뜻하게, 손과 팔의 힘은 뺍니다."},
         {n:"눈과 어깨", t:"눈은 감거나 반쯤 내리뜨고, 어깨를 한 번 올렸다 내리며 힘을 뺍니다. 배에는 힘을 주지 않습니다."}
       ],
       danCore:"상단전(정수리), 중단전(가슴 중앙), 하단전(배꼽 아래) 중 어느 곳에 마음을 두어도 좋으나, 결국 하단전(배꼽 아래)에 마음을 모아 집중선(集中禪)이 되도록 합니다. 호흡은 편하고 자연스럽게 이어갑니다.",
       danPrepare:[
-        "허리를 세우고 두 손을 아랫배에 포갑니다. 어깨와 턱의 힘을 내려놓습니다.",
-        "눈은 감거나 반쯤 내리뜨고, 배꼽 아래의 온기를 느껴 봅니다.",
-        "이제 시작합니다."
+        "의자에 앉거나 바닥에 편히 평좌해 허리를 세웁니다.",
+        "두 손은 엄지와 검지를 가볍게 맞대어 허벅지 위에 올리거나, 아랫배 아래에 편안히 포개어 둡니다.",
+        "호흡은 편하고 자연스럽게 두고, 이제 배꼽 아래 하단전에 마음을 모읍니다.",
+        "시작합니다."
       ],
-      danPrepareCap:"허리를 세우고 두 손을 아랫배에 포갠 채, 숨을 고릅니다.",
+      danPrepareCap:"의자에 앉거나 평좌해 허리를 세우고, 두 손을 가볍게 내려놓습니다.",
       danIntro:"마음을 배꼽 아래 하단전에 내려놓습니다. 숨은 세지도, 조절하지도 않습니다. 들어오고 나가는 숨을 그대로 두고, 아랫배의 온기와 무게에 마음만 머뭅니다.",
       danIntroCap:"숨은 그대로, 마음은 하단전에.",
+      danQuiet:"배꼽 아래 하단전에 마음을 모아 고요히 머뭅니다.",
       danRemind:[
         "생각이 흩어지면 부드럽게 배꼽 아래 하단전으로 마음을 돌아오게 합니다. 호흡은 편하고 자연스럽게 둡니다.",
         "숨의 길이를 바꾸지 않습니다. 그저 편안히 오가게 두고, 마음은 하단전에 머뭅니다.",
@@ -1075,8 +1108,8 @@
         "몸이 흔들리면 천천히 다시 세우고, 마음을 하단전에 내려놓습니다.",
         "지금 이 숨, 이 자리에 온전히 머뭅니다."
       ],
-      danEnd:"숨을 그대로 두고, 아랫배의 온기를 잠시 느껴 봅니다. 오늘 이 자리에 머문 만큼 마음이 가라앉았습니다. 천천히 눈을 뜨고, 두 손을 비벼 얼굴과 목에 가볍게 대어 봅니다. 가볍고 편안한 하루 보내세요.",
-      danEndCap:"아랫배의 온기를 느끼며 천천히 마칩니다.",
+      danEnd:"편안히 눈을 뜨고 자리에서 일어납니다. 오늘도 고요한 시간 잘 보내셨습니다.",
+      danEndCap:"편안히 눈을 뜨고 자리에서 일어납니다.",
       danSite:"하단전 · 배꼽 아래",
       kPrep:"입정",
       danStart:(m)=> m + "분 단전주선 시작하기",
@@ -1095,7 +1128,7 @@
         {n:"1 · 숨 고르기 (아랫배·단전)", t:"시작하면 먼저 아랫배 단전에 마음을 모으고, 편안하게 몸과 마음을 이완하며 숨을 고릅니다. 두 손바닥을 비벼 따뜻해진 온기로 여덟 곳의 림프절을 스무 번 이상 부드럽게 순환합니다. 서서, 앉아서, 누워서 어느 자세든 좋습니다."},
         {n:"2 · 비우기, 여덟 부위", t:"1 귀밑(양손으로 귀 뒤 턱 아래에서 뒷목으로) → 2 목(한쪽씩, 오른손바닥으로 왼쪽 목 옆선을 귀밑에서 쇄골로, 이어 왼손바닥으로 오른쪽) → 3 쇄골(한쪽씩, 검지·중지로 위 우묵한 곳을 중앙으로, 아래는 바깥에서 안쪽으로) → 4 겨드랑이(한쪽씩, 왼팔을 머리 위에 얹고 오른손으로 바깥에서 가슴 중앙으로, 톡톡 — 수술·림프절 치료를 받으신 분은 두드리지 말고 덮기만) → 5 팔꿈치(한쪽씩, 손끝에서 팔꿈치를 지나 겨드랑이·쇄골로) → 6 복부(두 손 겹쳐, 따뜻한 두 손의 온기로, 시계 방향) → 7 서혜부(양손 동시에, 바깥에서 안쪽 중심으로 쓸거나 손날로 톡톡) → 8 오금(양손 동시에, 오금을 감싸 쥐고 아래에서 위로 허벅지·서혜부로). 부위마다 스무 번 이상, 내 몸이 편안한 만큼. 언제나 말단에서 중심으로. 한 부위가 끝나면 팔을 내려놓고 손끝을 털어 낸 뒤, 숨 한 번 내쉬며 다음 부위로 이어집니다."},
         {n:"3 · 여덟 부위 전신 쓸기", t:"여덟 부위를 모두 열면, 귀밑에서 목과 쇄골, 가슴과 복부를 지나 다리 끝까지 여덟 부위 전신을 위에서 아래·중심 방향으로 크게 쓸어 내리며 흐름을 하나로 이어 줍니다. 동작이 끝난 뒤 몸이 하나로 가벼워지는 느낌을 잠시 느껴 봅니다."},
-        {n:"4 · 채우기 — 단전주선 (5·10·20분)", t:"홈에서 「2 채우기 · 단전주선」을 고르면 먼저 자세 카드가 나옵니다. 등받이 없이 앉아 허리를 세우고 턱을 살짝 당기며, 두 손을 아랫배 앞에 편안히 포갭니다. 눈은 감거나 반쯤 내리뜨고, 어깨와 배의 힘을 뺍니다. 상단전(정수리)·중단전(가슴 중앙)·하단전(배꼽 아래) 중 어느 곳에 마음을 두어도 좋으나, 결국 하단전에 마음을 모아 집중선(集中禪)이 되도록 합니다. 숨은 세지도 조절하지도 않고, 편안하고 자연스럽게 이어갑니다. 시작하면 입정으로 자리를 고른 뒤 「이제 시작합니다」 안내와 함께 싱잉볼이 울리고, 명상 중에는 일정 간격으로 하단전으로 돌아오는 짧은 안내가 이어집니다. 마칠 때는 싱잉볼 → 차분한 마무리 말 → 싱잉볼 순서로 끝맺습니다."},
+        {n:"4 · 채우기 — 단전주선 (5·10·20분)", t:"홈의 「2 채우기 · 단전주선」 카드에서 5·10·20분을 고르고 「안내 멘트」와 「싱잉볼만」 중 하나를 고른 뒤 「바로 시작하기」를 누르면, 자세 안내를 거치지 않고 곧장 시작합니다. 자리가 궁금하시면 카드의 「자세 · 단전 그림 보기」로 상·중·하단전과 앉는 법을 먼저 살펴보실 수 있습니다. 등받이 없이 앉거나 바닥에 평좌해 허리를 세우고, 두 손은 엄지와 검지를 가볍게 맞대어 허벅지 위에 올리거나 아랫배 아래에 포개어 둡니다. 눈은 감거나 반쯤 내리뜨고, 어깨와 배의 힘을 뺍니다. 상단전(정수리)·중단전(가슴 중앙)·하단전(배꼽 아래) 중 어느 곳에 마음을 두어도 좋으나, 결국 하단전에 마음을 모아 집중선(集中禪)이 되도록 합니다. 숨은 세지도 조절하지도 않고, 편안하고 자연스럽게 이어갑니다. 시작하면 입정 안내 뒤 청량한 싱잉볼이 울립니다. 「안내 멘트」는 일정 간격으로 하단전으로 돌아오는 짧은 안내가 이어지고, 「싱잉볼만」은 그 시간 전체가 중간 말 없이 고요하며 화면에 한 줄의 자막만 남습니다. 마칠 때는 싱잉볼 → 마무리 말 → 싱잉볼 순서로 끝맺습니다."},
         {n:"5 · 주관적 평가 (림프 순환 / 단전주선)", t:"운동을 마친 뒤, 또는 하루 중 아무 때나 1분 호흡을 재고 오늘의 느낌을 골라 한 줄 메모와 함께 일기에 남깁니다. 평가는 두 길로 나뉩니다 — 1 비우기 · 림프 순환은 붓기·무거움, 어깨·목·몸 뭉침, 몸의 순환감을, 2 채우기 · 단전주선은 마음의 고요함, 하단전 집중도, 호흡의 편안함을 봅니다. 마친 쪽이 자동으로 골라지고, 필요하면 위에서 다른 쪽으로 바꿀 수 있습니다."},
         {n:"주의할 점", t:"림프절은 절대 세게 누르지 않습니다. 목 앞 기관과 수술한 쪽 겨드랑이는 누르지 말고 손바닥으로 덮기만 합니다. 식사 후 가볍게 몸을 비우는 운동으로도 활용할 수 있으며, 식후라면 복부만 누르지 말고 살며시 스치듯 지나갑니다. 음주 후에는 무리하지 마세요. 임신 중이거나 치료 중인 질환이 있으면 의료진과 상의해 주세요."},
         {n:"코스에 대해", t:"1 비우기 · 림프 순환은 하루 한 번 15분입니다. 숨 고르기와 마사지 강도 안내로 시작해 여덟 부위를 부위당 약 1분 33초씩 순환하고(부위마다 실동작 80초 안팎 — 2초에 1회 스무 번, 한쪽씩 하는 부위는 좌우 40초씩), 부위 끝에 손·팔 풀기와 호흡 연결 멘트를 지나 다음 부위로 바로 이어집니다. 부위가 바뀔 때는 맑은 물방울 소리가 한 번 울리고, 여덟 부위 전신 쓸기와 아랫배 온기 채우기, 마지막 깊은 싱잉볼과 마무리 인사로 끝맺습니다. 연습할 때는 연습 화면 아래 [‹ 이전] [다음 ›] 단추로 부위·단계를 앞뒤로 건너뛸 수 있습니다. 2 채우기 · 단전주선은 5분·10분·20분 중에 고르며, 입정(20초 안팎) → 싱잉볼 → 하단전 명상 → 싱잉볼·마무리 말·싱잉볼 순서로 진행됩니다."},
@@ -1225,18 +1258,20 @@
       danSub:"The breath as it is; the mind set down in the lower belly.",
       danPosture:[
         {n:"Back and head", t:"Sit without leaning back, let the waist rise tall, and tuck the chin slightly so the body keeps one centre line."},
-        {n:"Both hands on the lower belly", t:"Fold both hands in front of the lower belly, palms warm, letting the hands and arms go."},
+        {n:"Both hands", t:"Bring the thumb and index finger lightly together and rest the hands on the thighs, or fold them comfortably below the lower belly. Palms warm, the hands and arms let go."},
         {n:"Eyes and shoulders", t:"Close the eyes or lower them halfway; lift the shoulders once and let them drop. Keep the belly soft."}
       ],
       danCore:"The crown (upper dantian), the centre of the chest (middle dantian) and below the navel (lower dantian) are all fine places for the mind — in the end we gather it below the navel so that it becomes one quiet concentration (集中禪). The breath stays easy and natural.",
       danPrepare:[
-        "Sit tall, fold both hands on the lower belly, and let the shoulders and jaw go.",
-        "Lower the eyes halfway and feel the warmth below the navel.",
-        "We begin now."
+        "Sit on a chair, or cross-legged on the floor, with the waist tall.",
+        "Bring the thumb and index finger lightly together and rest the hands on the thighs, or fold them comfortably below the lower belly.",
+        "Let the breath be easy and natural, and now gather the mind below the navel.",
+        "We begin."
       ],
-      danPrepareCap:"Waist tall, both hands folded on the lower belly, the breath settling.",
+      danPrepareCap:"On a chair or cross-legged, the waist tall, the hands resting lightly.",
       danIntro:"Set the mind down below the navel. Do not count the breath or control it; let it come and go as it is, and keep only the warmth below the navel in your attention.",
       danIntroCap:"The breath as it is, the mind in the lower belly.",
+      danQuiet:"Gathered below the navel, resting quietly.",
       danRemind:[
         "When a thought scatters, come back gently to the lower belly. The breath stays easy and natural.",
         "Leave the length of the breath alone; let it flow, and keep the mind in the lower belly.",
@@ -1249,8 +1284,8 @@
         "If the body sways, sit up slowly and set the mind back in the lower belly.",
         "Rest completely here, in this breath, in this place."
       ],
-      danEnd:"Leave the breath as it is, and rest a moment in the warmth below the navel. The mind has settled as long as you sat here. Open the eyes slowly, rub the palms and lay them lightly on the face and neck. Have a light, easy day.",
-      danEndCap:"Feeling the warmth below the navel, and closing slowly.",
+      danEnd:"Open the eyes gently and rise from your seat. You have kept a quiet time well today.",
+      danEndCap:"Open the eyes gently and rise from your seat.",
       danSite:"Lower dantian · below the navel",
       kPrep:"SETTLING",
       danStart:(m)=> "Begin " + m + " minutes",
@@ -1269,7 +1304,7 @@
         {n:"1 · Settling (lower belly · dantian)", t:"First the mind gathers in the lower belly, and the body and mind soften as the breath settles. Rub the palms warm, and with that warmth circulate the eight lymph sites gently, twenty strokes or more. Standing, sitting or lying down — any position is fine."},
         {n:"2 · Emptying, the eight sites", t:"1 under the ear (both hands, from the hollow behind the ear toward the nape) → 2 neck (one side, right palm down the left side from under the ear to the collarbone, then the left palm for the right side) → 3 collarbone (one side, two fingers gathering the hollow toward the centre, the palm below sweeping from the outside in) → 4 armpit (one side, left arm over the head, right hand from the outside toward the centre of the chest, then pat — after surgery or lymph-node treatment, do not pat, only cover) → 5 elbow (one side, fingertips past the elbow toward the armpit and collarbone) → 6 abdomen (both palms, with the warmth of the two hands, clockwise) → 7 groin (both hands at once, from the outside toward the centre, or pat with the edge of the hand) → 8 behind the knee (both hands at once, holding the knees and sweeping up along the thigh toward the groin). Twenty strokes or more a site, as many as feel comfortable — always from the edges toward the centre. Each site ends by letting the arms down and shaking the fingertips, then one breath out carries you straight on to the next site."},
         {n:"3 · The sweep over all eight sites", t:"Once all eight are open, sweep the whole body — from under the ear through the neck and collarbone, the chest and the abdomen, down to the ends of the legs — from above downward toward the centre, and let the flow become one. Then rest a moment in how the body feels, lighter and joined together."},
-        {n:"4 · Filling — dantian sitting (5 · 10 · 20 min)", t:"Choose 「2 Fill · dantian sitting」 on the home screen and a posture card comes first. Sit without leaning back, let the waist rise tall, tuck the chin slightly, and fold both hands in front of the lower belly. Eyes closed or halfway down, shoulders and belly soft. The crown (upper dantian), the centre of the chest (middle dantian) and below the navel (lower dantian) are all fine places for the mind — in the end it gathers below the navel and becomes one quiet concentration (集中禪). The breath is neither counted nor controlled; it stays easy and natural. The session opens with a short settling, then the bowl sounds with “We begin now.”; through the sitting, short reminders bring the mind back below the navel. It closes in the order of bowl → calm closing words → bowl."},
+        {n:"4 · Filling — dantian sitting (5 · 10 · 20 min)", t:"On the home card for 「2 Fill · dantian sitting」, choose five, ten or twenty minutes, pick 「Guidance」 or 「Bowl only」, and tap 「Begin now」 — it starts straight away without a posture screen. If you want the seat first, 「Posture · the three dantian」 opens a picture of the upper, middle and lower dantian and how to sit. Sit on a chair without leaning back, or cross-legged on the floor, the waist tall; rest the hands on the thighs with thumb and index finger lightly together, or fold them below the lower belly. Eyes closed or halfway down, shoulders and belly soft. The crown (upper dantian), the centre of the chest (middle dantian) and below the navel (lower dantian) are all fine places for the mind — in the end it gathers below the navel and becomes one quiet concentration (集中禪). The breath is neither counted nor controlled; it stays easy and natural. When it begins, a short settling is followed by a clear singing bowl. With 「Guidance」, short reminders bring the mind back below the navel at intervals; with 「Bowl only」 the whole sitting stays silent between the bowls, with one quiet line on screen. It closes in the order of bowl → closing words → bowl."},
         {n:"5 · Subjective check-in (lymph / dantian)", t:"After practice, or at any point in the day: count a minute of breaths, choose what you felt, and keep it with a line in the journal. The check-in is split in two — 1 Empty · lymph looks at swelling and heaviness, shoulders and neck released, and a sense of the body flowing; 2 Fill · dantian looks at a still mind, attention below the navel, and an easy breath. The side you just finished is chosen for you, and you can switch above."},
         {n:"Cautions", t:"Never press a lymph node hard. Do not press the windpipe or the armpit on the operated side — cover it with the palm. The fifteen minutes can also serve as a light after-meal practice for clearing the body; right after eating, do not press the abdomen, just let the hand pass lightly over it. Do not overdo it after drinking. If you are pregnant or under treatment for an illness, please speak with your doctor first."},
         {n:"About this course", t:"1 Empty · lymph is fifteen minutes once a day: the settling breath and the note on pressure, then the eight sites at about ninety-three seconds each — some eighty seconds of actual stroking, twenty strokes or more, forty seconds a side for the one-sided sites. Each site ends with the arms let down, one breath out, and a clear water-drop as the next site begins. Then one full sweep over all eight sites, the warmth gathered below the navel, and the closing words that ring out into a deep singing bowl — a little over fifteen minutes in all. In practice you can step forward and back between sites with [‹ Back] and [Next ›] under the ring. 2 Fill · dantian comes in five, ten or twenty minutes: settling (about twenty seconds) → bowl → sitting below the navel → bowl, closing words, bowl."},
@@ -1361,6 +1396,7 @@
     voice:true, bell:true, bgm:true, beat:true, rate:0.88, pitch:0.86,
     voiceURI:{ko:"", en:""},
     danMin:5,
+    danMode:"guide",
     lymphMin:10,
     breathBefore:null, breathAfter:null, breathMode:"before"
   };
@@ -1379,7 +1415,7 @@
         }
       }
       if(s && typeof s === "object"){
-        ["lang","voice","bell","bgm","beat","rate","pitch","danMin","lymphMin"].forEach(k=>{
+        ["lang","voice","bell","bgm","beat","rate","pitch","danMin","danMode","lymphMin"].forEach(k=>{
           if(s[k] !== undefined) state[k] = s[k];
         });
         if(s.voiceURI && typeof s.voiceURI === "object"){
@@ -1393,7 +1429,7 @@
     try{
       localStorage.setItem(SETTINGS_KEY, JSON.stringify({
         lang:state.lang, voice:state.voice, bell:state.bell, bgm:state.bgm, beat:state.beat,
-        rate:state.rate, pitch:state.pitch, danMin:state.danMin, lymphMin:state.lymphMin,
+        rate:state.rate, pitch:state.pitch, danMin:state.danMin, danMode:state.danMode, lymphMin:state.lymphMin,
         voiceURI:state.voiceURI
       }));
     }catch(e){}
@@ -1443,6 +1479,7 @@
       .forEach(([id,ko,en])=>{ const el = $(id); if(el) el.textContent = state.lang === "ko" ? ko : en; });
 
     renderMinChips();
+    renderDanMode();
     renderRateChips();
     renderToneChips();
     renderLymphList();
@@ -1465,7 +1502,7 @@
   /* =========================================================
      Screen / nav
      ========================================================= */
-  const SCREENS = ["home","lymph","dantian","practice","light","complete","breath","diary"];
+  const SCREENS = ["home","lymph","practice","light","complete","breath","diary"];
 
   function showScreen(name){
     if(name !== "lymph") stopMarkTour();
@@ -1473,7 +1510,7 @@
       const el = $("screen-" + s);
       if(el) el.classList.toggle("hidden", s !== name);
     });
-    document.body.classList.toggle("hide-nav", name === "practice" || name === "lymph" || name === "dantian");
+    document.body.classList.toggle("hide-nav", name === "practice" || name === "lymph");
     window.scrollTo(0, 0);
   }
   function showTab(name){
@@ -1490,10 +1527,33 @@
     showScreen("lymph");
     startMarkTour();
   }
-  /* 2 채우기 — 자세 카드를 먼저 보여 주고 시작합니다 */
-  function openDantian(){
-    renderMinChips();
-    showScreen("dantian");
+  /* 2 채우기 — 홈 카드에서 고른 시간과 모드로 바로 들어가고,
+     ‘자세 · 단전 그림 보기’는 안내만 하는 모달을 엽니다 */
+  function openPosture(){
+    const m = $("posture-modal");
+    if(!m) return;
+    m.classList.remove("hidden");
+    document.body.classList.add("modal-open");
+  }
+  function closePosture(){
+    const m = $("posture-modal");
+    if(!m) return;
+    m.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+  }
+  function startFromPosture(){
+    closePosture();
+    startDantian();
+  }
+  function setDanMode(mode){
+    state.danMode = (mode === "bowl") ? "bowl" : "guide";
+    renderDanMode();
+    saveSettings();
+  }
+  function renderDanMode(){
+    const box = $("dan-mode-pills");
+    if(!box) return;
+    box.querySelectorAll(".mpill").forEach(b => b.classList.toggle("on", b.dataset.mode === state.danMode));
   }
 
   /* the eight nodes breathe; one after another glows brighter, in order */
@@ -1537,7 +1597,7 @@
   }
 
   function updateDanStart(){
-    const b = $("t-danstart");
+    const b = $("t-c2go");
     if(b) b.textContent = C().danStart(state.danMin);
   }
 
@@ -1919,27 +1979,73 @@
       g.setTargetAtTime(on ? 0.004 : 0.02, t, 0.15);
     }catch(e){}
   }
+  /* 청량한 싱잉볼 — 낮은 몸통은 얇게 두고, 높은 배음이 물방울처럼 맑게 길게 반짝입니다.
+     아주 조금씩 어긋난 세 겹이 천천히 맥을 타서 영롱한 공명이 남습니다. */
+  let roomIR = null;
+  function bowlRoom(sec){
+    if(!audioCtx) return null;
+    try{
+      const len = Math.floor(audioCtx.sampleRate * (sec || 4.5));
+      if(!roomIR || roomIR.length !== len){
+        const ir = audioCtx.createBuffer(2, len, audioCtx.sampleRate);
+        for(let ch = 0; ch < 2; ch++){
+          const d = ir.getChannelData(ch);
+          for(let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2);
+        }
+        roomIR = ir;
+      }
+      const conv = audioCtx.createConvolver();
+      conv.buffer = roomIR;
+      return conv;
+    }catch(e){ return null; }
+  }
+  function bowlBus(level, wet){
+    const out = audioCtx.createGain();
+    out.gain.value = level;
+    out.connect(audioCtx.destination);
+    const conv = bowlRoom(4.5);
+    if(conv){
+      const w = audioCtx.createGain();
+      w.gain.value = wet;
+      out.connect(conv); conv.connect(w); w.connect(audioCtx.destination);
+    }
+    return out;
+  }
   function playBell(times){
     if(!state.bell) return;
     ensureAudio();
     if(!audioCtx) return;
-    const count = times || 1;
-    const freqs = [196, 293.7, 352, 522, 880, 1174];
-    const amps  = [0.15, 0.062, 0.07, 0.038, 0.018, 0.009];
-    for(let c = 0; c < count; c++){
-      const startAt = audioCtx.currentTime + c * 3.2;
-      freqs.forEach((f, idx)=>{
-        const osc = audioCtx.createOscillator();
-        const g = audioCtx.createGain();
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(f, startAt);
-        g.gain.setValueAtTime(0.0001, startAt);
-        g.gain.linearRampToValueAtTime(amps[idx], startAt + 0.018);
-        g.gain.exponentialRampToValueAtTime(0.0001, startAt + 4.4 - idx * 0.42);
-        osc.connect(g); g.connect(audioCtx.destination);
-        osc.start(startAt); osc.stop(startAt + 4.7);
-      });
-    }
+    try{
+      const count = times || 1;
+      const out = bowlBus(0.7, 0.3);
+      /* [frequency, level, attack, decay] — 위로 갈수록 짧게, 맑은 유리처럼 */
+      const partials = [
+        [523.25, 0.100, 0.010, 4.0],
+        [783.99, 0.062, 0.008, 3.5],
+        [1046.50,0.050, 0.007, 3.0],
+        [1567.98,0.028, 0.006, 2.4],
+        [2093.00,0.017, 0.005, 1.9],
+        [2637.02,0.010, 0.004, 1.5],
+        [3135.96,0.006, 0.004, 1.2]
+      ];
+      for(let c = 0; c < count; c++){
+        const startAt = audioCtx.currentTime + 0.02 + c * 3.2;
+        partials.forEach((p)=>{
+          [0, 1.1, 2.3].forEach((det, k)=>{
+            const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(p[0] + det, startAt);
+            const amp = p[1] * (k ? 0.32 : 1);
+            const dec = Math.max(0.5, p[3] - k * 0.45);
+            g.gain.setValueAtTime(0.0001, startAt);
+            g.gain.linearRampToValueAtTime(amp, startAt + p[2] + 0.012);
+            g.gain.exponentialRampToValueAtTime(0.0001, startAt + dec);
+            osc.connect(g); g.connect(out);
+            osc.start(startAt); osc.stop(startAt + dec + 0.2);
+          });
+        });
+      }
+    }catch(e){}
   }
   /* 부위에서 부위로 넘어가는 자리의 물방울 — 맑고 짧아, 단전주선의 싱잉볼과 귀로 바로 구분됩니다 */
   function playDrop(){
@@ -1969,49 +2075,34 @@
       o2.start(t); o2.stop(t + 0.2);
     }catch(e){}
   }
-  /* 15분 순환의 마지막 한 번 — 낮은 배음이 온몸에 깊고 길게 퍼지는 싱잉볼.
-     두 겹으로 살짝 어긋눈 배음이 천천히 맥을 타서 긴 여운을 만듭니다. */
+  /* 15분 순환의 마지막 한 번 — 깊되 맑은 싱잉볼. 낮은 바탕 위로 높은 배음이 오래 반짝이며 퍼집니다. */
   function playDeepBowl(){
     if(!state.bell) return;
     ensureAudio();
     if(!audioCtx) return;
     try{
       const t0 = audioCtx.currentTime + 0.06;
-      const out = audioCtx.createGain();
-      out.gain.value = 0.55;
-      out.connect(audioCtx.destination);
-      /* a long, soft room so the tone keeps spreading after the strike */
-      try{
-        const len = Math.floor(audioCtx.sampleRate * 5);
-        const ir = audioCtx.createBuffer(2, len, audioCtx.sampleRate);
-        for(let ch = 0; ch < 2; ch++){
-          const d = ir.getChannelData(ch);
-          for(let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.4);
-        }
-        const conv = audioCtx.createConvolver(); conv.buffer = ir;
-        const wet = audioCtx.createGain(); wet.gain.value = 0.6;
-        out.connect(conv); conv.connect(wet); wet.connect(audioCtx.destination);
-      }catch(e){}
-      /* [frequency, level, attack, decay] — the low partials swell and stay */
+      const out = bowlBus(0.62, 0.55);
+      /* [frequency, level, attack, decay] — 바탕은 깊게, 배음은 맑게 */
       const partials = [
-        [55.0,  0.30, 0.22, 13.0],
-        [82.4,  0.18, 0.16, 12.0],
-        [110.0, 0.24, 0.12, 11.5],
-        [164.8, 0.13, 0.09, 9.0],
-        [220.0, 0.09, 0.07, 7.0],
-        [293.7, 0.055, 0.05, 5.5],
-        [440.0, 0.03, 0.04, 4.2],
-        [587.3, 0.018, 0.03, 3.2]
+        [261.63, 0.20, 0.10, 12.0],
+        [392.00, 0.13, 0.08, 10.5],
+        [523.25, 0.12, 0.06, 9.5],
+        [783.99, 0.080, 0.05, 7.5],
+        [1046.50,0.052, 0.04, 6.0],
+        [1567.98,0.030, 0.03, 4.6],
+        [2093.00,0.017, 0.02, 3.4],
+        [2637.02,0.009, 0.02, 2.6]
       ];
       partials.forEach(p=>{
-        const f = p[0], amp = p[1], atk = p[2], dec = p[3];
-        [0, 0.8].forEach((det, k)=>{
+        [0, 0.9, 1.9].forEach((det, k)=>{
           const o = audioCtx.createOscillator(), g = audioCtx.createGain();
           o.type = "sine";
-          o.frequency.setValueAtTime(f + det, t0);
-          const a = amp * (k ? 0.5 : 1);
+          o.frequency.setValueAtTime(p[0] + det, t0);
+          const a = p[1] * (k ? 0.34 : 1);
+          const dec = Math.max(1.2, p[3] - k * 1.6);
           g.gain.setValueAtTime(0.0001, t0);
-          g.gain.linearRampToValueAtTime(a, t0 + atk + 0.05);
+          g.gain.linearRampToValueAtTime(a, t0 + p[2] + 0.05);
           g.gain.exponentialRampToValueAtTime(0.0001, t0 + dec);
           o.connect(g); g.connect(out);
           o.start(t0); o.stop(t0 + dec + 0.2);
@@ -2093,7 +2184,7 @@
     mode:"", kick:"", min:0, areaIndex:0, startedAt:0, beatIdx:0, voiceEnd:null
   };
 
-  function stepOf(o){ return Object.assign({dur:30, kicker:"", site:"", count:0, caption:"", speech:[], group:"", restAt:null, endOnSpeech:false}, o); }
+  function stepOf(o){ return Object.assign({dur:30, kicker:"", site:"", count:0, caption:"", speech:[], group:"", restAt:null, endOnSpeech:false, holdFirst:false}, o); }
 
   /* Roughly how long a line takes at the chosen pace: Korean speech runs about
      five characters a second at rate 1 and each sentence waits a breath for the
@@ -2326,13 +2417,13 @@
     return steps;
   }
 
-  /* the dantian sitting on its own: 5, 10 or 20 minutes, no counting of the breath */
-  /* 단전주선 — 입정 → 「이제 시작합니다」+ 싱잉볼 → 고요한 리마인드 → 싱잉볼 · 마무리 말 · 싱잉볼 */
-  function buildDantian(min){
+  /* 단전주선 — 입정 → 「시작합니다」+ 청량한 싱잉볼 → (안내 멘트 모드) 고요한 리마인드 / (싱잉볼만) 완전 무음 → 싱잉볼 · 마무리 말 · 싱잉볼 */
+  function buildDantian(min, mode){
     const c = C();
     const steps = [];
     const total = Math.max(180, Math.round(min * 60));
     const G = SPEECH_GAP_MS / 1000;
+    const silent = (mode === "bowl");
 
     /* ① 입정 — 자세와 하단전을 안내하고, 마지막 말이 끝난 자리에서 싱잉볼이 울립니다 */
     const psp = [];
@@ -2354,21 +2445,28 @@
     steps.push(stepOf({dur:prepDur, kicker:c.kPrep, site:c.danSite, count:0,
       caption:c.danPrepareCap, speech:psp, group:"prep", bellAt:prepBellAt}));
 
-    /* ② 몸 — 5·10·20분에 맞춰 60~80초마다 짧은 리마인드. 숨은 세지 않습니다 */
     const span = Math.max(60, total - prepDur - closeDur);
-    const n = Math.max(1, Math.min(14, Math.round(span / 62)));
-    const each = Math.floor(span / n);
-    let left = span;
-    for(let i = 0; i < n; i++){
-      const d = (i === n - 1) ? left : each;
-      left -= d;
-      const line = (i === 0) ? c.danIntro : c.danRemind[(i - 1) % c.danRemind.length];
-      steps.push(stepOf({dur:Math.max(20, d), kicker:c.kDan, site:c.danSite, count:0,
-        caption:line, speech:[{at:0, text:line}], group:"dan"}));
+
+    if(silent){
+      /* ② 싱잉볼만 — 입정 뒤 본 명상 전체가 무음, 중간 멘트 0건. 화면에는 한 줄만 고요히 */
+      steps.push(stepOf({dur:span, kicker:c.kDan, site:c.danSite, count:0,
+        caption:c.danQuiet, speech:[], group:"dan"}));
+    }else{
+      /* ② 안내 멘트 — 5·10·20분에 맞춰 60~80초마다 짧은 리마인드. 숨은 세지 않습니다 */
+      const n = Math.max(1, Math.min(14, Math.round(span / 62)));
+      const each = Math.floor(span / n);
+      let left = span;
+      for(let i = 0; i < n; i++){
+        const d = (i === n - 1) ? left : each;
+        left -= d;
+        const line = (i === 0) ? c.danIntro : c.danRemind[(i - 1) % c.danRemind.length];
+        steps.push(stepOf({dur:Math.max(20, d), kicker:c.kDan, site:c.danSite, count:0,
+          caption:line, speech:[{at:0, text:line}], group:"dan"}));
+      }
     }
 
     steps.push(stepOf({dur:closeDur, kicker:c.closeSite, site:c.closeSite, count:0,
-      caption:c.danEndCap, speech:csp, group:"close", bellAt:0.4, bellEnd:finalBellAt}));
+      caption:c.danEndCap, speech:csp, group:"close", bellAt:0.4, bellEnd:finalBellAt, holdFirst:true}));
 
     return steps;
   }
@@ -2388,6 +2486,7 @@
     session.mode = mode;
     session.kick = kick;
     session.min = (opt && opt.min) || 0;
+    session.danMode = (opt && opt.danMode) || "";
     session.areaIndex = (opt && opt.areaIndex) || 0;
     session.startedAt = Date.now();
 
@@ -2403,7 +2502,8 @@
     $("p-kind").textContent = kick;
     showScreen("practice");
     requestWakeLock();
-    startBGM();
+    /* 싱잉볼만 모드는 완전 무음을 지키기 위해 배경음도 올리지 않습니다 */
+    if(!(mode === "dantian" && session.danMode === "bowl")) startBGM();
     startStep(true);
   }
 
@@ -2426,7 +2526,7 @@
     session.lastSpokenAt = null;
     if(session.idx === 0 && !session.noStartBell) playBell(1);
     renderPractice();
-    if(s.speech.length){
+    if(s.speech.length && !s.holdFirst){
       session.spoken.add(0);          /* the first cue is spoken here, and tick must not repeat it */
       if(speakNow !== false) speakCue(s.speech[0]);
     }
@@ -2681,6 +2781,7 @@
       seconds: Math.round(totalElapsed),
       areaIndex: session.areaIndex || 0,
       min: session.min || 0,
+      danMode: session.danMode || "",
       label: sessionLabel()
     };
 
@@ -2740,14 +2841,15 @@
   function again(){
     if(!lastSession.mode){ showTab("home"); return; }
     if(lastSession.mode === "lymphOne") startLymphOne(lastSession.areaIndex || 0);
-    else if(lastSession.mode === "dantian") startDantian(lastSession.min || lastSession.minutes || state.danMin);
+    else if(lastSession.mode === "dantian") startDantian(lastSession.min || lastSession.minutes || state.danMin, lastSession.danMode);
     else startFifteen();
   }
 
   function startFifteen(){ startSession(buildFifteen(), "fifteen", C().lymphKind, {min:15}); }
-  function startDantian(min){
+  function startDantian(min, mode){
     const m = min || state.danMin || 5;
-    startSession(buildDantian(m), "dantian", C().danKind, {min:m});
+    const md = mode || state.danMode || "guide";
+    startSession(buildDantian(m, md), "dantian", C().danKind, {min:m, danMode:md});
   }
   function startLymphAll(){ startFifteen(); }
   function startLymphOne(i){ startSession(buildLymphOne(i), "lymphOne", C().lymphKind, {areaIndex:i, min:15}); }
@@ -3192,7 +3294,10 @@
   window.showScreen = showScreen;
   window.showTab = showTab;
   window.openLymph = openLymph;
-  window.openDantian = openDantian;
+  window.openPosture = openPosture;
+  window.closePosture = closePosture;
+  window.startFromPosture = startFromPosture;
+  window.setDanMode = setDanMode;
   window.setEvalKind = setEvalKind;
   window.startFifteen = startFifteen;
   window.startDantian = startDantian;
