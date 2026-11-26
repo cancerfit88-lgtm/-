@@ -2463,8 +2463,12 @@
       /* 줄이 끝난 그 자리에서 다음 줄이 이어지도록 — 이 기기의 목소리가
          예상보다 빠르면 기다리지 않고, 늦어도 앞 줄을 끊지 않습니다 */
       if(i > 0 && s.pace && session.cueEndAt != null && session.cueEndFor === s.speech[i - 1].at){
-        const g = s.pace.gap;
-        at = Math.max(sp.at - 20, Math.min(sp.at, session.cueEndAt + g + 0.12));
+        const prev = s.speech[i - 1];
+        const plannedGap = sp.at - (prev.at + estSpeech(prev.text, s.pace));
+        /* 같은 숨으로 이어지는 줄만 당깁니다. 일부러 두는 긴 침묵(쓰다듬는 시간)은 그대로 */
+        if(plannedGap <= 1.2){
+          at = Math.max(sp.at - 20, Math.min(sp.at, session.cueEndAt + s.pace.gap + 0.12));
+        }
       }
       if(e >= at){
         /* 앞당겨 말한 줄은 자막의 시각도 함께 당겨, 목소리와 자막이 어긋나지 않게 */
