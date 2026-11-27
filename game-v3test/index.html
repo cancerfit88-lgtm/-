@@ -399,29 +399,6 @@
     }
     #toast.show { opacity: 1; }
 
-    /* ── 하단 조준 영역 안내 ───────────────────── */
-    #aim-hint {
-      position: absolute;
-      left: 50%;
-      bottom: 168px;
-      transform: translateX(-50%);
-      max-width: calc(100% - 28px);
-      padding: 7px 16px;
-      background: rgba(255, 255, 255, 0.96);
-      border: 2px solid rgba(15, 138, 128, 0.38);
-      border-radius: 999px;
-      color: var(--teal-dark);
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 1;
-      transition: opacity 0.45s ease;
-      z-index: 12;
-    }
-    #aim-hint.hidden { opacity: 0; }
-
     /* 화면 높이가 낮은 휴대폰(주소창이 보이는 크롬 등)에서도 시작 버튼까지 한 화면에 */
     @media (max-height: 780px) {
       .card { padding: 14px 14px calc(12px + env(safe-area-inset-bottom)); }
@@ -462,7 +439,6 @@
   <div id="game-area">
     <canvas id="canvas"></canvas>
     <div id="toast">명중! 잘하셨어요!</div>
-    <div id="aim-hint" class="hidden">아래쪽을 밀어 조준 · 손을 떼면 발사</div>
 
     <div id="overlay">
       <div class="card" id="card-menu">
@@ -537,7 +513,6 @@
       var spdList = document.getElementById('spd-list');
       var menuHint = document.getElementById('menu-hint');
       var menuBest = document.getElementById('menu-best');
-      var aimHintEl = document.getElementById('aim-hint');
 
       var GAME_TIME = 60;
 
@@ -743,28 +718,11 @@
 
       /* ── 조준·발사 ────────────────────────────── */
       var aim = { active: false, pointerId: null, angle: -Math.PI / 2 };
-      var aimHintTimer = null;
 
       function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
 
       // 하단 조준 영역 높이(손가락 지문에 활이 가리지 않도록 넓게)
       function aimZoneH() { return Math.max(96, Math.min(160, H * 0.23)); }
-
-      function showAimHint(ms) {
-        if (!aimHintEl) return;
-        aimHintEl.style.bottom = Math.round(aimZoneH() + 14) + 'px';
-        aimHintEl.classList.remove('hidden');
-        window.clearTimeout(aimHintTimer);
-        if (ms) {
-          aimHintTimer = window.setTimeout(function () {
-            aimHintEl.classList.add('hidden');
-          }, ms);
-        }
-      }
-      function hideAimHint() {
-        window.clearTimeout(aimHintTimer);
-        if (aimHintEl) aimHintEl.classList.add('hidden');
-      }
 
       function fireAt(angle) {
         if (mode !== 'play') return;
@@ -819,7 +777,6 @@
           aim.active = true;
           aim.pointerId = e.pointerId;
           setAim(p.x, p.y);
-          hideAimHint();
           try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
         } else {
           // 하늘·풍선: 짧게 콕 누르면 그 지점으로 즉시 발사
@@ -1169,7 +1126,7 @@
         ctx.setLineDash([]);
 
         // 좌우로 밀어 조준하는 느낌을 주는 화살꼬리
-        ctx.fillStyle = on ? 'rgba(15, 138, 128, 0.60)' : 'rgba(13, 59, 69, 0.22)';
+        ctx.fillStyle = on ? 'rgba(15, 138, 128, 0.62)' : 'rgba(13, 59, 69, 0.26)';
         ctx.font = '800 24px system-ui, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -1213,7 +1170,7 @@
         ctx.setLineDash([]);
 
         // 조준점
-        var t = Math.min(Math.max(H * 0.42, 150), Math.max(90, maxT - 26));
+        var t = Math.min(Math.max(H * 0.42, 150), Math.max(80, maxT - 36));
         var px = m.x + dx * t;
         var py = m.y + dy * t;
         ctx.beginPath();
@@ -1353,15 +1310,13 @@
         overlay.classList.add('hidden');
         mode = 'play';
         spawnBalloon(false);
-        showToast('풍선을 콕! 또는 아래쪽을 밀어 쏘세요 🏹', 2400);
-        showAimHint(9000);
+        showToast('풍선을 콕! 또는 아래쪽을 밀어 쏘세요 🏹', 3000);
       }
 
       function endGame() {
         mode = 'over';
         aim.active = false;
         aim.pointerId = null;
-        hideAimHint();
         timeShown = 0;
         timeEl.textContent = '0';
 
@@ -1405,7 +1360,6 @@
 
         aim.active = false;
         aim.pointerId = null;
-        hideAimHint();
 
         cardResult.classList.add('hidden');
         cardMenu.classList.remove('hidden');
