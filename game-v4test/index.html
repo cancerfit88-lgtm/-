@@ -1545,6 +1545,17 @@
           aim.active = true;
           setAim(fx, fy);
           ball('aim test');
+        } else if (/[?&]test=burst/.test(q)) {
+          // 한 번 터뜨린 직후의 모습을 정지 화면으로 남긴다
+          startGame();
+          window.setTimeout(function () {
+            var f = parseFloat((/[?&]fz=([\d.]+)/.exec(q) || [0, '0.08'])[1]);
+            createBurst(W * 0.45, H * 0.46, '#ff4d6d', '#ff8fa3');
+            window.requestAnimationFrame = function () { return 0; };  // 루프 정지
+            var steps = Math.max(1, Math.round(f / 0.016));
+            for (var i = 0; i < steps; i++) updateEffects(0.016);
+            draw();
+          }, 700);
         } else if (/[?&]test=pop/.test(q)) {
           startGame();
           window.setInterval(function () {
