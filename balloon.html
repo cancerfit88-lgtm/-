@@ -565,8 +565,11 @@
       var balloons = [];
       var arrows = [];
       var particles = [];
+      var rings = [];
       var floats = [];
       var bowAngle = -Math.PI / 2;
+      var pull = 0;          // 활시위 당김 정도(0: 제자리, 1: 가득 당김)
+      var pullVel = 0;
       var spawnAcc = 0;
       var lastT = 0;
       var goalDone = false;
@@ -611,7 +614,43 @@
           osc.stop(t0 + dur + 0.03);
         } catch (e) {}
       }
-      function popSound() { tone('sine', 480 + Math.random() * 180, 160, 0.15, 0.26); }
+      // 짧고 맑은 파편 소리(밴드패스 노이즈)
+      function noisePop(dur, vol, freq, q) {
+        if (!soundOn) return;
+        try {
+          if (!audioCtx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            audioCtx = new AC();
+          }
+          var t0 = audioCtx.currentTime;
+          var len = Math.max(1, Math.floor(audioCtx.sampleRate * dur));
+          var buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+          var d = buf.getChannelData(0);
+          for (var i = 0; i < len; i++) {
+            var k = 1 - i / len;
+            d[i] = (Math.random() * 2 - 1) * k * k;
+          }
+          var src = audioCtx.createBufferSource();
+          src.buffer = buf;
+          var bp = audioCtx.createBiquadFilter();
+          bp.type = 'bandpass';
+          bp.frequency.value = freq;
+          bp.Q.value = q;
+          var g = audioCtx.createGain();
+          g.gain.setValueAtTime(vol, t0);
+          g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+          src.connect(bp);
+          bp.connect(g);
+          g.connect(audioCtx.destination);
+          src.start(t0);
+        } catch (e) {}
+      }
+      function popSound() {
+        noisePop(0.075, 0.30, 1800 + Math.random() * 500, 1.1);   // 맑게 터지는 '팡'
+        tone('sine', 1150 + Math.random() * 220, 420, 0.13, 0.19); // 동그란 울림
+        window.setTimeout(function () { tone('sine', 2300, 2650, 0.06, 0.06); }, 12);
+      }
       function shootSound() { tone('triangle', 300, 620, 0.09, 0.13); }
       function bonusSound() {
         tone('sine', 880, 990, 0.12, 0.16);
@@ -645,8 +684,8 @@
         window.setTimeout(resize, 220);
       });
 
-      /* ── 활 크기·위치 (기존보다 1.45배 큼직하게) ── */
-      var BOW_S = 1.45;        // 활·화살 확대 배율
+      /* ── 활 크기·위치 (풍선과 어울리는 1.15배) ── */
+      var BOW_S = 1.15;        // 활·화살 확대 배율
       var BOW_BOTTOM = 34;     // 활(시위 아래 끝)이 중심에서 아래로 뻗는 길이(로컬 좌표)
       var BOW_TIP = 56;        // 중심에서 화살촉 끝까지(로컬 좌표)
       var HIT_SLOP = 20;       // 맞힘 판정 여유 반경
@@ -736,6 +775,8 @@
         var ang = clamp(angle, -Math.PI + 0.10, -0.10);
         bowAngle = ang;
         var m = muzzlePoint();
+        // 콕 눌러 쏠 때도 시위가 팅! 하고 튕기는 손맛
+        if (!aim.active) { pull = 0.55; pullVel = -5; }
         var speed = 980;
         arrows.push({
           x: m.x,
@@ -858,7 +899,8 @@
 
       function resolveHit(b) {
         var burstColor = b.kind === 'bonus' ? GOLD.fill : (b.kind === 'hazard' ? '#55606e' : b.color.fill);
-        createBurst(b.x, b.y, burstColor);
+        var lightColor = b.kind === 'bonus' ? GOLD.shine : (b.kind === 'hazard' ? '#9aa5b1' : b.color.shine);
+        createBurst(b.x, b.y, burstColor, lightColor);
 
         if (b.kind === 'bonus') {
           score += 30;
@@ -888,19 +930,26 @@
       }
 
       /* ── 효과 ────────────────────────────────── */
-      function createBurst(x, y, color) {
-        for (var i = 0; i < 16; i++) {
-          var ang = (Math.PI * 2 * i) / 16 + Math.random() * 0.25;
-          var spd = 120 + Math.random() * 260;
+      // 풍선 색 파편이 톡! 튀고 맑은 동심원 파동이 퍼진다
+      function createBurst(x, y, color, light) {
+        var n = 8;
+        for (var i = 0; i < n; i++) {
+          var ang = (Math.PI * 2 * i) / n + (Math.random() - 0.5) * 0.55;
+          var spd = 150 + Math.random() * 240;
           particles.push({
             x: x, y: y,
             vx: Math.cos(ang) * spd,
-            vy: Math.sin(ang) * spd,
-            r: 4 + Math.random() * 5,
+            vy: Math.sin(ang) * spd - 34,
+            r: 3.2 + Math.random() * 3.4,
+            rot: Math.random() * Math.PI,
+            spin: (Math.random() - 0.5) * 13,
             life: 1,
-            color: color
+            color: i % 3 === 0 ? light : color,
+            shard: true
           });
         }
+        rings.push({ x: x, y: y, r: 8, w: 3.4, grow: 330, life: 1, color: color });
+        rings.push({ x: x, y: y, r: 2, w: 2.0, grow: 220, life: 1, color: 'rgba(255, 255, 255, 0.95)' });
       }
 
       function confetti() {
@@ -930,8 +979,15 @@
           p.y += p.vy * dt;
           p.vx *= 0.98;
           p.vy = p.vy * 0.98 + 150 * dt;
+          if (p.shard) p.rot += p.spin * dt;
           p.life -= dt * 1.6;
           if (p.life <= 0) particles.splice(i, 1);
+        }
+        for (i = rings.length - 1; i >= 0; i--) {
+          var g = rings[i];
+          g.r += g.grow * dt;
+          g.life -= dt * 1.9;
+          if (g.life <= 0) rings.splice(i, 1);
         }
         for (i = floats.length - 1; i >= 0; i--) {
           var f = floats[i];
@@ -939,6 +995,17 @@
           f.life -= dt * 1.1;
           if (f.life <= 0) floats.splice(i, 1);
         }
+      }
+
+      // 활시위 당김/팅! 복원(스프링)
+      function updateBow(dt) {
+        var target = (aim.active && mode === 'play') ? 1 : 0;
+        var k = target > 0 ? 150 : 620;
+        var damp = target > 0 ? 19 : 27;
+        pullVel += (target - pull) * k * dt - pullVel * damp * dt;
+        pull += pullVel * dt;
+        if (pull < -0.32) { pull = -0.32; pullVel = 0; }
+        if (pull > 1.12) { pull = 1.12; pullVel = 0; }
       }
 
       /* ── 그리기 ──────────────────────────────── */
@@ -1037,13 +1104,14 @@
 
       function drawBow() {
         var bp = bowPos();
+        var p = Math.max(-0.32, Math.min(1, pull));
 
         // 활 그림자(잔디 위에 또렷하게)
         ctx.save();
         ctx.translate(bp.x, bp.y);
         ctx.fillStyle = 'rgba(13, 59, 69, 0.13)';
         ctx.beginPath();
-        ctx.ellipse(0, BOW_BOTTOM * BOW_S - 1, 36 * BOW_S, 7, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, BOW_BOTTOM * BOW_S - 1, 34 * BOW_S, 7, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
 
@@ -1052,32 +1120,56 @@
         ctx.rotate(bowAngle + Math.PI / 2);
         ctx.scale(BOW_S, BOW_S);
 
+        // 활대: 당길수록 살짝 더 휘고, 놓으면 팅! 하고 제자리로
+        var bend = p * 6;
+        var rad = 46 + bend;
+        var cy = 12 + bend * 0.35;
         ctx.strokeStyle = '#7f4f24';
         ctx.lineWidth = 8;
         ctx.lineCap = 'round';
         ctx.beginPath();
-        ctx.arc(0, 12, 46, Math.PI * 1.15, Math.PI * 1.85);
+        ctx.arc(0, cy, rad, Math.PI * 1.15, Math.PI * 1.85);
         ctx.stroke();
 
-        ctx.strokeStyle = '#555';
-        ctx.lineWidth = 2.5;
+        // 시위가 걸리는 활대 양끝
+        var tipL = Math.cos(Math.PI * 1.15) * rad;
+        var tipR = Math.cos(Math.PI * 1.85) * rad;
+        var tipY = cy + Math.sin(Math.PI * 1.15) * rad;
+        var nockY = 6 + p * 26;      // 시위 중앙(당김점)
+
+        ctx.strokeStyle = '#4a5057';
+        ctx.lineWidth = 2.6;
         ctx.beginPath();
-        ctx.moveTo(-40, -10);
-        ctx.lineTo(0, 6);
-        ctx.lineTo(40, -10);
+        ctx.moveTo(tipL, tipY);
+        ctx.lineTo(0, nockY);
+        ctx.lineTo(tipR, tipY);
         ctx.stroke();
 
-        ctx.strokeStyle = '#333';
+        // 화살: 시위와 함께 뒤로 당겨진다
+        var tipEnd = -44 + p * 26;
+        ctx.strokeStyle = '#3d2c2e';
         ctx.lineWidth = 4;
         ctx.beginPath();
-        ctx.moveTo(0, 6);
-        ctx.lineTo(0, -44);
+        ctx.moveTo(0, nockY);
+        ctx.lineTo(0, tipEnd);
         ctx.stroke();
+
+        // 깃
+        ctx.strokeStyle = '#e63946';
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.moveTo(0, nockY - 10);
+        ctx.lineTo(-7, nockY + 4);
+        ctx.moveTo(0, nockY - 10);
+        ctx.lineTo(7, nockY + 4);
+        ctx.stroke();
+
+        // 촉
         ctx.fillStyle = '#e63946';
         ctx.beginPath();
-        ctx.moveTo(0, -56);
-        ctx.lineTo(-7, -41);
-        ctx.lineTo(7, -41);
+        ctx.moveTo(0, tipEnd - 12);
+        ctx.lineTo(-7, tipEnd + 3);
+        ctx.lineTo(7, tipEnd + 3);
         ctx.closePath();
         ctx.fill();
 
@@ -1087,9 +1179,32 @@
       function drawParticle(p) {
         ctx.globalAlpha = Math.max(0, Math.min(1, p.life));
         ctx.fillStyle = p.color;
+        if (p.shard) {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.beginPath();
+          ctx.moveTo(0, -p.r * 1.15);
+          ctx.lineTo(p.r, p.r * 0.85);
+          ctx.lineTo(-p.r, p.r * 0.85);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function drawRing(g) {
+        ctx.globalAlpha = Math.max(0, Math.min(1, g.life)) * 0.8;
+        ctx.strokeStyle = g.color;
+        ctx.lineWidth = g.w;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.arc(g.x, g.y, g.r, 0, Math.PI * 2);
+        ctx.stroke();
         ctx.globalAlpha = 1;
       }
 
@@ -1127,11 +1242,13 @@
         ctx.fillStyle = on ? 'rgba(255, 255, 255, 0.26)' : 'rgba(255, 255, 255, 0.10)';
         roundRectPath(9, top + 3, W - 18, zH - 10, 18);
         ctx.fill();
-        ctx.setLineDash([12, 10]);
-        ctx.lineWidth = on ? 3 : 2;
-        ctx.strokeStyle = on ? 'rgba(15, 138, 128, 0.70)' : 'rgba(13, 59, 69, 0.18)';
-        ctx.stroke();
         ctx.setLineDash([]);
+
+        ctx.lineWidth = on ? 2.4 : 1.8;
+        ctx.strokeStyle = on ? 'rgba(15, 138, 128, 0.55)' : 'rgba(13, 59, 69, 0.14)';
+        ctx.beginPath();
+        roundRectPath(9, top + 3, W - 18, zH - 10, 18);
+        ctx.stroke();
 
         // 좌우로 밀어 조준하는 느낌을 주는 화살꼬리
         ctx.fillStyle = on ? 'rgba(15, 138, 128, 0.62)' : 'rgba(13, 59, 69, 0.26)';
@@ -1146,59 +1263,22 @@
         ctx.textBaseline = 'alphabetic';
       }
 
-      // 미는 동안 보여 주는 점선 조준선 + 조준점
-      function drawGuide() {
+      // 미는 동안 활 바로 앞쪽에만 은은하게 또렷해지는 작은 점 5개
+      function drawAimDots() {
         if (!aim.active || mode !== 'play') return;
         var m = muzzlePoint();
         var dx = Math.cos(aim.angle);
         var dy = Math.sin(aim.angle);
-        var maxT = 3000;
-        if (dx > 0.001) maxT = Math.min(maxT, (W - 10 - m.x) / dx);
-        if (dx < -0.001) maxT = Math.min(maxT, (10 - m.x) / dx);
-        if (dy < -0.001) maxT = Math.min(maxT, (10 - m.y) / dy);
-        var ex = m.x + dx * maxT;
-        var ey = m.y + dy * maxT;
-
         ctx.save();
-        ctx.lineCap = 'round';
-        // 밝은 하늘에서도 또렷하게 보이도록 흰 테를 먼저 깔고 붉은 점선을 올린다
-        ctx.setLineDash([16, 13]);
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.94)';
-        ctx.beginPath();
-        ctx.moveTo(m.x, m.y);
-        ctx.lineTo(ex, ey);
-        ctx.stroke();
-        ctx.lineWidth = 4.5;
-        ctx.strokeStyle = 'rgba(217, 79, 51, 0.95)';
-        ctx.beginPath();
-        ctx.moveTo(m.x, m.y);
-        ctx.lineTo(ex, ey);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        // 조준점
-        var t = Math.min(Math.max(H * 0.42, 150), Math.max(80, maxT - 36));
-        var px = m.x + dx * t;
-        var py = m.y + dy * t;
-        ctx.beginPath();
-        ctx.arc(px, py, 27, 0, Math.PI * 2);
-        ctx.setLineDash([6, 7]);
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = 'rgba(217, 79, 51, 0.72)';
-        ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.beginPath();
-        ctx.arc(px, py, 15, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
-        ctx.fill();
-        ctx.lineWidth = 3.5;
-        ctx.strokeStyle = 'rgba(217, 79, 51, 0.95)';
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(px, py, 5, 0, Math.PI * 2);
-        ctx.fillStyle = '#d94f33';
-        ctx.fill();
+        for (var i = 0; i < 5; i++) {
+          var t = 22 + i * 24;              // 활 앞 22~118px까지만
+          var r = 5.2 - i * 0.85;           // 점점 작아지고
+          var a = 0.42 - i * 0.07;          // 점점 흐려진다
+          ctx.beginPath();
+          ctx.arc(m.x + dx * t, m.y + dy * t, Math.max(1.4, r), 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(11, 84, 86, ' + a.toFixed(3) + ')';
+          ctx.fill();
+        }
         ctx.restore();
       }
 
@@ -1213,11 +1293,12 @@
 
         var i;
         drawAimPad();
+        drawAimDots();
         for (i = 0; i < balloons.length; i++) drawBalloon(balloons[i]);
         for (i = 0; i < arrows.length; i++) drawArrow(arrows[i]);
-        drawGuide();
         drawBow();
         for (i = 0; i < particles.length; i++) drawParticle(particles[i]);
+        for (i = 0; i < rings.length; i++) drawRing(rings[i]);
         for (i = 0; i < floats.length; i++) drawFloat(floats[i]);
       }
 
@@ -1285,6 +1366,7 @@
           updateDemo(dt);
           updateEffects(dt);
         }
+        updateBow(dt);
         draw();
         window.requestAnimationFrame(tick);
       }
@@ -1301,9 +1383,12 @@
         balloons = [];
         arrows = [];
         particles = [];
+        rings = [];
         floats = [];
         spawnAcc = 0;
         bowAngle = -Math.PI / 2;
+        pull = 0;
+        pullVel = 0;
 
         scoreEl.textContent = '0';
         timeEl.textContent = String(GAME_TIME);
@@ -1358,8 +1443,11 @@
         balloons = [];
         arrows = [];
         particles = [];
+        rings = [];
         floats = [];
         bowAngle = -Math.PI / 2;
+        pull = 0;
+        pullVel = 0;
 
         scoreEl.textContent = '0';
         timeEl.textContent = String(GAME_TIME);

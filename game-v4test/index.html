@@ -1121,7 +1121,7 @@
         ctx.scale(BOW_S, BOW_S);
 
         // 활대: 당길수록 살짝 더 휘고, 놓으면 팅! 하고 제자리로
-        var bend = p * 5;
+        var bend = p * 6;
         var rad = 46 + bend;
         var cy = 12 + bend * 0.35;
         ctx.strokeStyle = '#7f4f24';
@@ -1135,7 +1135,7 @@
         var tipL = Math.cos(Math.PI * 1.15) * rad;
         var tipR = Math.cos(Math.PI * 1.85) * rad;
         var tipY = cy + Math.sin(Math.PI * 1.15) * rad;
-        var nockY = 6 + p * 20;      // 시위 중앙(당김점)
+        var nockY = 6 + p * 26;      // 시위 중앙(당김점)
 
         ctx.strokeStyle = '#4a5057';
         ctx.lineWidth = 2.6;
@@ -1146,7 +1146,7 @@
         ctx.stroke();
 
         // 화살: 시위와 함께 뒤로 당겨진다
-        var tipEnd = -44 + p * 20;
+        var tipEnd = -44 + p * 26;
         ctx.strokeStyle = '#3d2c2e';
         ctx.lineWidth = 4;
         ctx.beginPath();
@@ -1293,9 +1293,9 @@
 
         var i;
         drawAimPad();
+        drawAimDots();
         for (i = 0; i < balloons.length; i++) drawBalloon(balloons[i]);
         for (i = 0; i < arrows.length; i++) drawArrow(arrows[i]);
-        drawAimDots();
         drawBow();
         for (i = 0; i < particles.length; i++) drawParticle(particles[i]);
         for (i = 0; i < rings.length; i++) drawRing(rings[i]);
