@@ -693,8 +693,16 @@
         var vy = 82 * mult * (0.85 + Math.random() * 0.35);
         var margin = r + 12;
 
+        // 활 바로 위에서 솟아 활을 가리지 않도록 좌우로 비켜서 올라온다
+        var bx = margin + Math.random() * Math.max(1, W - margin * 2);
+        var clear = 74;
+        if (Math.abs(bx - W / 2) < clear) {
+          bx = W / 2 + (bx < W / 2 ? -clear : clear);
+          bx = Math.max(margin, Math.min(W - margin, bx));
+        }
+
         balloons.push({
-          x: margin + Math.random() * Math.max(1, W - margin * 2),
+          x: bx,
           y: H - groundH() - r * 1.15,
           r: r,
           vy: vy,
