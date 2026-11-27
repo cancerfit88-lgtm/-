@@ -18,7 +18,10 @@
     document.getElementById('wrap').style.height = hm[1] + 'px';
     document.getElementById('f').style.height = hm[1] + 'px';
   }
-  if (q) document.getElementById('f').src = '/game-v3test/' + q;
+  var pm = /[?&]p=([^&]+)/.exec(q);
+  var src = pm ? decodeURIComponent(pm[1]) : '/game-v3test/';
+  if (q) src += '?v=' + Date.now();
+  document.getElementById('f').src = src;
 </script>
 </body>
 </html>
