@@ -1280,8 +1280,8 @@
         ctx.save();
         for (var i = 0; i < 5; i++) {
           var t = 22 + i * 24;              // 활 앞 22~118px까지만
-          var r = 5.2 - i * 0.85;           // 점점 작아지고
-          var a = 0.42 - i * 0.07;          // 점점 흐려진다
+          var r = 5.6 - i * 0.9;            // 점점 작아지고
+          var a = 0.48 - i * 0.06;          // 점점 흐려진다
           ctx.beginPath();
           ctx.arc(m.x + dx * t, m.y + dy * t, Math.max(1.4, r), 0, Math.PI * 2);
           ctx.fillStyle = 'rgba(11, 84, 86, ' + a.toFixed(3) + ')';
