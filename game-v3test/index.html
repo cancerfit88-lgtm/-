@@ -647,15 +647,14 @@
 
       /* ── 활 크기·위치 (기존보다 1.45배 큼직하게) ── */
       var BOW_S = 1.45;        // 활·화살 확대 배율
-      var BOW_BOTTOM = 58;     // 활 그림이 중심에서 아래로 뻗는 길이(로컬 좌표)
-      var BOW_TIP = 56;        // 중심에서 활 끝(화살 나가는 곳)까지(로컬 좌표)
+      var BOW_BOTTOM = 34;     // 활(시위 아래 끝)이 중심에서 아래로 뻗는 길이(로컬 좌표)
+      var BOW_TIP = 56;        // 중심에서 화살촉 끝까지(로컬 좌표)
       var HIT_SLOP = 20;       // 맞힘 판정 여유 반경
 
       function groundH() { return Math.max(26, H * 0.045); }
       function bowPos() {
-        // 활 아래 끝이 잔디 위에 서도록 중심을 끌어올린다(잘리지 않게)
-        var gH = groundH();
-        return { x: W / 2, y: H - Math.max(gH * 0.5, 12) - BOW_BOTTOM * BOW_S };
+        // 활 아래 끝이 잔디에 닿도록 중심을 잡는다(잘리지 않게)
+        return { x: W / 2, y: H - groundH() - BOW_BOTTOM * BOW_S + 4 };
       }
       function muzzlePoint() {
         var bp = bowPos();
@@ -770,6 +769,7 @@
 
       canvas.addEventListener('pointerdown', function (e) {
         if (mode !== 'play') return;
+        if (aim.active) return;   // 조준 중에는 다른 손가락을 무시
         e.preventDefault();
         var p = localPoint(e);
         if (p.y >= H - aimZoneH()) {
@@ -1033,9 +1033,9 @@
         // 활 그림자(잔디 위에 또렷하게)
         ctx.save();
         ctx.translate(bp.x, bp.y);
-        ctx.fillStyle = 'rgba(13, 59, 69, 0.10)';
+        ctx.fillStyle = 'rgba(13, 59, 69, 0.13)';
         ctx.beginPath();
-        ctx.ellipse(0, BOW_BOTTOM * BOW_S - 4, 42 * BOW_S, 8, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, BOW_BOTTOM * BOW_S - 1, 36 * BOW_S, 7, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
 
