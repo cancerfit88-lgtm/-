@@ -19,9 +19,13 @@
     document.getElementById('f').style.height = hm[1] + 'px';
   }
   var pm = /[?&]p=([^&]+)/.exec(q);
-  var src = pm ? decodeURIComponent(pm[1]) : '/game-v3test/';
-  if (q) src += '?v=' + Date.now();
-  document.getElementById('f').src = src;
+  var path = pm ? decodeURIComponent(pm[1]) : '/game-v3test/';
+  var ps = [];
+  if (/test=aim/.test(q)) ps.push('test=aim');
+  var fx = /[?&]fx=([^&]+)/.exec(q); if (fx) ps.push('fx=' + fx[1]);
+  var fy = /[?&]fy=([^&]+)/.exec(q); if (fy) ps.push('fy=' + fy[1]);
+  ps.push('v=' + Date.now());
+  document.getElementById('f').src = path + '?' + ps.join('&');
 </script>
 </body>
 </html>
