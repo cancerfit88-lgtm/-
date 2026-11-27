@@ -819,7 +819,7 @@
           aim.active = true;
           aim.pointerId = e.pointerId;
           setAim(p.x, p.y);
-          showAimHint(4000);
+          hideAimHint();
           try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
         } else {
           // 하늘·풍선: 짧게 콕 누르면 그 지점으로 즉시 발사
@@ -840,7 +840,6 @@
         aim.active = false;
         aim.pointerId = null;
         fireAt(aim.angle);
-        showAimHint(1600);
       });
 
       canvas.addEventListener('pointercancel', function (e) {
@@ -1160,7 +1159,7 @@
         var top = H - zH;
         var on = aim.active;
         ctx.save();
-        ctx.fillStyle = on ? 'rgba(255, 255, 255, 0.30)' : 'rgba(255, 255, 255, 0.16)';
+        ctx.fillStyle = on ? 'rgba(255, 255, 255, 0.26)' : 'rgba(255, 255, 255, 0.10)';
         roundRectPath(9, top + 3, W - 18, zH - 10, 18);
         ctx.fill();
         ctx.setLineDash([12, 10]);
@@ -1468,7 +1467,7 @@
       resize();
       showMenu();
 
-      /* ── 테스트 전용 훅(?test=aim) ───────────── */
+      /* ── 테스트 전용 훅 ───────────────────────── */
       window.__g = function () {
         return { mode: mode, score: score, arrows: arrows.length, balloons: balloons.length,
                  bow: bowAngle, aimActive: aim.active, W: W, H: H, zone: aimZoneH() };
