@@ -189,6 +189,7 @@
       display: block;
       width: 100%;
       height: 100%;
+      touch-action: none;
     }
 
     #overlay {
@@ -443,8 +444,8 @@
       <div class="card" id="card-menu">
         <h1 class="title">🎈 풍선 활쏘기</h1>
         <p class="lead">
-          하늘로 날아오르는 풍선을<br />
-          <b>손가락으로 콕! 누르면</b> 화살이 날아가 터집니다.
+          하늘의 풍선을 <b>콕! 누르면</b> 바로 발사!<br />
+          <b>아래쪽을 밀었다 놓아도</b> 조준해서 쏠 수 있어요.
         </p>
 
         <div class="field">
@@ -644,10 +645,23 @@
         window.setTimeout(resize, 220);
       });
 
+      /* ── 활 크기·위치 (기존보다 1.45배 큼직하게) ── */
+      var BOW_S = 1.45;        // 활·화살 확대 배율
+      var BOW_BOTTOM = 34;     // 활(시위 아래 끝)이 중심에서 아래로 뻗는 길이(로컬 좌표)
+      var BOW_TIP = 56;        // 중심에서 화살촉 끝까지(로컬 좌표)
+      var HIT_SLOP = 20;       // 맞힘 판정 여유 반경
+
       function groundH() { return Math.max(26, H * 0.045); }
       function bowPos() {
-        var gH = groundH();
-        return { x: W / 2, y: H - gH - 10 };
+        // 활 아래 끝이 잔디에 닿도록 중심을 잡는다(잘리지 않게)
+        return { x: W / 2, y: H - groundH() - BOW_BOTTOM * BOW_S + 4 };
+      }
+      function muzzlePoint() {
+        var bp = bowPos();
+        return {
+          x: bp.x + Math.cos(bowAngle) * BOW_TIP * BOW_S,
+          y: bp.y + Math.sin(bowAngle) * BOW_TIP * BOW_S
+        };
       }
 
       /* ── 풍선 ────────────────────────────────── */
@@ -677,12 +691,11 @@
 
         var mult = demo ? 0.5 : SPD[spd].mult;
         var vy = 82 * mult * (0.85 + Math.random() * 0.35);
-        var bp = bowPos();
         var margin = r + 12;
 
         balloons.push({
           x: margin + Math.random() * Math.max(1, W - margin * 2),
-          y: bp.y - 4,
+          y: H - groundH() - r * 1.15,
           r: r,
           vy: vy,
           sway: Math.random() * Math.PI * 2,
@@ -702,46 +715,127 @@
         }
       }
 
-      /* ── 화살 ────────────────────────────────── */
+      /* ── 조준·발사 ────────────────────────────── */
+      var aim = { active: false, pointerId: null, angle: -Math.PI / 2 };
+
+      function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+
+      // 하단 조준 영역 높이(손가락 지문에 활이 가리지 않도록 넓게)
+      function aimZoneH() { return Math.max(96, Math.min(160, H * 0.23)); }
+
+      function fireAt(angle) {
+        if (mode !== 'play') return;
+        var ang = clamp(angle, -Math.PI + 0.10, -0.10);
+        bowAngle = ang;
+        var m = muzzlePoint();
+        var speed = 980;
+        arrows.push({
+          x: m.x,
+          y: m.y,
+          vx: Math.cos(ang) * speed,
+          vy: Math.sin(ang) * speed,
+          angle: ang
+        });
+        shootSound();
+      }
+
+      // 하늘을 콕 누르면 그 지점으로 바로 발사
       function shootTo(tx, ty) {
         if (mode !== 'play') return;
         var bp = bowPos();
         var dx = tx - bp.x;
         var dy = ty - bp.y;
-        if (dy > -20) return;
-        var angle = Math.atan2(dy, dx);
-        if (angle > -0.12 || angle < -Math.PI + 0.12) return;
-        bowAngle = angle;
-        var speed = 980;
-        arrows.push({
-          x: bp.x,
-          y: bp.y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          angle: angle
-        });
-        shootSound();
+        if (dy > -30) return;
+        fireAt(Math.atan2(dy, dx));
+      }
+
+      // 손가락 위치 → 조준 각도(손가락 위쪽에 가상의 조준점을 두어 방향을 정한다)
+      function setAim(fx, fy) {
+        var bp = bowPos();
+        var zH = aimZoneH();
+        var u = clamp((H - fy) / zH, 0, 1);    // 0: 영역 아래, 1: 영역 위
+        var liftMin = BOW_TIP * BOW_S + 26;    // 활 끝 바로 위
+        var liftMax = Math.max(liftMin + 140, bp.y - 70);
+        var chY = bp.y - (liftMin + (liftMax - liftMin) * u);
+        var chX = clamp(fx, 14, W - 14);
+        aim.angle = clamp(Math.atan2(chY - bp.y, chX - bp.x), -Math.PI + 0.10, -0.10);
+        bowAngle = aim.angle;
+      }
+
+      function localPoint(e) {
+        var rect = canvas.getBoundingClientRect();
+        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
       }
 
       canvas.addEventListener('pointerdown', function (e) {
         if (mode !== 'play') return;
+        if (aim.active) return;   // 조준 중에는 다른 손가락을 무시
         e.preventDefault();
-        var rect = canvas.getBoundingClientRect();
-        shootTo(e.clientX - rect.left, e.clientY - rect.top);
+        var p = localPoint(e);
+        if (p.y >= H - aimZoneH()) {
+          // 아래쪽 넓은 영역: 대고 미는 동안 조준, 떼면 발사
+          aim.active = true;
+          aim.pointerId = e.pointerId;
+          setAim(p.x, p.y);
+          try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+        } else {
+          // 하늘·풍선: 짧게 콕 누르면 그 지점으로 즉시 발사
+          shootTo(p.x, p.y);
+        }
       });
 
+      canvas.addEventListener('pointermove', function (e) {
+        if (!aim.active || e.pointerId !== aim.pointerId) return;
+        e.preventDefault();
+        var p = localPoint(e);
+        setAim(p.x, p.y);
+      });
+
+      canvas.addEventListener('pointerup', function (e) {
+        if (!aim.active || e.pointerId !== aim.pointerId) return;
+        e.preventDefault();
+        aim.active = false;
+        aim.pointerId = null;
+        fireAt(aim.angle);
+      });
+
+      canvas.addEventListener('pointercancel', function (e) {
+        if (!aim.active || e.pointerId !== aim.pointerId) return;
+        aim.active = false;
+        aim.pointerId = null;
+      });
+
+      // 화살촉이 지나간 선분과 풍선 중심 사이의 거리
+      function segDist(x1, y1, x2, y2, cx, cy) {
+        var dx = x2 - x1;
+        var dy = y2 - y1;
+        var len2 = dx * dx + dy * dy;
+        var t = len2 > 0 ? ((cx - x1) * dx + (cy - y1) * dy) / len2 : 0;
+        t = clamp(t, 0, 1);
+        var ex = x1 + dx * t - cx;
+        var ey = y1 + dy * t - cy;
+        return Math.sqrt(ex * ex + ey * ey);
+      }
+
       function updateArrows(dt) {
+        var tipLen = 30 * BOW_S;
         for (var i = arrows.length - 1; i >= 0; i--) {
           var a = arrows[i];
+          var px = a.x, py = a.y;
           a.x += a.vx * dt;
           a.y += a.vy * dt;
+
+          // 화살촉이 이번 프레임에 지나간 자리까지 함께 보고,
+          // 판정 반경을 넉넉히 주어 가장자리에 스쳐도 시원하게 터진다
+          var tdx = Math.cos(a.angle) * tipLen;
+          var tdy = Math.sin(a.angle) * tipLen;
+          var x1 = px + tdx, y1 = py + tdy;
+          var x2 = a.x + tdx, y2 = a.y + tdy;
 
           var hit = false;
           for (var j = balloons.length - 1; j >= 0; j--) {
             var b = balloons[j];
-            var dx = a.x - b.x;
-            var dy = a.y - b.y;
-            if (Math.sqrt(dx * dx + dy * dy) <= b.r + 14) {
+            if (segDist(x1, y1, x2, y2, b.x, b.y) <= b.r + HIT_SLOP) {
               balloons.splice(j, 1);
               resolveHit(b);
               hit = true;
@@ -905,12 +999,24 @@
         ctx.save();
         ctx.translate(a.x, a.y);
         ctx.rotate(a.angle + Math.PI / 2);
+        ctx.scale(BOW_S, BOW_S);
         ctx.strokeStyle = '#3d2c2e';
         ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
         ctx.beginPath();
         ctx.moveTo(0, 22);
         ctx.lineTo(0, -18);
         ctx.stroke();
+        // 깃
+        ctx.strokeStyle = '#e63946';
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.moveTo(0, 12);
+        ctx.lineTo(-7, 24);
+        ctx.moveTo(0, 12);
+        ctx.lineTo(7, 24);
+        ctx.stroke();
+        // 촉
         ctx.fillStyle = '#e63946';
         ctx.beginPath();
         ctx.moveTo(0, -30);
@@ -923,9 +1029,20 @@
 
       function drawBow() {
         var bp = bowPos();
+
+        // 활 그림자(잔디 위에 또렷하게)
+        ctx.save();
+        ctx.translate(bp.x, bp.y);
+        ctx.fillStyle = 'rgba(13, 59, 69, 0.13)';
+        ctx.beginPath();
+        ctx.ellipse(0, BOW_BOTTOM * BOW_S - 1, 36 * BOW_S, 7, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
         ctx.save();
         ctx.translate(bp.x, bp.y);
         ctx.rotate(bowAngle + Math.PI / 2);
+        ctx.scale(BOW_S, BOW_S);
 
         ctx.strokeStyle = '#7f4f24';
         ctx.lineWidth = 8;
@@ -978,6 +1095,105 @@
         ctx.textAlign = 'start';
       }
 
+      function roundRectPath(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+      }
+
+      // 하단 넓은 조준 영역 표시
+      function drawAimPad() {
+        if (mode !== 'play') return;
+        var zH = aimZoneH();
+        var top = H - zH;
+        var on = aim.active;
+        ctx.save();
+        ctx.fillStyle = on ? 'rgba(255, 255, 255, 0.26)' : 'rgba(255, 255, 255, 0.10)';
+        roundRectPath(9, top + 3, W - 18, zH - 10, 18);
+        ctx.fill();
+        ctx.setLineDash([12, 10]);
+        ctx.lineWidth = on ? 3 : 2;
+        ctx.strokeStyle = on ? 'rgba(15, 138, 128, 0.70)' : 'rgba(13, 59, 69, 0.18)';
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // 좌우로 밀어 조준하는 느낌을 주는 화살꼬리
+        ctx.fillStyle = on ? 'rgba(15, 138, 128, 0.62)' : 'rgba(13, 59, 69, 0.26)';
+        ctx.font = '800 24px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        var my = top + zH * 0.5;
+        ctx.fillText('\u2039', 28, my);
+        ctx.fillText('\u203a', W - 28, my);
+        ctx.restore();
+        ctx.textAlign = 'start';
+        ctx.textBaseline = 'alphabetic';
+      }
+
+      // 미는 동안 보여 주는 점선 조준선 + 조준점
+      function drawGuide() {
+        if (!aim.active || mode !== 'play') return;
+        var m = muzzlePoint();
+        var dx = Math.cos(aim.angle);
+        var dy = Math.sin(aim.angle);
+        var maxT = 3000;
+        if (dx > 0.001) maxT = Math.min(maxT, (W - 10 - m.x) / dx);
+        if (dx < -0.001) maxT = Math.min(maxT, (10 - m.x) / dx);
+        if (dy < -0.001) maxT = Math.min(maxT, (10 - m.y) / dy);
+        var ex = m.x + dx * maxT;
+        var ey = m.y + dy * maxT;
+
+        ctx.save();
+        ctx.lineCap = 'round';
+        // 밝은 하늘에서도 또렷하게 보이도록 흰 테를 먼저 깔고 붉은 점선을 올린다
+        ctx.setLineDash([16, 13]);
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.94)';
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(ex, ey);
+        ctx.stroke();
+        ctx.lineWidth = 4.5;
+        ctx.strokeStyle = 'rgba(217, 79, 51, 0.95)';
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(ex, ey);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // 조준점
+        var t = Math.min(Math.max(H * 0.42, 150), Math.max(80, maxT - 36));
+        var px = m.x + dx * t;
+        var py = m.y + dy * t;
+        ctx.beginPath();
+        ctx.arc(px, py, 27, 0, Math.PI * 2);
+        ctx.setLineDash([6, 7]);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'rgba(217, 79, 51, 0.72)';
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        ctx.arc(px, py, 15, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
+        ctx.fill();
+        ctx.lineWidth = 3.5;
+        ctx.strokeStyle = 'rgba(217, 79, 51, 0.95)';
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(px, py, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#d94f33';
+        ctx.fill();
+        ctx.restore();
+      }
+
       function draw() {
         ctx.clearRect(0, 0, W, H);
 
@@ -988,8 +1204,10 @@
         ctx.fillRect(0, H - gH, W, 5);
 
         var i;
+        drawAimPad();
         for (i = 0; i < balloons.length; i++) drawBalloon(balloons[i]);
         for (i = 0; i < arrows.length; i++) drawArrow(arrows[i]);
+        drawGuide();
         drawBow();
         for (i = 0; i < particles.length; i++) drawParticle(particles[i]);
         for (i = 0; i < floats.length; i++) drawFloat(floats[i]);
@@ -1084,16 +1302,21 @@
         timePill.classList.remove('low');
         updateGoal();
 
+        aim.active = false;
+        aim.pointerId = null;
+
         cardMenu.classList.add('hidden');
         cardResult.classList.add('hidden');
         overlay.classList.add('hidden');
         mode = 'play';
         spawnBalloon(false);
-        showToast('시작! 풍선을 향해 쏘세요 🏹', 1200);
+        showToast('풍선을 콕! 또는 아래쪽을 밀어 쏘세요 🏹', 3000);
       }
 
       function endGame() {
         mode = 'over';
+        aim.active = false;
+        aim.pointerId = null;
         timeShown = 0;
         timeEl.textContent = '0';
 
@@ -1134,6 +1357,9 @@
         timeEl.textContent = String(GAME_TIME);
         timePill.classList.remove('low');
         updateGoal();
+
+        aim.active = false;
+        aim.pointerId = null;
 
         cardResult.classList.add('hidden');
         cardMenu.classList.remove('hidden');
